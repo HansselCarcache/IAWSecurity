@@ -8,6 +8,7 @@ public class Tbl_rol {
 	private int estado;
 	
 
+	
 	//metodos
 	public int getId_rol() {
 		return id_rol;
