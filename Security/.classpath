@@ -8,10 +8,13 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.payara.tools.lib.system">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
+=======
+>>>>>>> branch 'Seguridad' of https://github.com/HansselCarcache/IAWSecurity.git
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
