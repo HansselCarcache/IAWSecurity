@@ -13,7 +13,7 @@ public class Tbl_user {
 	private int estado;
 	
 	
-	//metodos
+	//metodos{
 	public int getId_user() {
 		return id_user;
 	}
