@@ -29,14 +29,14 @@ public class Dt_usuario {
 	}
 	
 	public ArrayList<Tbl_user> listaUserActivos(){
-		ArrayList<Tbl_user> listUser = new ArrayList<entidades.Tbl_user>();
+		ArrayList<Tbl_user> listUser = new ArrayList<Tbl_user>();
 		try {
 			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT * FROM seguridad.tbl_user WHERE estado <> 3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("SELECT * FROM seguridad.tbl_user WHERE estado <> 3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				Tbl_user user = new Tbl_user();
-				user.setId_user(rs.getInt("idUser"));
+				user.setId_user(rs.getInt("id_user"));
 				user.setUser(rs.getString("user"));
 				user.setPwd(rs.getString("pwd"));
 				user.setNombres(rs.getString("nombres"));

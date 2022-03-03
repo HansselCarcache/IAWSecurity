@@ -18,7 +18,7 @@ public class poolConexion
 //	private static String url = "jdbc:mysql://localhost:3306/flesnic?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private static String url = "jdbc:mysql://localhost:3306/seguridad?autoReconnect=true&useSSL=false&serverTimezone=UTC";
 	private static String user = "root";
-	private static String pass="1234";
+	private static String pass="2503";
 
     //Constructor
 	private poolConexion()
@@ -128,7 +128,7 @@ public class poolConexion
 	    	if(con!=null)
 	    	{
 	    		JOptionPane.showMessageDialog(null, "Conectado a BD Seguridad");
-	    		System.out.println("Conectado a flesnic!!!");
+	    		System.out.println("Conectado a Seguridad!!!");
 	    	}
 	    	else
 	    	{
@@ -141,7 +141,7 @@ public class poolConexion
             try 
             {
                con.close();
-               System.out.println("Se desconectó de flesnic!!!");
+               System.out.println("Se desconectó de Seguridad!!!");
             } 
             catch (SQLException ex) 
             {
