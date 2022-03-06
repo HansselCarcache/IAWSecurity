@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Esto es una prueba</h1>
+<h1>Te encontras en tu proyecto final de ISW</h1>
 <a href="production/index.html">Click aqui</a>
 
 </body>
