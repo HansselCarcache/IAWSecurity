@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Te encontras en tu proyecto final de ISW</h1>
-<a href="production/index.html">Click aqui</a>
+<a href="production/Inicio.jsp">Click aqui</a>
 
 </body>
 </html>
