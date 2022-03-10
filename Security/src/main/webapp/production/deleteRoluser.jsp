@@ -9,13 +9,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Usuarios | Registrar </title>
+    <title>Rol Usuario | Eliminar </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  	<link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+    <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 
@@ -29,25 +29,26 @@
 
 <body class="nav-md">
     <div class="container body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-                    <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
-                    </div>
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
+            </div>
 
-                    <div class="clearfix"></div>
+            <div class="clearfix"></div>
 
-                    <%@include file="diseño.jsp"%>
+            <%@include file="diseño.jsp"%>
 
             <!-- page content -->
             <div class="right_col" role="main">
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Registrar Usuario</h3>
+                            <h3>Eliminar rol de usuario</h3>
                         </div>
 
+                        
                     </div>
                     <div class="clearfix"></div>
 
@@ -55,7 +56,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Registros de usuario </h2>
+                                    <h2>Eliminación de roles de usuario </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -78,103 +79,14 @@
 <!--                                         <span class="section">Personal Info</span> -->
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombres: <span class="required">*</span>
-											</label>
+											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Rol Usuario<span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombres" name="nombres" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Apellidos: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="apellidos" name="apellidos" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="username" name="username" required="required" class="form-control ">
+												<input type="text" class="form-control" readonly="readonly" placeholder="ID Rol Usuario">
 											</div>
 										</div>
 										
 										<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Sexo: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-											
-												<select class="form-control js-example-basic-single" name="sexo" id="sexo" required="required">
-												  <option value="">Seleccione...</option>
-												  
-												  <option value="M">Masculino</option>
-												  <option value="F">Femenino</option>
-												  
-												</select>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="telefono" name="telefono" required="required" class="form-control ">
-											</div>
-										</div>
-                                        
-                                        <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="cargo" name="cargo" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo personal: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="correop" name="correop" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="iduca" name="iduca" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="correoi" name="correoi" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Contraseña: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="pwd" name="pwd" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Confirmar contraseña: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="pwd2" name="pwd2" required="required" class="form-control ">
-											</div>
-										</div>
-                                        
-										
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Facultad: <span class="required">*</span></label>
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Usuario: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 												<%
@@ -182,7 +94,7 @@
 							                      	Dt_usuario dtu = new Dt_usuario();
 							                      	listaUsuario = dtu.listaUserActivos();
 								                 %>
-												<select class="form-control js-example-basic-single" name="facultad" id="facultad" required="required">
+												<select class="form-control js-example-basic-single" name="cbxUser" id="cbxUser" >
 												  <option value="">Seleccione...</option>
 												  <% 
 												  	for(Tbl_user tu :listaUsuario){
@@ -194,8 +106,9 @@
 												</select>
                                             </div>
                                         </div>
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Departamento: <span class="required">*</span></label>
+
+										<div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Rol: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
 <!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
 												<%
@@ -203,7 +116,7 @@
 							                      	Dt_rol dtr = new Dt_rol();
 							                      	listRol = dtr.listaRolActivos();
 								                 %>
-								                 <select class="form-control js-example-basic-single" name="departamento" id="departamento" required="required">
+								                 <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" >
 												  <option value="">Seleccione...</option>
 												  <% 
 												  	for(Tbl_rol trol :listRol){
@@ -216,29 +129,14 @@
 											</div>
                                         </div>
                                         
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Carrera: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												
-												<select class="form-control js-example-basic-single" name="carrera" id="carrera" required="required">
-												  <option value="">Seleccione...</option>
-												
-												  <option value=""></option>
-												 
-												</select>
-                                            </div>
-                                        </div>
                                         
+
                                         
                                         
                                         <div class="ln_solid">
-                                            <div class="form-group">
-                                                <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-success">Cancelar</button>
-                                                </div>
-                                            </div>
+                                            <div class="col-md-6 offset-md-3">
+                								<button type='reset' class="btn btn-danger">Eliminar</button>
+                  							</div>
                                         </div>
                                     </form>
                                 </div>

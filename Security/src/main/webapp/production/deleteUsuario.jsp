@@ -9,13 +9,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Usuarios | Registrar </title>
+    <title>Usuarios | Eliminar </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  	<link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+    <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 
@@ -29,25 +29,26 @@
 
 <body class="nav-md">
     <div class="container body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-                    <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
-                    </div>
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
+            </div>
 
-                    <div class="clearfix"></div>
+            <div class="clearfix"></div>
 
-                    <%@include file="diseño.jsp"%>
+            <%@include file="diseño.jsp"%>
 
             <!-- page content -->
             <div class="right_col" role="main">
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Registrar Usuario</h3>
+                            <h3>Eliminar usuario</h3>
                         </div>
 
+                        
                     </div>
                     <div class="clearfix"></div>
 
@@ -55,7 +56,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Registros de usuario </h2>
+                                    <h2>Eliminación de usuarios </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -76,6 +77,29 @@
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Usuario<span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" class="form-control" readonly="readonly" placeholder="ID Opción">
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha de registro: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="fregistro" name="fregistro" required="required" class="form-control ">
+											</div>
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Estado: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="estado" name="estado" required="required" class="form-control ">
+											</div>
+										</div>
 
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombres: <span class="required">*</span>
@@ -229,16 +253,13 @@
 												</select>
                                             </div>
                                         </div>
-                                        
+
                                         
                                         
                                         <div class="ln_solid">
-                                            <div class="form-group">
-                                                <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-success">Cancelar</button>
-                                                </div>
-                                            </div>
+                                            <div class="col-md-6 offset-md-3">
+                								<button type='reset' class="btn btn-danger">Eliminar</button>
+                  							</div>
                                         </div>
                                     </form>
                                 </div>
