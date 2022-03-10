@@ -309,7 +309,8 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form action="../Sl_gestionUserRol" method="post"  novalidate>
+                                    <input type="hidden" value="1" name="opcion" id="opcion"/>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
@@ -435,6 +436,10 @@
             if (this.checked)
                 $('form .alert').remove();
         }).prop('checked', false);
+        
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
     </script>
 
     <!-- jQuery -->
@@ -456,9 +461,7 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
     
     <script type="text/javascript">
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
+   
     </script>
 
 </body>

@@ -73,24 +73,41 @@ public class Dt_userrol {
 		return listUserRol;
 	}
 		
-
-		public boolean asignaRol(Tbl_userRol tur) {
+		
+		//Metodo para asignar un rol a un usuario
+		public boolean asignaRol(Tbl_userRol tur){
 			boolean guardado = false;
 			
-			try {
-				c= poolConexion.getConnection();
+			try{
+				c = poolConexion.getConnection();
 				this.llena_rsUserRol(c);
-				rsUserRol.moveToInsertRow();
+				this.rsUserRol.moveToInsertRow();
 				rsUserRol.updateInt("id_user", tur.getId_user());
 				rsUserRol.updateInt("id_rol", tur.getId_rol());
 				rsUserRol.insertRow();
 				rsUserRol.moveToCurrentRow();
-				guardado=true;
+				guardado = true;
 			}
-			catch(Exception e) {
+			catch (Exception e) {
 				System.err.println("ERROR AL GUARDAR tbl_userrol "+e.getMessage());
 				e.printStackTrace();
 			}
-			return guardado
+			finally{
+				try {
+					if(rsUserRol != null){
+						rsUserRol.close();
+					}
+					if(c != null){
+						poolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			return guardado;
 		}
+
 }
