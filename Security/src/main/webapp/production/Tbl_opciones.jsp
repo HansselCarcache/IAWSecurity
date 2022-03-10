@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Inicio | Sistema de gestión docente</title>
+    <title>Seguridad | Opciones</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -45,14 +45,14 @@
 
             <div class="clearfix"></div>
 
-            <%@include file="diseño.jsp"%>
+           <%@include file="diseño.jsp"%>
 
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Inicio </h3>
+                <h3>Opciones </h3>
               </div>
 
 
@@ -64,7 +64,7 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Usuarios registrados</h2>
+                    <h2>Opciones registradas</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -85,65 +85,59 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                            <a href="addUsuario.jsp">
-                            	<i class="fa fa-plus-square"></i>Nuevo usuario</a>
+                            <a href="addOpcion.jsp">
+                            	<i class="fa fa-plus-square"></i> Nueva opción</a>
                             	<br><br>
                             </div>
                             
                     
                     <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
-                      <%
-                      		ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>();
-                      		Dt_usuario dtu = new Dt_usuario();
-                      		listaUsuario = dtu.listaUserActivos();
-                      %>
+                    
                       <thead>
                         <tr>
-                          <th>Id_user</th>
-                          <th>Nombre completo</th>
-                          <th>Usuario</th>
-                          <th>Correo electrónico</th>
+                          <th>Id_opcion</th>
+                          <th>Descripcion</th>
                           <th>Estado</th>
+                          <th>Acciones</th>
                           
                         </tr>
                       </thead>
 
 
                       <tbody>
-                      <%
-                      	for(Tbl_user tu :listaUsuario){
-                      		String estado= "";
-                      		if(tu.getEstado()!=3){
-                      			estado= "Activo";
-                      		}
-                      		else{
-                      			estado = "Inactivo";
-                      		}
-                      %>
+                     
                       	
                       
                         <tr>
-                          <td><%=tu.getId_user() %></td>
-                          <td><%=tu.getNombres()+" "+tu.getApellidos() %></td>
-                          <td><%=tu.getUser() %></td>
-                          <td><%=tu.getEmail() %></td>
-                          <td><%=estado %></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>
+                           <a href="updateOpcion.jsp">
+                            <i class="far fa-edit" title="Editar Opciones"></i>
+                          </a>
+                          &nbsp;&nbsp;
+                          <a href="readOpcion.jsp">
+                            <i class="far fa-eye" title="Visualizar Opciones"></i>
+                          </a> 
+                          &nbsp;&nbsp;
+                          <a href="deleteOpcion.jsp" >
+                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
+                          </a>
+                          </td>
+                          
                           
                         </tr>
-                        <%
-                        }
-                        %>
+                        
                         
                         
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>Id_user</th>
-                          <th>Nombre completo</th>
-                          <th>Usuario</th>
-                          <th>Correo electrónico</th>
+                          <th>Id_opcion</th>
+                          <th>Descripcion</th>
                           <th>Estado</th>
-                          
+                          <th>Acciones</th>
                         </tr>
                       </tfoot>
                     </table>
