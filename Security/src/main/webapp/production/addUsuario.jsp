@@ -236,7 +236,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
                                                     <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-success">Cancelar</button>
+                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
                                                 </div>
                                             </div>
                                         </div>

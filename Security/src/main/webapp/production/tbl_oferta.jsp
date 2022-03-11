@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Seguridad | Usuarios</title>
+    <title>Oferta | Ofertas</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -52,7 +52,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Usuarios </h3>
+                <h3>Oferta </h3>
               </div>
 
 
@@ -64,7 +64,7 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Usuarios registrados</h2>
+                    <h2>Ofertas registradas</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -85,8 +85,8 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                            <a href="addUsuario.jsp">
-                            	<i class="fa fa-plus-square"></i> Nuevo usuario</a>
+                            <a href="addOferta.jsp">
+                            	<i class="fa fa-plus-square"></i> Nueva Oferta</a>
                             	<br><br>
                             </div>
                             
@@ -95,15 +95,13 @@
                     
                       <thead>
                         <tr>
-                          <th>ID Usuario</th>
-                          <th>ID Uca</th>
-                          <th>Nombre usuario</th>
-                          <th>Nombre completo</th>
-                          <th>Sexo</th>
-                          <th>Telefono</th>
-                          <th>Cargo</th>
-                          <th>Correo personal</th>
-                          <th>Carrera</th>
+                          <th>ID Oferta</th>
+                          <th>Nombre</th>
+                          <th>Descripcion</th>
+                          <th>Periodo</th>
+                          <th>Fecha Inicio</th>
+                          <th>Fecha Final</th>
+                          <th>Cantidad de capacitaciones registradas</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                           
@@ -125,18 +123,16 @@
                           <td></td>
                           <td></td>
                           <td></td>
-                          <td></td>
-                          <td></td>
                           <td>
-                           <a href="updateUsuario.jsp">
+                           <a href="updateOferta.jsp">
                             <i class="far fa-edit" title="Editar Opciones"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readUsuario.jsp">
+                          <a href="readOferta.jsp">
                             <i class="far fa-eye" title="Visualizar Opciones"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteUsuario.jsp" >
+                          <a href="deleteOferta.jsp" >
                             <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
                           </a>
                           </td>
@@ -149,15 +145,13 @@
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>ID Usuario</th>
-                          <th>ID Uca</th>
-                          <th>Nombre usuario</th>
-                          <th>Nombre completo</th>
-                          <th>Sexo</th>
-                          <th>Telefono</th>
-                          <th>Cargo</th>
-                          <th>Correo personal</th>
-                          <th>Carrera</th>
+                          <th>ID Oferta</th>
+                          <th>Nombre</th>
+                          <th>Descripcion</th>
+                          <th>Periodo</th>
+                          <th>Fecha Inicio</th>
+                          <th>Fecha Final</th>
+                          <th>Cantidad de capacitaciones registradas</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                         </tr>
@@ -184,10 +178,6 @@
         <!-- /footer content -->
       </div>
     </div>
-    </div>
-    </div>
-    
-    
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
