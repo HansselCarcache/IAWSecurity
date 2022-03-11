@@ -55,7 +55,7 @@
                   <li><a><i class="fa-solid fa-school"></i> Inscripciones <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="tables.html">Inscripciones</a></li>
-                      <li><a href="tables_dynamic.html">Escala de evaluación</a></li>
+                      <li><a href="tbl_escalaClasificacion.jsp">Escala de evaluación</a></li>
                     </ul>
                   </li>
                   
