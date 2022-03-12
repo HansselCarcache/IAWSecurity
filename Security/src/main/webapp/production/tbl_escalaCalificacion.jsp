@@ -93,11 +93,17 @@
                     
                     <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                     
+                    <%
+                    		ArrayList<Tbl_escalaCalificacion> listaEscalaCalificacion = new ArrayList<Tbl_escalaCalificacion>();
+              				Dt_escalacalificacion dtecl = new Dt_escalacalificacion();
+              				listaEscalaCalificacion = dtecl.listaEscalaActivo();
+                      %>
+                    
                       <thead>
                         <tr>
                           <th>ID Escala</th>
                           <th>Calificación</th>
-                          <th>Descripcion</th>
+                          <th>Descripción</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                           
@@ -106,14 +112,24 @@
 
 
                       <tbody>
-                     
-                      	
+                      	<%
+                      		for(Tbl_escalaCalificacion tecl :listaEscalaCalificacion){
+                      			String estado= "";
+                      			if(tecl.getEstado()!=3){
+                      				estado= "Activo";
+                      			}
+                      			else{
+                      				estado = "Inactivo";
+                      			}
+	                      	
+	                      %>
                       
                         <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                        
+                          <td><%=tecl.getId_escala() %></td>
+                          <td><%=tecl.getCalificacion() %></td>
+                          <td><%=tecl.getDescripcion() %></td>
+                          <td><%=estado %></td>
                           <td>
                            <a href="updateEscalaCalificacion.jsp">
                             <i class="far fa-edit" title="Editar Opciones"></i>
@@ -130,7 +146,9 @@
                           
                           
                         </tr>
-                        
+                        <%
+                        }
+                        %>
                         
                         
                       </tbody>
@@ -164,6 +182,8 @@
         </footer>
         <!-- /footer content -->
       </div>
+    </div>
+    </div>
     </div>
 
     <!-- jQuery -->
