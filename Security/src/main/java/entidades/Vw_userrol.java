@@ -3,65 +3,30 @@ package entidades;
 public class Vw_userrol {
 	
 	//atributos
-	private int id_user;
-	private String user;
-	private String pwd;
-	private String nombres;
-	private String apellidos;
-	private String email;
-	private String pwd_temp;
-	private int estado;
+	private int id_rol_usuario;
+	private int id_usuario;
+	private String usuario;
 	private int id_rol;
 	private String rol;
 	
 	//metodos
-	public int getId_user() {
-		return id_user;
+	public int getId_rol_usuario() {
+		return id_rol_usuario;
 	}
-	public void setId_user(int id_user) {
-		this.id_user = id_user;
+	public void setId_rol_usuario(int id_rol_usuario) {
+		this.id_rol_usuario = id_rol_usuario;
 	}
-	public String getUser() {
-		return user;
+	public int getId_usuario() {
+		return id_usuario;
 	}
-	public void setUser(String user) {
-		this.user = user;
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
 	}
-	public String getPwd() {
-		return pwd;
+	public String getUsuario() {
+		return usuario;
 	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
-	public String getNombres() {
-		return nombres;
-	}
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
-	}
-	public String getApellidos() {
-		return apellidos;
-	}
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getPwd_temp() {
-		return pwd_temp;
-	}
-	public void setPwd_temp(String pwd_temp) {
-		this.pwd_temp = pwd_temp;
-	}
-	public int getEstado() {
-		return estado;
-	}
-	public void setEstado(int estado) {
-		this.estado = estado;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 	public int getId_rol() {
 		return id_rol;
@@ -75,6 +40,9 @@ public class Vw_userrol {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
+	
+	
+	
 	
 	
 }

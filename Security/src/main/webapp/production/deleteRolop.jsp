@@ -112,16 +112,16 @@
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 												<%
-							                      	ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>();
-							                      	Dt_usuario dtu = new Dt_usuario();
-							                      	listaUsuario = dtu.listaUserActivos();
+							                      	ArrayList<Tbl_opcion> listaOpcion = new ArrayList<Tbl_opcion>();
+							                      	Dt_Opciones dtopc = new Dt_Opciones();
+							                      	listaOpcion = dtopc.listaOpcionesActivos();
 								                 %>
 												<select class="form-control js-example-basic-single" name="cbxUser" id="cbxUser" >
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_user tu :listaUsuario){
+												  	for(Tbl_opcion tu :listaOpcion){
 												  %>
-												  <option value="<%=tu.getId_user()%>"><%=tu.getUser()%></option>
+												  <option value="<%=tu.getId_opcion()%>"><%=tu.getOpcion()%></option>
 												  <%
 												  	}
 												  %>

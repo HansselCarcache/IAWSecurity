@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_opcion, datos.*, java.util.*;"%>
 
 <!DOCTYPE html>
 <html>
@@ -92,10 +92,15 @@
                             
                     
                     <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <%
+                      		ArrayList<Tbl_opcion> listaOpciones = new ArrayList<Tbl_opcion>();
+                      		Dt_Opciones dtopc = new Dt_Opciones();
+                      		listaOpciones = dtopc.listaOpcionesActivos();
+                      %>
                     
                       <thead>
                         <tr>
-                          <th>Id_opcion</th>
+                          
                           <th>Descripcion</th>
                           <th>Estado</th>
                           <th>Acciones</th>
@@ -105,13 +110,22 @@
 
 
                       <tbody>
-                     
+	                     <%
+	                      	for(Tbl_opcion topc :listaOpciones){
+	                      		String estado= "";
+	                      		if(topc.getEstado()!=3){
+	                      			estado= "Activo";
+	                      		}
+	                      		else{
+	                      			estado = "Inactivo";
+	                      		}
+	                      %>
                       	
                       
                         <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          
+                          <td><%=topc.getOpcion()%></td>
+                          <td><%=estado%></td>
                           <td>
                            <a href="updateOpcion.jsp">
                             <i class="far fa-edit" title="Editar Opciones"></i>
@@ -128,13 +142,16 @@
                           
                           
                         </tr>
+                        <%
+                        }
+                        %>
                         
                         
                         
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>Id_opcion</th>
+                          
                           <th>Descripcion</th>
                           <th>Estado</th>
                           <th>Acciones</th>

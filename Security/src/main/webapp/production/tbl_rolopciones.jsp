@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.Vw_rolopcion, datos.*, java.util.*;"%>
 
 <!DOCTYPE html>
 <html>
@@ -92,13 +92,16 @@
                             
                     
                     <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <%
+                      		ArrayList<Vw_rolopcion> listaRolop = new ArrayList<Vw_rolopcion>();
+                      		Dt_rolopciones dtrolop = new Dt_rolopciones();
+                      		listaRolop = dtrolop.listarolopcion();
+                      %>
                     
                       <thead>
                         <tr>
-                          <th>Id_rol_opcion</th>
-                          <th>Id_rol</th>
+                          
                           <th>Rol</th>
-                          <th>Id_opcion</th>
                           <th>Opcion</th>
                           <th>Acciones</th>
                           
@@ -107,15 +110,16 @@
 
 
                       <tbody>
-                     
+                     	<%
+	                      	for(Vw_rolopcion rop :listaRolop){
+	                      		
+	                      %>
                       	
                       
                         <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          
+                          <td><%=rop.getRol() %></td>
+                          <td><%=rop.getOpcion() %></td>
                           <td>
                            <a href="updateRolop.jsp">
                             <i class="far fa-edit" title="Editar Opciones"></i>
@@ -132,16 +136,15 @@
                           
                           
                         </tr>
-                        
+                         <%
+                        }
+                        %>
                         
                         
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>Id_rol_opcion</th>
-                          <th>Id_rol</th>
                           <th>Rol</th>
-                          <th>Id_opcion</th>
                           <th>Opcion</th>
                           <th>Acciones</th>
                         </tr>

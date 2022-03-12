@@ -18,7 +18,7 @@ public class Dt_rol {
 	//Metodo para llenar el RusultSet //para insert, update and delete
 	public void llena_rsRol(Connection c){
 		try{
-			ps = c.prepareStatement("SELECT * FROM seguridad.tbl_rol;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("SELECT * FROM dbfdocente.rol;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsRol = ps.executeQuery();
 		}
 		catch (Exception e){
@@ -32,12 +32,12 @@ public class Dt_rol {
 		ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
 		try{
 			c = poolConexion.getConnection(); //obtenemos una conexion del pool
-			ps = c.prepareStatement("SELECT * FROM seguridad.tbl_rol WHERE estado<>3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps = c.prepareStatement("SELECT * FROM dbfdocente.rol WHERE estado<>3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()){
 				Tbl_rol trol = new Tbl_rol(); //instanciamos a rol
 				trol.setId_rol(rs.getInt("id_rol"));
-				trol.setRol(rs.getString("rol"));
+				trol.setRol(rs.getString("descripcion"));
 				trol.setEstado(rs.getInt("estado"));
 				listRol.add(trol);
 			}
