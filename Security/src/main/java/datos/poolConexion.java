@@ -16,9 +16,15 @@ public class poolConexion
 	private static BasicDataSource dataSource;
 //	private static String url = "jdbc:mysql://localhost:3306/flesnic?allowPublicKeyRetrieval=true";
 //	private static String url = "jdbc:mysql://localhost:3306/flesnic?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-	private static String url = "jdbc:mysql://localhost:3306/seguridad?autoReconnect=true&useSSL=false&serverTimezone=UTC";
+	//DATOS DE LA CONEXION LOCAL
+	/*private static String url = "jdbc:mysql://localhost:3306/seguridad?autoReconnect=true&useSSL=false&serverTimezone=UTC";
 	private static String user = "root";
-	private static String pass="2503";
+	private static String pass="2503";*/
+	//DATOS DE LA CONEXION REMOTA
+	private static String url = "jdbc:mysql://165.98.12.158:3306/seguridad?autoReconnect=true&useSSL=false&serverTimezone=UTC";
+	private static String user = "root";
+	private static String pass="My$qlS3rv3rAPS*";
+
 
     //Constructor
 	private poolConexion()
