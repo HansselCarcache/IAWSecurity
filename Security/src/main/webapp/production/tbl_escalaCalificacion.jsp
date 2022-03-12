@@ -85,7 +85,7 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                            <a href="addEscalaClasificacion.jsp">
+                            <a href="addEscalaCalificacion.jsp">
                             	<i class="fa fa-plus-square"></i> Nueva Escala de evaluación</a>
                             	<br><br>
                             </div>
@@ -115,15 +115,15 @@
                           <td></td>
                           <td></td>
                           <td>
-                           <a href="updateEscalaClasificacion.jsp">
+                           <a href="updateEscalaCalificacion.jsp">
                             <i class="far fa-edit" title="Editar Opciones"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readEscalaClasificacion.jsp">
+                          <a href="readEscalaCalificacion.jsp">
                             <i class="far fa-eye" title="Visualizar Opciones"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteEscalaClasificacion.jsp" >
+                          <a href="deleteEscalaCalificacion.jsp" >
                             <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
                           </a>
                           </td>
