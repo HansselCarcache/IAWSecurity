@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Escala Evaluación | Modificar </title>
+    <title>Visualizar | Facilitador </title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -55,7 +55,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Modificar escala de evalaución</h3>
+                            <h3>Visualizar Facilitador</h3>
                         </div>
 
                     </div>
@@ -65,7 +65,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Modificación de escala de evaluación </h2>
+                                    <h2>Datos de Facilitador</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -86,35 +86,60 @@
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
-											
+
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Escala: <span class="required">*</span></label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="idescala" name="idescala" class="form-control" readonly="readonly" placeholder="ID Escala">
-											</div>
-										</div>
-											
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Escala: <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="escala" name="escala" required="required" class="form-control ">
+												<input type="text" id="id_uca" name="id_uca" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
 										
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripcion: <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" name="descripcion" required="required" class="form-control ">
+												<input type="text" id="nombre" name="nombre" required="required" readonly="readonly" class="form-control ">
 											</div>
-										</div>     
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Apellido<span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="apellido" name="apellido" required="required" readonly="readonly" class="form-control ">
+											</div>
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Telefono: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="telefono" name="telefono" required="required" readonly="readonly" class="form-control ">
+											</div>
+										</div>
+										
+											<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Email<span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="email" name="email" required="required" readonly="readonly" class="form-control ">
+											</div>
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Grado Academico<span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="grado_academico" name="grado_academico" required="required" readonly="readonly" class="form-control ">
+											</div>
+										</div>
+										
                                         
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
+                                                   <button type="button" class="btn btn-primary">Regresar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -127,7 +152,6 @@
                     </div>
                     
                     
-                            </div>
                             
                         </div>
                         <div class="col-md-6 col-sm-6 ">
@@ -150,6 +174,7 @@
             </footer>
             <!-- /footer content -->
         </div>
+    </div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -270,4 +295,3 @@
 </script>
 
 </body>
-</html>

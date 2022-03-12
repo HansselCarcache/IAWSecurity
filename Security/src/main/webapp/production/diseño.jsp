@@ -47,7 +47,7 @@
                       <li><a href="tbl_oferta.jsp">Oferta</a></li>
                       <li><a href="form_advanced.html">Capacitaciones</a></li>
                       <li><a href="form_wizards.html">Modalidades</a></li>
-                      <li><a href="form_validation.html">Facilitadores</a></li>
+                      <li><a href="tbl_facilitadores.jsp">Facilitadores</a></li>
                       
                     </ul>
                   </li>

@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Escala de evaluación | Evaluación</title>
+    <title>Facilitadores</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -52,7 +52,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Escala de evaluación</h3>
+                <h3>facilitadores</h3>
               </div>
 
 
@@ -64,7 +64,7 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Escalas de evaluación registradas</h2>
+                    <h2>Facilitadores registrados</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -85,8 +85,8 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                            <a href="addEscalaClasificacion.jsp">
-                            	<i class="fa fa-plus-square"></i> Nueva Escala de evaluación</a>
+                            <a href="addFacilitador.jsp">
+                            	<i class="fa fa-plus-square"></i> Nuevo Facilitador</a>
                             	<br><br>
                             </div>
                             
@@ -95,12 +95,12 @@
                     
                       <thead>
                         <tr>
-                          <th>ID Escala</th>
-                          <th>Calificación</th>
-                          <th>Descripcion</th>
-                          <th>Estado</th>
-                          <th>Acciones</th>
-                          
+                          <th>ID UCA</th>
+                          <th>Nombre</th>
+                          <th>Apellido</th>
+                          <th>Telefono</th>
+                          <th>Email</th>
+                          <th>Grado Academico</th>
                         </tr>
                       </thead>
 
@@ -114,17 +114,19 @@
                           <td></td>
                           <td></td>
                           <td></td>
+                          <td></td>
+                          <td></td>
                           <td>
-                           <a href="updateEscalaClasificacion.jsp">
-                            <i class="far fa-edit" title="Editar Opciones"></i>
+                           <a href="updateFacilitadores.jsp">
+                            <i class="far fa-edit" title="Editar"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readEscalaClasificacion.jsp">
-                            <i class="far fa-eye" title="Visualizar Opciones"></i>
+                          <a href="readFacilitadores.jsp">
+                            <i class="far fa-eye" title="Visualizar"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteEscalaClasificacion.jsp" >
-                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
+                          <a href="deleteFacilitadores.jsp" >
+                            <i class="far fa-trash-alt" title="Eliminar"></i>
                           </a>
                           </td>
                           
@@ -136,11 +138,12 @@
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>ID Escala</th>
-                          <th>Calificación</th>
-                          <th>Descripcion</th>
-                          <th>Estado</th>
-                          <th>Acciones</th>        
+                          <th>ID UCA</th>
+                          <th>Nombre</th>
+                          <th>Apellido</th>
+                          <th>Telefono</th>
+                          <th>Email</th>
+                          <th>Grado Academico</th>      
                         </tr>
                       </tfoot>
                     </table>
