@@ -368,7 +368,7 @@
 						                  <div class="x_content">
 						                  <div class="row">
                  
-						                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+						                    <table id="tbl_capacitaciones" class="table table-striped table-bordered" style="width:100%">
 						                    
 						                      <thead>
 						                        <tr>
@@ -514,6 +514,34 @@
                 $(this).closest('tr').remove();
             });
         }
+        
+        $(document).ready(function() {
+            $('#tbl_capacitaciones').DataTable( {
+            	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
+            	"dom": '<"top"lf>rt<"bottom"ip><"clear">',
+            	
+            	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+            
+            	"language": {
+                    "lengthMenu": "Mostrar _MENU_ records por pagina",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "emptyTable": "No existen datos en la tabla",
+                    "zeroRecords": "No existe un registro en la BD",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    
+                    "infoEmpty": "No existe registro",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                }
+            } );
+        } );
+        
+        
     </script>
 
     <!-- jQuery -->
@@ -554,9 +582,7 @@
     
     <script type="text/javascript">
    
-    </script>
-    
-    <script>
+   
           
 </script>
 
