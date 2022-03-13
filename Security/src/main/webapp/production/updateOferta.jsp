@@ -43,7 +43,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                        <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -317,6 +317,11 @@
                  
 						                    <table  id="datatable-buttons"  class="table table-striped table-bordered" style="width:100%">
 						                    
+						                    <%
+						                      		ArrayList<Vw_ofertadet> listaOfertadet = new ArrayList<Vw_ofertadet>();
+						                      		Dt_ofertadet dtof = new Dt_ofertadet();
+						                      		listaOfertadet = dtof.listaOfertasdet();
+						                      %>
 						                      <thead>
 						                        <tr>
 						                          <th>Id Oferta detalle</th>
@@ -329,22 +334,26 @@
 						
 						
 							                      <tbody>
-							          					
-							                          <td></td>
-							                          <td></td>
-							                          <td></td>
-							                          <td></td>
+							                      <%
+								                      	for(Vw_ofertadet oferD :listaOfertadet){
+								                      		
+								                      %>
+							          					<tr>
+							                          <td><%=oferD.getId_oferta_detalle() %></td>
+							                          <td><%=oferD.getCapacitacion() %></td>
+							                          <td><%=oferD.getNombres()+' '+oferD.getApellidos() %></td>
+							                          <td><%=oferD.getDias() %></td>
 							                          <td>
 							                           <a href="#">
 							                            <i class="far fa-edit" title="Editar Opciones"></i>
 							                          </a>
 						
-							                          &nbsp;&nbsp;
-							                          <a href="#" >
-							                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
-							                          </a>
+							                        
 							                          </td>
-								                        
+								                        </tr>
+								                         <%
+									                        }
+									                      %>
 							                        
 							                      </tbody>
 						                      <tfoot>

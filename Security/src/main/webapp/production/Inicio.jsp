@@ -123,11 +123,7 @@
                       	
                       
                         <tr>
-                          <td><%=tu.getId_user() %></td>
-                          <td><%=tu.getNombres()+" "+tu.getApellidos() %></td>
-                          <td><%=tu.getUser() %></td>
-                          <td><%=tu.getEmail() %></td>
-                          <td><%=estado %></td>
+                          
                           
                         </tr>
                         <%
