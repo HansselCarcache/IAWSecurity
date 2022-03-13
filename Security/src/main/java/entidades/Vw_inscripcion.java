@@ -3,6 +3,7 @@ package entidades;
 public class Vw_inscripcion {
 
 	//Attributes
+	
 	private int id_inscripcion;
 	private int id_usuario;
 	private String usario;
