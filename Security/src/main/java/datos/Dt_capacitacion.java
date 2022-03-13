@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import entidades.Tbl_modalidad;
 import entidades.Tbl_user;
 
-public class Dt_modalidad {
+public class Dt_capacitacion {
 	
 	//Atributos
 	poolConexion pc = poolConexion.getInstance();

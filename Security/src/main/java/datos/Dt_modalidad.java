@@ -20,7 +20,7 @@ public class Dt_modalidad {
 	//Metodo para llenar el ResultSet para insert, update y delete
 	public void llenaRsModalidad(Connection c) {
 		try {
-			ps = c.prepareStatement("SELECT * FROM seguridad.tbl_modalidad;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("SELECT * FROM dbfdocente.modalidad;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsModalidad = ps.executeQuery();
 			
 		}
@@ -34,7 +34,7 @@ public class Dt_modalidad {
 		ArrayList<Tbl_modalidad> listModalidad = new ArrayList<Tbl_modalidad>();
 		try {
 			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT * FROM seguridad.tbl_modalidad WHERE estado <> 3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps = c.prepareStatement("SELECT * FROM dbfdocente.modalidad WHERE estado <> 3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				Tbl_modalidad modalidad = new Tbl_modalidad();

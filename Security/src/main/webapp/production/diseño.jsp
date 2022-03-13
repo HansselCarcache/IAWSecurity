@@ -45,8 +45,8 @@
                   <li><a><i class="fa-solid fa-graduation-cap"></i> Oferta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="tbl_oferta.jsp">Oferta</a></li>
-                      <li><a href="form_advanced.html">Capacitaciones</a></li>
-                      <li><a href="form_wizards.html">Modalidades</a></li>
+                      <li><a href="tbl_capacitaciones">Capacitaciones</a></li>
+                      <li><a href="tbl_modalidad.jsp">Modalidades</a></li>
                       <li><a href="tbl_facilitadores.jsp">Facilitadores</a></li>
                       
                     </ul>

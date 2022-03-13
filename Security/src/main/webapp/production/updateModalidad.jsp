@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Modalidad | Registrar </title>
+    <title>Modalidad | Modificar </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Registrar Modalidad</h3>
+                            <h3>Modificar Modalidad</h3>
                         </div>
 
                         
@@ -56,7 +56,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Registro de modalidades </h2>
+                                    <h2>Modificación de modalidades </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>

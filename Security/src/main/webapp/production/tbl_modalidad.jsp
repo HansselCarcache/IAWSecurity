@@ -93,6 +93,12 @@
                     
                     <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                     
+                    <%
+                      		ArrayList<Tbl_modalidad> listaModalidad = new ArrayList<Tbl_modalidad>();
+                      		Dt_modalidad dtmodalidad = new Dt_modalidad();
+                      		listaModalidad = dtmodalidad.listaModalidadesActivas();
+                      %>
+                    
                       <thead>
                         <tr>
                           <th>ID Modalidad</th>
@@ -107,11 +113,22 @@
 
                       <tbody>
                      
+                     
+                     <%
+	                      	for(Tbl_modalidad tmodalidad :listaModalidad){
+	                      		String estado= "";
+	                      		if(tmodalidad.getEstado()!=3){
+	                      			estado= "Activo";
+	                      		}
+	                      		else{
+	                      			estado = "Inactivo";
+	                      		}
+	                      %>
                       	
                       
                         <tr>
-                          <td></td>
-                          <td></td>
+                          <td><%=trol.getNombre() %></td>
+                          <td><%=estado %></td>
                           <td></td>
                           <td></td>
                           <td></td>
@@ -121,16 +138,16 @@
                           <td></td>
                           <td></td>
                           <td>
-                           <a href="updateUsuario.jsp">
-                            <i class="far fa-edit" title="Editar Opciones"></i>
+                           <a href="updateModalidad.jsp">
+                            <i class="far fa-edit" title="Editar Modalidad"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readUsuario.jsp">
-                            <i class="far fa-eye" title="Visualizar Opciones"></i>
+                          <a href="readModalidad.jsp">
+                            <i class="far fa-eye" title="Visualizar Modalidad"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteUsuario.jsp" >
-                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
+                          <a href="deleteModalidad.jsp" >
+                            <i class="far fa-trash-alt" title="Eliminar Modalidad"></i>
                           </a>
                           </td>
                           
