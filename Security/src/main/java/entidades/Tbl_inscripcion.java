@@ -1,7 +1,5 @@
 package entidades;
 
-import java.sql.Date;
-
 public class Tbl_inscripcion {
 
 	//Attributes
@@ -11,7 +9,7 @@ public class Tbl_inscripcion {
 	private int id_facultad;
 	private int id_departamento;
 	private int id_carrera;
-	private Date fecha_inscripcion;
+	private String fecha_inscripcion;
 	private int id_oferta_detalle;
 	private int id_escala;
 	
@@ -47,10 +45,10 @@ public class Tbl_inscripcion {
 	public void setId_carrera(int id_carrera) {
 		this.id_carrera = id_carrera;
 	}
-	public Date getFecha_inscripcion() {
+	public String getFecha_inscripcion() {
 		return fecha_inscripcion;
 	}
-	public void setFecha_inscripcion(Date fecha_inscripcion) {
+	public void setFecha_inscripcion(String fecha_inscripcion) {
 		this.fecha_inscripcion = fecha_inscripcion;
 	}
 	public int getId_oferta_detalle() {
