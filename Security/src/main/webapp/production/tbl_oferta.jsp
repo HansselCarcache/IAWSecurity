@@ -91,7 +91,13 @@
                             </div>
                             
                     
-                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <table id="tbl_oferta" class="table table-striped table-bordered" style="width:100%">
+                    
+                    <%
+                      		ArrayList<Vw_oferta> listaOferta = new ArrayList<Vw_oferta>();
+                      		Dt_oferta dtof = new Dt_oferta();
+                      		listaOferta = dtof.listaOfertasCActivos();
+                      %>
                     
                       <thead>
                         <tr>
@@ -111,18 +117,27 @@
 
 
                       <tbody>
-                     
+                     <%
+	                      	for(Vw_oferta oferC :listaOferta){
+	                      		String estado= "";
+	                      		if(oferC.getEstado()!=3){
+	                      			estado= "Activo";
+	                      		}
+	                      		else{
+	                      			estado = "Inactivo";
+	                      		}
+	                      %>
                       	
                       
                         <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td><%=oferC.getId_oferta() %></td>
+                          <td><%=oferC.getNombre() %></td>
+                          <td><%=oferC.getDescripcion() %></td>
+                          <td><%=oferC.getPeriodo() %></td>
+                          <td><%=oferC.getFecha_inicio() %></td>
+                          <td><%=oferC.getFecha_final() %></td>
+                          <td><%=oferC.getCantidad() %></td>
+                          <td><%=oferC.getEstado() %></td>
                           <td>
                            <a href="updateOferta.jsp">
                             <i class="far fa-edit" title="Editar Opciones"></i>
@@ -140,7 +155,9 @@
                           
                         </tr>
                         
-                        
+                        <%
+                        }
+                        %>
                         
                       </tbody>
                       <tfoot>
@@ -208,6 +225,35 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    
+     <script>
+    $(document).ready(function() {
+        $('#tbl_oferta').DataTable( {
+        	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
+        	"dom": '<"top"Blf>rt<"bottom"ip><"clear">',
+        	
+        	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+        
+        	"language": {
+                "lengthMenu": "Mostrar _MENU_ records por pagina",
+                "search": "Buscar:",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+                "emptyTable": "No existen datos en la tabla",
+                "zeroRecords": "No existe un registro en la BD",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                
+                "infoEmpty": "No existe registro",
+                "infoFiltered": "(filtered from _MAX_ total records)"
+            }
+        } );
+    } );
+    
+    </script>
 
   </body>
 </html>

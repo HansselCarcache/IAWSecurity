@@ -43,7 +43,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                        <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -173,8 +173,13 @@
 						                  <div class="x_content">
 						                  <div class="row">
                  
-						                    <table  id="datatable-buttons"  class="table table-striped table-bordered" style="width:100%">
+						                    <table  id="tbl_detalle"  class="table table-striped table-bordered" style="width:100%">
 						                    
+						                    <%
+						                      		ArrayList<Vw_ofertadet> listaOfertadet = new ArrayList<Vw_ofertadet>();
+						                      		Dt_ofertadet dtof = new Dt_ofertadet();
+						                      		listaOfertadet = dtof.listaOfertasdet();
+						                      %>
 						                      <thead>
 						                        <tr>
 						                          
@@ -192,17 +197,30 @@
 						
 						
 							                      <tbody>
-							          					
-							                          <td></td>
-							                          <td></td>
-							                          <td></td>
-							                          <td></td>
-							                          <td></td>
-							                          <td></td>
-							                          <td></td>
-							                          <td></td>
-								                        
-							                        
+							                      <%
+								                      	for(Vw_ofertadet oferD :listaOfertadet){
+								                      		String publico= "";
+								                      		if(oferD.getPublico()!=0){
+								                      			publico= "Público";
+								                      		}
+								                      		else{
+								                      			publico = "No es Público";
+								                      		}
+								                      		
+								                      %>
+							          				<tr>
+							                          <td><%=oferD.getCapacitacion() %></td>
+							                          <td><%=oferD.getNombres()+' '+oferD.getApellidos() %></td>
+							                          <td><%=oferD.getFecha_inicio() %></td>
+							                          <td><%=oferD.getFecha_final() %></td>
+							                          <td><%=oferD.getHora_inicio() %></td>
+							                          <td><%=oferD.getHora_final() %></td>
+							                          <td><%=oferD.getDias() %></td>
+							                          <td><%=publico %></td>
+								                     </tr>
+							                         <%
+									                        }
+									                      %>
 							                      </tbody>
 						                      <tfoot>
 						                        <tr>
@@ -329,6 +347,32 @@
                 $(this).closest('tr').remove();
             });
         }
+        
+        $(document).ready(function() {
+        $('#tbl_detalle').DataTable( {
+        	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
+        	"dom": '<"top"f>rt<"bottom"ip><"clear">',
+        	
+        	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+        
+        	"language": {
+                "lengthMenu": "Mostrar _MENU_ records por pagina",
+                "search": "Buscar:",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+                "emptyTable": "No existen datos en la tabla",
+                "zeroRecords": "No existe un registro en la BD",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                
+                "infoEmpty": "No existe registro",
+                "infoFiltered": "(filtered from _MAX_ total records)"
+            }
+        } );
+        } );
     </script>
 
     <!-- jQuery -->

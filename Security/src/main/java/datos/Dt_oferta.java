@@ -1,14 +1,17 @@
 package datos;
+
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import entidades.Tbl_rol;
 
-public class Dt_rol {
-	
-	//Atributos
+
+import entidades.Vw_oferta;
+
+public class Dt_oferta {
+
 	poolConexion pc = poolConexion.getInstance(); 
 	Connection c = null;
 	private ResultSet rsRol = null;
@@ -18,7 +21,7 @@ public class Dt_rol {
 	//Metodo para llenar el RusultSet //para insert, update and delete
 	public void llena_rsRol(Connection c){
 		try{
-			ps = c.prepareStatement("SELECT * FROM dbfdocente.rol;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("SELECT * FROM dbfdocente.vw_oferta;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsRol = ps.executeQuery();
 		}
 		catch (Exception e){
@@ -28,18 +31,23 @@ public class Dt_rol {
 	}
 	
 	//Metodo para visualizar usuarios registrados y activos
-	public ArrayList<Tbl_rol> listaRolActivos(){
-		ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
+	public ArrayList<Vw_oferta> listaOfertasCActivos(){
+		ArrayList<Vw_oferta> listofc = new ArrayList<Vw_oferta>();
 		try{
 			c = poolConexion.getConnection(); //obtenemos una conexion del pool
-			ps = c.prepareStatement("SELECT * FROM dbfdocente.rol WHERE estado<>3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps = c.prepareStatement("SELECT * FROM dbfdocente.vw_oferta WHERE estado <>3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()){
-				Tbl_rol trol = new Tbl_rol(); //instanciamos a rol
-				trol.setId_rol(rs.getInt("id_rol"));
-				trol.setRol(rs.getString("descripcion"));
-				trol.setEstado(rs.getInt("estado"));
-				listRol.add(trol);
+				Vw_oferta topc = new Vw_oferta(); //instanciamos a rol
+				topc.setId_oferta(rs.getInt("id_oferta"));
+				topc.setNombre(rs.getString("nombre"));
+				topc.setDescripcion(rs.getString("descripcion"));
+				topc.setPeriodo(rs.getString("periodo"));
+				topc.setFecha_inicio(rs.getString("fecha_inicio"));
+				topc.setFecha_final(rs.getString("fecha_final"));
+				topc.setEstado(rs.getInt("estado"));
+				topc.setCantidad(rs.getInt("cantidad"));
+				listofc.add(topc);
 			}
 		}
 		catch (Exception e){
@@ -64,7 +72,8 @@ public class Dt_rol {
 			}
 			
 		}
-		return listRol;
+		return listofc;
 	}
 
+	
 }

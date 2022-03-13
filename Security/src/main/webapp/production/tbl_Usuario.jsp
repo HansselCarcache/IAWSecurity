@@ -91,11 +91,16 @@
                             </div>
                             
                     
-                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <table id="tbl_user" class="table table-striped table-bordered" style="width:100%">
+                     <%
+                      		ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>();
+                      		Dt_usuario dtusr = new Dt_usuario();
+                      		listaUsuario = dtusr.listaUserActivos();
+                      %>
                     
                       <thead>
                         <tr>
-                          <th>ID Usuario</th>
+                          
                           <th>ID Uca</th>
                           <th>Nombre usuario</th>
                           <th>Nombre completo</th>
@@ -113,20 +118,29 @@
 
 
                       <tbody>
-                     
+                     	<%
+	                      	for(Tbl_user tusr :listaUsuario){
+	                      		String estado= "";
+	                      		if(tusr.getEstado()!=3){
+	                      			estado= "Activo";
+	                      		}
+	                      		else{
+	                      			estado = "Inactivo";
+	                      		}
+	                      %>
                       	
                       
                         <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          
+                          <td><%=tusr.getId_uca() %></td>
+                          <td><%=tusr.getNombre_usuario() %></td>
+                          <td><%=tusr.getNombres()+" "+tusr.getApellidos() %></td>
+                          <td><%=tusr.getSexo() %></td>
+                          <td><%=tusr.getTelefono_contacto() %></td>
+                          <td><%=tusr.getCargo() %></td>
+                          <td><%=tusr.getCorreo_personal() %></td>
+                          <td><%=tusr.getId_carrera() %></td>
+                          <td><%=estado %></td>
                           <td>
                            <a href="updateUsuario.jsp">
                             <i class="far fa-edit" title="Editar Opciones"></i>
@@ -143,13 +157,16 @@
                           
                           
                         </tr>
+                        <%
+                        }
+                        %>
                         
                         
                         
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>ID Usuario</th>
+                          
                           <th>ID Uca</th>
                           <th>Nombre usuario</th>
                           <th>Nombre completo</th>
@@ -218,6 +235,35 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    
+     <script>
+    $(document).ready(function() {
+        $('#tbl_user').DataTable( {
+        	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
+        	"dom": '<"top"Blf>rt<"bottom"ip><"clear">',
+        	
+        	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+        
+        	"language": {
+                "lengthMenu": "Mostrar _MENU_ records por pagina",
+                "search": "Buscar:",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+                "emptyTable": "No existen datos en la tabla",
+                "zeroRecords": "No existe un registro en la BD",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                
+                "infoEmpty": "No existe registro",
+                "infoFiltered": "(filtered from _MAX_ total records)"
+            }
+        } );
+    } );
+    
+    </script>
 
   </body>
 </html>

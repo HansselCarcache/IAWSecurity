@@ -92,7 +92,7 @@
 												  <% 
 												  	for(Tbl_user tu :listaUsuario){
 												  %>
-												  <option value="<%=tu.getId_user()%>"><%=tu.getUser()%></option>
+												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_usuario()%></option>
 												  <%
 												  	}
 												  %>

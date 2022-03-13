@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_rol, datos.*, java.util.*;"%>
 
 <!DOCTYPE html>
 <html>
@@ -90,12 +90,18 @@
                             	<br><br>
                             </div>
                             
+                   
+                    <table id="tbl_rol" class="table table-striped table-bordered" style="width:100%">
                     
-                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <%
+                      		ArrayList<Tbl_rol> listaRol = new ArrayList<Tbl_rol>();
+                      		Dt_rol dtrol = new Dt_rol();
+                      		listaRol = dtrol.listaRolActivos();
+                      %>
                     
                       <thead>
                         <tr>
-                          <th>Id_Rol</th>
+                          
                           <th>Descripcion</th>
                           <th>Estado</th>
                           <th>Acciones</th>
@@ -105,13 +111,22 @@
 
 
                       <tbody>
-                     
+                    	 <%
+	                      	for(Tbl_rol trol :listaRol){
+	                      		String estado= "";
+	                      		if(trol.getEstado()!=3){
+	                      			estado= "Activo";
+	                      		}
+	                      		else{
+	                      			estado = "Inactivo";
+	                      		}
+	                      %>
                       	
                       
                         <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          
+                          <td><%=trol.getRol() %></td>
+                          <td><%=estado %></td>
                           <td>
                            <a href="updateRol.jsp">
                             <i class="far fa-edit" title="Editar Opciones"></i>
@@ -128,13 +143,15 @@
                           
                           
                         </tr>
-                        
+                        <%
+                        }
+                        %>
                         
                         
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>Id_Rol</th>
+                          
                           <th>Descripcion</th>
                           <th>Estado</th>
                           <th>Acciones</th>
@@ -192,6 +209,41 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#tbl_rol').DataTable( {
+        	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
+        	 keys: {
+        	        focus: ':eq(0)'
+        	    },
+        	    //Elimina una columna
+        	//"columnDefs": [
+        	       // { "visible": false, "targets": 0 }
+        	     // ],
+        	"dom": '<"top"Blf>rt<"bottom"ip><"clear">',
+        	
+        	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+        
+        	"language": {
+                "lengthMenu": "Mostrar _MENU_ records por pagina",
+                "search": "Buscar:",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+                "emptyTable": "No existen datos en la tabla",
+                "zeroRecords": "No existe un registro en la BD",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                
+                "infoEmpty": "No existe registro",
+                "infoFiltered": "(filtered from _MAX_ total records)"
+            }
+        } );
+    } );
+    
+    </script>
 
   </body>
 </html>

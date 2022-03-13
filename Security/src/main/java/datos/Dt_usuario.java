@@ -18,7 +18,7 @@ public class Dt_usuario {
 	//Metodo para llenar el ResultSet para insert, update y delete
 	public void llenaRsUsuario(Connection c) {
 		try {
-			ps = c.prepareStatement("SELECT * FROM seguridad.tbl_user;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("SELECT * FROM dbfdocente.usuarios;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsUsuario = ps.executeQuery();
 			
 		}
@@ -32,18 +32,35 @@ public class Dt_usuario {
 		ArrayList<Tbl_user> listUser = new ArrayList<Tbl_user>();
 		try {
 			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT * FROM seguridad.tbl_user WHERE estado <> 3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps = c.prepareStatement("SELECT * FROM dbfdocente.usuarios WHERE estado <> 3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				Tbl_user user = new Tbl_user();
-				user.setId_user(rs.getInt("id_user"));
-				user.setUser(rs.getString("user"));
-				user.setPwd(rs.getString("pwd"));
+				user.setId_usuario(rs.getInt("id_usuario"));
+				user.setNombre_usuario(rs.getString("nombre_usuario"));
 				user.setNombres(rs.getString("nombres"));
 				user.setApellidos(rs.getString("apellidos"));
-				user.setEmail(rs.getString("email"));
-				user.setPwd_temp(rs.getString("pwd_temp"));
+				user.setSexo(rs.getString("sexo"));
+				user.setTelefono_contacto(rs.getString("telefono_contacto"));
+				user.setFecha_registro(rs.getString("fecha_registro"));
+				user.setCargo(rs.getString("cargo"));
+				user.setId_uca(rs.getString("id_uca"));
+				user.setCorreo_personal(rs.getString("correo_personal"));
+				user.setCorreo_electronico(rs.getString("correo_electronico"));
+				user.setPwd(rs.getString("pwd"));
+				user.setUrlFoto(rs.getString("urlFoto"));
+				user.setCodVerificacion(rs.getString("codVerificacion"));
+				user.setKey_encriptacion(rs.getString("key_encriptacion"));
 				user.setEstado(rs.getInt("estado"));
+				user.setId_facultad(rs.getInt("id_facultad"));
+				user.setId_departamento(rs.getInt("id_departamento"));
+				user.setId_carrera(rs.getInt("id_carrera"));
+				user.setUsuario_creacion(rs.getInt("usuario_creacion"));
+				user.setFecha_creacion(rs.getString("fecha_creacion"));
+				user.setUsuario_edicion(rs.getInt("usuario_edicion"));
+				user.setFecha_edicion(rs.getString("fecha_edicion"));
+				user.setUsuario_eliminacion(rs.getInt("usuario_eliminacion"));
+				user.setFecha_eliminacion(rs.getString("fecha_eliminacion"));
 				listUser.add(user);
 				
 			}

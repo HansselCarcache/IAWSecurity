@@ -16,7 +16,7 @@ public class poolConexion
 	private static BasicDataSource dataSource;
 //	private static String url = "jdbc:mysql://localhost:3306/flesnic?allowPublicKeyRetrieval=true";
 //	private static String url = "jdbc:mysql://localhost:3306/flesnic?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-	private static String url = "jdbc:mysql://localhost:3306/seguridad?autoReconnect=true&useSSL=false&serverTimezone=UTC";
+	private static String url = "jdbc:mysql://localhost:3306/dbfdocente?autoReconnect=true&useSSL=false&serverTimezone=UTC";
 	private static String user = "root";
 	private static String pass="2503";
 
@@ -84,7 +84,7 @@ public class poolConexion
 		   		try 
 		   		{
 					con = poolConexion.dataSource.getConnection();
-					System.out.println("se conecto a Seguridad!!!");
+					System.out.println("se conecto a dbFDocente!!!");
 				} 
 		   		catch (SQLException e) 
 		   		{
@@ -127,13 +127,13 @@ public class poolConexion
 	    	con = poolConexion.getConnection();
 	    	if(con!=null)
 	    	{
-	    		JOptionPane.showMessageDialog(null, "Conectado a BD Seguridad");
-	    		System.out.println("Conectado a Seguridad!!!");
+	    		JOptionPane.showMessageDialog(null, "Conectado a dbFDocente");
+	    		System.out.println("Conectado a dbFDocente!!!");
 	    	}
 	    	else
 	    	{
-	    		JOptionPane.showMessageDialog(null, "Error al Conectr a BD Seguridad!!!");
-	    		System.out.println("Error al Conectar a flesnic!!!");
+	    		JOptionPane.showMessageDialog(null, "Error al Conectr a dbFDocente!!!");
+	    		System.out.println("Error al Conectar a dbFDocente!!!");
 	    	}
         }
         finally
@@ -141,7 +141,7 @@ public class poolConexion
             try 
             {
                con.close();
-               System.out.println("Se desconectó de Seguridad!!!");
+               System.out.println("Se desconectó de dbFDocente!!!");
             } 
             catch (SQLException ex) 
             {

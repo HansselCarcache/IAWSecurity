@@ -2,16 +2,16 @@ package entidades;
 
 public class Tbl_rolopcion {
 	
-	private int id_rolOpcion;
+	private int id_rol_opciones;
 	private int id_rol;
 	private int id_opcion;
 	
-	//metodos
-	public int getId_rolOpcion() {
-		return id_rolOpcion;
+	
+	public int getId_rol_opciones() {
+		return id_rol_opciones;
 	}
-	public void setId_rolOpcion(int id_rolOpcion) {
-		this.id_rolOpcion = id_rolOpcion;
+	public void setId_rol_opciones(int id_rol_opciones) {
+		this.id_rol_opciones = id_rol_opciones;
 	}
 	public int getId_rol() {
 		return id_rol;
@@ -25,6 +25,9 @@ public class Tbl_rolopcion {
 	public void setId_opcion(int id_opcion) {
 		this.id_opcion = id_opcion;
 	}
+	
+	
+	
 	
 	
 

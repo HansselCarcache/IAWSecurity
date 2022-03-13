@@ -43,7 +43,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                        <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -200,7 +200,7 @@
 												  <% 
 												  	for(Tbl_user tu :listaUsuario){
 												  %>
-												  <option value="<%=tu.getId_user()%>"><%=tu.getUser()%></option>
+												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_usuario()%></option>
 												  <%
 												  	}
 												  %>
@@ -315,8 +315,13 @@
 						                  <div class="x_content">
 						                  <div class="row">
                  
-						                    <table  id="datatable-buttons"  class="table table-striped table-bordered" style="width:100%">
+						                    <table  id="tbl_detalle"  class="table table-striped table-bordered" style="width:100%">
 						                    
+						                    <%
+						                      		ArrayList<Vw_ofertadet> listaOfertadet = new ArrayList<Vw_ofertadet>();
+						                      		Dt_ofertadet dtof = new Dt_ofertadet();
+						                      		listaOfertadet = dtof.listaOfertasdet();
+						                      %>
 						                      <thead>
 						                        <tr>
 						                          <th>Id Oferta detalle</th>
@@ -329,22 +334,26 @@
 						
 						
 							                      <tbody>
-							          					
-							                          <td></td>
-							                          <td></td>
-							                          <td></td>
-							                          <td></td>
+							                      <%
+								                      	for(Vw_ofertadet oferD :listaOfertadet){
+								                      		
+								                      %>
+							          					<tr>
+							                          <td><%=oferD.getId_oferta_detalle() %></td>
+							                          <td><%=oferD.getCapacitacion() %></td>
+							                          <td><%=oferD.getNombres()+' '+oferD.getApellidos() %></td>
+							                          <td><%=oferD.getDias() %></td>
 							                          <td>
 							                           <a href="#">
 							                            <i class="far fa-edit" title="Editar Opciones"></i>
 							                          </a>
 						
-							                          &nbsp;&nbsp;
-							                          <a href="#" >
-							                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
-							                          </a>
+							                        
 							                          </td>
-								                        
+								                        </tr>
+								                         <%
+									                        }
+									                      %>
 							                        
 							                      </tbody>
 						                      <tfoot>
@@ -398,7 +407,7 @@
 						                  <div class="x_content">
 						                  <div class="row">
                  
-						                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+						                    <table id="tbl_capacitaciones" class="table table-striped table-bordered" style="width:100%">
 						                    
 						                      <thead>
 						                        <tr>
@@ -544,6 +553,59 @@
                 $(this).closest('tr').remove();
             });
         }
+        
+        $(document).ready(function() {
+            $('#tbl_capacitaciones').DataTable( {
+            	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
+            	"dom": '<"top"lf>rt<"bottom"ip><"clear">',
+            	
+            	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+            
+            	"language": {
+                    "lengthMenu": "Mostrar _MENU_ records por pagina",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "emptyTable": "No existen datos en la tabla",
+                    "zeroRecords": "No existe un registro en la BD",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    
+                    "infoEmpty": "No existe registro",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                }
+            } );
+            
+            $('#tbl_detalle').DataTable( {
+            	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
+            	"dom": '<"top"f>rt<"bottom"p><"clear">',
+            	
+            	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+            
+            	"language": {
+                    "lengthMenu": "Mostrar _MENU_ records por pagina",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "emptyTable": "No existen datos en la tabla",
+                    "zeroRecords": "No existe un registro en la BD",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    
+                    "infoEmpty": "No existe registro",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                }
+            } );
+        } );
+        
+        
+        
     </script>
 
     <!-- jQuery -->
@@ -584,9 +646,7 @@
     
     <script type="text/javascript">
    
-    </script>
     
-    <script>
           
 </script>
 

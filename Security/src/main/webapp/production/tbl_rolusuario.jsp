@@ -1,5 +1,6 @@
+<%@page import="entidades.Vw_rolopcion"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.Vw_userrol, datos.*, java.util.*;"%>
 
 <!DOCTYPE html>
 <html>
@@ -91,14 +92,19 @@
                             </div>
                             
                     
-                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <table id="tbl_rolusr" class="table table-striped table-bordered" style="width:100%">
+                    
+                    <%
+                      		ArrayList<Vw_userrol> listaRolusr = new ArrayList<Vw_userrol>();
+                      		Dt_roluser dtrolusr = new Dt_roluser();
+                      		listaRolusr = dtrolusr.listarolusuario();
+                      %>
                     
                       <thead>
                         <tr>
-                          <th>Id_rol_usuario</th>
-                          <th>Id_usuario</th>
+                          
                           <th>Usuario</th>
-                          <th>Id_rol</th>
+                          
                           <th>Rol</th>
                           <th>Acciones</th>
                           
@@ -107,15 +113,17 @@
 
 
                       <tbody>
-                     
+                     	<%
+	                      	for(Vw_userrol rus :listaRolusr){
+	                      		
+	                      %>
                       	
                       
                         <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          
+                          <td><%=rus.getUsuario() %></td>
+                          
+                          <td><%=rus.getRol() %></td>
                           <td>
                            <a href="updateRoluser.jsp">
                             <i class="far fa-edit" title="Editar Opciones"></i>
@@ -132,16 +140,16 @@
                           
                           
                         </tr>
-                        
+                        <%
+                        }
+                        %>
                         
                         
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>Id_rol_usuario</th>
-                          <th>Id_usuario</th>
+                          
                           <th>Usuario</th>
-                          <th>Id_rol</th>
                           <th>Rol</th>
                           <th>Acciones</th>
                         </tr>
@@ -198,6 +206,35 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    
+     <script>
+    $(document).ready(function() {
+        $('#tbl_rolusr').DataTable( {
+        	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
+        	"dom": '<"top"Blf>rt<"bottom"ip><"clear">',
+        	
+        	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+        
+        	"language": {
+                "lengthMenu": "Mostrar _MENU_ records por pagina",
+                "search": "Buscar:",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+                "emptyTable": "No existen datos en la tabla",
+                "zeroRecords": "No existe un registro en la BD",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                
+                "infoEmpty": "No existe registro",
+                "infoFiltered": "(filtered from _MAX_ total records)"
+            }
+        } );
+    } );
+    
+    </script>
 
   </body>
 </html>
