@@ -29,6 +29,7 @@ public class Dt_inscripcion {
 			}
 		}
 		
+		
 		public ArrayList<Tbl_inscripcion> listaInscripActivo(){
 			ArrayList<Tbl_inscripcion> listIncrip = new ArrayList<Tbl_inscripcion>();
 			try {

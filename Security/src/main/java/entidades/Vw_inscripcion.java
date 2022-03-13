@@ -18,7 +18,6 @@ public class Vw_inscripcion {
 	private int id_escala;
 	private String calificacion;
 	
-	
 	//Methods
 	public int getId_inscripcion() {
 		return id_inscripcion;
