@@ -102,7 +102,7 @@
                                         
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
-                								<button  class="btn btn-primary"><a href="tbl_facultad.jsp">Regresar</a></button> 
+                								<a href="tbl_facultad.jsp" class="btn btn-primary">Regresar</a>
                   							</div>
                                         </div>
                                     </form>

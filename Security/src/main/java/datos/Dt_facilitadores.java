@@ -40,8 +40,8 @@ public class Dt_facilitadores {
 				rs = ps.executeQuery();
 				while(rs.next()){
 					Tbl_facilitadores trol = new Tbl_facilitadores(); //instanciamos a rol
-			
-					trol.setId_uca(rs.getInt("id_uca"));
+					trol.setId_facilitador(rs.getInt("id_facilitador"));
+					trol.setId_uca(rs.getString("id_uca"));
 					trol.setNombres(rs.getString("nombres"));
 					trol.setApellidos(rs.getString("apellidos"));
 					trol.setTelefono(rs.getString("telefono"));

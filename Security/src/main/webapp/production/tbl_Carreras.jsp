@@ -129,7 +129,7 @@
                         <tr>
                            <td><%=c.getNombre_carrera() %></td>
                           <td><%=c.getNombre_departamento() %></td>
-                           <td><%=c.getEstado() %></td>
+                           <td><%=estado %></td>
                           <td>
                            <a href="updateCarrera.jsp">
                             <i class="far fa-edit" title="Editar Carreras"></i>
