@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Oferta | Modalidad</title>
+    <title>Oferta | Capacitaciones</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -52,7 +52,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Modalidad </h3>
+                <h3>Capacitaciones </h3>
               </div>
 
 
@@ -64,7 +64,7 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Modalidades registradas</h2>
+                    <h2>Capacitaciones registradas</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -85,8 +85,8 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                            <a href="addModalidad.jsp">
-                            	<i class="fa fa-plus-square"></i> Nueva modalidad</a>
+                            <a href="addCapacitacion.jsp">
+                            	<i class="fa fa-plus-square"></i> Nueva capacitacion</a>
                             	<br><br>
                             </div>
                             
@@ -94,19 +94,18 @@
                     <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                     
                     <%
-                      		ArrayList<Tbl_modalidad> listaModalidad = new ArrayList<Tbl_modalidad>();
-                      		Dt_modalidad dtmodalidad = new Dt_modalidad();
-                      		listaModalidad = dtmodalidad.listaModalidadesActivas();
+                      		ArrayList<Vw_capacitacion> listaCapacitacion = new ArrayList<Vw_capacitacion>();
+                      		Dt_capacitacion dtcapacitacion = new Dt_capacitacion();
+                      		listaCapacitacion = dtcapacitacion.listarcapacitacionesActivas();
                       %>
                     
                       <thead>
                         <tr>
-                          <th>ID Modalidad</th>
+                          <th>ID Capacitación</th>
                           <th>Nombre</th>
-                          <th>Descripción</th>
-                          <th>Certificación</th>
                           <th>Estado</th>
-                          <th></th>
+                          <th>Modalidad</th>
+ 	                      <th></th>
                           
                         </tr>
                       </thead>
@@ -116,9 +115,9 @@
                       <tbody>
                      
                      <%
-	                      	for(Tbl_modalidad tmod :listaModalidad){
+	                      	for(Vw_capacitacion tcap :listaCapacitacion){
 	                      		String estado= "";
-	                      		if(tmod.getEstado()!=3){
+	                      		if(tcap.getEstado()!=3){
 	                      			estado= "Activo";
 	                      		}
 	                      		else{
@@ -128,22 +127,21 @@
                       	
                       
                         <tr>
-                          <td><%=tmod.getId_modalidad() %></td>
-                          <td><%=tmod.getNombre() %></td>
-                          <td><%=tmod.getDescripcion() %></td>
-                          <td><%=tmod.getCertificada() %></td>
+                          <td><%=tcap.getId_capacitacion() %></td>
+                          <td><%=tcap.getNombre() %></td>
                           <td><%=estado %></td>
+                          <td><%=tcap.getModalidad() %></td>
                           <td>
-                           <a href="updateModalidad.jsp">
-                            <i class="far fa-edit" title="Editar Modalidad"></i>
+                           <a href="updateCapacitacion.jsp">
+                            <i class="far fa-edit" title="Editar Capacitación"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readModalidad.jsp">
-                            <i class="far fa-eye" title="Visualizar Modalidad"></i>
+                          <a href="readCapacitacion.jsp">
+                            <i class="far fa-eye" title="Visualizar Capacitación"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteModalidad.jsp" >
-                            <i class="far fa-trash-alt" title="Eliminar Modalidad"></i>
+                          <a href="deleteCapacitacion.jsp" >
+                            <i class="far fa-trash-alt" title="Eliminar Capacitación"></i>
                           </a>
                           </td>
                           
@@ -157,12 +155,12 @@
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>ID Modalidad</th>
+                          <th>ID Capacitación</th>
                           <th>Nombre</th>
-                          <th>Descripción</th>
-                          <th>Certificación</th>
                           <th>Estado</th>
-                          <th></th>
+                          <th>Modalidad</th>
+ 	                      <th></th>
+ 	                      
                         </tr>
                       </tfoot>
                     </table>

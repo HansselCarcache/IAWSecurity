@@ -40,8 +40,8 @@ public class Dt_modalidad {
 				Tbl_modalidad modalidad = new Tbl_modalidad();
 				modalidad.setId_modalidad(rs.getInt("id_modalidad"));
 				modalidad.setNombre(rs.getString("nombre"));
-				modalidad.setDescripcion(rs.getString("Descripción"));
-				modalidad.setCertificada(rs.getInt("Certificada"));
+				modalidad.setDescripcion(rs.getString("descripcion"));
+				modalidad.setCertificada(rs.getInt("certificada"));
 				modalidad.setEstado(rs.getInt("estado"));
 				listModalidad.add(modalidad);
 				
