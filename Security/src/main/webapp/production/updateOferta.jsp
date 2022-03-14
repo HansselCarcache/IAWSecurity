@@ -408,6 +408,11 @@
 						                  <div class="row">
                  
 						                    <table id="tbl_capacitaciones" class="table table-striped table-bordered" style="width:100%">
+						                    <%
+					                      		ArrayList<Vw_capacitacion> listaCapacitacionV = new ArrayList<Vw_capacitacion>();
+					                      		Dt_capacitacion dtcapacitacion = new Dt_capacitacion();
+					                      		listaCapacitacionV = dtcapacitacion.listarcapacitacionesV();
+			                    			  %>
 						                    
 						                      <thead>
 						                        <tr>
@@ -419,15 +424,26 @@
 						
 						
 							                      <tbody>
+							                       <%
+							                      	for(Vw_capacitacion cap :listaCapacitacionV){
+							                      		String estado= "";
+							                      		if(cap.getEstado()!=3){
+							                      			estado= "Activo";
+							                      		}
+							                      		else{
+							                      			estado = "Inactivo";
+							                      		}
+	                     						 %>
 							          
 								                        <tr>
-								                          <td></td>
-								                          <td></td>
-								                          <td>
-								                      
-								                          </td>
+								                          <td><%=cap.getNombre() %></td>
+								                          <td><%=cap.getModalidad() %></td>
+								                          <td><%=estado %></td>
 								                  
 								                        </tr>
+								                        <%
+                        									}
+                        								%>
 							                        
 							                      </tbody>
 						                      <tfoot>

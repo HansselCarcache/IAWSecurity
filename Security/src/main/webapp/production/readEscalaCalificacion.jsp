@@ -98,7 +98,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Escala: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="escala" name="escala" required="required" class="form-control ">
+												<input type="text" id="escala" name="escala" required="required" class="form-control" readonly="readonly">
 											</div>
 										</div>
 										
@@ -106,7 +106,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripción: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" name="descripcion" required="required" class="form-control ">
+												<input type="text" id="descripcion" name="descripcion" required="required" class="form-control" readonly="readonly">
 											</div>
 										</div>
   

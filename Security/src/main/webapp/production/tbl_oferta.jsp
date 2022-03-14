@@ -85,6 +85,7 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
+                            <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
                             <a href="addOferta.jsp">
                             	<i class="fa fa-plus-square"></i> Nueva Oferta</a>
                             	<br><br>
@@ -101,15 +102,15 @@
                     
                       <thead>
                         <tr>
-                          <th>ID Oferta</th>
-                          <th>Nombre</th>
-                          <th>Descripcion</th>
-                          <th>Periodo</th>
-                          <th>Fecha Inicio</th>
-                          <th>Fecha Final</th>
-                          <th>Cantidad de capacitaciones registradas</th>
-                          <th>Estado</th>
-                          <th>Acciones</th>
+                          <th>ID Oferta <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Nombre <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Descripcion <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Periodo <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Fecha Inicio <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Fecha Final <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Cantidad de capacitaciones asignadas <a onclick="eliminarcolumna(6)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Estado <a onclick="eliminarcolumna(7)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Acciones <a onclick="eliminarcolumna(8)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
                           
                         </tr>
@@ -137,7 +138,7 @@
                           <td><%=oferC.getFecha_inicio() %></td>
                           <td><%=oferC.getFecha_final() %></td>
                           <td><%=oferC.getCantidad() %></td>
-                          <td><%=oferC.getEstado() %></td>
+                          <td><%=estado %></td>
                           <td>
                            <a href="updateOferta.jsp">
                             <i class="far fa-edit" title="Editar Opciones"></i>
@@ -168,7 +169,7 @@
                           <th>Periodo</th>
                           <th>Fecha Inicio</th>
                           <th>Fecha Final</th>
-                          <th>Cantidad de capacitaciones registradas</th>
+                          <th>Cantidad de capacitaciones asignadas</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                         </tr>
@@ -227,13 +228,89 @@
     <script src="../build/js/custom.min.js"></script>
     
      <script>
+   	function eliminarcolumna(id){
+   		var table = $('#tbl_oferta').DataTable();
+   	 
+   		table.column( id).visible( false );
+   	}
+   	function mostrarcolumna(){
+   		var table = $('#tbl_oferta').DataTable();
+   	    
+   	   	table.columns( [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ] ).visible( true, true );
+   	}
+   	
+   	
+   	
+   	
+    
     $(document).ready(function() {
+    	
+    	
         $('#tbl_oferta').DataTable( {
-        	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
-        	"dom": '<"top"Blf>rt<"bottom"ip><"clear">',
+        	buttons: [  
+        				
+		        		{
+			        		extend: 'csv',
+							text: 'CSV',
+							title: 'Ofertas registradas',
+							action: function ( e, dt, node, config ) {
+			                    //alert( 'Activated!' );
+			                    eliminarcolumna(8);
+			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
+			                },
+							exportOptions: {
+				                columns: ':visible',
+				            }
+		        		},
+        				{
+        					extend: 'excel',
+        					text: 'Excel',
+        					title: 'Ofertas registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(8);
+        	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+        				
+        				{
+        					extend: 'pdf',
+        					text: 'PDF',
+        					title: 'Ofertas registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(8);
+        	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+      
+        				{ 
+        					extend: 'print',
+        					text: 'Imprimir',
+        					title: 'Ofertas registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(8);
+        	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        					
+        				} 
+        			 ],
+        	keys: true,
+        	    
+        	"dom": '<Blf<rt>ip>',
         	
         	"lengthMenu": [ 10, 25, 50, 75, 100 ],
-        
+        	
         	"language": {
                 "lengthMenu": "Mostrar _MENU_ records por pagina",
                 "search": "Buscar:",
@@ -252,6 +329,8 @@
             }
         } );
     } );
+    
+    
     
     </script>
 

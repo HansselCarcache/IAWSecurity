@@ -98,7 +98,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombres" name="nombres" required="required" class="form-control ">
+												<input type="text" id="nombres" name="nombres" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -106,7 +106,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripcion: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="apellidos" name="apellidos" required="required" class="form-control ">
+												<input type="text" id="apellidos" name="apellidos" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -114,7 +114,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Periodo: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="username" name="username" required="required" class="form-control ">
+												<input type="text" id="username" name="username" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -122,7 +122,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha inicio: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="username" name="username" required="required" class="form-control ">
+												<input type="date" id="username" name="username" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -130,11 +130,15 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha final: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="username" name="username" required="required" class="form-control ">
+												<input type="date" id="username" name="username" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
-                                        
+                                        <div class="ln_solid">
+                                            <div class="col-md-6 offset-md-3">
+                								<a href="tbl_oferta.jsp" class="btn btn-primary">Regresar</a>
+                  							</div>
+                                        </div>
                                         
                                         
                                     </form>
@@ -172,6 +176,11 @@
 						                  
 						                  <div class="x_content">
 						                  <div class="row">
+						                  <div class="text-muted font-13 col-md-12" style="text-align: right;">
+				                             <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
+				                            
+				                            	<br><br>
+                            				</div>
                  
 						                    <table  id="tbl_detalle"  class="table table-striped table-bordered" style="width:100%">
 						                    
@@ -183,14 +192,14 @@
 						                      <thead>
 						                        <tr>
 						                          
-						                          <th>Nombre Capacitación</th>
-						                          <th>Facilitador</th>
-						                          <th>Fecha Inicio</th>
-						                          <th>Fecha Final</th>
-						                          <th>Hora Inicio</th>
-						                          <th>Hora Final</th>
-						                          <th>Días</th>
-						                          <th>Público</th>
+						                          <th>Nombre Capacitación <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Facilitador <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Fecha Inicio <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Fecha Final <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Hora Inicio <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Hora Final <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Días <a onclick="eliminarcolumna(6)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Público <a onclick="eliminarcolumna(7)"><i class="fa-solid fa-circle-minus"></i></a></th>
 						                          
 						                        </tr>
 						                      </thead>
@@ -240,6 +249,11 @@
 							              </div>
 							              <!-- Final primera Tabla -->
 							                </div>
+							                <div class="ln_solid">
+                                            <div class="col-md-6 offset-md-11">
+                								<a href="tbl_oferta.jsp" class="btn btn-primary">Regresar</a>
+                  							</div>
+                                        </div>
                                         </div>
                                         
                                         </div>
@@ -250,6 +264,7 @@
                                     
                                     
                                 </div>
+                                
                             </div>
                             
                         </div>
@@ -348,30 +363,106 @@
             });
         }
         
-        $(document).ready(function() {
-        $('#tbl_detalle').DataTable( {
-        	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
-        	"dom": '<"top"f>rt<"bottom"ip><"clear">',
-        	
-        	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+    	function eliminarcolumna(id){
+       		var table = $('#tbl_detalle').DataTable();
+       	 
+       		table.column( id).visible( false );
+       	}
+       	function mostrarcolumna(){
+       		var table = $('#tbl_detalle').DataTable();
+       	    
+       	   	table.columns( [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ] ).visible( true, true );
+       	}
+       	
+       	
+       	
+       	
         
-        	"language": {
-                "lengthMenu": "Mostrar _MENU_ records por pagina",
-                "search": "Buscar:",
-                "paginate": {
-                    "first":      "Primero",
-                    "last":       "Ultimo",
-                    "next":       "Siguiente",
-                    "previous":   "Anterior"
-                },
-                "emptyTable": "No existen datos en la tabla",
-                "zeroRecords": "No existe un registro en la BD",
-                "info": "Mostrando página _PAGE_ de _PAGES_",
-                
-                "infoEmpty": "No existe registro",
-                "infoFiltered": "(filtered from _MAX_ total records)"
-            }
-        } );
+        $(document).ready(function() {
+        	
+        	
+            $('#tbl_detalle').DataTable( {
+            	buttons: [  
+            				
+    		        		{
+    			        		extend: 'csv',
+    							text: 'CSV',
+    							title: 'Usuarios registrados',
+    							action: function ( e, dt, node, config ) {
+    			                    //alert( 'Activated!' );
+    			                    eliminarcolumna(9);
+    			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
+    			                },
+    							exportOptions: {
+    				                columns: ':visible',
+    				            }
+    		        		},
+            				{
+            					extend: 'excel',
+            					text: 'Excel',
+            					title: 'Usuarios registrados',
+            					action: function ( e, dt, node, config ) {
+            	                    //alert( 'Activated!' );
+            	                    eliminarcolumna(9);
+            	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
+            	                },
+            					exportOptions: {
+            		                columns: ':visible',
+            		            }
+            				},
+            				
+            				{
+            					extend: 'pdf',
+            					text: 'PDF',
+            					title: 'Usuarios registrados',
+            					action: function ( e, dt, node, config ) {
+            	                    //alert( 'Activated!' );
+            	                    eliminarcolumna(9);
+            	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
+            	                },
+            					exportOptions: {
+            		                columns: ':visible',
+            		            }
+            				},
+          
+            				{ 
+            					extend: 'print',
+            					text: 'Imprimir',
+            					title: 'Usuarios registrados',
+            					action: function ( e, dt, node, config ) {
+            	                    //alert( 'Activated!' );
+            	                    eliminarcolumna(9);
+            	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
+            	                },
+            					exportOptions: {
+            		                columns: ':visible',
+            		            }
+            					
+            				} 
+            			 ],
+            	keys: true,
+            	    
+            	"dom": '<lf<rt>ip>',
+            	
+            	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+            	
+            	"language": {
+                    "lengthMenu": "Mostrar _MENU_ records por pagina",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "emptyTable": "No existen datos en la tabla",
+                    "zeroRecords": "No existe un registro en la BD",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    
+                    "infoEmpty": "No existe registro",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                }
+            } );
         } );
     </script>
 

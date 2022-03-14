@@ -94,7 +94,7 @@
 							                      	Dt_rol dtr = new Dt_rol();
 							                      	listRol = dtr.listaRolActivos();
 								                 %>
-								                 <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" required="required">
+								                 <select class="form-control js-example-basic-single"  name="cbxRol" id="cbxRol" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
 												  	for(Tbl_rol trol :listRol){

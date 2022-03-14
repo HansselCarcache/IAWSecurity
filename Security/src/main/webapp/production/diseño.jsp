@@ -37,16 +37,16 @@
                   </li>
                   <li><a><i class="fa-solid fa-landmark"></i> Universidad <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">Facultades</a></li>
-                      <li><a href="media_gallery.html">Departamentos</a></li>
-                      <li><a href="typography.html">Carreras</a></li>
+                      <li><a href="tbl_facultad.jsp">Facultades</a></li>
+                      <li><a href="tbl_departamento.jsp">Departamentos</a></li>
+                      <li><a href="tbl_Carreras.jsp">Carreras</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa-solid fa-graduation-cap"></i> Oferta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="tbl_oferta.jsp">Oferta</a></li>
-                      <li><a href="form_advanced.html">Capacitaciones</a></li>
-                      <li><a href="form_wizards.html">Modalidades</a></li>
+                      <li><a href="tbl_capacitacion.jsp">Capacitaciones</a></li>
+                      <li><a href="tbl_modalidad.jsp">Modalidades</a></li>
                       <li><a href="tbl_facilitadores.jsp">Facilitadores</a></li>
                       
                     </ul>
@@ -54,7 +54,7 @@
                   
                   <li><a><i class="fa-solid fa-school"></i> Inscripciones <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tables.html">Inscripciones</a></li>
+                      <li><a href="tbl_inscripcion.jsp">Inscripciones</a></li>
                       <li><a href="tbl_escalaCalificacion.jsp">Escala de evaluación</a></li>
                     </ul>
                   </li>

@@ -94,7 +94,7 @@
 							                      	Dt_usuario dtu = new Dt_usuario();
 							                      	listaUsuario = dtu.listaUserActivos();
 								                 %>
-												<select class="form-control js-example-basic-single" name="cbxUser" id="cbxUser" >
+												<select class="form-control js-example-basic-single" disabled name="cbxUser" id="cbxUser" >
 												  <option value="">Seleccione...</option>
 												  <% 
 												  	for(Tbl_user tu :listaUsuario){
@@ -116,7 +116,7 @@
 							                      	Dt_rol dtr = new Dt_rol();
 							                      	listRol = dtr.listaRolActivos();
 								                 %>
-								                 <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" >
+								                 <select class="form-control js-example-basic-single" disabled name="cbxRol" id="cbxRol" >
 												  <option value="">Seleccione...</option>
 												  <% 
 												  	for(Tbl_rol trol :listRol){
@@ -135,7 +135,7 @@
                                         
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
-                								<button  class="btn btn-primary"><a href="tbl_rolusuario.jsp">Regresar</a></button> 
+                								<a href="tbl_rolusuario.jsp" class="btn btn-primary">Regresar</a>
                   							</div>
                                         </div>
                                     </form>

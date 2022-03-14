@@ -89,7 +89,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Descripcion <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" required="required" class="form-control ">
+												<input type="text" id="descripcion" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
 										
@@ -97,7 +97,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="estado" required="required" class="form-control ">
+												<input type="text" id="estado" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
 
@@ -105,7 +105,7 @@
                                         
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
-                								<button  class="btn btn-primary"><a href="Tbl_opciones.jsp">Regresar</a></button> 
+                								<a href="Tbl_opciones.jsp" class="btn btn-primary">Regresar</a>
                   							</div>
                                         </div>
                                     </form>

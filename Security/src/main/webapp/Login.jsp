@@ -81,8 +81,8 @@ span.psw {
     <label for="psw"><b>Contraseña</b></label>
     <input type="password" placeholder="Introduzca su contraseña" name="psw" >
         
-        
-   <button type="submit"><a href="production/Inicio.jsp">Iniciar Sesión</a></button> 
+ 
+   <button onclick="location.href='production/Inicio.jsp'">Iniciar Sesión</button>
     <label>
       <input type="checkbox" checked="checked" name="remember"> Recordar mi contraseña
     </label>
