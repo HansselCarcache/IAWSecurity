@@ -89,7 +89,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Descripcion <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" required="required" class="form-control ">
+												<input type="text" id="descripcion" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
 										
@@ -97,7 +97,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="estado" required="required" class="form-control ">
+												<input type="text" id="estado" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
 

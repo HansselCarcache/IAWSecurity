@@ -98,7 +98,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombres" name="nombres" required="required" class="form-control ">
+												<input type="text" id="nombres" name="nombres" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
 										
@@ -106,7 +106,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripcion: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="apellidos" name="apellidos" required="required" class="form-control ">
+												<input type="text" id="apellidos" name="apellidos" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
 										
@@ -114,7 +114,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Periodo: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="username" name="username" required="required" class="form-control ">
+												<input type="text" id="username" name="username" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
 										
@@ -122,7 +122,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha inicio: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="username" name="username" required="required" class="form-control ">
+												<input type="date" id="username" name="username" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
 										
@@ -130,7 +130,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha final: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="username" name="username" required="required" class="form-control ">
+												<input type="date" id="username" name="username" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
 										

@@ -89,7 +89,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha de registro: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="fregistro" name="fregistro" required="required" class="form-control ">
+												<input type="text" id="fregistro" name="fregistro" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -97,7 +97,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Estado: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="estado" name="estado" required="required" class="form-control ">
+												<input type="text" id="estado" name="estado" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 
@@ -105,7 +105,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombres: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombres" name="nombres" required="required" class="form-control ">
+												<input type="text" id="nombres" name="nombres" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -113,7 +113,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Apellidos: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="apellidos" name="apellidos" required="required" class="form-control ">
+												<input type="text" id="apellidos" name="apellidos" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -121,7 +121,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="username" name="username" required="required" class="form-control ">
+												<input type="text" id="username" name="username" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -130,7 +130,7 @@
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 											
-												<select class="form-control js-example-basic-single" name="sexo" id="sexo" required="required">
+												<select class="form-control js-example-basic-single" disabled name="sexo" id="sexo" required="required">
 												  <option value="">Seleccione...</option>
 												  
 												  <option value="M">Masculino</option>
@@ -144,7 +144,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="telefono" name="telefono" required="required" class="form-control ">
+												<input type="text" id="telefono" name="telefono" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
                                         
@@ -152,7 +152,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="cargo" name="cargo" required="required" class="form-control ">
+												<input type="text" id="cargo" name="cargo" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -160,7 +160,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo personal: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="correop" name="correop" required="required" class="form-control ">
+												<input type="text" id="correop" name="correop" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -168,7 +168,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="iduca" name="iduca" required="required" class="form-control ">
+												<input type="text" id="iduca" name="iduca" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -176,7 +176,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="correoi" name="correoi" required="required" class="form-control ">
+												<input type="text" id="correoi" name="correoi" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -184,7 +184,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Contraseña: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="pwd" name="pwd" required="required" class="form-control ">
+												<input type="text" id="pwd" name="pwd" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -192,7 +192,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Confirmar contraseña: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="pwd2" name="pwd2" required="required" class="form-control ">
+												<input type="text" id="pwd2" name="pwd2" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
                                         
@@ -202,16 +202,16 @@
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 												<%
-							                      	ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>();
-							                      	Dt_usuario dtu = new Dt_usuario();
-							                      	listaUsuario = dtu.listaUserActivos();
+							                      	ArrayList<Tbl_facultad> listaFacultad = new ArrayList<Tbl_facultad>();
+							                      	Dt_facultad dtf = new Dt_facultad();
+							                      	listaFacultad = dtf.listaFacultadesActivas();
 								                 %>
-												<select class="form-control js-example-basic-single" name="facultad" id="facultad" required="required">
+												<select class="form-control js-example-basic-single" disabled name="facultad" id="facultad" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_user tu :listaUsuario){
+												  	for(Tbl_facultad tf :listaFacultad){
 												  %>
-												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_usuario()%></option>
+												  <option value="<%=tf.getId_facultad()%>"><%=tf.getNombre_facultad()%></option>
 												  <%
 												  	}
 												  %>
@@ -223,16 +223,18 @@
                                             <div class="col-md-6 col-sm-6">
 <!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
 												<%
-							                      	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-							                      	Dt_rol dtr = new Dt_rol();
-							                      	listRol = dtr.listaRolActivos();
-								                 %>
-								                 <select class="form-control js-example-basic-single" name="departamento" id="departamento" required="required">
+                      		
+						                      		ArrayList<Vw_facultad_departamento> listaFaDe = new ArrayList<Vw_facultad_departamento>();
+						                      		Dt_departamento dtdepa = new Dt_departamento();
+						                      		listaFaDe =  dtdepa.listaDepartamentosActivos();
+                      		
+                      							%>
+								                 <select class="form-control js-example-basic-single" disabled name="departamento" id="departamento" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_rol trol :listRol){
+												  	for(Vw_facultad_departamento de :listaFaDe){
 												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
+												  <option value="<%=de.getId_departamento()%>"><%=de.getNombre_departamento()%></option>
 												  <%
 												  	}
 												  %>
@@ -245,7 +247,7 @@
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 												
-												<select class="form-control js-example-basic-single" name="carrera" id="carrera" required="required">
+												<select class="form-control js-example-basic-single" disabled name="carrera" id="carrera" required="required">
 												  <option value="">Seleccione...</option>
 												
 												  <option value=""></option>

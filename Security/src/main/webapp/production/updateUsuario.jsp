@@ -186,16 +186,16 @@
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 												<%
-							                      	ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>();
-							                      	Dt_usuario dtu = new Dt_usuario();
-							                      	listaUsuario = dtu.listaUserActivos();
+							                      	ArrayList<Tbl_facultad> listaFacultad = new ArrayList<Tbl_facultad>();
+							                      	Dt_facultad dtf = new Dt_facultad();
+							                      	listaFacultad = dtf.listaFacultadesActivas();
 								                 %>
 												<select class="form-control js-example-basic-single" name="facultad" id="facultad" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_user tu :listaUsuario){
+												  	for(Tbl_facultad tf :listaFacultad){
 												  %>
-												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_usuario()%></option>
+												  <option value="<%=tf.getId_facultad()%>"><%=tf.getNombre_facultad()%></option>
 												  <%
 												  	}
 												  %>
@@ -207,16 +207,18 @@
                                             <div class="col-md-6 col-sm-6">
 <!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
 												<%
-							                      	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-							                      	Dt_rol dtr = new Dt_rol();
-							                      	listRol = dtr.listaRolActivos();
-								                 %>
+                      		
+						                      		ArrayList<Vw_facultad_departamento> listaFaDe = new ArrayList<Vw_facultad_departamento>();
+						                      		Dt_departamento dtdepa = new Dt_departamento();
+						                      		listaFaDe =  dtdepa.listaDepartamentosActivos();
+                      		
+                      							%>
 								                 <select class="form-control js-example-basic-single" name="departamento" id="departamento" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_rol trol :listRol){
+												  	for(Vw_facultad_departamento de :listaFaDe){
 												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
+												  <option value="<%=de.getId_departamento()%>"><%=de.getNombre_departamento()%></option>
 												  <%
 												  	}
 												  %>
