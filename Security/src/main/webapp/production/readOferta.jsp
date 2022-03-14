@@ -134,7 +134,11 @@
 											</div>
 										</div>
 										
-                                        
+                                        <div class="ln_solid">
+                                            <div class="col-md-6 offset-md-3">
+                								<a href="tbl_oferta.jsp" class="btn btn-primary">Regresar</a>
+                  							</div>
+                                        </div>
                                         
                                         
                                     </form>
@@ -245,6 +249,11 @@
 							              </div>
 							              <!-- Final primera Tabla -->
 							                </div>
+							                <div class="ln_solid">
+                                            <div class="col-md-6 offset-md-11">
+                								<a href="tbl_oferta.jsp" class="btn btn-primary">Regresar</a>
+                  							</div>
+                                        </div>
                                         </div>
                                         
                                         </div>
@@ -255,6 +264,7 @@
                                     
                                     
                                 </div>
+                                
                             </div>
                             
                         </div>

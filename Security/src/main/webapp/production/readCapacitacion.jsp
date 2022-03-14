@@ -116,8 +116,14 @@
 									<select id="id_modalidad" readonly="readonly" class="form-control ">
 									
 									
-									<option value="1">Virtual</option>
-								  	<option value="2">Presencial</option>
+									<option value="">Seleccione...</option>
+												  <% 
+												  	for(Tbl_modalidad mod :listaModalidad){
+												  %>
+												  <option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre()%></option>
+												  <%
+												  	}
+												  %>
 										</select>
 	                      	
 	                      		

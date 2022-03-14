@@ -177,16 +177,16 @@
                                             	<div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 												<%
-							                      	ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>();
-							                      	Dt_usuario dtu = new Dt_usuario();
-							                      	listaUsuario = dtu.listaUserActivos();
+							                      	ArrayList<Tbl_capacitacion> listaCapacitacion = new ArrayList<Tbl_capacitacion>();
+							                      	Dt_capacitacion dtu = new Dt_capacitacion();
+							                      	listaCapacitacion = dtu.listacapacitacionesActivas();
 								                 %>
 												<select class="form-control js-example-basic-single" name="capacitacion" id="capacitacion" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_user tu :listaUsuario){
+												  	for(Tbl_capacitacion tc :listaCapacitacion){
 												  %>
-												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_usuario()%></option>
+												  <option value="<%=tc.getNombre()%>"><%=tc.getNombre()%></option>
 												  <%
 												  	}
 												  %>
@@ -207,7 +207,7 @@
 												  <% 
 												  	for(Tbl_rol trol :listRol){
 												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
+												  <option value="<%=trol.getRol()%>"><%=trol.getRol()%></option>
 												  <%
 												  	}
 												  %>
@@ -301,7 +301,9 @@
 						                  <div class="x_content">
 						                  <div class="row">
                  
-						                    <table  id="datatable-buttons"  class="table table-striped table-bordered" style="width:100%">
+						                    <table  id="tbl_detalle"  class="table table-striped table-bordered" style="width:100%">
+						                    
+						                    
 						                    
 						                      <thead>
 						                        <tr>
@@ -315,7 +317,13 @@
 						
 							                      <tbody>
 							          
+								                        <tr>
+								                        <td></td>
+								                        <td></td>
+								                        <td></td>
+								                        <td></td>
 								                        
+								                        </tr>
 							                        
 							                      </tbody>
 						                      <tfoot>
@@ -369,6 +377,11 @@
 						                  <div class="row">
                  
 						                    <table id="tbl_capacitaciones" class="table table-striped table-bordered" style="width:100%">
+									          <%
+					                      		ArrayList<Vw_capacitacion> listaCapacitacionV = new ArrayList<Vw_capacitacion>();
+					                      		Dt_capacitacion dtcapacitacion = new Dt_capacitacion();
+					                      		listaCapacitacionV = dtcapacitacion.listarcapacitacionesV();
+			                    			  %>
 						                    
 						                      <thead>
 						                        <tr>
@@ -380,15 +393,26 @@
 						
 						
 							                      <tbody>
+							                      <%
+							                      	for(Vw_capacitacion cap :listaCapacitacionV){
+							                      		String estado= "";
+							                      		if(cap.getEstado()!=3){
+							                      			estado= "Activo";
+							                      		}
+							                      		else{
+							                      			estado = "Inactivo";
+							                      		}
+	                     						 %>
 							          
 								                        <tr>
-								                          <td></td>
-								                          <td></td>
-								                          <td>
-								                      
-								                          </td>
+								                          <td><%=cap.getNombre() %></td>
+								                          <td><%=cap.getModalidad() %></td>
+								                          <td><%=estado %></td>
 								                  
 								                        </tr>
+								                        <%
+                        									}
+                        								%>
 							                        
 							                      </tbody>
 						                      <tfoot>
@@ -501,7 +525,7 @@
             var fac = $('#facilitador').val();
             var dias = $('#dias').val();
 
-             document.getElementById("datatable-buttons").insertRow(1).innerHTML = 
+             document.getElementById("tbl_detalle").insertRow(1).innerHTML = 
              '<td>'+ cap +'</td>'+
              '<td>'+ fac +'</td>' + 
              '<td>'+ dias +'</td>' + 
@@ -519,6 +543,32 @@
             $('#tbl_capacitaciones').DataTable( {
             	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
             	"dom": '<"top"lf>rt<"bottom"ip><"clear">',
+            	keys: true,
+            	
+            	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+            
+            	"language": {
+                    "lengthMenu": "Mostrar _MENU_ records por pagina",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "emptyTable": "No existen datos en la tabla",
+                    "zeroRecords": "No existe un registro en la BD",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    
+                    "infoEmpty": "No existe registro",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                }
+            } );
+            
+            $('#tbl_detalle').DataTable( {
+            	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
+            	"dom": '<"top"lf>rst<"bottom"ip><"clear">',
+            	keys: true,
             	
             	"lengthMenu": [ 10, 25, 50, 75, 100 ],
             

@@ -96,7 +96,7 @@
                     <%
                       		ArrayList<Vw_capacitacion> listaCapacitacion = new ArrayList<Vw_capacitacion>();
                       		Dt_capacitacion dtcapacitacion = new Dt_capacitacion();
-                      		listaCapacitacion = dtcapacitacion.listarcapacitacionesActivas();
+                      		listaCapacitacion = dtcapacitacion.listarcapacitacionesV();
                       %>
                     
                       <thead>

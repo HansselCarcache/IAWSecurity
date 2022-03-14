@@ -73,11 +73,11 @@ public class Dt_capacitacion {
 	}
 	
 	
-	public ArrayList<Vw_capacitacion> listarcapacitacionesActivas(){
+	public ArrayList<Vw_capacitacion> listarcapacitacionesV(){
 		ArrayList<Vw_capacitacion> listCapacitacion = new ArrayList<Vw_capacitacion>();
 		try {
 			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT dbfdocente.capacitacion.id_capacitacion, dbfdocente.capacitacion.nombre, dbfdocente.capacitacion.estado, dbfdocente.modalidad.nombre as modalidad FROM dbfdocente.capacitacion inner join dbfdocente.modalidad on dbfdocente.capacitacion.id_modalidad=dbfdocente.modalidad.id_modalidad WHERE dbfdocente.capacitacion.estado <> 3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps = c.prepareStatement("SELECT * FROM dbfdocente.vw_capacitacion;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				Vw_capacitacion capacitacion = new Vw_capacitacion();

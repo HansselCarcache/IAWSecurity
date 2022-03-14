@@ -124,6 +124,13 @@
 	                      		else{
 	                      			estado = "Inactivo";
 	                      		}
+	                      		String certificacion= "";
+	                      		if(tmod.getCertificada()!=0){
+	                      			certificacion= "Certificado";
+	                      		}
+	                      		else{
+	                      			certificacion = "No es certificado";
+	                      		}
 	                      %>
                       	
                       
@@ -131,7 +138,7 @@
                           <td><%=tmod.getId_modalidad() %></td>
                           <td><%=tmod.getNombre() %></td>
                           <td><%=tmod.getDescripcion() %></td>
-                          <td><%=tmod.getCertificada() %></td>
+                          <td><%=certificacion %></td>
                           <td><%=estado %></td>
                           <td>
                            <a href="updateModalidad.jsp">

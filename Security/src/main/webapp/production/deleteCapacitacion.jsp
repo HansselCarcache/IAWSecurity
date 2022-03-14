@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Rol Opción | Visualizar </title>
+    <title>Capacitación | Eliminar </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Visualizar opciónes de rol</h3>
+                            <h3>Capacitación</h3>
                         </div>
 
                         
@@ -56,7 +56,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Visualización de opciones de rol </h2>
+                                    <h2>Eliminación de capacitación </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -79,61 +79,63 @@
 <!--                                         <span class="section">Personal Info</span> -->
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Rol Opción<span class="required">*</span></label>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="id_capacitacion">ID Capacitación <span class="required">*</span>
+											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="ID Rol Opción">
+												<input type="text" class="form-control" readonly="readonly" placeholder="1">
 											</div>
 										</div>
 
-										<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Rol: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-												<%
-							                      	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-							                      	Dt_rol dtr = new Dt_rol();
-							                      	listRol = dtr.listaRolActivos();
-								                 %>
-								                 <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" >
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Tbl_rol trol :listRol){
-												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Nombre <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" class="form-control" readonly="readonly" placeholder="Inducción">
 											</div>
-                                        </div>
-                                        
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Opciones: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												<%
-							                      	ArrayList<Tbl_opcion> listaOpcion = new ArrayList<Tbl_opcion>();
-							                      	Dt_Opciones dtopc = new Dt_Opciones();
-							                      	listaOpcion = dtopc.listaOpcionesActivos();
-								                 %>
-												<select class="form-control js-example-basic-single" name="cbxUser" id="cbxUser" >
-												  <option value="">Seleccione...</option>
-												 <% 
-												  	for(Tbl_opcion tu :listaOpcion){
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="estado" readonly="readonly" class="form-control " placeholder="activo">
+											</div>
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="modalidad">Modalidad <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+											
+											  <%
+	                      			ArrayList<Tbl_modalidad> listaModalidad = new ArrayList<Tbl_modalidad>();
+	                      			Dt_modalidad dtmodalidad = new Dt_modalidad();
+	                      			listaModalidad = dtmodalidad.listaModalidadesActivas();
+	                      					%>
+												
+									<select id="id_modalidad" readonly="readonly" class="form-control ">
+									
+									
+									<option value="">Seleccione...</option>
+												  <% 
+												  	for(Tbl_modalidad mod :listaModalidad){
 												  %>
-												  <option value="<%=tu.getId_opcion()%>"><%=tu.getOpcion()%></option>
+												  <option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre()%></option>
 												  <%
 												  	}
 												  %>
-												</select>
-                                            </div>
-                                        </div>
+										</select>
+	                      	
+	                      		
+		                      				
+											</div>
+										</div>
 
                                         
                                         
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
-                								<a href="tbl_rolopciones.jsp" class="btn btn-primary">Regresar</a>
+                								<a href="#" class="btn btn-danger">Eliminar</a>
                   							</div>
                                         </div>
                                     </form>
