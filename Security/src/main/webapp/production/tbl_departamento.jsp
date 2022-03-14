@@ -87,6 +87,7 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
+                            <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
                             <a href="addDepartamento.jsp">
                             	<i class="fa fa-plus-square"></i> Nuevo Departamento</a>
                             	<br><br>
@@ -106,10 +107,10 @@
                       <thead>
                         <tr>
                           
-                          <th>Nombre Departamento</th>
-                          <th>Nombre Facultad</th>
-                          <th>Estado</th>
-                          <th>Acciones</th>
+                          <th>Nombre Departamento <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Nombre Facultad <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Estado <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Acciones <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
                         </tr>
                       </thead>
@@ -227,7 +228,7 @@
    	function mostrarcolumna(){
    		var table = $('#tbl_departamento').DataTable();
    	    
-   	   	table.columns( [ 0, 1, 2 ] ).visible( true, true );
+   	   	table.columns( [ 0, 1, 2, 3 ] ).visible( true, true );
    	}
    	
    	
@@ -246,7 +247,7 @@
 							title: 'Departamentos registrados',
 							action: function ( e, dt, node, config ) {
 			                    //alert( 'Activated!' );
-			                    eliminarcolumna(2);
+			                    eliminarcolumna(3);
 			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
 			                },
 							exportOptions: {
@@ -259,7 +260,7 @@
         					title: 'Departamentos registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(2);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {
@@ -273,7 +274,7 @@
         					title: 'Departamentos registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(2);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {
@@ -287,7 +288,7 @@
         					title: 'Departamentos registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(2);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {

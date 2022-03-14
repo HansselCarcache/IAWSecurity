@@ -85,13 +85,14 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
+                            <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
                             <a href="addEscalaCalificacion.jsp">
                             	<i class="fa fa-plus-square"></i> Nueva Escala de evaluación</a>
                             	<br><br>
                             </div>
                             
                     
-                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <table id="tbl_calificacion" class="table table-striped table-bordered" style="width:100%">
                     
                     <%
                     		ArrayList<Tbl_escalaCalificacion> listaEscalaCalificacion = new ArrayList<Tbl_escalaCalificacion>();
@@ -215,6 +216,110 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    <script>
+    function eliminarcolumna(id){
+   		var table = $('#tbl_calificacion').DataTable();
+   	 
+   		table.column( id).visible( false );
+   	}
+   	function mostrarcolumna(){
+   		var table = $('#tbl_calificacion').DataTable();
+   	    
+   	   	table.columns( [ 0, 1, 2, 3, 4] ).visible( true, true );
+   	}
+   	
+   	
+   	
+   	
+    
+    $(document).ready(function() {
+    	
+    	
+        $('#tbl_calificacion').DataTable( {
+        	buttons: [  
+        				
+		        		{
+			        		extend: 'csv',
+							text: 'CSV',
+							title: 'Escalas de calificación registradas',
+							action: function ( e, dt, node, config ) {
+			                    //alert( 'Activated!' );
+			                    eliminarcolumna(4);
+			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
+			                },
+							exportOptions: {
+				                columns: ':visible',
+				            }
+		        		},
+        				{
+        					extend: 'excel',
+        					text: 'Excel',
+        					title: 'Escalas de calificación registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(4);
+        	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+        				
+        				{
+        					extend: 'pdf',
+        					text: 'PDF',
+        					title: 'Escalas de calificación registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(4);
+        	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+      
+        				{ 
+        					extend: 'print',
+        					text: 'Imprimir',
+        					title: 'Escalas de calificación registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(4);
+        	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        					
+        				} 
+        			 ],
+        	keys: true,
+        	    
+        	"dom": '<Blf<rt>ip>',
+        	
+        	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+        	
+        	"language": {
+                "lengthMenu": "Mostrar _MENU_ records por pagina",
+                "search": "Buscar:",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+                "emptyTable": "No existen datos en la tabla",
+                "zeroRecords": "No existe un registro en la BD",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                
+                "infoEmpty": "No existe registro",
+                "infoFiltered": "(filtered from _MAX_ total records)"
+            }
+        } );
+    } );
+    
+    </script>
 
   </body>
 </html>

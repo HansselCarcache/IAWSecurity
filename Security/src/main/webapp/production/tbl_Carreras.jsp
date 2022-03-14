@@ -221,7 +221,7 @@
    	function mostrarcolumna(){
    		var table = $('#tbl_Carreras').DataTable();
    	    
-   	   	table.columns( [ 0, 1, 2 ] ).visible( true, true );
+   	   	table.columns( [ 0, 1, 2, 3 ] ).visible( true, true );
    	}
    	
    	
@@ -240,7 +240,7 @@
 							title: 'Carreras registradas',
 							action: function ( e, dt, node, config ) {
 			                    //alert( 'Activated!' );
-			                    eliminarcolumna(2);
+			                    eliminarcolumna(3);
 			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
 			                },
 							exportOptions: {
@@ -253,7 +253,7 @@
         					title: 'Carreras registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(2);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {
@@ -267,7 +267,7 @@
         					title: 'Carreras registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(2);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {
@@ -281,7 +281,7 @@
         					title: 'Carreras registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(2);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {

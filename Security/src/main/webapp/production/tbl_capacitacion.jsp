@@ -85,13 +85,14 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
+                            <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
                             <a href="addCapacitacion.jsp">
                             	<i class="fa fa-plus-square"></i> Nueva capacitacion</a>
                             	<br><br>
                             </div>
                             
                     
-                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <table id="tbl_capacitacion" class="table table-striped table-bordered" style="width:100%">
                     
                     <%
                       		ArrayList<Vw_capacitacion> listaCapacitacion = new ArrayList<Vw_capacitacion>();
@@ -101,11 +102,11 @@
                     
                       <thead>
                         <tr>
-                          <th>ID Capacitación</th>
-                          <th>Nombre</th>
-                          <th>Estado</th>
-                          <th>Modalidad</th>
- 	                      <th></th>
+                          <th>ID Capacitación <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Nombre <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Estado <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Modalidad <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
+ 	                      <th>Acciones <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
                         </tr>
                       </thead>
@@ -159,7 +160,7 @@
                           <th>Nombre</th>
                           <th>Estado</th>
                           <th>Modalidad</th>
- 	                      <th></th>
+ 	                      <th>Acciones</th>
  	                      
                         </tr>
                       </tfoot>
@@ -215,6 +216,110 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    <script>
+    function eliminarcolumna(id){
+   		var table = $('#tbl_capacitacion').DataTable();
+   	 
+   		table.column( id).visible( false );
+   	}
+   	function mostrarcolumna(){
+   		var table = $('#tbl_capacitacion').DataTable();
+   	    
+   	   	table.columns( [ 0, 1, 2, 3, 4] ).visible( true, true );
+   	}
+   	
+   	
+   	
+   	
+    
+    $(document).ready(function() {
+    	
+    	
+        $('#tbl_capacitacion').DataTable( {
+        	buttons: [  
+        				
+		        		{
+			        		extend: 'csv',
+							text: 'CSV',
+							title: 'Capacitaciones registradas',
+							action: function ( e, dt, node, config ) {
+			                    //alert( 'Activated!' );
+			                    eliminarcolumna(4);
+			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
+			                },
+							exportOptions: {
+				                columns: ':visible',
+				            }
+		        		},
+        				{
+        					extend: 'excel',
+        					text: 'Excel',
+        					title: 'Capacitaciones registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(4);
+        	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+        				
+        				{
+        					extend: 'pdf',
+        					text: 'PDF',
+        					title: 'Capacitaciones registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(4);
+        	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+      
+        				{ 
+        					extend: 'print',
+        					text: 'Imprimir',
+        					title: 'Capacitaciones registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(4);
+        	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        					
+        				} 
+        			 ],
+        	keys: true,
+        	    
+        	"dom": '<Blf<rt>ip>',
+        	
+        	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+        	
+        	"language": {
+                "lengthMenu": "Mostrar _MENU_ records por pagina",
+                "search": "Buscar:",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+                "emptyTable": "No existen datos en la tabla",
+                "zeroRecords": "No existe un registro en la BD",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                
+                "infoEmpty": "No existe registro",
+                "infoFiltered": "(filtered from _MAX_ total records)"
+            }
+        } );
+    } );
+    
+    </script>
 
   </body>
 </html>

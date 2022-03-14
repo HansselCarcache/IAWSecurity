@@ -86,6 +86,7 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
+                            <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
                             <a href="addFacultad.jsp">
                             	<i class="fa fa-plus-square"></i> Nueva Facultad</a>
                             	<br><br>
@@ -105,9 +106,9 @@
                       <thead>
                         <tr>
                           
-                          <th>Nombre Facultad</th>
-                          <th>Estado</th>
-                          <th>Acciones</th>
+                          <th>Nombre Facultad <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Estado <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Acciones <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
                         </tr>
                       </thead>
@@ -213,20 +214,89 @@
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
     <script>
+    function eliminarcolumna(id){
+   		var table = $('#tbl_facultad').DataTable();
+   	 
+   		table.column( id).visible( false );
+   	}
+   	function mostrarcolumna(){
+   		var table = $('#tbl_facultad').DataTable();
+   	    
+   	   	table.columns( [ 0, 1, 2 ] ).visible( true, true );
+   	}
+   	
+   	
+   	
+   	
+    
     $(document).ready(function() {
+    	
+    	
         $('#tbl_facultad').DataTable( {
-        	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
-        	 keys: {
-        	        focus: ':eq(0)'
-        	    },
-        	    //Elimina una columna
-        	//"columnDefs": [
-        	       // { "visible": false, "targets": 0 }
-        	     // ],
-        	"dom": '<"top"Blf>rt<"bottom"ip><"clear">',
+        	buttons: [  
+        				
+		        		{
+			        		extend: 'csv',
+							text: 'CSV',
+							title: 'Facultades registradas',
+							action: function ( e, dt, node, config ) {
+			                    //alert( 'Activated!' );
+			                    eliminarcolumna(2);
+			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
+			                },
+							exportOptions: {
+				                columns: ':visible',
+				            }
+		        		},
+        				{
+        					extend: 'excel',
+        					text: 'Excel',
+        					title: 'Facultades registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(2);
+        	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+        				
+        				{
+        					extend: 'pdf',
+        					text: 'PDF',
+        					title: 'Facultades registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(2);
+        	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+      
+        				{ 
+        					extend: 'print',
+        					text: 'Imprimir',
+        					title: 'Facultades registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(2);
+        	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        					
+        				} 
+        			 ],
+        	keys: true,
+        	    
+        	"dom": '<Blf<rt>ip>',
         	
         	"lengthMenu": [ 10, 25, 50, 75, 100 ],
-        
+        	
         	"language": {
                 "lengthMenu": "Mostrar _MENU_ records por pagina",
                 "search": "Buscar:",
