@@ -37,15 +37,9 @@
                   </li>
                   <li><a><i class="fa-solid fa-landmark"></i> Universidad <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-<<<<<<< HEAD
                       <li><a href="tbl_facultad.jsp">Facultades</a></li>
                       <li><a href="tbl_departamento.jsp">Departamentos</a></li>
                       <li><a href="typography.html">Carreras</a></li>
-=======
-                      <li><a href="general_elements.html">Facultades</a></li>
-                      <li><a href="media_gallery.html">Departamentos</a></li>
-                      <li><a href="tbl_Carreras.jsp">Carreras</a></li>
->>>>>>> b1d68466c46d0fd89465e350ae8599f63856cf79
                     </ul>
                   </li>
                   <li><a><i class="fa-solid fa-graduation-cap"></i> Oferta <span class="fa fa-chevron-down"></span></a>

@@ -101,11 +101,11 @@
                     
                       <thead>
                         <tr>
-                          <th>ID Escala</th>
-                          <th>Calificación</th>
-                          <th>Descripción</th>
-                          <th>Estado</th>
-                          <th>Acciones</th>
+                          <th>ID Escala <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Calificación <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Descripción <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Estado <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Acciones <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
                         </tr>
                       </thead>
