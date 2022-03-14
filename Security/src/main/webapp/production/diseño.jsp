@@ -37,8 +37,8 @@
                   </li>
                   <li><a><i class="fa-solid fa-landmark"></i> Universidad <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">Facultades</a></li>
-                      <li><a href="media_gallery.html">Departamentos</a></li>
+                      <li><a href="tbl_facultad.jsp">Facultades</a></li>
+                      <li><a href="tbl_departamento.jsp">Departamentos</a></li>
                       <li><a href="typography.html">Carreras</a></li>
                     </ul>
                   </li>
