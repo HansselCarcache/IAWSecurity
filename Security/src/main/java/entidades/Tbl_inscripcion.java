@@ -4,6 +4,7 @@ public class Tbl_inscripcion {
 
 	//Attributes
 	
+	
 	private int id_inscripcion;
 	private int id_usuario;
 	private int id_facultad;

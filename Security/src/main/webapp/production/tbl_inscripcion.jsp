@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Seguridad | Rol Usuario</title>
+    <title>Inscripciones | Inscripcion</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -53,7 +53,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Rol Usuario </h3>
+                <h3>Inscripciones </h3>
               </div>
 
 
@@ -65,7 +65,7 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Roles de usuario registrados</h2>
+                    <h2>Inscripciones registradas</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -86,9 +86,8 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                            <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
                             <a href="addRoluser.jsp">
-                            	<i class="fa fa-plus-square"></i> Asignar roles de usuario</a>
+                            	<i class="fa fa-plus-square"></i> Nueva inscripción</a>
                             	<br><br>
                             </div>
                             
@@ -104,10 +103,10 @@
                       <thead>
                         <tr>
                           
-                          <th>Usuario <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Usuario</th>
                           
-                          <th>Rol <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Acciones <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Rol</th>
+                          <th>Acciones</th>
                           
                         </tr>
                       </thead>
@@ -177,6 +176,8 @@
         <!-- /footer content -->
       </div>
     </div>
+    </div>
+    </div>
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
@@ -209,89 +210,13 @@
     <script src="../build/js/custom.min.js"></script>
     
      <script>
-   	function eliminarcolumna(id){
-   		var table = $('#tbl_rolusr').DataTable();
-   	 
-   		table.column( id).visible( false );
-   	}
-   	function mostrarcolumna(){
-   		var table = $('#tbl_rolusr').DataTable();
-   	    
-   	   	table.columns( [ 0, 1, 2 ] ).visible( true, true );
-   	}
-   	
-   	
-   	
-   	
-    
     $(document).ready(function() {
-    	
-    	
         $('#tbl_rolusr').DataTable( {
-        	buttons: [  
-        				
-		        		{
-			        		extend: 'csv',
-							text: 'CSV',
-							title: 'Roles de usuario registrados',
-							action: function ( e, dt, node, config ) {
-			                    //alert( 'Activated!' );
-			                    eliminarcolumna(2);
-			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
-			                },
-							exportOptions: {
-				                columns: ':visible',
-				            }
-		        		},
-        				{
-        					extend: 'excel',
-        					text: 'Excel',
-        					title: 'Roles de usuario registrado',
-        					action: function ( e, dt, node, config ) {
-        	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(2);
-        	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
-        	                },
-        					exportOptions: {
-        		                columns: ':visible',
-        		            }
-        				},
-        				
-        				{
-        					extend: 'pdf',
-        					text: 'PDF',
-        					title: 'Roles de usuario registrado',
-        					action: function ( e, dt, node, config ) {
-        	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(2);
-        	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
-        	                },
-        					exportOptions: {
-        		                columns: ':visible',
-        		            }
-        				},
-      
-        				{ 
-        					extend: 'print',
-        					text: 'Imprimir',
-        					title: 'Roles de usuario registrado',
-        					action: function ( e, dt, node, config ) {
-        	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(2);
-        	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
-        	                },
-        					exportOptions: {
-        		                columns: ':visible',
-        		            }
-        					
-        				} 
-        			 ],
-        	keys: true,
-        	    
-        	"dom": '<Blf<rt>ip>',
+        	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
+        	"dom": '<"top"Blf>rt<"bottom"ip><"clear">',
         	
         	"lengthMenu": [ 10, 25, 50, 75, 100 ],
-        	
+        
         	"language": {
                 "lengthMenu": "Mostrar _MENU_ records por pagina",
                 "search": "Buscar:",
@@ -310,8 +235,6 @@
             }
         } );
     } );
-    
-    
     
     </script>
 
