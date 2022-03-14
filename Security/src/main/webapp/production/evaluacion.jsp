@@ -95,22 +95,49 @@
                     
                       <thead>
                         <tr>
-                          <th>ID UCA</th>
                           <th>Nombre</th>
                           <th>Apellido</th>
-                          <th>Telefono</th>
-                          <th>Email</th>
-                          <th>Grado Academico</th>
+                          <th>Calificacion</th>
                         </tr>
                       </thead>
+                      <tbody>
+                          <tr>
+                        <td></td>
+                        <td></td>
+                        <td>      <form class="" action="" method="post" novalidate>
+<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
+<!--                                         </p> -->
+<!--                                         <span class="section">Personal Info</span> -->
+
+										
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align"> <span class="required"></span></label>
+                                            <div class="col-md-4 col-sm-4">
+<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+												<%
+							                      	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
+							                      	Dt_rol dtr = new Dt_rol();
+							                      	listRol = dtr.listaRolActivos();
+								                 %>
+								                 <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" required="required">
+												  <option value="">Seleccione...</option>
+												  <% 
+												  	for(Tbl_rol trol :listRol){
+												  %>
+												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
+												  <%
+												  	}
+												  %>
+												</select>
+											</div>
+                                        </div></td>
+                        </tr>
+                      </tbody>
                       <tfoot>
                         <tr>
                           <th>Nombre</th>
-                          <th>Nombre</th>
                           <th>Apellido</th>
-                          <th>Telefono</th>
-                          <th>Email</th>
-                          <th>Grado Academico</th>      
+                          <th>Calificacion</th>
                         </tr>
                       </tfoot>
                     </table>

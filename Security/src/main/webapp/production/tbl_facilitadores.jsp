@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_facilitadores, datos.*, java.util.*;"%>
 
 <!DOCTYPE html>
 <html>
@@ -52,7 +52,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>facilitadores</h3>
+                <h3>Facilitadores</h3>
               </div>
 
 
@@ -93,6 +93,12 @@
                     
                     <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                     
+                      <%
+                      		ArrayList<Tbl_facilitadores> listFac = new ArrayList<Tbl_facilitadores>();
+                      		Dt_facilitadores dtrol = new Dt_facilitadores();
+                      		listFac = dtrol.listarFacActivos();
+                      %>
+                    
                       <thead>
                         <tr>
                           <th>ID UCA</th>
@@ -101,21 +107,29 @@
                           <th>Telefono</th>
                           <th>Email</th>
                           <th>Grado Academico</th>
+                          <th>Acciones</th>
                         </tr>
                       </thead>
 
 
                       <tbody>
-                     
+                          
+                        	 <%
+	                      	for(Tbl_facilitadores trol :listFac){
+
+	                      		
+	                      	
+	                      %>
                       	
                       
                         <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td><%=trol.getId_uca() %></td>
+                          <td><%=trol.getNombres() %></td>
+                          <td><%=trol.getApellidos() %></td>
+                          <td><%=trol.getTelefono() %></td>
+                          <td><%=trol.getEmail() %></td>
+                          <td><%=trol.getGrado_academico()  %></td>
+                         
                           <td>
                            <a href="updateFacilitadores.jsp">
                             <i class="far fa-edit" title="Editar"></i>
@@ -131,7 +145,7 @@
                           </td>
                           
                           
-                        </tr>
+                        </tr><%}%>
                         
                         
                         
@@ -143,7 +157,8 @@
                           <th>Apellido</th>
                           <th>Telefono</th>
                           <th>Email</th>
-                          <th>Grado Academico</th>      
+                          <th>Grado Academico</th>  
+                          <th>Acciones</th>    
                         </tr>
                       </tfoot>
                     </table>
