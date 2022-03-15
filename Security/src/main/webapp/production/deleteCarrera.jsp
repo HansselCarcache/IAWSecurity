@@ -20,7 +20,7 @@
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+   <link href="../custom.min.css" rel="stylesheet">
     
     <!-- Select2 -->
     <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
@@ -81,11 +81,27 @@
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Carrera<span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="ID Departamento">
+												<input type="text" class="form-control" readonly="readonly" placeholder="ID Carrera">
 											</div>
 										</div>
-
-									  <div class="field item form-group">
+										
+										  <div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre<span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="descripcion" required="required" class="form-control ">
+											</div>
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="estado" required="required" class="form-control ">
+											</div>
+										</div>
+										
+									    <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Departamento: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
 <!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
@@ -106,22 +122,6 @@
 												</select>
 											</div>
                                         </div>
-                                        
-                                        <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" required="required" class="form-control ">
-											</div>
-										</div>
-										
-											<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="estado" required="required" class="form-control ">
-											</div>
-
                                         
                                         
                                         <div class="ln_solid">
