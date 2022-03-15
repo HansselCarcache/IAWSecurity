@@ -217,12 +217,12 @@
     
          <script>
    	function eliminarcolumna(id){
-   		var table = $('#tbl_evaluacion').DataTable();
+   		var table = $('#tbl_Evaluacion').DataTable();
    	 
    		table.column( id).visible( false );
    	}
    	function mostrarcolumna(){
-   		var table = $('#tbl_evaluacion').DataTable();
+   		var table = $('#tbl_Evaluacion').DataTable();
    	    
    	   	table.columns( [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ] ).visible( true, true );
    	}
@@ -234,7 +234,7 @@
     $(document).ready(function() {
     	
     	
-        $('#tbl_evaluacion').DataTable( {
+        $('#tbl_Evaluacion').DataTable( {
         	buttons: [  
         				
 		        		{

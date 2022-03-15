@@ -85,6 +85,7 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
+                            <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
                             <a href="addInscripcion.jsp">
                             	<i class="fa fa-plus-square"></i> Nueva inscripción</a>
                             	<br><br>
@@ -108,7 +109,7 @@
                           <th>Carrera <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Fecha de inscripción <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Capacitación <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Acciones</th>
+                          <th>Acciones <a onclick="eliminarcolumna(6)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
                         </tr>
                       </thead>
@@ -231,7 +232,7 @@
     	function mostrarcolumna(){
     		var table = $('#tbl_inscr').DataTable();
     	    
-    	   	table.columns( [ 0, 1, 2 ] ).visible( true, true );
+    	   	table.columns( [ 0, 1, 2, 3, 4, 5, 6 ] ).visible( true, true );
     	}
     	
     	
@@ -250,7 +251,7 @@
  							title: 'Inscripciones registradas',
  							action: function ( e, dt, node, config ) {
  			                    //alert( 'Activated!' );
- 			                    eliminarcolumna(2);
+ 			                    eliminarcolumna(6);
  			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
  			                },
  							exportOptions: {
@@ -263,7 +264,7 @@
          					title: 'Inscripciones registradas',
          					action: function ( e, dt, node, config ) {
          	                    //alert( 'Activated!' );
-         	                    eliminarcolumna(2);
+         	                    eliminarcolumna(6);
          	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
          	                },
          					exportOptions: {
@@ -277,7 +278,7 @@
          					title: 'Inscripciones registradas',
          					action: function ( e, dt, node, config ) {
          	                    //alert( 'Activated!' );
-         	                    eliminarcolumna(2);
+         	                    eliminarcolumna(6);
          	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
          	                },
          					exportOptions: {
@@ -291,7 +292,7 @@
          					title: 'Inscripciones registradas',
          					action: function ( e, dt, node, config ) {
          	                    //alert( 'Activated!' );
-         	                    eliminarcolumna(2);
+         	                    eliminarcolumna(6);
          	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
          	                },
          					exportOptions: {
