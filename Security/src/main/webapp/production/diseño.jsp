@@ -81,7 +81,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="../Login.jsp">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -108,7 +108,7 @@
                           <span>Configuración</span>
                         </a>
                     <a class="dropdown-item"  href="javascript:;">Ayuda</a>
-                      <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i>Cerrar sesión</a>
+                      <a class="dropdown-item"  href="../Login.jsp"><i class="fa fa-sign-out pull-right"></i>Cerrar sesión</a>
                     </div>
                   </li>
   

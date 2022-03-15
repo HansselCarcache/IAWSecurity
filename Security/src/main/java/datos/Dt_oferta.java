@@ -35,7 +35,7 @@ public class Dt_oferta {
 		ArrayList<Vw_oferta> listofc = new ArrayList<Vw_oferta>();
 		try{
 			c = poolConexion.getConnection(); //obtenemos una conexion del pool
-			ps = c.prepareStatement("SELECT * FROM dbfdocente.vw_oferta WHERE estado <>3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps = c.prepareStatement("SELECT * FROM dbfdocente.vw_oferta;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()){
 				Vw_oferta topc = new Vw_oferta(); //instanciamos a rol

@@ -198,16 +198,16 @@
                                             <div class="col-md-6 col-sm-6">
 <!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
 												<%
-							                      	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-							                      	Dt_rol dtr = new Dt_rol();
-							                      	listRol = dtr.listaRolActivos();
+												ArrayList<Tbl_facilitadores> listFac = new ArrayList<Tbl_facilitadores>();
+					                      		Dt_facilitadores dtrol = new Dt_facilitadores();
+					                      		listFac = dtrol.listarFacActivos();
 								                 %>
 								                 <select class="form-control js-example-basic-single" name="facilitador" id="facilitador" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_rol trol :listRol){
+												  for(Tbl_facilitadores trol :listFac){
 												  %>
-												  <option value="<%=trol.getRol()%>"><%=trol.getRol()%></option>
+												  <option value="<%=trol.getNombres()+' '+trol.getApellidos()%>"><%=trol.getNombres()+' '+trol.getApellidos()%></option>
 												  <%
 												  	}
 												  %>

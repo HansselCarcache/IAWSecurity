@@ -191,16 +191,16 @@
                                             	<div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 												<%
-							                      	ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>();
-							                      	Dt_usuario dtu = new Dt_usuario();
-							                      	listaUsuario = dtu.listaUserActivos();
+							                      	ArrayList<Tbl_capacitacion> listaCapacitacion = new ArrayList<Tbl_capacitacion>();
+							                      	Dt_capacitacion dtu = new Dt_capacitacion();
+							                      	listaCapacitacion = dtu.listacapacitacionesActivas();
 								                 %>
 												<select class="form-control js-example-basic-single" name="capacitacion" id="capacitacion" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_user tu :listaUsuario){
+												  	for(Tbl_capacitacion tc :listaCapacitacion){
 												  %>
-												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_usuario()%></option>
+												  <option value="<%=tc.getNombre()%>"><%=tc.getNombre()%></option>
 												  <%
 												  	}
 												  %>
@@ -212,16 +212,16 @@
                                             <div class="col-md-6 col-sm-6">
 <!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
 												<%
-							                      	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-							                      	Dt_rol dtr = new Dt_rol();
-							                      	listRol = dtr.listaRolActivos();
+												ArrayList<Tbl_facilitadores> listFac = new ArrayList<Tbl_facilitadores>();
+					                      		Dt_facilitadores dtrol = new Dt_facilitadores();
+					                      		listFac = dtrol.listarFacActivos();
 								                 %>
 								                 <select class="form-control js-example-basic-single" name="facilitador" id="facilitador" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_rol trol :listRol){
+												  for(Tbl_facilitadores trol :listFac){
 												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
+												  <option value="<%=trol.getNombres()+' '+trol.getApellidos()%>"><%=trol.getNombres()+' '+trol.getApellidos()%></option>
 												  <%
 												  	}
 												  %>

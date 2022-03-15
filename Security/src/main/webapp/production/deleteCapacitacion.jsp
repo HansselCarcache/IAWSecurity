@@ -113,7 +113,7 @@
 	                      			listaModalidad = dtmodalidad.listaModalidadesActivas();
 	                      					%>
 												
-									<select id="id_modalidad" readonly="readonly" class="form-control ">
+									<select class="form-control js-example-basic-single" name="modalidad" id="modalidad" required="required">
 									
 									
 									<option value="">Seleccione...</option>
