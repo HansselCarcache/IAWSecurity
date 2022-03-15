@@ -45,7 +45,7 @@ public class Dt_inscripcionDocente {
 				insc.setFecha_inscripcion(rs.getString("fecha_inscripcion"));
 				insc.setNombre_oferta(rs.getString("Oferta"));
 				insc.setId_escala(rs.getInt("id_escala"));
-				insc.setId_uca(rs.getInt("id_uca"));
+				insc.setId_uca(rs.getString("id_uca"));
 				insc.setCorreo_electronico(rs.getString("correo_electronico"));
 				
 				listInsc.add(insc);

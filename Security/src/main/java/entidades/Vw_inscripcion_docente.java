@@ -12,7 +12,7 @@ public class Vw_inscripcion_docente {
 		private String fecha_inscripcion;
 		private String nombre_oferta;
 		private int id_escala;
-		private int id_uca;
+		private String id_uca;
 		private String correo_electronico;
 		
 		public int getId_inscripcion() {
@@ -63,10 +63,10 @@ public class Vw_inscripcion_docente {
 		public void setId_escala(int id_escala) {
 			this.id_escala = id_escala;
 		}
-		public int getId_uca() {
+		public String getId_uca() {
 			return id_uca;
 		}
-		public void setId_uca(int id_uca) {
+		public void setId_uca(String id_uca) {
 			this.id_uca = id_uca;
 		}
 		public String getCorreo_electronico() {
