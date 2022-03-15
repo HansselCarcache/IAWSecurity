@@ -20,7 +20,7 @@
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="../custom.min.css" rel="stylesheet">
     
     <!-- Select2 -->
     <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
@@ -102,7 +102,7 @@
                                         
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
-                								<button  class="btn btn-primary"><a href="tbl_facultad.jsp">Regresar</a></button> 
+                								<a href="tbl_facultad.jsp" class="btn btn-primary">Regresar</a>
                   							</div>
                                         </div>
                                     </form>

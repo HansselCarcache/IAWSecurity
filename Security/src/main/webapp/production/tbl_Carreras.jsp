@@ -33,7 +33,7 @@
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="../custom.min.css" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -129,7 +129,7 @@
                         <tr>
                            <td><%=c.getNombre_carrera() %></td>
                           <td><%=c.getNombre_departamento() %></td>
-                           <td><%=c.getEstado() %></td>
+                           <td><%=estado %></td>
                           <td>
                            <a href="updateCarrera.jsp">
                             <i class="far fa-edit" title="Editar Carreras"></i>

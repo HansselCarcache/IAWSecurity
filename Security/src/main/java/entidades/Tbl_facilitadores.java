@@ -5,12 +5,13 @@ public class Tbl_facilitadores {
 	//Attributes
 	
 		private int id_facilitador;
-		private int id_uca;
+		private String id_uca;
 		private String nombres;
 		private String apellidos;
 		private String telefono;
 		private String email;
 		private String grado_academico;
+		
 		
 		//Methods
 		
@@ -18,12 +19,12 @@ public class Tbl_facilitadores {
 			return id_facilitador;
 		}
 		public void setId_facilitador(int id_facilitador) {
-			this.id_facilitador =id_facilitador;
+			this.id_facilitador = id_facilitador;
 		}
-		public int getId_uca() {
+		public String getId_uca() {
 			return id_uca;
 		}
-		public void setId_uca(int id_uca) {
+		public void setId_uca(String id_uca) {
 			this.id_uca = id_uca;
 		}
 		public String getNombres() {
@@ -44,7 +45,6 @@ public class Tbl_facilitadores {
 		public void setTelefono(String telefono) {
 			this.telefono = telefono;
 		}
-
 		public String getEmail() {
 			return email;
 		}
@@ -57,4 +57,6 @@ public class Tbl_facilitadores {
 		public void setGrado_academico(String grado_academico) {
 			this.grado_academico = grado_academico;
 		}
+		
+		
 }
