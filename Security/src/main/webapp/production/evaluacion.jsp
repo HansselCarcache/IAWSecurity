@@ -94,6 +94,8 @@
                       		Dt_inscripcion dtins = new Dt_inscripcion();
                       		listInc = dtins.listaIns();
                       %>
+                      
+                    
                     
                       <thead>
                         <tr>
@@ -101,7 +103,6 @@
                           <th>Facultad</th>
                           <th>Departamento</th>
                           <th>Carrera</th>
-                          <th>Fecha de Inscripcion</th>
                           <th>Oferta</th>
                           <th>Calificacion</th>
                         </tr>
@@ -121,7 +122,6 @@
                         <td><%=ins.getNombre_facultad() %></td>
                         <td><%=ins.getNombre_departamento() %></td>
                         <td><%=ins.getNombre_carrera() %></td>
-                        <td><%=ins.getFecha_inscripcion() %></td>
                         <td><%=ins.getNombre_oferta() %></td>
                         <td>      <form class="" action="" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
@@ -130,20 +130,19 @@
 
 										
                                         <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align"> <span class="required"></span></label>
-                                            <div class="col-md-4 col-sm-4">
+                                            <div class="col-md-9 col-sm-9">
 <!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
 												<%
-							                      	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-							                      	Dt_rol dtr = new Dt_rol();
-							                      	listRol = dtr.listaRolActivos();
+							                      	ArrayList<Tbl_escalaCalificacion> listC = new ArrayList<Tbl_escalaCalificacion>();
+							                      	Dt_inscripcion dtr = new Dt_inscripcion();
+							                      	listC = dtr.listaCal();
 								                 %>
-								                 <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" required="required">
+								                      <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_rol trol :listRol){
+												  	for(Tbl_escalaCalificacion trol :listC){
 												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
+												  <option value="<%=trol.getId_escala()%>"><%=trol.getCalificacion()%></option>
 												  <%
 												  	}
 												  %>
@@ -158,7 +157,6 @@
                           <th>Facultad</th>
                           <th>Departamento</th>
                           <th>Carrera</th>
-                          <th>Fecha de Inscripcion</th>
                           <th>Oferta</th>
                           <th>Calificacion</th>
   

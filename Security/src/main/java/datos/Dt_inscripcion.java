@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import entidades.Tbl_escalaCalificacion;
 import entidades.Tbl_inscripcion;
 import entidades.Vw_inscripcion;
 
@@ -123,5 +124,47 @@ public class Dt_inscripcion {
 			}
 			return listInc;
 		}
+		
+		//Listar para combobox
+		public ArrayList<Tbl_escalaCalificacion> listaCal(){
+			ArrayList<Tbl_escalaCalificacion> listCa = new ArrayList<Tbl_escalaCalificacion>();
+			try {
+				c = poolConexion.getConnection();
+				ps = c.prepareStatement("SELECT * FROM dbfdocente.escalacalificacion WHERE estado<>3;;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					Tbl_escalaCalificacion esc = new Tbl_escalaCalificacion();
+					esc.setId_escala(rs.getInt("id_escala"));
+					esc.setCalificacion(rs.getString("calificacion"));
+					esc.setDescripcion(rs.getString("descripcion"));
+					esc.setEstado(rs.getInt("estado"));
+					listCa.add(esc);
+					
+				}
+			}
+			catch (Exception e){
+				System.out.println("DATOS: ERROR EN LISTAR INSCRIPCIONES"+ e.getMessage());
+				e.printStackTrace();
+				
+			}
+			finally {
+				try {
+					if(rs!= null) {
+						rs.close();
+					}
+					if(ps!= null) {
+						ps.close();
+					}
+					if(c != null) {
+						poolConexion.closeConnection(c);
+					}
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return listCa;
+		}
+		
 	
 }
