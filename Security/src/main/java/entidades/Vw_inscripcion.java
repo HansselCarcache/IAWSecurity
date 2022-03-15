@@ -11,9 +11,9 @@ public class Vw_inscripcion {
 	private String nombre_carrera;
 	private String fecha_inscripcion;
 	private String nombre_oferta;
-	private String calificacion;
-	
-	
+	private int id_escala;
+	private String id_uca;
+	private String correo_electronico;
 	public int getId_inscripcion() {
 		return id_inscripcion;
 	}
@@ -56,14 +56,27 @@ public class Vw_inscripcion {
 	public void setNombre_oferta(String nombre_oferta) {
 		this.nombre_oferta = nombre_oferta;
 	}
-	public String getCalificacion() {
-		return calificacion;
+	public int getId_escala() {
+		return id_escala;
 	}
-	public void setCalificacion(String calificacion) {
-		this.calificacion = calificacion;
+	public void setId_escala(int id_escala) {
+		this.id_escala = id_escala;
+	}
+	public String getId_uca() {
+		return id_uca;
+	}
+	public void setId_uca(String id_uca) {
+		this.id_uca = id_uca;
+	}
+	public String getCorreo_electronico() {
+		return correo_electronico;
+	}
+	public void setCorreo_electronico(String correo_electronico) {
+		this.correo_electronico = correo_electronico;
 	}
 	
-
+	
+	
 	
 	
 	
