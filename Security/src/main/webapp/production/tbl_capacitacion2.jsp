@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Oferta | Modalidad</title>
+    <title>Oferta | Capacitaciones</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -45,14 +45,14 @@
 
             <div class="clearfix"></div>
 
-           <%@include file="diseño.jsp"%>
+           <%@include file="diseñoDocente.jsp"%>
 
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Modalidad </h3>
+                <h3>Capacitaciones </h3>
               </div>
 
 
@@ -64,7 +64,7 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Modalidades registradas</h2>
+                    <h2>Capacitaciones registradas</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -85,29 +85,26 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                            <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
-                            <a href="addModalidad.jsp">
-                            	<i class="fa fa-plus-square"></i> Nueva modalidad</a>
+                            
                             	<br><br>
                             </div>
                             
                     
-                    <table id="tbl_modalidad" class="table table-striped table-bordered" style="width:100%">
+                    <table id="tbl_capacitacion" class="table table-striped table-bordered" style="width:100%">
                     
                     <%
-                      		ArrayList<Tbl_modalidad> listaModalidad = new ArrayList<Tbl_modalidad>();
-                      		Dt_modalidad dtmodalidad = new Dt_modalidad();
-                      		listaModalidad = dtmodalidad.listaModalidadesActivas();
+                      		ArrayList<Vw_capacitacion> listaCapacitacion = new ArrayList<Vw_capacitacion>();
+                      		Dt_capacitacion dtcapacitacion = new Dt_capacitacion();
+                      		listaCapacitacion = dtcapacitacion.listarcapacitacionesV();
                       %>
                     
                       <thead>
                         <tr>
                           
-                          <th>Nombre <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Descripción <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Certificación <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Estado <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Acciones <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Nombre </th>
+                          <th>Estado </th>
+                          <th>Modalidad </th>
+ 	                      <th>Inscripción </th>
                           
                         </tr>
                       </thead>
@@ -117,42 +114,27 @@
                       <tbody>
                      
                      <%
-	                      	for(Tbl_modalidad tmod :listaModalidad){
+	                      	for(Vw_capacitacion tcap :listaCapacitacion){
 	                      		String estado= "";
-	                      		if(tmod.getEstado()!=3){
+	                      		if(tcap.getEstado()!=3){
 	                      			estado= "Activo";
 	                      		}
 	                      		else{
 	                      			estado = "Inactivo";
-	                      		}
-	                      		String certificacion= "";
-	                      		if(tmod.getCertificada()!=0){
-	                      			certificacion= "Certificado";
-	                      		}
-	                      		else{
-	                      			certificacion = "No es certificado";
 	                      		}
 	                      %>
                       	
                       
                         <tr>
                           
-                          <td><%=tmod.getNombre() %></td>
-                          <td><%=tmod.getDescripcion() %></td>
-                          <td><%=certificacion %></td>
+                          <td><%=tcap.getNombre() %></td>
                           <td><%=estado %></td>
+                          <td><%=tcap.getModalidad() %></td>
                           <td>
-                           <a href="updateModalidad.jsp">
-                            <i class="far fa-edit" title="Editar Modalidad"></i>
+                           <a href="updateCapacitacion.jsp">
+                            <i class="far fa-edit" title="Inscribir Capacitación"></i>
                           </a>
-                          &nbsp;&nbsp;
-                          <a href="readModalidad.jsp">
-                            <i class="far fa-eye" title="Visualizar Modalidad"></i>
-                          </a> 
-                          &nbsp;&nbsp;
-                          <a href="deleteModalidad.jsp" >
-                            <i class="far fa-trash-alt" title="Eliminar Modalidad"></i>
-                          </a>
+                         
                           </td>
                           
                           
@@ -167,10 +149,10 @@
                         <tr>
                           
                           <th>Nombre</th>
-                          <th>Descripción</th>
-                          <th>Certificación</th>
                           <th>Estado</th>
-                          <th>Acciones</th>
+                          <th>Modalidad</th>
+ 	                      <th>Inscripción</th>
+ 	                      
                         </tr>
                       </tfoot>
                     </table>
@@ -226,15 +208,15 @@
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
     <script>
-	function eliminarcolumna(id){
-   		var table = $('#tbl_modalidad').DataTable();
+    function eliminarcolumna(id){
+   		var table = $('#tbl_capacitacion').DataTable();
    	 
    		table.column( id).visible( false );
    	}
    	function mostrarcolumna(){
-   		var table = $('#tbl_modalidad').DataTable();
+   		var table = $('#tbl_capacitacion').DataTable();
    	    
-   	   	table.columns( [ 0, 1, 2, 3, 4] ).visible( true, true );
+   	   	table.columns( [ 0, 1, 2, 3] ).visible( true, true );
    	}
    	
    	
@@ -244,16 +226,16 @@
     $(document).ready(function() {
     	
     	
-        $('#tbl_modalidad').DataTable( {
+        $('#tbl_capacitacion').DataTable( {
         	buttons: [  
         				
 		        		{
 			        		extend: 'csv',
 							text: 'CSV',
-							title: 'Modalidades registradas',
+							title: 'Capacitaciones registradas',
 							action: function ( e, dt, node, config ) {
 			                    //alert( 'Activated!' );
-			                    eliminarcolumna(4);
+			                    eliminarcolumna(3);
 			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
 			                },
 							exportOptions: {
@@ -263,10 +245,10 @@
         				{
         					extend: 'excel',
         					text: 'Excel',
-        					title: 'Modalidades registradas',
+        					title: 'Capacitaciones registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(4);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {
@@ -277,10 +259,10 @@
         				{
         					extend: 'pdf',
         					text: 'PDF',
-        					title: 'Modalidades registradas',
+        					title: 'Capacitaciones registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(4);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {
@@ -291,10 +273,10 @@
         				{ 
         					extend: 'print',
         					text: 'Imprimir',
-        					title: 'Modalidades registradas',
+        					title: 'Capacitaciones registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(4);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {
@@ -305,7 +287,7 @@
         			 ],
         	keys: true,
         	    
-        	"dom": '<Blf<rt>ip>',
+        	"dom": '<lf<rt>ip>',
         	
         	"lengthMenu": [ 10, 25, 50, 75, 100 ],
         	

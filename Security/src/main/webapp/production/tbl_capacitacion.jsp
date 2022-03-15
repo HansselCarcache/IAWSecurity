@@ -102,11 +102,11 @@
                     
                       <thead>
                         <tr>
-                          <th>ID Capacitación <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Nombre <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Estado <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Modalidad <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
- 	                      <th>Acciones <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          
+                          <th>Nombre <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Estado <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Modalidad <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+ 	                      <th>Acciones <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
                         </tr>
                       </thead>
@@ -128,7 +128,7 @@
                       	
                       
                         <tr>
-                          <td><%=tcap.getId_capacitacion() %></td>
+                          
                           <td><%=tcap.getNombre() %></td>
                           <td><%=estado %></td>
                           <td><%=tcap.getModalidad() %></td>
@@ -156,7 +156,7 @@
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>ID Capacitación</th>
+                          
                           <th>Nombre</th>
                           <th>Estado</th>
                           <th>Modalidad</th>
@@ -225,7 +225,7 @@
    	function mostrarcolumna(){
    		var table = $('#tbl_capacitacion').DataTable();
    	    
-   	   	table.columns( [ 0, 1, 2, 3, 4] ).visible( true, true );
+   	   	table.columns( [ 0, 1, 2, 3] ).visible( true, true );
    	}
    	
    	
@@ -244,7 +244,7 @@
 							title: 'Capacitaciones registradas',
 							action: function ( e, dt, node, config ) {
 			                    //alert( 'Activated!' );
-			                    eliminarcolumna(4);
+			                    eliminarcolumna(3);
 			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
 			                },
 							exportOptions: {
@@ -257,7 +257,7 @@
         					title: 'Capacitaciones registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(4);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {
@@ -271,7 +271,7 @@
         					title: 'Capacitaciones registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(4);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {
@@ -285,7 +285,7 @@
         					title: 'Capacitaciones registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(4);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {

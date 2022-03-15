@@ -1,3 +1,4 @@
+<%@page import="entidades.Vw_inscripcion_docente"%>
 <%@page import="entidades.Vw_rolopcion"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.Vw_userrol, datos.*, java.util.*;"%>
@@ -55,8 +56,6 @@
               <div class="title_left">
                 <h3>Inscripciones </h3>
               </div>
-
-
             </div>
 
             <div class="clearfix"></div>
@@ -86,27 +85,31 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                            <a href="addRoluser.jsp">
+                            <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
+                            <a href="addInscripcion.jsp">
                             	<i class="fa fa-plus-square"></i> Nueva inscripción</a>
                             	<br><br>
                             </div>
                             
                     
-                    <table id="tbl_rolusr" class="table table-striped table-bordered" style="width:100%">
+                    <table id="tbl_inscr" class="table table-striped table-bordered" style="width:100%">
                     
                     <%
-                      		ArrayList<Vw_userrol> listaRolusr = new ArrayList<Vw_userrol>();
-                      		Dt_roluser dtrolusr = new Dt_roluser();
-                      		listaRolusr = dtrolusr.listarolusuario();
+                    ArrayList<Vw_inscripcion_docente> listaInsc = new ArrayList<Vw_inscripcion_docente>();
+              		Dt_inscripcionDocente dtinsc = new Dt_inscripcionDocente();
+              		listaInsc = dtinsc.listainscripcion();
                       %>
                     
                       <thead>
                         <tr>
                           
-                          <th>Usuario</th>
-                          
-                          <th>Rol</th>
-                          <th>Acciones</th>
+                          <th>Id UCA <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Nombre completo <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Correo electronico <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Carrera <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Fecha de inscripción <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Capacitación <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Acciones <a onclick="eliminarcolumna(6)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
                         </tr>
                       </thead>
@@ -114,26 +117,33 @@
 
                       <tbody>
                      	<%
-	                      	for(Vw_userrol rus :listaRolusr){
+	                      	for(Vw_inscripcion_docente ins :listaInsc){
 	                      		
 	                      %>
                       	
                       
                         <tr>
+                          <td><%=ins.getId_uca()%></td>
                           
-                          <td><%=rus.getUsuario() %></td>
+                          <td><%=ins.getNombres()%></td>
                           
-                          <td><%=rus.getRol() %></td>
+                          <td><%=ins.getCorreo_electronico() %></td>
+                          
+                          <td><%=ins.getNombre_carrera() %></td>
+                          
+                          <td><%=ins.getFecha_inscripcion() %></td>
+                          
+                          <td><%=ins.getNombre_oferta() %></td>
                           <td>
-                           <a href="updateRoluser.jsp">
+                           <a href="updateInscripcion.jsp">
                             <i class="far fa-edit" title="Editar Opciones"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readRoluser.jsp">
+                          <a href="readInscripcion.jsp">
                             <i class="far fa-eye" title="Visualizar Opciones"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteRoluser.jsp" >
+                          <a href="deleteInscripcion.jsp" >
                             <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
                           </a>
                           </td>
@@ -149,8 +159,12 @@
                       <tfoot>
                         <tr>
                           
-                          <th>Usuario</th>
-                          <th>Rol</th>
+                          <th>Id UCA</th>
+                          <th>Nombre completo</th>
+                          <th>Correo electronico</th>
+                          <th>Carrera</th>
+                          <th>Fecha de inscripción</th>
+                          <th>Capacitación</th>
                           <th>Acciones</th>
                         </tr>
                       </tfoot>
@@ -210,31 +224,107 @@
     <script src="../build/js/custom.min.js"></script>
     
      <script>
-    $(document).ready(function() {
-        $('#tbl_rolusr').DataTable( {
-        	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
-        	"dom": '<"top"Blf>rt<"bottom"ip><"clear">',
-        	
-        	"lengthMenu": [ 10, 25, 50, 75, 100 ],
-        
-        	"language": {
-                "lengthMenu": "Mostrar _MENU_ records por pagina",
-                "search": "Buscar:",
-                "paginate": {
-                    "first":      "Primero",
-                    "last":       "Ultimo",
-                    "next":       "Siguiente",
-                    "previous":   "Anterior"
-                },
-                "emptyTable": "No existen datos en la tabla",
-                "zeroRecords": "No existe un registro en la BD",
-                "info": "Mostrando página _PAGE_ de _PAGES_",
-                
-                "infoEmpty": "No existe registro",
-                "infoFiltered": "(filtered from _MAX_ total records)"
-            }
-        } );
-    } );
+     function eliminarcolumna(id){
+    		var table = $('#tbl_inscr').DataTable();
+    	 
+    		table.column( id).visible( false );
+    	}
+    	function mostrarcolumna(){
+    		var table = $('#tbl_inscr').DataTable();
+    	    
+    	   	table.columns( [ 0, 1, 2, 3, 4, 5, 6 ] ).visible( true, true );
+    	}
+    	
+    	
+    	
+    	
+     
+     $(document).ready(function() {
+     	
+     	
+         $('#tbl_inscr').DataTable( {
+         	buttons: [  
+         				
+ 		        		{
+ 			        		extend: 'csv',
+ 							text: 'CSV',
+ 							title: 'Inscripciones registradas',
+ 							action: function ( e, dt, node, config ) {
+ 			                    //alert( 'Activated!' );
+ 			                    eliminarcolumna(6);
+ 			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
+ 			                },
+ 							exportOptions: {
+ 				                columns: ':visible',
+ 				            }
+ 		        		},
+         				{
+         					extend: 'excel',
+         					text: 'Excel',
+         					title: 'Inscripciones registradas',
+         					action: function ( e, dt, node, config ) {
+         	                    //alert( 'Activated!' );
+         	                    eliminarcolumna(6);
+         	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
+         	                },
+         					exportOptions: {
+         		                columns: ':visible',
+         		            }
+         				},
+         				
+         				{
+         					extend: 'pdf',
+         					text: 'PDF',
+         					title: 'Inscripciones registradas',
+         					action: function ( e, dt, node, config ) {
+         	                    //alert( 'Activated!' );
+         	                    eliminarcolumna(6);
+         	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
+         	                },
+         					exportOptions: {
+         		                columns: ':visible',
+         		            }
+         				},
+       
+         				{ 
+         					extend: 'print',
+         					text: 'Imprimir',
+         					title: 'Inscripciones registradas',
+         					action: function ( e, dt, node, config ) {
+         	                    //alert( 'Activated!' );
+         	                    eliminarcolumna(6);
+         	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
+         	                },
+         					exportOptions: {
+         		                columns: ':visible',
+         		            }
+         					
+         				} 
+         			 ],
+         	keys: true,
+         	    
+         	"dom": '<Blf<rt>ip>',
+         	
+         	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+         	
+         	"language": {
+                 "lengthMenu": "Mostrar _MENU_ records por pagina",
+                 "search": "Buscar:",
+                 "paginate": {
+                     "first":      "Primero",
+                     "last":       "Ultimo",
+                     "next":       "Siguiente",
+                     "previous":   "Anterior"
+                 },
+                 "emptyTable": "No existen datos en la tabla",
+                 "zeroRecords": "No existe un registro en la BD",
+                 "info": "Mostrando página _PAGE_ de _PAGES_",
+                 
+                 "infoEmpty": "No existe registro",
+                 "infoFiltered": "(filtered from _MAX_ total records)"
+             }
+         } );
+     } );
     
     </script>
 
