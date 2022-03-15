@@ -31,7 +31,7 @@
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="../custom.min.css" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -60,7 +60,7 @@
 
             <div class="clearfix"></div>
 
-            <div class="row">
+            <!--  <div class="row">
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
@@ -91,65 +91,14 @@
                             </div>
                             
                     
-                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
-                      <%
-                      		ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>();
-                      		Dt_usuario dtu = new Dt_usuario();
-                      		listaUsuario = dtu.listaUserActivos();
-                      %>
-                      <thead>
-                        <tr>
-                          <th>Id_user</th>
-                          <th>Nombre completo</th>
-                          <th>Usuario</th>
-                          <th>Correo electrónico</th>
-                          <th>Estado</th>
-                          
-                        </tr>
-                      </thead>
-
-
-                      <tbody>
-                      <%
-                      	for(Tbl_user tu :listaUsuario){
-                      		String estado= "";
-                      		if(tu.getEstado()!=3){
-                      			estado= "Activo";
-                      		}
-                      		else{
-                      			estado = "Inactivo";
-                      		}
-                      %>
-                      	
-                      
-                        <tr>
-                          
-                          
-                        </tr>
-                        <%
-                        }
-                        %>
-                        
-                        
-                      </tbody>
-                      <tfoot>
-                        <tr>
-                          <th>Id_user</th>
-                          <th>Nombre completo</th>
-                          <th>Usuario</th>
-                          <th>Correo electrónico</th>
-                          <th>Estado</th>
-                          
-                        </tr>
-                      </tfoot>
-                    </table>
+                    
                   </div>
                   </div>
               </div>
             </div>
                 </div>
               </div>
-              </div>
+              </div>-->
                 </div>
               </div>
         <!-- /page content -->
