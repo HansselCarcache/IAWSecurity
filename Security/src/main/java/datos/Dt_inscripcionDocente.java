@@ -48,7 +48,6 @@ public class Dt_inscripcionDocente {
 				insc.setId_uca(rs.getInt("id_uca"));
 				insc.setCorreo_electronico(rs.getString("correo_electronico"));
 				
-				
 				listInsc.add(insc);
 				
 			}

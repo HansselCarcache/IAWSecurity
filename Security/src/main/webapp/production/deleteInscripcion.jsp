@@ -56,8 +56,6 @@
                         <div class="title_left">
                             <h3>Registrar inscripción</h3>
                         </div>
-
-                        
                     </div>
                     <div class="clearfix"></div>
 

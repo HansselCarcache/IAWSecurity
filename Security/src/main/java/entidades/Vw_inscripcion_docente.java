@@ -76,9 +76,6 @@ public class Vw_inscripcion_docente {
 			this.correo_electronico = correo_electronico;
 		}
 		
-		
-		
-		
 	//Methods
 		
 		
