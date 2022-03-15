@@ -87,7 +87,7 @@
                            
                             
                     
-                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <table id="tbl_Evaluacion" class="table table-striped table-bordered" style="width:100%">
                     
                      <%
                       		ArrayList<Vw_inscripcion> listInc = new ArrayList<Vw_inscripcion>();
@@ -214,6 +214,113 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    
+         <script>
+   	function eliminarcolumna(id){
+   		var table = $('#tbl_evaluacion').DataTable();
+   	 
+   		table.column( id).visible( false );
+   	}
+   	function mostrarcolumna(){
+   		var table = $('#tbl_evaluacion').DataTable();
+   	    
+   	   	table.columns( [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ] ).visible( true, true );
+   	}
+   	
+   	
+   	
+   	
+    
+    $(document).ready(function() {
+    	
+    	
+        $('#tbl_evaluacion').DataTable( {
+        	buttons: [  
+        				
+		        		{
+			        		extend: 'csv',
+							text: 'CSV',
+							title: 'Ofertas registradas',
+							action: function ( e, dt, node, config ) {
+			                    //alert( 'Activated!' );
+			                    eliminarcolumna(8);
+			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
+			                },
+							exportOptions: {
+				                columns: ':visible',
+				            }
+		        		},
+        				{
+        					extend: 'excel',
+        					text: 'Excel',
+        					title: 'Ofertas registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(8);
+        	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+        				
+        				{
+        					extend: 'pdf',
+        					text: 'PDF',
+        					title: 'Ofertas registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(8);
+        	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+      
+        				{ 
+        					extend: 'print',
+        					text: 'Imprimir',
+        					title: 'Ofertas registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(8);
+        	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        					
+        				} 
+        			 ],
+        	keys: true,
+        	    
+        	"dom": '<lf<rt>ip>',
+        	
+        	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+        	
+        	"language": {
+                "lengthMenu": "Mostrar _MENU_ records por pagina",
+                "search": "Buscar:",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+                "emptyTable": "No existen datos en la tabla",
+                "zeroRecords": "No existe un registro en la BD",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                
+                "infoEmpty": "No existe registro",
+                "infoFiltered": "(filtered from _MAX_ total records)"
+            }
+        } );
+    } );
+    
+    
+    
+    </script>
 
   </body>
 </html>
