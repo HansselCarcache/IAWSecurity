@@ -222,12 +222,22 @@
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Carrera: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												
+												 <%
+						                      		ArrayList<Vw_carrera_departamento> listaCarreras = new ArrayList<Vw_carrera_departamento>();
+						                      		Dt_carreras dtc = new Dt_carreras();
+						                      		listaCarreras = dtc.listaCarreras();
+                      								%>
 												<select class="form-control js-example-basic-single" name="carrera" id="carrera" required="required">
 												  <option value="">Seleccione...</option>
+												  <%
+							                      	for(Vw_carrera_departamento c :listaCarreras){
+							                      		
+	                     						 %>
 												
-												  <option value=""></option>
-												 
+												  <option value="<%=c.getId_carrera()%>"><%=c.getNombre_carrera()%></option>
+												 <%
+												  	}
+												  %>
 												</select>
                                             </div>
                                         </div>
