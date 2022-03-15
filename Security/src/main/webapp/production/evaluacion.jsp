@@ -100,10 +100,10 @@
                       <thead>
                         <tr>
                           <th>Usuario</th>
-                          <th>Facultad</th>
-                          <th>Departamento</th>
                           <th>Carrera</th>
                           <th>Oferta</th>
+                          <th>Id UCA</th>
+                          <th>Correo</th>
                           <th>Calificacion</th>
                         </tr>
                       </thead>
@@ -111,7 +111,6 @@
                       
                                  <%
 	                      	for(Vw_inscripcion ins : listInc){
-
 	                      		
 	                      	
 	                      %>
@@ -119,10 +118,11 @@
                            
                           <tr>
                         <td><%=ins.getUsuario() %></td>
-                        <td><%=ins.getNombre_facultad() %></td>
-                        <td><%=ins.getNombre_departamento() %></td>
                         <td><%=ins.getNombre_carrera() %></td>
                         <td><%=ins.getNombre_oferta() %></td>
+                        <td><%=ins.getId_uca() %></td>
+                        <td><%=ins.getCorreo_electronico() %></td>
+                        
                         <td>      <form class="" action="" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
@@ -154,10 +154,10 @@
                       <tfoot>
                         <tr>
                           <th>Usuario</th>
-                          <th>Facultad</th>
-                          <th>Departamento</th>
                           <th>Carrera</th>
                           <th>Oferta</th>
+                          <th>Id UCA</th>
+                          <th>Correo</th>
                           <th>Calificacion</th>
   
                         </tr>
@@ -217,12 +217,12 @@
     
          <script>
    	function eliminarcolumna(id){
-   		var table = $('#tbl_evaluacion').DataTable();
+   		var table = $('#tbl_Evaluacion').DataTable();
    	 
    		table.column( id).visible( false );
    	}
    	function mostrarcolumna(){
-   		var table = $('#tbl_evaluacion').DataTable();
+   		var table = $('#tbl_Evaluacion').DataTable();
    	    
    	   	table.columns( [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ] ).visible( true, true );
    	}
@@ -234,7 +234,7 @@
     $(document).ready(function() {
     	
     	
-        $('#tbl_evaluacion').DataTable( {
+        $('#tbl_Evaluacion').DataTable( {
         	buttons: [  
         				
 		        		{

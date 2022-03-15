@@ -85,7 +85,7 @@ public class Dt_inscripcion {
 			ArrayList<Vw_inscripcion> listInc = new ArrayList<Vw_inscripcion>();
 			try {
 				c = poolConexion.getConnection();
-				ps = c.prepareStatement("SELECT * FROM dbfdocente.vw_inscripcion_reporte;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				ps = c.prepareStatement("SELECT * FROM dbfdocente.vw_inscripcion_docente;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 				rs = ps.executeQuery();
 				while(rs.next()) {
 					Vw_inscripcion ins = new Vw_inscripcion();
@@ -96,7 +96,9 @@ public class Dt_inscripcion {
 					ins.setNombre_carrera(rs.getString("nombre_carrera"));
 					ins.setFecha_inscripcion(rs.getString("fecha_inscripcion"));
 					ins.setNombre_oferta(rs.getString("Oferta"));
-					ins.setCalificacion(rs.getString("calificacion"));
+					ins.setId_escala(rs.getInt("id_escala"));
+					ins.setId_uca(rs.getString("id_uca"));
+					ins.setCorreo_electronico(rs.getString("correo_electronico"));
 					listInc.add(ins);
 					
 				}
