@@ -10,11 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import datos.Dt_Oferta;
-import datos.Dt_Oferta_Det;
-import entidades.Oferta;
-import entidades.Oferta_Detalle;
+import datos.Dt_ofertadet;
+import entidades.Vw_ofertadet;
 
 /**
  * Servlet implementation class Sl_OfertaDet
@@ -44,22 +41,20 @@ public class Sl_OfertaDet extends HttpServlet {
 	 */
 	
 	
-	@SuppressWarnings("deprecation")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int opc = 0;
 		opc = Integer.parseInt(request.getParameter("opcion"));
 		// INSTANCIAMOS LOS OBJETOS
-		Oferta_Detalle tod = new Oferta_Detalle();
-		Dt_Oferta_Det dtf = new Dt_Oferta_Det();
+		Vw_ofertadet tod = new Vw_ofertadet();
+		Dt_ofertadet dtf = new Dt_ofertadet();
 		boolean x = false;
 		try {
 			String cfinicio = request.getParameter("finiciod").toString();
-			
 			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+			
+			
 			Date finicio = formato.parse(cfinicio);
 			java.sql.Date sqlinicio= new java.sql.Date(finicio.getTime());
-			
-			
 			
 			java.util.Date ffinal =  new SimpleDateFormat("yyyy-MM-dd").parse( request.getParameter("ffinald"));
 			java.sql.Date sqlfin= new java.sql.Date(ffinal.getTime());
@@ -77,20 +72,20 @@ public class Sl_OfertaDet extends HttpServlet {
 				
 				if(sqlfinicioe.getTime() <= sqlfin.getTime() && sqlfine.getTime() >= sqlfin.getTime() && sqlinicio.getTime() <= sqlfin.getTime()) {
 					//Fecha en rango y mayor que inicio
-					tod.setFecha_inicial(sqlinicio);
+					tod.setFecha_inicio(sqlinicio);
 					tod.setFecha_final(sqlfin);
 					x=true;
 				}
 				else 
 				{
 					//Fecha final fuera de rango
-					response.sendRedirect("production/frm_addNewOfertaDet.jsp?msj=4");
+					response.sendRedirect("production/addOfertaDet.jsp?msj=4");
 				}
 			}
 			else
 			{
 				//Fecha inicio fuera de rango
-				response.sendRedirect("production/frm_addNewOfertaDet.jsp?msj=3");
+				response.sendRedirect("production/addOfertaDet.jsp?msj=3");
 			}
 			
 			
@@ -101,17 +96,23 @@ public class Sl_OfertaDet extends HttpServlet {
 			e1.getMessage();
 		}
 		
+		//Salto de linea
+		
+		String horario = "";
+		String temp = request.getParameter("horario");
+		horario = temp.replace("\n" , "</br>");
+
+		
 		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 		tod.setId_capacitacion(Integer.parseInt(request.getParameter("capacitacion")));
 		tod.setId_facilitador(Integer.parseInt(request.getParameter("facilitador")));
-		tod.setHora_inicio(request.getParameter("hinicial"));
-		tod.setHora_final(request.getParameter("hfinal"));
-		
+		tod.setId_modalidad(Integer.parseInt(request.getParameter("modalidad")));
+		tod.setDescripcion_horaria(horario);
 		tod.setDias(request.getParameter("dias"));
 		tod.setPublico(Integer.parseInt(request.getParameter("publico")));
 		tod.setId_oferta(Integer.parseInt(request.getParameter("id_oferta")));
 		
-		
+		System.out.print(tod.getDescripcion_horaria());
 		////////////////////////////////////////////////////////////////////
 		
 		switch(opc) {
@@ -121,10 +122,10 @@ public class Sl_OfertaDet extends HttpServlet {
 				if(x) {
 					if(dtf.addOferta(tod)) {
 						//Si
-						response.sendRedirect("production/frm_addNewOfertaDet.jsp?msj=1");
+						response.sendRedirect("production/addOfertaDet.jsp?msj=1");
 					}else {
 						//No
-						response.sendRedirect("production/frm_addNewOfertaDet.jsp?msj=2");
+						response.sendRedirect("production/addOfertaDet.jsp?msj=2");
 					}
 				}
 				

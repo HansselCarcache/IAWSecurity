@@ -10,8 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import datos.Dt_Oferta;
-import entidades.Oferta;
+import datos.Dt_oferta;
+import entidades.Tbl_oferta;
 
 /**
  * Servlet implementation class Sl_OfertaEnc
@@ -45,8 +45,8 @@ public class Sl_OfertaEnc extends HttpServlet {
 		int opc = 0;
 		opc = Integer.parseInt(request.getParameter("opcion"));
 		// INSTANCIAMOS LOS OBJETOS
-		Oferta tf = new Oferta();
-		Dt_Oferta dtf = new Dt_Oferta();
+		Tbl_oferta tf = new Tbl_oferta();
+		Dt_oferta dtf = new Dt_oferta();
 		
 		try {
 			String cfinicio = request.getParameter("finicio").toString();
@@ -70,7 +70,7 @@ public class Sl_OfertaEnc extends HttpServlet {
 		}
 		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 		tf.setNombre(request.getParameter("nombre"));
-		tf.setPeriodo(request.getParameter("periodo"));
+		tf.setYear(request.getParameter("periodo"));
 		tf.setDescripcion(request.getParameter("descr"));
 		
 		
@@ -82,14 +82,14 @@ public class Sl_OfertaEnc extends HttpServlet {
 				if(tf.getFecha_inicial().getYear()==tf.getFecha_final().getYear()) {
 					if(dtf.addOferta(tf)) {
 						//Si
-						response.sendRedirect("production/frm_addNewOfertaDet.jsp?msj=1");
+						response.sendRedirect("production/addOfertaDet.jsp?msj=1");
 					}else {
 						//No
-						response.sendRedirect("production/frm_addOfertaEnc.jsp?msj=2");
+						response.sendRedirect("production/addOferta.jsp?msj=2");
 					}
 				}else {
 					//Fechas en distintos años so no
-					response.sendRedirect("production/frm_addOfertaEnc.jsp?msj=3");
+					response.sendRedirect("production/addOferta.jsp?msj=3");
 				}
 				
 			}catch(Exception e) {

@@ -1,17 +1,20 @@
 package entidades;
 
+import java.sql.Date;
+
 public class Tbl_ofertadet {
 	
 	private int id_oferta_detalle;
 	private int id_oferta;
-	private String fecha_inicio;
-	private String fecha_final;
-	private String hora_inicio;
-	private String hora_final;
+	private Date fecha_inicio;
+	private Date fecha_final;
 	private String dias;
+	private String descripcion_horaria;
 	private int publico;
 	private int id_capacitacion;
 	private int id_facilitador;
+	
+	
 	private int usuario_creacion;
 	private String fecha_creacion;
 	private int usuario_edicion;
@@ -32,29 +35,17 @@ public class Tbl_ofertadet {
 	public void setId_oferta(int id_oferta) {
 		this.id_oferta = id_oferta;
 	}
-	public String getFecha_inicio() {
+	public Date getFecha_inicio() {
 		return fecha_inicio;
 	}
-	public void setFecha_inicio(String fecha_inicio) {
+	public void setFecha_inicio(Date fecha_inicio) {
 		this.fecha_inicio = fecha_inicio;
 	}
-	public String getFecha_final() {
+	public Date getFecha_final() {
 		return fecha_final;
 	}
-	public void setFecha_final(String fecha_final) {
+	public void setFecha_final(Date fecha_final) {
 		this.fecha_final = fecha_final;
-	}
-	public String getHora_inicio() {
-		return hora_inicio;
-	}
-	public void setHora_inicio(String hora_inicio) {
-		this.hora_inicio = hora_inicio;
-	}
-	public String getHora_final() {
-		return hora_final;
-	}
-	public void setHora_final(String hora_final) {
-		this.hora_final = hora_final;
 	}
 	public String getDias() {
 		return dias;
@@ -115,6 +106,12 @@ public class Tbl_ofertadet {
 	}
 	public void setFecha_eliminacion(String fecha_eliminacion) {
 		this.fecha_eliminacion = fecha_eliminacion;
+	}
+	public String getDescripcion_horaria() {
+		return descripcion_horaria;
+	}
+	public void setDescripcion_horaria(String descripcion_horaria) {
+		this.descripcion_horaria = descripcion_horaria;
 	}
 	
 	
