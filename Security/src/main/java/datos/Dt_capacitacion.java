@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Tbl_capacitacion;
-import entidades.Tbl_modalidad;
+import entidades.Tbl_tipo_capacitacion;
 import entidades.Tbl_user;
 import entidades.Vw_capacitacion;
 

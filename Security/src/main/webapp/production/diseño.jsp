@@ -46,6 +46,7 @@
                     <ul class="nav child_menu">
                       <li><a href="tbl_oferta.jsp">Oferta</a></li>
                       <li><a href="tbl_capacitacion.jsp">Capacitaciones</a></li>
+                      <li><a href="tbl_tipo_capacitacion.jsp">Tipo de Capacitación</a></li>
                       <li><a href="tbl_modalidad.jsp">Modalidades</a></li>
                       <li><a href="tbl_facilitadores.jsp">Facilitadores</a></li>
                       

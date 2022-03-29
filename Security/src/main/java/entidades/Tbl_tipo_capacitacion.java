@@ -1,38 +1,38 @@
 package entidades;
 
-public class Tbl_modalidad {
+public class Tbl_tipo_capacitacion {
 	
 	//atributos
-	private int id_modalidad;
-	private String nombre;
-	private String descripcion;
+	private int id_tipo_capacitacion;
+	private String tipo_capacitacion;
 	private int certificada;
+	private String descripcion;
 	private int estado;
 	
 	
-	public int getId_modalidad() {
-		return id_modalidad;
+	public int getId_tipo_capacitacion() {
+		return id_tipo_capacitacion;
 	}
-	public void setId_modalidad(int id_modalidad) {
-		this.id_modalidad = id_modalidad;
+	public void setId_tipo_capacitacion(int id_tipo_capacitacion) {
+		this.id_tipo_capacitacion = id_tipo_capacitacion;
 	}
-	public String getNombre() {
-		return nombre;
+	public String getTipo_capacitacion() {
+		return tipo_capacitacion;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setTipo_capacitacion(String tipo_capacitacion) {
+		this.tipo_capacitacion = tipo_capacitacion;
 	}
 	public int getCertificada() {
 		return certificada;
 	}
 	public void setCertificada(int certificada) {
 		this.certificada = certificada;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	public int getEstado() {
 		return estado;

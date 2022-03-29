@@ -5,50 +5,49 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import entidades.Tbl_modalidad;
-import entidades.Tbl_user;
+import entidades.Tbl_tipo_capacitacion;
+import entidades.Tbl_facultad;
 
-public class Dt_modalidad {
+public class Dt_tipo_capacitacion {
 	
 	//Atributos
-	poolConexion pc = poolConexion.getInstance();
+	poolConexion pc = poolConexion.getInstance(); 
 	Connection c = null;
-	private ResultSet rsModalidad = null;
+	private ResultSet rsTipoCapacitacion = null;
 	private ResultSet rs = null;
 	private PreparedStatement ps = null;
 	
-	//Metodo para llenar el ResultSet para insert, update y delete
-	public void llenaRsModalidad(Connection c) {
-		try {
-			ps = c.prepareStatement("SELECT * FROM dbfdocente.modalidad;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
-			rsModalidad = ps.executeQuery();
-			
+	public void llenar_rsTipoCapacitacion(Connection c){
+		try{
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.tipo_capacitacion;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsTipoCapacitacion = ps.executeQuery();
 		}
-		catch(Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR MODALIDAD "+ e.getMessage());
+		catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR TIPO DE CAPACITACIÓN "+ e.getMessage());
 			e.printStackTrace();
 		}
 	}
 	
-	public ArrayList<Tbl_modalidad> listaModalidadesActivas(){
-		ArrayList<Tbl_modalidad> listModalidad = new ArrayList<Tbl_modalidad>();
+	//Metodo para visualizar tipo capacitacion registrados y activos
+	public ArrayList<Tbl_tipo_capacitacion> listaTipCapActivos(){
+		ArrayList<Tbl_tipo_capacitacion> listTipCap = new ArrayList<Tbl_tipo_capacitacion>();
 		try {
-			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT * FROM dbfdocente.modalidad WHERE estado <> 3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			c = poolConexion.getConnection(); //obtenemos una PoolConexion del pool
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.tipo_capacitacion WHERE estado<>3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				Tbl_modalidad modalidad = new Tbl_modalidad();
-				modalidad.setId_modalidad(rs.getInt("id_modalidad"));
-				modalidad.setNombre(rs.getString("nombre"));
-				modalidad.setDescripcion(rs.getString("descripcion"));
-				modalidad.setCertificada(rs.getInt("certificada"));
-				modalidad.setEstado(rs.getInt("estado"));
-				listModalidad.add(modalidad);
+				Tbl_tipo_capacitacion tipcap = new Tbl_tipo_capacitacion(); //instanciamos a tipo capacitación
+				tipcap.setId_tipo_capacitacion(rs.getInt("id_tipo_capacitacion"));
+				tipcap.setTipo_capacitacion(rs.getString("tipo_capacitacion"));
+				tipcap.setCertificada(rs.getInt("certificada"));
+				tipcap.setDescripcion(rs.getString("descripcion"));
+				tipcap.setEstado(rs.getInt("estado"));
+				listTipCap.add(tipcap);
 				
 			}
 		}
 		catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR MODALIDAD"+ e.getMessage());
+			System.out.println("DATOS: ERROR EN LISTAR TIPO CAPACITACION: "+ e.getMessage());
 			e.printStackTrace();
 			
 		}
@@ -68,7 +67,46 @@ public class Dt_modalidad {
 				e.printStackTrace();
 			}
 		}
-		return listModalidad;
+		return listTipCap;
 	}
+	
+	
+	public boolean addTipoCapacitacion(Tbl_tipo_capacitacion tipcap){
+		boolean guardado = false;
+		
+		try{
+			c = poolConexion.getConnection();
+			this.llenar_rsTipoCapacitacion(c);
+			this.rsTipoCapacitacion.moveToInsertRow();
+			rsTipoCapacitacion.updateString("tipo_capacitacion", tipcap.getTipo_capacitacion());
+			rsTipoCapacitacion.updateInt("certificada", tipcap.getCertificada());
+			rsTipoCapacitacion.updateString("descripcion", tipcap.getDescripcion());
+			rsTipoCapacitacion.updateInt("estado", 1);
+			rsTipoCapacitacion.insertRow();
+			rsTipoCapacitacion.moveToCurrentRow();
+			guardado = true;
+		}
+		catch (Exception e) {
+			System.err.println("ERROR AL GUARDAR TIPO DE CAPACITACION: "+e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rsTipoCapacitacion != null){
+					rsTipoCapacitacion.close();
+				}
+				if(c != null){
+					poolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return guardado;
+	}
+	
 	
 }
