@@ -10,6 +10,7 @@ import entidades.Tbl_facultad;
 
 public class Dt_tipo_capacitacion {
 	
+	
 	//Atributos
 	poolConexion pc = poolConexion.getInstance(); 
 	Connection c = null;

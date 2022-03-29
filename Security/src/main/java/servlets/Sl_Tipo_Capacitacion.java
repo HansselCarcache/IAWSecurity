@@ -13,6 +13,7 @@ import datos.Dt_tipo_capacitacion;
 import entidades.Tbl_facultad;
 import entidades.Tbl_tipo_capacitacion;
 
+
 @WebServlet("/Sl_Tipo_Capacitacion")
 
 public class Sl_Tipo_Capacitacion extends HttpServlet{

@@ -23,6 +23,7 @@ public class poolConexion
 	private static String user = "root";
 	//private static String pass="My$qlS3rv3rAPS*";
 	private static String pass="12345";
+	
 
     //Constructor
 	private poolConexion()

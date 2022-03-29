@@ -2,6 +2,7 @@ package entidades;
 
 public class Tbl_tipo_capacitacion {
 	
+	
 	//atributos
 	private int id_tipo_capacitacion;
 	private String tipo_capacitacion;
