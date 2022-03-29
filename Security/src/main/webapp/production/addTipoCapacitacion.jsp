@@ -48,6 +48,7 @@
                             <h3>Registrar un tipo de capacitación</h3>
                         </div>
 
+
                         
                     </div>
                     <div class="clearfix"></div>

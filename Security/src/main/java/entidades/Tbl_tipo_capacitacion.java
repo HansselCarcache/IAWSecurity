@@ -41,5 +41,6 @@ public class Tbl_tipo_capacitacion {
 		this.estado = estado;
 	}
 	
+	
 
 }

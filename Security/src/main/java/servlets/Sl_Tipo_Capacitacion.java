@@ -78,5 +78,6 @@ public class Sl_Tipo_Capacitacion extends HttpServlet{
 			
 		}
 	}
+	
 
 }

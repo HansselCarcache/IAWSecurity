@@ -28,6 +28,7 @@ public class Dt_tipo_capacitacion {
 		}
 	}
 	
+	
 	//Metodo para visualizar tipo capacitacion registrados y activos
 	public ArrayList<Tbl_tipo_capacitacion> listaTipCapActivos(){
 		ArrayList<Tbl_tipo_capacitacion> listTipCap = new ArrayList<Tbl_tipo_capacitacion>();

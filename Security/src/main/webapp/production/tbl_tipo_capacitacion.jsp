@@ -89,6 +89,7 @@
 										
 											<table id="tbl_tipocap" class="table table-striped table-bordered" style="width: 100%">
                     
+                    
 						                    <%
 						                    ArrayList<Tbl_tipo_capacitacion> listaTipCap = new ArrayList<Tbl_tipo_capacitacion>();
 						                    Dt_tipo_capacitacion dttipcap = new Dt_tipo_capacitacion();
