@@ -7,7 +7,7 @@ public class Tbl_facilitadores {
 		private int id_facilitador;
 		private String id_uca;
 		private String nombres;
-		private String apellidos;
+		private String cedula;
 		private String telefono;
 		private String email;
 		private String grado_academico;
@@ -33,11 +33,12 @@ public class Tbl_facilitadores {
 		public void setNombres(String nombres) {
 			this.nombres = nombres;
 		}
-		public String getApellidos() {
-			return apellidos;
+		
+		public String getCedula() {
+			return cedula;
 		}
-		public void setApellidos(String apellidos) {
-			this.apellidos = apellidos;
+		public void setCedula(String cedula) {
+			this.cedula = cedula;
 		}
 		public String getTelefono() {
 			return telefono;

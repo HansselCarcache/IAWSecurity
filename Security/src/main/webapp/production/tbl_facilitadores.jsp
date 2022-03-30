@@ -97,18 +97,17 @@
                       <%
                       		ArrayList<Tbl_facilitadores> listFac = new ArrayList<Tbl_facilitadores>();
                       		Dt_facilitadores dtrol = new Dt_facilitadores();
-                      		listFac = dtrol.listarFacActivos();
+                      		listFac = dtrol.listaFaciActivos();
                       %>
                     
                       <thead>
                         <tr>
                           <th>ID UCA <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Nombre <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Apellido <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Telefono <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Email <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Grado Academico <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Acciones <a onclick="eliminarcolumna(6)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Telefono <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Email <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Grado Academico <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Acciones <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
                         </tr>
                       </thead>
 
@@ -126,7 +125,6 @@
                         <tr>
                           <td><%=trol.getId_uca() %></td>
                           <td><%=trol.getNombres() %></td>
-                          <td><%=trol.getApellidos() %></td>
                           <td><%=trol.getTelefono() %></td>
                           <td><%=trol.getEmail() %></td>
                           <td><%=trol.getGrado_academico()  %></td>
@@ -155,7 +153,6 @@
                         <tr>
                           <th>ID UCA</th>
                           <th>Nombre</th>
-                          <th>Apellido</th>
                           <th>Telefono</th>
                           <th>Email</th>
                           <th>Grado Academico</th>  

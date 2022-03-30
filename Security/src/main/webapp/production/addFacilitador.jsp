@@ -82,7 +82,8 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form class="" action="../Sl_Facilitador" method="post" novalidate>
+                                    <input type="hidden" value="1" name="opcion" id="opcion"/>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
@@ -103,13 +104,7 @@
 											</div>
 										</div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Apellido<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="apellido" name="apellido" required="required" class="form-control ">
-											</div>
-										</div>
+										
 										
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Telefono: <span class="required">*</span>
@@ -132,6 +127,13 @@
 											</label>
 											<div class="col-md-6 col-sm-6 ">
 												<input type="text" id="grado_academico" name="grado_academico" required="required" class="form-control ">
+											</div>
+										</div>
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cedula<span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="cedula" name="cedula" required="required" class="form-control ">
 											</div>
 										</div>
 										

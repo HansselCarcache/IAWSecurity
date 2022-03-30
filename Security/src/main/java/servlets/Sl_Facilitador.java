@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datos.Dt_Facilitador;
-import entidades.Facilitador;
+
+import datos.Dt_facilitadores;
+
+import entidades.Tbl_facilitadores;
 
 	@WebServlet("/Sl_Facilitador")
 
@@ -41,14 +43,15 @@ import entidades.Facilitador;
 			int opc = 0;
 			opc = Integer.parseInt(request.getParameter("opcion"));
 			// INSTANCIAMOS LOS OBJETOS
-			Facilitador Faci = new Facilitador();
-			Dt_Facilitador dtm = new Dt_Facilitador();
+			Tbl_facilitadores Faci = new Tbl_facilitadores();
+			Dt_facilitadores dtm = new Dt_facilitadores();
 			// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
-			Faci.setEmail(request.getParameter("persEmail"));
-			Faci.setGrado_academico(request.getParameter("academic"));
-			Faci.setId_uca(request.getParameter("iduca"));
-			Faci.setNombre_completo(request.getParameter("fullname"));
-			Faci.setTelefono_contacto(request.getParameter("telephone"));
+			Faci.setEmail(request.getParameter("email"));
+			Faci.setGrado_academico(request.getParameter("grado_academico"));
+			Faci.setCedula(request.getParameter("cedula"));
+			Faci.setId_uca(request.getParameter("id_uca"));
+			Faci.setNombres(request.getParameter("nombre"));
+			Faci.setTelefono(request.getParameter("telefono"));
 			
 			
 			
@@ -59,9 +62,9 @@ import entidades.Facilitador;
 				try {
 					
 					if(dtm.addFacilitador(Faci)) {
-						response.sendRedirect("production/tbl_facilitador.jsp?msj=1");
+						response.sendRedirect("production/tbl_facilitadores.jsp?msj=1");
 					}else {
-						response.sendRedirect("production/tbl_facilitador.jsp?msj=2");
+						response.sendRedirect("production/tbl_facilitadores.jsp?msj=2");
 					}
 				}catch(Exception e) {
 					System.out.println("Error Sl_gestionUserRol opc1: "+e.getMessage());
