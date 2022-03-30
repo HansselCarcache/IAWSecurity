@@ -1,22 +1,24 @@
 package entidades;
 
+import java.sql.Date;
+
 public class Vw_ofertadet {
 
 	private int id_oferta_detalle;
 	private int id_oferta;
 	private String periodo;
-	private String fecha_inicio;
-	private String fecha_final;
-	private String hora_inicio;
-	private String hora_final;
+	private Date fecha_inicio;
+	private Date fecha_final;
+	private String descripcion_horaria;
 	private String dias;
 	private int publico;
 	private int id_capacitacion;
 	private String capacitacion;
+	private String tipo_capacitacion;
+	private int id_modalidad;
 	private String modalidad;
 	private int id_facilitador;
-	private String nombres;
-	private String apellidos;
+	private String facilitador;
 	
 	//metodos
 	public int getId_oferta_detalle() {
@@ -37,29 +39,17 @@ public class Vw_ofertadet {
 	public void setPeriodo(String periodo) {
 		this.periodo = periodo;
 	}
-	public String getFecha_inicio() {
+	public Date getFecha_inicio() {
 		return fecha_inicio;
 	}
-	public void setFecha_inicio(String fecha_inicio) {
+	public void setFecha_inicio(Date fecha_inicio) {
 		this.fecha_inicio = fecha_inicio;
 	}
-	public String getFecha_final() {
+	public Date getFecha_final() {
 		return fecha_final;
 	}
-	public void setFecha_final(String fecha_final) {
+	public void setFecha_final(Date fecha_final) {
 		this.fecha_final = fecha_final;
-	}
-	public String getHora_inicio() {
-		return hora_inicio;
-	}
-	public void setHora_inicio(String hora_inicio) {
-		this.hora_inicio = hora_inicio;
-	}
-	public String getHora_final() {
-		return hora_final;
-	}
-	public void setHora_final(String hora_final) {
-		this.hora_final = hora_final;
 	}
 	public String getDias() {
 		return dias;
@@ -97,18 +87,32 @@ public class Vw_ofertadet {
 	public void setId_facilitador(int id_facilitador) {
 		this.id_facilitador = id_facilitador;
 	}
-	public String getNombres() {
-		return nombres;
+	public String getDescripcion_horaria() {
+		return descripcion_horaria;
 	}
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
+	public void setDescripcion_horaria(String descripcion_horaria) {
+		this.descripcion_horaria = descripcion_horaria;
 	}
-	public String getApellidos() {
-		return apellidos;
+	public String getTipo_capacitacion() {
+		return tipo_capacitacion;
 	}
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
+	public void setTipo_capacitacion(String tipo_capacitacion) {
+		this.tipo_capacitacion = tipo_capacitacion;
 	}
+	public int getId_modalidad() {
+		return id_modalidad;
+	}
+	public void setId_modalidad(int id_modalidad) {
+		this.id_modalidad = id_modalidad;
+	}
+	public String getFacilitador() {
+		return facilitador;
+	}
+	public void setFacilitador(String facilitador) {
+		this.facilitador = facilitador;
+	}
+	
+	
 	
 	
 }

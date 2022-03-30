@@ -8,14 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datos.Dt_Facultad;
-import datos.Dt_Modalidad;
-import entidades.Facultad;
-import entidades.Modalidad;
+import datos.Dt_facultad;
+import datos.Dt_tipo_capacitacion;
+import entidades.Tbl_facultad;
+import entidades.Tbl_tipo_capacitacion;
 
-@WebServlet("/Sl_Modalidad")
 
-public class Sl_Modalidad extends HttpServlet{
+@WebServlet("/Sl_Tipo_Capacitacion")
+
+public class Sl_Tipo_Capacitacion extends HttpServlet{
 	
 	
 	private static final long serialVersionUID = 1L;
@@ -23,7 +24,7 @@ public class Sl_Modalidad extends HttpServlet{
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Sl_Modalidad() {
+    public Sl_Tipo_Capacitacion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,14 +44,14 @@ public class Sl_Modalidad extends HttpServlet{
 		int opc = 0;
 		opc = Integer.parseInt(request.getParameter("opcion"));
 		// INSTANCIAMOS LOS OBJETOS
-		Modalidad Mod = new Modalidad();
-		Dt_Modalidad dtm = new Dt_Modalidad();
+		Tbl_tipo_capacitacion TipCap = new Tbl_tipo_capacitacion();
+		Dt_tipo_capacitacion dttc = new Dt_tipo_capacitacion();
 		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
-		Mod.setNombre_modalidad(request.getParameter("name"));
+		TipCap.setTipo_capacitacion(request.getParameter("tipo_capacitacion"));
 		 int certif = Integer.parseInt(request.getParameter("certificada"));
-		Mod.setCertificada(certif);
-		
-		Mod.setDescripcion(request.getParameter("descripcion"));
+		TipCap.setCertificada(certif);
+		TipCap.setDescripcion(request.getParameter("descripcion"));
+		TipCap.setEstado(1);
 		
 		
 		////////////////////////////////////////////////////////////////////
@@ -59,13 +60,13 @@ public class Sl_Modalidad extends HttpServlet{
 		case 1:
 			try {
 				
-				if(dtm.addModalidad(Mod)) {
-					response.sendRedirect("production/tbl_modalidad.jsp?msj=1");
+				if(dttc.addTipoCapacitacion(TipCap)) {
+					response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=1");
 				}else {
-					response.sendRedirect("production/tbl_modalidad.jsp?msj=2");
+					response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=2");
 				}
 			}catch(Exception e) {
-				System.out.println("Error Sl_gestionUserRol opc1: "+e.getMessage());
+				System.out.println("Error Sl_Tipo_Capacitacion opc1: "+e.getMessage());
 				e.printStackTrace();
 			}
 			break;
@@ -78,19 +79,6 @@ public class Sl_Modalidad extends HttpServlet{
 			
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 }

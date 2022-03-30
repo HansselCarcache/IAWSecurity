@@ -65,385 +65,129 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Registros de ofertas </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
-                                            </div>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
+                                    <h2>Ingrese un Encabezado para su oferta </h2>
+                                    
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form class="" action="../Sl_OfertaEnc" method="post" novalidate>
+                                    <input type="hidden" value="1" name="opcion" id="opcion"/>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombres" name="nombres" required="required" class="form-control ">
-											</div>
-										</div>
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre de Oferta <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input class="form-control" id="nombre" name="nombre" placeholder="Primer Semestre 2020"  />
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripcion: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="apellidos" name="apellidos" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Periodo: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="username" name="username" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha inicio: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="username" name="username" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha final: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="username" name="username" required="required" class="form-control ">
-											</div>
-										</div>
-										
+                                            </div>
+                                        </div>
                                         
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha Inicio <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input class="form-control" type="date" name="finicio" id="finicio" />
+										
+                                            </div>
+                                        </div>
                                         
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha Final <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input class="form-control" type="date" name="ffinal" id="ffinal"   />
+										
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Año <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input class="form-control" name="periodo" id="periodo" placeholder="2020"  />
+										
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Descripción <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input class="form-control"  name="descr" id="descr" placeholder="Ofertas dentro del periodo 1S 2020" />
+										
+                                            </div>
+                                        </div>
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
+                                                
+                                                	<button type="submit" class="btn btn-primary">Guardar</button>
+                                                    <a href="tbl_oferta.jsp" class="btn btn-success">Regresar</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
-                                    
-                                    
                                 </div>
                             </div>
+						
                         </div>
                     </div>
                     
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Detalles de oferta </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
-                                            </div>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
-<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
-<!--                                         </p> -->
-<!--                                         <span class="section">Personal Info</span> -->
-									<div class="row">
-                        				<div class="col-md-6 col-sm-6">
-											<div class="field item form-group">
-                                            	<label class="col-form-label col-md-3 col-sm-3  label-align">Capacitación:<span class="required">*</span></label>
-                                            	<div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												<%
-							                      	ArrayList<Tbl_capacitacion> listaCapacitacion = new ArrayList<Tbl_capacitacion>();
-							                      	Dt_capacitacion dtu = new Dt_capacitacion();
-							                      	listaCapacitacion = dtu.listacapacitacionesActivas();
-								                 %>
-												<select class="form-control js-example-basic-single" name="capacitacion" id="capacitacion" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Tbl_capacitacion tc :listaCapacitacion){
-												  %>
-												  <option value="<%=tc.getNombre()%>"><%=tc.getNombre()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-                                            </div>
-                                        </div>
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Facilitador: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-												<%
-												ArrayList<Tbl_facilitadores> listFac = new ArrayList<Tbl_facilitadores>();
-					                      		Dt_facilitadores dtrol = new Dt_facilitadores();
-					                      		listFac = dtrol.listarFacActivos();
-								                 %>
-								                 <select class="form-control js-example-basic-single" name="facilitador" id="facilitador" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  for(Tbl_facilitadores trol :listFac){
-												  %>
-												  <option value="<%=trol.getNombres()+' '+trol.getApellidos()%>"><%=trol.getNombres()+' '+trol.getApellidos()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-											</div>
-                                        </div>
+                    <div class="x_panel">
+							<div class="x_title">
+								<h2>Detalles de la Oferta</h2>
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha inicio: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="finicio" name="finicio" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha final: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="ffinal" name="ffinal" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Hora inicio: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="time" id="hinicio" name="hinicio" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Hora final: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="time" id="hfinal" name="hfinal" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Días: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="dias" name="dias" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Publico: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="card-box table-responsive">
+											<div class="text-muted font-13 col-md-12"
+												style="text-align: right;">
 												
-												<select class="form-control js-example-basic-single" name="publico" id="publico" required="required">
-												  <option value="">Seleccione...</option>
-												
-												  <option value="1">Si</option>
-												  <option value="2">No</option>
-												 
-												</select>
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-											
-											<div class="col-md-6 offset-md-3">
-												<button type="button" class="btn btn-primary" onclick="agregarFila()">Registrar nuevo</button>
 											</div>
+
+											<table id="tbl_detalle" class="table table-striped table-bordered dataTable" style="width:100%">
+												<thead>
+													<tr>
+														<th>Capacitacion</th>
+														<th>Facilitador</th>
+														<th>Fecha Inicial</th>
+														<th>Fecha Final</th>
+														<th>Hora de Inicio</th>
+														<th>Hora de Finalización</th>
+														<th>Días de Asistencia</th>
+														
+													</tr>
+												</thead>
+
+												<tbody>
+													
+													
+												</tbody>
+
+												<tfoot>
+													<tr>
+														<th>Capacitacion</th>
+														<th>Facilitador</th>
+														<th>Fecha Inicial</th>
+														<th>Fecha Final</th>
+														<th>Hora de Inicio</th>
+														<th>Hora de Finalización</th>
+														<th>Días de Asistencia</th>
+														
+													</tr>
+												</tfoot>
+											</table>
+
+
 										</div>
-                                        
-                                      
-                                        
-                                        
-                                        <!-- Inicio segunda tabla -->	
-							              <div class="x_panel">
-						                  <div class="x_title">
-						                    <h2>Oferta detalle</h2>
-						                    <ul class="nav navbar-right panel_toolbox">
-						                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-						                      </li>
-						                      <li class="dropdown">
-						                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-						                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						                            <a class="dropdown-item" href="#">Settings 1</a>
-						                            <a class="dropdown-item" href="#">Settings 2</a>
-						                          </div>
-						                      </li>
-						                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-						                      </li>
-						                    </ul>
-						                    <div class="clearfix"></div>
-						                  </div>
-						                  <div class="x_content">
-						                  <div class="row">
-                 
-						                    <table  id="tbl_detalle"  class="table table-striped table-bordered" style="width:100%">
-						                    
-						                    
-						                    
-						                      <thead>
-						                        <tr>
-						                          <th>Nombre Capacitación</th>
-						                          <th>Facilitador</th>
-						                          <th>Dias</th>
-						                          <th>Acciones</th>
-						                        </tr>
-						                      </thead>
-						
-						
-							                      <tbody>
-							          
-								                        <tr>
-								                        <td></td>
-								                        <td></td>
-								                        <td></td>
-								                        <td></td>
-								                        
-								                        </tr>
-							                        
-							                      </tbody>
-						                      <tfoot>
-						                        <tr>
-						                          <th>Nombre Capacitación</th>
-						                          <th>Facilitador</th>
-						                          <th>Dias</th>
-						                          <th>Acciones</th>
-						                        </tr>
-						                      </tfoot>
-						                    </table>
-							                  </div>
-							                  </div>
-							              </div>
-							              <!-- Final Segunda Tabla -->
-										
-                                        
-                                        
-                                        <div class="ln_solid"><br>
-                                            <div class="form-group">
-                                                <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        </form>
-                                        <!-- Inicio de la partición del medio -->
-                                        <div class="col-md-6 col-sm-6">
-                                        <!-- Inicio Tabla Capacitaciones -->
-                                         <div class="x_panel">
-						                  <div class="x_title">
-						                    <h2>Capacitaciones registradas</h2>
-						                    <ul class="nav navbar-right panel_toolbox">
-						                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-						                      </li>
-						                      <li class="dropdown">
-						                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-						                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						                            <a class="dropdown-item" href="#">Settings 1</a>
-						                            <a class="dropdown-item" href="#">Settings 2</a>
-						                          </div>
-						                      </li>
-						                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-						                      </li>
-						                    </ul>
-						                    <div class="clearfix"></div>
-						                  </div>
-						                  <div class="x_content">
-						                  <div class="row">
-                 
-						                    <table id="tbl_capacitaciones" class="table table-striped table-bordered" style="width:100%">
-									          <%
-					                      		ArrayList<Vw_capacitacion> listaCapacitacionV = new ArrayList<Vw_capacitacion>();
-					                      		Dt_capacitacion dtcapacitacion = new Dt_capacitacion();
-					                      		listaCapacitacionV = dtcapacitacion.listarcapacitacionesV();
-			                    			  %>
-						                    
-						                      <thead>
-						                        <tr>
-						                          <th>Nombre Capacitación</th>
-						                          <th>Modalidad</th>
-						                          <th>Estado</th>
-						                        </tr>
-						                      </thead>
-						
-						
-							                      <tbody>
-							                      <%
-							                      	for(Vw_capacitacion cap :listaCapacitacionV){
-							                      		String estado= "";
-							                      		if(cap.getEstado()!=3){
-							                      			estado= "Activo";
-							                      		}
-							                      		else{
-							                      			estado = "Inactivo";
-							                      		}
-	                     						 %>
-							          
-								                        <tr>
-								                          <td><%=cap.getNombre() %></td>
-								                          <td><%=cap.getModalidad() %></td>
-								                          <td><%=estado %></td>
-								                  
-								                        </tr>
-								                        <%
-                        									}
-                        								%>
-							                        
-							                      </tbody>
-						                      <tfoot>
-						                        <tr>
-						                          <th>Nombre Capacitación</th>
-						                          <th>Modalidad</th>
-						                          <th>Estado</th>
-						                        </tr>
-						                      </tfoot>
-						                    </table>
-							                  </div>
-							                  </div>
-							              </div>
-							              <!-- Final tabla Capacitaciones -->
-							             
-							            </div>
-							            <!-- Final de la partición del medio -->
-							                </div>
-                                        </div>
-                                        
-                                        </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                </div>
+									</div>
+								</div>
+							</div>
+						</div>
                             </div>
                             
                         </div>
+                        
                         <div class="col-md-6 col-sm-6 ">
                
               </div>
