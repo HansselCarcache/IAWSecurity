@@ -108,17 +108,17 @@
 											<div class="col-md-6 col-sm-6 ">
 											
 											  <%
-	                      			ArrayList<Tbl_modalidad> listaModalidad = new ArrayList<Tbl_modalidad>();
-	                      			Dt_modalidad dtmodalidad = new Dt_modalidad();
-	                      			listaModalidad = dtmodalidad.listaModalidadesActivas();
-	                      					%>
+																						  ArrayList<Tbl_tipo_capacitacion> listaModalidad = new ArrayList<Tbl_tipo_capacitacion>();
+																						  																				  	                      			Dt_tipo_capacitacion dtmodalidad = new Dt_tipo_capacitacion();
+																						  																				  	                      			listaModalidad = dtmodalidad.listaModalidadesActivas();
+																						  %>
 												
 									<select class="form-control js-example-basic-single" name="modalidad" id="modalidad" required="required">
 									
 									
 									<option value="">Seleccione...</option>
-												  <% 
-												  	for(Tbl_modalidad mod :listaModalidad){
+												  <%
+												  for(Tbl_tipo_capacitacion mod :listaModalidad){
 												  %>
 												  <option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre()%></option>
 												  <%
