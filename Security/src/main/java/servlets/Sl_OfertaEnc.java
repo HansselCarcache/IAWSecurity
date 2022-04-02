@@ -47,6 +47,9 @@ public class Sl_OfertaEnc extends HttpServlet {
 		// INSTANCIAMOS LOS OBJETOS
 		Tbl_oferta tf = new Tbl_oferta();
 		Dt_oferta dtf = new Dt_oferta();
+		//CAMPOS DE CONTROL
+		Date fechaSistema =new Date();
+		boolean x=false;
 		
 		try {
 			String cfinicio = request.getParameter("finicio").toString();
@@ -59,18 +62,32 @@ public class Sl_OfertaEnc extends HttpServlet {
 			
 			java.util.Date ffinal =  new SimpleDateFormat("yyyy-MM-dd").parse( request.getParameter("ffinal"));
 			java.sql.Date sqlfin= new java.sql.Date(ffinal.getTime());
-			tf.setFecha_inicial(sqlinicio);
-			tf.setFecha_final(sqlfin);
 			
-			
+			//Validacion de las fechas
+			if(sqlinicio.getYear()==sqlfin.getYear()) {
+				if(sqlinicio.getTime()<=sqlfin.getTime()) {
+					tf.setFecha_inicial(sqlinicio);
+					tf.setFecha_final(sqlfin);
+					x=true;
+				}else {
+					//Inicio es mayor que final so bai
+					response.sendRedirect("production/addOferta.jsp?msj=4");
+				}
+			}else {
+				//Fechas en distintos años so no
+				response.sendRedirect("production/addOferta.jsp?msj=3");
+			}
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			e1.getMessage();
 		}
+		
+		
 		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 		tf.setNombre(request.getParameter("nombre"));
-		tf.setYear(tf.getFecha_inicial().getYear()+"");
+		int year = tf.getFecha_inicial().getYear()+1900;
+		tf.setYear(year+"");
 		tf.setDescripcion(request.getParameter("descr"));
 		
 		int id=0;
@@ -78,9 +95,12 @@ public class Sl_OfertaEnc extends HttpServlet {
 		
 		switch(opc) {
 		case 1:
+			tf.setFecha_creacion(new java.sql.Timestamp(fechaSistema.getTime()));
+			tf.setUsuario_creacion(1);
 			try {
-				if(tf.getFecha_inicial().getYear()==tf.getFecha_final().getYear()) {
-					id =dtf.addOferta(tf); 
+				if(x) {
+					id =dtf.addOferta(tf);
+					
 					if(id!=0) {
 						//Si
 						response.sendRedirect("production/addOfertaDet.jsp?msj=1&id="+id);
@@ -88,9 +108,6 @@ public class Sl_OfertaEnc extends HttpServlet {
 						//No
 						response.sendRedirect("production/addOferta.jsp?msj=2");
 					}
-				}else {
-					//Fechas en distintos años so no
-					response.sendRedirect("production/addOferta.jsp?msj=3");
 				}
 				
 			}catch(Exception e) {
@@ -99,7 +116,26 @@ public class Sl_OfertaEnc extends HttpServlet {
 			}
 			break;
 		case 2:
-			//codigo
+			tf.setId_oferta(Integer.parseInt(request.getParameter("id")));
+			tf.setFecha_modificacion(new java.sql.Timestamp(fechaSistema.getTime()));
+			tf.setUsuario_modificacion(1);
+			try {
+				if(x) {
+					//id =dtf.editOferta(tf);
+					
+					if(dtf.editOferta(tf)) {
+						//Si
+						response.sendRedirect("production/updateOferta.jsp?msj=1&id="+tf.getId_oferta());
+					}else {
+						//No
+						response.sendRedirect("production/updateOferta.jsp?msj=2&id="+tf.getId_oferta());
+					}
+				}
+				
+			}catch(Exception e) {
+				System.out.println("Error Sl_Oferta opc1: "+e.getMessage());
+				e.printStackTrace();
+			}
 			break;
 		default:
 			//codigo

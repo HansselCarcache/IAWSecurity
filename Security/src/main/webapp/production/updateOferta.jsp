@@ -3,16 +3,19 @@
 <!DOCTYPE html>
 <html>
 <%
-Tbl_oferta to = new Tbl_oferta();
-Dt_oferta dtu = new Dt_oferta();
+ArrayList<Vw_ofertadet> listaOferta = new ArrayList<Vw_ofertadet>();
+Tbl_oferta oferta = new Tbl_oferta();
 
+Dt_oferta dto = new Dt_oferta();
+Dt_ofertadet dtod = new Dt_ofertadet();
 
 String id = "";
-id = request.getParameter("id")==null?"0":request.getParameter("id");
-						
-to = dtu.getoferta(Integer.parseInt(id));
+id = request.getParameter("id") == null ? "0" : request.getParameter("id");
 
+oferta = dto.getoferta(Integer.parseInt(id));
+listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 %>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -63,429 +66,373 @@ to = dtu.getoferta(Integer.parseInt(id));
 
             <!-- page content -->
             <div class="right_col" role="main">
-                <div class="">
-                    <div class="page-title">
-                        <div class="title_left">
-                            <h3>Modificar Oferta</h3>
-                        </div>
+						<div class="">
+							<div class="page-title">
+								<div class="title_left">
+									<h3>Edicion de Oferta</h3>
+								</div>
 
-                    </div>
-                    <div class="clearfix"></div>
+							</div>
+							<div class="clearfix"></div>
+							
+							<div class="row">
+								<div class="col-md-12 col-sm-12">
+									<div class="x_panel">
+										<div class="x_title">
+											<h2>Oferta a Editar</h2>
+											<ul class="nav navbar-right panel_toolbox">
+												<li><a class="collapse-link"><i
+														class="fa fa-chevron-up"></i></a></li>
 
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Modificación de ofertas </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
-                                            </div>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
-<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
-<!--                                         </p> -->
-<!--                                         <span class="section">Personal Info</span> -->
-											
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Oferta: <span class="required">*</span></label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="idoferta" name="idoferta" class="form-control" readonly="readonly" placeholder="ID Oferta">
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="x_content">
+											<form class="" action="../Sl_OfertaEnc" method="post" novalidate>
+												<input type="hidden" value="2" id="opcion" name="opcion"/>
+												<input type="hidden" value="<%=id %>" id="id" name="id"/>
+												<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Nombre
+														de Oferta <span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input class="form-control" name="nombre"
+															placeholder="ex. Primer Semestre 2020"
+															value="<%=oferta.getNombre()%>" required/>
+
+													</div>
+												</div>
+
+												<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Fecha
+														Inicio <span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input value="<%=oferta.getFecha_inicial()%>"
+															class="form-control" type="date" name="finicio"
+															id="finicio" required />
+
+													</div>
+												</div>
+
+												<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Fecha
+														Final <span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input value="<%=oferta.getFecha_final()%>"
+															class="form-control" type="date" name="ffinal"
+															id="ffinal" placeholder="ex. Primer Semestre 2020" required
+															 />
+
+													</div>
+												</div>
+
+												<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Descripción
+														<span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input value="<%=oferta.getDescripcion()%>"
+															class="form-control" name="descr" id="descr"
+															placeholder="ex. ofertas dentro del periodo 1S 2020"
+															required />
+
+													</div>
+												</div>
+												<div class="ln_solid">
+													<div class="form-group">
+														<div class="col-md-6 offset-md-3">
+
+															<button type="submit" class="btn btn-primary">Guardar</button>
+															<a href="tbl_oferta.jsp" class="btn btn-success">Regresar</a>
+														</div>
+													</div>
+												</div>
+											</form>
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-12 col-sm-12">
+										<div class="x_panel">
+											<div class="x_title">
+												<h2>Ingresar un detalle de oferta</h2>
+												<ul class="nav navbar-right panel_toolbox">
+													<li><a class="collapse-link"><i
+															class="fa fa-chevron-up"></i></a>
+												</ul>
+												<div class="clearfix"></div>
+											</div>
+											<div class="x_content">
+												<div class="row">
+													<div class="col-md-12 col-sm-12">
+												<form class="" action="../Sl_OfertaDet" method="post" novalidate>
+													<input type="hidden" value="<%=oferta.getFecha_inicial() %>" name="finicio" id="finicio"/>
+												   	<input type="hidden" value="<%=oferta.getFecha_final() %>"  name="ffinal" id="ffinal" />
+												   	<input type="hidden" value="1" name="opcion" id="opcion"/>
+												   	<input type="hidden" value="1" name="estado" id="estado"/>
+												   	<input type="hidden" value="<%=oferta.getId_oferta() %>" name="id_oferta" id="id_oferta"/>
+	
+													<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
+													<!--                                         </p> -->
+													<!--                                         <span class="section">Personal Info</span> -->
+													
+															<div class="field item form-group">
+																<label
+																	class="col-form-label col-md-3 col-sm-3  label-align">Capacitación:<span
+																	class="required">*</span></label>
+																<div class="col-md-6 col-sm-6">
+																	<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
+																	<%
+																	ArrayList<Tbl_capacitacion> listaCapacitacion = new ArrayList<Tbl_capacitacion>();
+																	Dt_capacitacion dtu = new Dt_capacitacion();
+																	listaCapacitacion = dtu.listacapacitacionesActivas();
+																	%>
+																	<select class="form-control js-example-basic-single"
+																		name="capacitacion" id="capacitacion"
+																		required="required">
+																		<option value="">Seleccione...</option>
+																		<%
+																		for (Tbl_capacitacion tc : listaCapacitacion) {
+																		%>
+																		<option value="<%=tc.getId_capacitacion()%>"><%=tc.getNombre()%></option>
+																		<%
+																		}
+																		%>
+																	</select>
+																</div>
+															</div>
+															<div class="field item form-group">
+																<label
+																	class="col-form-label col-md-3 col-sm-3  label-align">Facilitador:
+																	<span class="required">*</span>
+																</label>
+																<div class="col-md-6 col-sm-6">
+																	<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+																	<%
+																	ArrayList<Tbl_facilitadores> listFac = new ArrayList<Tbl_facilitadores>();
+																	Dt_facilitadores dtrol = new Dt_facilitadores();
+																	listFac = dtrol.listaFaciActivos();
+																	%>
+																	<select class="form-control js-example-basic-single"
+																		name="facilitador" id="facilitador" required="required">
+																		<option value="">Seleccione...</option>
+																		<%
+																		for (Tbl_facilitadores trol : listFac) {
+																		%>
+																		<option value="<%=trol.getId_facilitador()%>"><%=trol.getNombres()%></option>
+																		<%
+																		}
+																		%>
+																	</select>
+																</div>
+															</div>
+															
+															<div class="field item form-group">
+																<label
+																	class="col-form-label col-md-3 col-sm-3  label-align">Modalidad:
+																	<span class="required">*</span>
+																</label>
+																<div class="col-md-6 col-sm-6">
+																	<!--<input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+																	<%
+																	ArrayList<Tbl_modalidad> listMod = new ArrayList<Tbl_modalidad>();
+																	Dt_modalidad dtmod = new Dt_modalidad();
+																	listMod = dtmod.listaModalidadesActivas();
+																	%>
+																	<select class="form-control js-example-basic-single"
+																		name="modalidad" id="modalidad" required="required">
+																		<option value="">Seleccione...</option>
+																		<%
+																		for (Tbl_modalidad mod : listMod) {
+																		%>
+																		<option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre_modalidad() %></option>
+																		<%
+																		}
+																		%>
+																	</select>
+																</div>
+															</div>
+	
+															<div class="item form-group">
+																<label
+																	class="col-form-label col-md-3 col-sm-3 label-align">Fecha
+																	inicio: <span class="required">*</span>
+																</label>
+																<div class="col-md-6 col-sm-6 ">
+																	<input type="date" id="finiciod" name="finiciod"
+																		required="required" class="form-control ">
+																</div>
+															</div>
+	
+															<div class="item form-group">
+																<label
+																	class="col-form-label col-md-3 col-sm-3 label-align">Fecha
+																	final: <span class="required">*</span>
+																</label>
+																<div class="col-md-6 col-sm-6 ">
+																	<input type="date" id="ffinald" name="ffinald"
+																		required="required" class="form-control ">
+																</div>
+															</div>
+															<div class="item form-group">
+																<label
+																	class="col-form-label col-md-3 col-sm-3 label-align">Días
+																	de Asistencia: <span class="required">*</span>
+																</label>
+																<div class="col-md-6 col-sm-6 ">
+																	<input type="text" id="dias" name="dias"
+																		required="required" class="form-control ">
+																</div>
+															</div>
+															<div class="item form-group">
+																<label
+																	class="col-form-label col-md-3 col-sm-3 label-align">Descripcion
+																	horaria: <span class="required">*</span>
+																</label>
+																<div class="col-md-6 col-sm-6 ">
+																	<textarea id="horario" name="horario"
+																		required="required" class="form-control" name="message"></textarea>
+																</div>
+															</div>
+	
+	
+	
+	
+															<div class="field item form-group">
+																<label
+																	class="col-form-label col-md-3 col-sm-3  label-align">Visibilidad:
+																	<span class="required">*</span>
+																</label>
+																<div class="col-md-6 col-sm-6">
+																	<select class="form-control js-example-basic-single"
+																		name="publico" id="publico" required="required">
+																		<option value="1">Mantener Privado</option>
+																		<option value="2">Hacer Publico</option>
+																	</select>
+																</div>
+															</div>
+															<div class="ln_solid">
+					                                            <div class="form-group">
+					                                                <div class="col-md-6 offset-md-3">
+					                                                    <button type='submit' class="btn btn-primary">Guardar</button>
+					                                                    <a href="tbl_oferta.jsp" class="btn btn-success">Regresar</a>
+					                                                </div>
+					                                            </div>
+	                                       					</div>
+													
+												</form>
 											</div>
 										</div>
-											
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombres" name="nombres" required="required" class="form-control ">
-											</div>
 										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripcion: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="apellidos" name="apellidos" required="required" class="form-control ">
-											</div>
 										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Periodo: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="username" name="username" required="required" class="form-control ">
-											</div>
+									</div>
+							</div>
+							
+							<div class="row">
+								<div class="x_panel">
+										<div class="x_title">
+											<h2>Ofertas Registradas</h2>
+	
+											<div class="clearfix"></div>
 										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha inicio: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="username" name="username" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha final: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="username" name="username" required="required" class="form-control ">
-											</div>
-										</div>
-										
-                                        
-                                        
-                                        <div class="ln_solid">
-                                            <div class="form-group">
-                                                <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Detalles de oferta </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
-                                            </div>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
-<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
-<!--                                         </p> -->
-<!--                                         <span class="section">Personal Info</span> -->
-									<div class="row">
-                        				<div class="col-md-6 col-sm-6">
-                        				
-                        					<div class="item form-group">
-												<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Oferta detalle: <span class="required">*</span></label>
-												<div class="col-md-6 col-sm-6 ">
-													<input type="text" id="idofertadet" name="idofertadet" class="form-control" readonly="readonly" placeholder="ID Oferta detalle">
+										<div class="x_content">
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="card-box table-responsive">
+<!-- 														<div class="text-muted font-13 col-md-12" -->
+<!-- 															style="text-align: right;"> -->
+<!-- 															<a href="frm_addOfertaDet.jsp"> <i -->
+<!-- 																class="fa fa-2x fa-plus-square" title="Nueva Oferta"></i></a> -->
+<!-- 															<br></br> -->
+<!-- 														</div> -->
+	
+														<table id="tbl_detalle"
+															class="table table-striped table-bordered dataTable facultad"
+															style="width: 100%">
+	
+	
+															<thead>
+																<tr>
+																	<th>Capacitacion</th>
+																	<th>Facilitador</th>
+																	<th>Duracion</th>
+																	<th>Horario</th>
+																	<th>Días de Asistencia</th>
+																	<th>Visibilidad</th>
+																	<th>Acciones</th>
+																</tr>
+															</thead>
+	
+															<tbody>
+	
+																<%
+																for (Vw_ofertadet to : listaOferta) {
+																	String estado = "";
+																	if (to.getPublico() == 2) {
+																		estado = "Publico";
+																	} else {
+																		estado = "Privado";
+																	}
+																%>
+																<tr>
+																	<td><%=to.getTipo_capacitacion()%> <%=to.getCapacitacion()%></td>
+																	<td><%=to.getFacilitador()%></td>
+																	<td>De <%=to.getFecha_inicio()%> a <%=to.getFecha_final()%></td>
+																	<td><%=to.getDescripcion_horaria()%></td>
+																	<td><%=to.getDias()%></td>
+																	<td><%=estado%></td>
+																	<td>
+											                           	<a href="updateOfertaDet.jsp">
+											                            	<i class="far fa-edit fa-2x" title="Editar Opciones"></i>
+											                         	</a>
+											                          	&nbsp;&nbsp;
+											                          	<a href="readOfertaDet.jsp">
+											                            	<i class="far fa-eye fa-2x" title="Visualizar Opciones"></i>
+											                          	</a> 
+											                          	&nbsp;&nbsp;
+											                          	<a href="deleteOfertaDet.jsp" >
+											                            	<i class="far fa-trash-alt fa-2x" title="Eliminar Opciones"></i>
+											                          	</a>
+	                          										</td>
+																</tr>
+																<%
+																}
+																%>
+															</tbody>
+	
+															<tfoot>
+																<tr>
+																	<th>Capacitación</th>
+																	<th>Facilitador</th>
+																	<th>Duración</th>
+																	<th>Horario</th>
+																	<th>Días de Asistencia</th>
+																	<th>Visibilidad</th>
+																	<th>Acciones</th>
+																</tr>
+															</tfoot>
+														</table>
+	
+	
+													</div>
 												</div>
 											</div>
-											<div class="field item form-group">
-                                            	<label class="col-form-label col-md-3 col-sm-3  label-align">Capacitación:<span class="required">*</span></label>
-                                            	<div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												<%
-							                      	ArrayList<Tbl_capacitacion> listaCapacitacion = new ArrayList<Tbl_capacitacion>();
-							                      	Dt_capacitacion dtc = new Dt_capacitacion();
-							                      	listaCapacitacion = dtc.listacapacitacionesActivas();
-								                 %>
-												<select class="form-control js-example-basic-single" name="capacitacion" id="capacitacion" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Tbl_capacitacion tc :listaCapacitacion){
-												  %>
-												  <option value="<%=tc.getNombre()%>"><%=tc.getNombre()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-                                            </div>
-                                        </div>
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Facilitador: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-												<%
-												ArrayList<Tbl_facilitadores> listFac = new ArrayList<Tbl_facilitadores>();
-					                      		Dt_facilitadores dtrol = new Dt_facilitadores();
-					                      		listFac = dtrol.listaFaciActivos();
-								                 %>
-								                 <select class="form-control js-example-basic-single" name="facilitador" id="facilitador" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  for(Tbl_facilitadores trol :listFac){
-												  %>
-												  <option value="<%=trol.getId_facilitador()%>"><%=trol.getNombres()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-											</div>
-                                        </div>
+										</div>
+									</div>
+							</div>
+						</div>
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha inicio: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="finicio" name="finicio" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha final: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="ffinal" name="ffinal" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Hora inicio: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="time" id="hinicio" name="hinicio" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Hora final: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="time" id="hfinal" name="hfinal" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Días: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="dias" name="dias" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Publico: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												
-												<select class="form-control js-example-basic-single" name="publico" id="publico" required="required">
-												  <option value="">Seleccione...</option>
-												
-												  <option value="1">Si</option>
-												  <option value="2">No</option>
-												 
-												</select>
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-											
-											<div class="col-md-6 offset-md-3">
-												<button type="button" class="btn btn-primary" onclick="agregarFila()">Registrar nuevo</button>
-											</div>
-										</div>
-                                        
-                                      
-                                        
-                                        
-                                        <!-- Inicio primera tabla -->	
-							              <div class="x_panel">
-						                  <div class="x_title">
-						                    <h2>Oferta detalle</h2>
-						                    <ul class="nav navbar-right panel_toolbox">
-						                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-						                      </li>
-						                      <li class="dropdown">
-						                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-						                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						                            <a class="dropdown-item" href="#">Settings 1</a>
-						                            <a class="dropdown-item" href="#">Settings 2</a>
-						                          </div>
-						                      </li>
-						                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-						                      </li>
-						                    </ul>
-						                    <div class="clearfix"></div>
-						                  </div>
-						                  <div class="x_content">
-						                  <div class="row">
-                 
-						                    <table  id="tbl_detalle"  class="table table-striped table-bordered" style="width:100%">
-						                    
-						                    <%
-						                      		ArrayList<Vw_ofertadet> listaOfertadet = new ArrayList<Vw_ofertadet>();
-						                      		Dt_ofertadet dtof = new Dt_ofertadet();
-						                      		listaOfertadet = dtof.listaOfertasdet();
-						                      %>
-						                      <thead>
-						                        <tr>
-						                          <th>Id Oferta detalle</th>
-						                          <th>Nombre Capacitación</th>
-						                          <th>Facilitador</th>
-						                          <th>Dias</th>
-						                          <th>Acciones</th>
-						                        </tr>
-						                      </thead>
-						
-						
-							                      <tbody>
-							                      <%
-								                      	for(Vw_ofertadet oferD :listaOfertadet){
-								                      		
-								                      %>
-							          					<tr>
-							                          <td><%=oferD.getId_oferta_detalle() %></td>
-							                          <td><%=oferD.getCapacitacion() %></td>
-							                          <td><%=oferD.getFacilitador() %></td>
-							                          <td><%=oferD.getDias() %></td>
-							                          <td>
-							                           <a href="#">
-							                            <i class="far fa-edit" title="Editar Opciones"></i>
-							                          </a>
-						
-							                        
-							                          </td>
-								                        </tr>
-								                         <%
-									                        }
-									                      %>
-							                        
-							                      </tbody>
-						                      <tfoot>
-						                        <tr>
-						                          <th>Id Oferta detalle</th>
-						                          <th>Nombre Capacitación</th>
-						                          <th>Facilitador</th>
-						                          <th>Dias</th>
-						                          <th>Acciones</th>
-						                        </tr>
-						                      </tfoot>
-						                    </table>
-							                  </div>
-							                  </div>
-							              </div>
-							              <!-- Final primera Tabla -->
-										
-                                        
-                                        
-                                        <div class="ln_solid"><br>
-                                            <div class="form-group">
-                                                <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        </form>
-                                        <!-- Inicio de la partición del medio -->
-                                        <div class="col-md-6 col-sm-6">
-                                        <!-- Inicio Tabla Capacitaciones -->
-                                         <div class="x_panel">
-						                  <div class="x_title">
-						                    <h2>Capacitaciones registradas</h2>
-						                    <ul class="nav navbar-right panel_toolbox">
-						                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-						                      </li>
-						                      <li class="dropdown">
-						                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-						                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						                            <a class="dropdown-item" href="#">Settings 1</a>
-						                            <a class="dropdown-item" href="#">Settings 2</a>
-						                          </div>
-						                      </li>
-						                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-						                      </li>
-						                    </ul>
-						                    <div class="clearfix"></div>
-						                  </div>
-						                  <div class="x_content">
-						                  <div class="row">
-                 
-						                    <table id="tbl_capacitaciones" class="table table-striped table-bordered" style="width:100%">
-						                    <%
-					                      		ArrayList<Vw_capacitacion> listaCapacitacionV = new ArrayList<Vw_capacitacion>();
-					                      		Dt_capacitacion dtcapacitacion = new Dt_capacitacion();
-					                      		listaCapacitacionV = dtcapacitacion.listarcapacitacionesV();
-			                    			  %>
-						                    
-						                      <thead>
-						                        <tr>
-						                          <th>Nombre Capacitación</th>
-						                          <th>Modalidad</th>
-						                          <th>Estado</th>
-						                        </tr>
-						                      </thead>
-						
-						
-							                      <tbody>
-							                       <%
-							                      	for(Vw_capacitacion cap :listaCapacitacionV){
-							                      		String estado= "";
-							                      		if(cap.getEstado()!=3){
-							                      			estado= "Activo";
-							                      		}
-							                      		else{
-							                      			estado = "Inactivo";
-							                      		}
-	                     						 %>
-							          
-								                        <tr>
-								                          <td><%=cap.getNombre() %></td>
-								                          <td><%=cap.getModalidad() %></td>
-								                          <td><%=estado %></td>
-								                  
-								                        </tr>
-								                        <%
-                        									}
-                        								%>
-							                        
-							                      </tbody>
-						                      <tfoot>
-						                        <tr>
-						                          <th>Nombre Capacitación</th>
-						                          <th>Modalidad</th>
-						                          <th>Estado</th>
-						                        </tr>
-						                      </tfoot>
-						                    </table>
-							                  </div>
-							                  </div>
-							              </div>
-							              <!-- Final tabla Capacitaciones -->
-							             
-							            </div>
-							            <!-- Final de la partición del medio -->
-							                </div>
-                                        </div>
-                                        
-                                        </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                </div>
-                            </div>
-                            
-                        </div>
+					</div>
                         <div class="col-md-6 col-sm-6 ">
                
               </div>

@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
+
 import entidades.Tbl_oferta;
 import entidades.Vw_oferta;
 
@@ -117,28 +120,40 @@ public class Dt_oferta {
 		return of;
 	}
 	
-	public int getid_oferta(){
-		int x = 0;
-		try{
-			c = poolConexion.getConnection(); //obtenemos una PoolConexion del pool
-			ps = c.prepareStatement("SELECT id_oferta from gestion_docente.oferta where estado != 3 Order by id_oferta DESC Limit 1", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			rs = ps.executeQuery();
-			rs.next();
+	public boolean setEstado(int id,int user){
+		boolean modificado=false;	
+		try
+		{
+			c = poolConexion.getConnection();
+			this.llena_rsOferta(c);
+			rsOferta.beforeFirst();
+			Date fechaSistema = new Date();
+			Timestamp fecha = new java.sql.Timestamp(fechaSistema.getTime());
 			
-			x = rs.getInt("id_oferta");
 			
+			while (rsOferta.next())
+			{
+				if(rsOferta.getInt(1)==id)
+				{
+					rsOferta.updateInt("estado", 2);
+					rsOferta.updateTimestamp("fecha_modificacion", fecha);
+					rsOferta.updateInt("usuario_modificacion", user);
+					rsOferta.updateRow();
+					modificado=true;
+					break;
+				}
+			}
 		}
-		catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR OFERTA: "+ e.getMessage());
+		catch (Exception e)
+		{
+			System.err.println("ERROR AL ACTUALIZAR USUARIO "+e.getMessage());
 			e.printStackTrace();
 		}
-		finally{
+		finally
+		{
 			try {
-				if(rs != null){
-					rs.close();
-				}
-				if(ps != null){
-					ps.close();
+				if(rsOferta != null){
+					rsOferta.close();
 				}
 				if(c != null){
 					poolConexion.closeConnection(c);
@@ -148,9 +163,8 @@ public class Dt_oferta {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
-		return x;
+		return modificado;
 	}
 
 	
@@ -167,6 +181,8 @@ public class Dt_oferta {
 			rsOferta.updateDate("fecha_final", fc.getFecha_final());
 			rsOferta.updateString("year", fc.getYear());
 			rsOferta.updateString("descripcion", fc.getDescripcion());
+			rsOferta.updateTimestamp("fecha_ingreso", fc.getFecha_creacion());
+			rsOferta.updateInt("usuario_ingreso", fc.getUsuario_creacion());
 			rsOferta.insertRow();
 			rsOferta.moveToCurrentRow();
 			this.llena_rsOferta(c);
@@ -194,5 +210,55 @@ public class Dt_oferta {
 		
 		return guardado;
 	}
-	
+
+	public boolean editOferta(Tbl_oferta to) {
+		boolean modificado=false;	
+		try
+		{
+			c = poolConexion.getConnection();
+			this.llena_rsOferta(c);
+			rsOferta.beforeFirst();
+			
+			while (rsOferta.next())
+			{
+				if(rsOferta.getInt(1)==to.getId_oferta())
+				{
+					
+					rsOferta.updateString("nombre", to.getNombre());
+					rsOferta.updateString("descripcion", to.getDescripcion());
+					rsOferta.updateDate("fecha_inicial", to.getFecha_inicial());
+					rsOferta.updateDate("fecha_final", to.getFecha_final());
+					rsOferta.updateString("year", to.getYear());
+					rsOferta.updateTimestamp("fecha_modificacion", to.getFecha_modificacion());
+					rsOferta.updateInt("usuario_modificacion", to.getUsuario_modificacion());
+					rsOferta.updateInt("estado", 2);
+					
+					rsOferta.updateRow();
+					modificado=true;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR AL ACTUALIZAR USUARIO "+e.getMessage());
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				if(rsOferta != null){
+					rsOferta.close();
+				}
+				if(c != null){
+					poolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return modificado;
+	}
 }

@@ -225,7 +225,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 																	<%
 																	for (Tbl_capacitacion tc : listaCapacitacion) {
 																	%>
-																	<option value="1"><%=tc.getNombre()%></option>
+																	<option value="<%=tc.getId_capacitacion()%>"><%=tc.getNombre()%></option>
 																	<%
 																	}
 																	%>
@@ -399,7 +399,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 															<%
 															for (Vw_ofertadet to : listaOferta) {
 																String estado = "";
-																if (to.getPublico() == 0) {
+																if (to.getPublico() == 1) {
 																	estado = "Privado";
 																} else {
 																	estado = "Publico";

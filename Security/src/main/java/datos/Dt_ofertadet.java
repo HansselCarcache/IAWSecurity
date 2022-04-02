@@ -1,7 +1,6 @@
 package datos;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -74,7 +73,7 @@ public class Dt_ofertadet {
 		return listofc;
 	}
 	
-	@SuppressWarnings("deprecation")
+	
 	public ArrayList<Vw_ofertadet> listaOD_id(int id){
 		ArrayList<Vw_ofertadet> listFac = new ArrayList<Vw_ofertadet>();
 		try{
@@ -85,15 +84,9 @@ public class Dt_ofertadet {
 				Vw_ofertadet ofd = new Vw_ofertadet(); //instanciamos a rol
 				ofd.setId_oferta(rs.getInt("id_oferta"));
 				
-				Date inicial= rs.getDate("fecha_inicial");
-				inicial.setDate((rs.getDate("fecha_inicial").getDate()+1));
 				
-				Date fin= rs.getDate("fecha_final");
-				fin.setDate((rs.getDate("fecha_final").getDate()+1));
-				
-				ofd.setFecha_inicio(inicial);
-				ofd.setFecha_final(fin);
-				System.out.print("Final " + fin);
+				ofd.setFecha_inicio(rs.getDate("fecha_inicial"));
+				ofd.setFecha_final(rs.getDate("fecha_final"));
 				ofd.setDias(rs.getString("dias"));
 				ofd.setPublico(rs.getInt("publico"));
 				ofd.setId_oferta(rs.getInt("id_oferta"));

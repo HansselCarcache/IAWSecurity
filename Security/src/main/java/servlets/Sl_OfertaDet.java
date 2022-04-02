@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import datos.Dt_oferta;
 import datos.Dt_ofertadet;
 import entidades.Vw_ofertadet;
 
@@ -44,9 +46,12 @@ public class Sl_OfertaDet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int opc = 0;
 		opc = Integer.parseInt(request.getParameter("opcion"));
+		
 		// INSTANCIAMOS LOS OBJETOS
 		Vw_ofertadet tod = new Vw_ofertadet();
 		Dt_ofertadet dtf = new Dt_ofertadet();
+		Dt_oferta dto = new Dt_oferta();
+		
 		boolean x = false;
 		try {
 			String cfinicio = request.getParameter("finiciod").toString();
@@ -122,7 +127,17 @@ public class Sl_OfertaDet extends HttpServlet {
 				if(x) {
 					if(dtf.addOferta(tod)) {
 						//Si
-						response.sendRedirect("production/addOfertaDet.jsp?msj=1");
+						//Habilitar cambiar estado a modif
+						int opc2 = 0;
+						opc2 = Integer.parseInt(request.getParameter("estado"));
+						System.out.println("OPCION ESTADO: "+opc2);
+						//Cambiar estado de oferta master
+						if(opc2==1) {
+							dto.setEstado(tod.getId_oferta(),1);
+							response.sendRedirect("production/updateOferta.jsp?msj=1&id="+tod.getId_oferta());
+						}
+						//Redirigir
+						response.sendRedirect("production/addOfertaDet.jsp?msj=1&id="+tod.getId_oferta());
 					}else {
 						//No
 						response.sendRedirect("production/addOfertaDet.jsp?msj=2");
