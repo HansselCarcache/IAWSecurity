@@ -78,11 +78,11 @@
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 
-										<div class="item form-group">
+									<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="id_capacitacion">ID Capacitación <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="1">
+												<input type="text" class="form-control" readonly="readonly" >
 											</div>
 										</div>
 
@@ -90,7 +90,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Nombre <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="Inducción">
+												<input type="text" class="form-control" readonly="readonly" >
 											</div>
 										</div>
 										
@@ -98,38 +98,98 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="estado" readonly="readonly" class="form-control " placeholder="activo">
+												<input type="text" id="estado" readonly="readonly" class="form-control " >
 											</div>
 										</div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="modalidad">Modalidad <span class="required">*</span>
+											<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="modalidad">Tipo Capacitacion <span class="readonly">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
 											
-											  <%
-																						  ArrayList<Tbl_tipo_capacitacion> listaModalidad = new ArrayList<Tbl_tipo_capacitacion>();
-																						  																				  	                      			Dt_tipo_capacitacion dtmodalidad = new Dt_tipo_capacitacion();
-																						  																				  	                      			listaModalidad = dtmodalidad.listaModalidadesActivas();
-																						  %>
+										<%--	  <%
+	                      			ArrayList<Tbl_modalidad> listaModalidad = new ArrayList<Tbl_modalidad>();
+	                      			Dt_modalidad dtmodalidad = new Dt_modalidad();
+	                      			listaModalidad = dtmodalidad.listaModalidadesActivas();
+	                      					%>--%>
 												
-									<select class="form-control js-example-basic-single" name="modalidad" id="modalidad" required="required">
+									<select class="form-control js-example-basic-single" name="modalidad" id="modalidad" >
 									
 									
 									<option value="">Seleccione...</option>
-												  <%
-												  for(Tbl_tipo_capacitacion mod :listaModalidad){
+									<%--			  <% 
+												  	for(Tbl_modalidad mod :listaModalidad){
 												  %>
 												  <option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre()%></option>
 												  <%
 												  	}
-												  %>
+												  %>--%>
 										</select>
 	                      	
 	                      		
 		                      				
 											</div>
 										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="modalidad">Evaluada <span class="readonly">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+											
+						<%-- 						  <%
+	                      			ArrayList<Tbl_modalidad> listaModalidad = new ArrayList<Tbl_modalidad>();
+	                      			Dt_modalidad dtmodalidad = new Dt_modalidad();
+	                      			listaModalidad = dtmodalidad.listaModalidadesActivas();
+	                      					%>--%>
+												
+									<select class="form-control js-example-basic-single" name="evaluada" id="evaluada" >
+									
+									
+									<option value="">Seleccione...</option>
+<%-- 												  <%  
+												  	for(Tbl_modalidad mod :listaModalidad){
+												  %> 
+ 												  <option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre()%></option> 
+ 												  <% 
+ 												  	}
+ 												  %> --%>
+										</select>
+	                      	
+	                      		
+		                      				
+											</div>
+										</div>
+										
+										
+<!-- 										<div class="item form-group"> -->
+<!-- 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="Tipo Evaluacion">Tipo Evaluacion <span class="readonly">*</span> -->
+<!-- 											</label> -->
+<!-- 											<div class="col-md-6 col-sm-6 "> -->
+											
+<%-- <%-- 											  <%  --%>
+<%-- 	                      			ArrayList<Tbl_modalidad> listaModalidad = new ArrayList<Tbl_modalidad>(); --%>
+<%-- 	                      			Dt_modalidad dtmodalidad = new Dt_modalidad(); --%>
+<%-- 	                      			listaModalidad = dtmodalidad.listaModalidadesActivas(); --%>
+<%-- 	                      					%> --%> --%>
+												
+<!-- 									<select class="form-control js-example-basic-single" name="tipoevaluacion" id="tipoevaluacion" > -->
+									
+									
+<!-- 									<option value="">Seleccione...</option> -->
+<%-- 												  <%  
+<%-- 											  	for(Tbl_modalidad mod :listaModalidad){ --%>
+<%-- 												  %>  --%>
+<%-- 												  <option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre()%></option>  --%>
+<%-- 												  <%  --%>
+<%-- 												  	} --%>
+<%-- 												  %> --%> --%>
+<!-- 										</select> -->
+	                      	
+	                      		
+		                      				
+<!-- 											</div> -->
+<!-- 										</div> -->
+				                                     
 
                                         
                                         

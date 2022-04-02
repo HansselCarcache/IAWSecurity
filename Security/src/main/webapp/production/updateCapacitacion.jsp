@@ -25,6 +25,12 @@
     <!-- Select2 -->
     <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
 <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
+<style type="text/css">
+#tipo{
+display:none;
+}
+</style>
+
 </head>
 
 <body class="nav-md">
@@ -78,34 +84,34 @@
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 
-										<<div class="item form-group">
+										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Nombre <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombre" required="required" class="form-control ">
+												<input type="text" id="nombre" name="nombre" required="required" class="form-control ">
 											</div>
 										</div>
 										
 										
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="modalidad">Modalidad <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="cbxTipoCap">Tipo Capacitacion <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
 											
-											  <%
-																						  ArrayList<Tbl_tipo_capacitacion> listaModalidad = new ArrayList<Tbl_tipo_capacitacion>();
-																						  																				                        			Dt_tipo_capacitacion dtmodalidad = new Dt_tipo_capacitacion();
-																						  																				                        			listaModalidad = dtmodalidad.listaModalidadesActivas();
-																						  %>
+											   <%
+                      			ArrayList<Tbl_tipo_capacitacion> listaModalidad = new ArrayList<Tbl_tipo_capacitacion>();
+                      			Dt_tipo_capacitacion dtmodalidad = new Dt_tipo_capacitacion();
+                      			listaModalidad = dtmodalidad.listaTipCapActivos();
+                      					%> 
 											
-								<select class="form-control js-example-basic-single" name="modalidad" id="modalidad" required="required">
+								<select class="form-control js-example-basic-single" name="cbxTipoCap" id="cbxTipoCap" required="required" >
 								
 								
-								<option value="">Seleccione...</option>
-												  <%
-												  for(Tbl_tipo_capacitacion mod :listaModalidad){
+								 <option value="">Seleccione...</option>
+												  <% 
+												  	for(Tbl_tipo_capacitacion mod :listaModalidad){
 												  %>
-												  <option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre()%></option>
+												  <option value="<%=mod.getId_tipo_capacitacion()%>"><%=mod.getTipo_capacitacion()%></option>
 												  <%
 												  	}
 												  %>
@@ -118,7 +124,36 @@
 											</div>
 										</div>
 
-                                        
+                                        <div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="evaluada">Evaluacion <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<select class="form-control js-example-basic-single" name="evaluada" id="evaluada" onchange="display()" required="required">
+								
+	                      	
+	                      			             <option  value = "0">No será evaluada</option>
+												 <option value = "1">Será evaluada</option>
+												  
+									
+									</select>
+	                     
+											</div>
+<!-- 											<div  class="item form-group" id="tipo"> -->
+<!-- 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="tipoevaluacion">Tipo<span >*</span> -->
+<!-- 											</label> -->
+<!-- 											<div class="col-md-6 col-sm-6 "> -->
+<!-- 												<select class="form-control js-example-basic-single" name="tipoevaluacion" id="tipoevaluacion" > -->
+												
+<!-- 												 <option value = "0">...</option>			         -->
+<!-- 												 <option value = "1">Cualitativa</option> -->
+<!-- 												 <option value = "2">Cuantitativa</option> -->
+
+<!-- 									</select> -->
+<!-- 											</div> -->
+<!-- 										    </div> -->
+											
+										</div>
+										
                                         
                                         <div class="ln_solid">
                                             <div class="form-group">
@@ -202,6 +237,17 @@
         });
     </script>
 
+<script type="text/javascript">
+function display(){
+	var x = document.getElementById('evaluada').value;
+	
+	if(x == "1"){
+		document.getElementById('tipo').style.display="block";
+	} else if(x == "0"){
+	var x = document.getElementById('tipo').style.display="none";
+	}
+}
+</script>
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
