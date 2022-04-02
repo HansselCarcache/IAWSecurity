@@ -2,6 +2,19 @@
 	pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 <!DOCTYPE html>
 <html>
+<%
+ArrayList<Vw_ofertadet> listaOferta = new ArrayList<Vw_ofertadet>();
+Tbl_oferta oferta = new Tbl_oferta();
+
+Dt_oferta dto = new Dt_oferta();
+Dt_ofertadet dtod = new Dt_ofertadet();
+
+String id = "";
+id = request.getParameter("id") == null ? "0" : request.getParameter("id");
+
+oferta = dto.getoferta(Integer.parseInt(id));
+listaOferta = dtod.listaOD_id(Integer.parseInt(id));
+%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -75,18 +88,7 @@
 
 							</div>
 							<div class="clearfix"></div>
-							<%
-							ArrayList<Vw_ofertadet> listaOferta = new ArrayList<Vw_ofertadet>();
-							Tbl_oferta oferta = new Tbl_oferta();
-
-							Dt_oferta dto = new Dt_oferta();
-							Dt_ofertadet dtod = new Dt_ofertadet();
-
-							int x = dto.getid_oferta();
-
-							oferta = dto.getoferta(x);
-							listaOferta = dtod.listaOD_id(x);
-							%>
+							
 							<div class="row">
 								<div class="col-md-12 col-sm-12">
 									<div class="x_panel">
@@ -225,7 +227,7 @@
 																	%>
 																	<option value="1"><%=tc.getNombre()%></option>
 																	<%
-																	}//<%=tc.getId_capacitacion()
+																	}
 																	%>
 																</select>
 															</div>
@@ -251,7 +253,6 @@
 																	<option value="<%=trol.getId_facilitador()%>"><%=trol.getNombres()%></option>
 																	<%
 																	}
-																	//<%=trol.getId_facilitador()
 																	%>
 																</select>
 															</div>
@@ -265,9 +266,9 @@
 															<div class="col-md-6 col-sm-6">
 																<!--<input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
 																<%
-																ArrayList<Tbl_modalidad> listFac = new ArrayList<Tbl_modalidads>();
-																Dt_modalidad dtrol = new Dt_modalidad();
-																listMod = dtrol.listaFaciActivos();
+																ArrayList<Tbl_modalidad> listMod = new ArrayList<Tbl_modalidad>();
+																Dt_modalidad dtmod = new Dt_modalidad();
+																listMod = dtmod.listaModalidadesActivas();
 																%>
 																<select class="form-control js-example-basic-single"
 																	name="modalidad" id="modalidad" required="required">
@@ -275,9 +276,9 @@
 																	<%
 																	for (Tbl_modalidad mod : listMod) {
 																	%>
-																	<option value="1">Prescencial</option>
+																	<option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre_modalidad() %></option>
 																	<%
-																	//}
+																	}
 																	%>
 																</select>
 															</div>
@@ -411,14 +412,19 @@
 																<td><%=to.getDescripcion_horaria()%></td>
 																<td><%=to.getDias()%></td>
 																<td><%=estado%></td>
-																<td><a href="" target="blank"><i
-																		class="fa fa-2x fa-edit" title="Editar Detalle"></i></a> 
-																		
-																	<a href="" target="blank"><i class="fa fa-eye fa-2x"
-																		title="Visualizar Detalle"></i></a> 
-																	
-																	<a href="" target="blank"><i class="fa fa-2x fa-trash"
-																		title="Eliminar Detalle"></i></a></td>
+																<td>
+										                           	<a href="updateOferta.jsp">
+										                            	<i class="far fa-edit fa-2x" title="Editar Opciones"></i>
+										                         	</a>
+										                          	&nbsp;&nbsp;
+										                          	<a href="readOferta.jsp">
+										                            	<i class="far fa-eye fa-2x" title="Visualizar Opciones"></i>
+										                          	</a> 
+										                          	&nbsp;&nbsp;
+										                          	<a href="deleteOferta.jsp" >
+										                            	<i class="far fa-trash-alt fa-2x" title="Eliminar Opciones"></i>
+										                          	</a>
+                          										</td>
 															</tr>
 															<%
 															}

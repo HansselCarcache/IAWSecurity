@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import entidades.Tbl_oferta;
+import entidades.Vw_oferta;
 
 public class Dt_oferta {
 
@@ -28,20 +29,21 @@ public class Dt_oferta {
 	}
 	
 	//Metodo para visualizar usuarios registrados y activos
-	public ArrayList<Tbl_oferta> listaOfActivos(){
-		ArrayList<Tbl_oferta> listFac = new ArrayList<Tbl_oferta>();
+	public ArrayList<Vw_oferta> listaOfActivos(){
+		ArrayList<Vw_oferta> listFac = new ArrayList<Vw_oferta>();
 		try{
 			c = poolConexion.getConnection(); //obtenemos una PoolConexion del pool
-			ps = c.prepareStatement("SELECT * FROM gestion_docente.oferta WHERE estado<>3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_oferta WHERE estado<>3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()){
-				Tbl_oferta of = new Tbl_oferta(); //instanciamos a rol
+				Vw_oferta of = new Vw_oferta(); //instanciamos a rol
 				of.setId_oferta(rs.getInt("id_oferta"));
 				of.setNombre(rs.getString("nombre"));
 				of.setDescripcion(rs.getString("descripcion"));
-				of.setYear(rs.getString("periodo"));
-				of.setFecha_inicial(rs.getDate("fecha_inicial"));
+				of.setYear(rs.getString("year"));
+				of.setFecha_inicio(rs.getDate("fecha_inicial"));
 				of.setFecha_final(rs.getDate("fecha_final"));
+				of.setCantidad(rs.getInt("cantidad"));
 				of.setEstado(rs.getInt("estado"));
 				listFac.add(of);
 			}
@@ -152,8 +154,8 @@ public class Dt_oferta {
 	}
 
 	
-	public boolean addOferta(Tbl_oferta fc){
-		boolean guardado = false;
+	public int addOferta(Tbl_oferta fc){
+		int guardado = 0;
 		
 		try{
 			c = poolConexion.getConnection();
@@ -167,7 +169,9 @@ public class Dt_oferta {
 			rsOferta.updateString("descripcion", fc.getDescripcion());
 			rsOferta.insertRow();
 			rsOferta.moveToCurrentRow();
-			guardado = true;
+			this.llena_rsOferta(c);
+			rsOferta.last();
+			guardado = rsOferta.getInt("id_oferta");
 		}
 		catch (Exception e) {
 			System.err.println("ERROR AL GUARDAR OFERTA: "+e.getMessage());

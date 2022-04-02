@@ -3,6 +3,9 @@
 
 <!DOCTYPE html>
 <html>
+<% 
+	
+%>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -10,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Facilitadores</title>
+    <title>Evaluacion</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -65,19 +68,7 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Docentes Inscritos </h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                          </div>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -99,7 +90,7 @@
                     
                       <thead>
                         <tr>
-                          <th>Usuario</th>
+                          <th>Estudiante docente</th>
                           <th>Carrera</th>
                           <th>Oferta</th>
                           <th>Id UCA</th>
@@ -108,11 +99,8 @@
                         </tr>
                       </thead>
                       <tbody>
-                      
-                                 <%
+	                     <%
 	                      	for(Vw_inscripcion ins : listInc){
-	                      		
-	                      	
 	                      %>
                       
                            
@@ -122,38 +110,93 @@
                         <td><%=ins.getNombre_oferta() %></td>
                         <td><%=ins.getId_uca() %></td>
                         <td><%=ins.getCorreo_electronico() %></td>
-                        
-                        <td>      <form class="" action="" method="post" novalidate>
+                        <td>
+							<a data-toggle="modal" data-target=".bs-example-modal-lg" target="blank"><i class="fa fa-2x fa-check" title="Evaluar Docente"></i></a>
+							<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+		                      <div class="modal-dialog modal-lg">
+		                        <div class="modal-content">
+		
+		                        <div class="modal-header">
+		                          <h4 class="modal-title" id="myModalLabel">Evaluar a <%=ins.getUsuario() %></h4>
+		                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+		                          </button>
+		                        </div>
+		                        
+		                        
+		                        	<div class="col-md-12 col-sm-12">
+		                        		
+										<form class="" action="" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
-
-										
-                                        <div class="field item form-group">
-                                            <div class="col-md-9 col-sm-9">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+										<div class="modal-body">
+										<div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Tipo de Calificación: <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 												<%
-							                      	ArrayList<Tbl_escalaCalificacion> listC = new ArrayList<Tbl_escalaCalificacion>();
-							                      	Dt_inscripcion dtr = new Dt_inscripcion();
-							                      	listC = dtr.listaCal();
+							                      	ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>();
+							                      	Dt_usuario dtu = new Dt_usuario();
+							                      	listaUsuario = dtu.listaUserActivos();
+							                      	//onChange="mostrar_cualitativa()" 
 								                 %>
-								                      <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" required="required">
+												<select class="form-control js-example-basic-single" name="cbxUser" id="cbxUser" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_escalaCalificacion trol :listC){
+												  	for(Tbl_user tu :listaUsuario){
 												  %>
-												  <option value="<%=trol.getId_escala()%>"><%=trol.getCalificacion()%></option>
+												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_usuario()%></option>
+												  <%
+												  	}
+												  %>
+												</select>
+                                            </div>
+                                        </div>
+										
+										
+                                        <div class="field item form-group" id="ev_cualitativa">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Calificación Cualitativa: <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+												<%
+							                      	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
+							                      	Dt_rol dtr = new Dt_rol();
+							                      	listRol = dtr.listaRolActivos();
+								                 %>
+								                 <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" required="required">
+												  <option  value="">Seleccione...</option>
+												  <% 
+												  	for(Tbl_rol trol :listRol){
+												  %>
+												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
 												  <%
 												  	}
 												  %>
 												</select>
 											</div>
-                                        </div></td>
-                        </tr><%}%>
+                                        </div>
+                                        
+                                        </div>
+
+                                        <div class="modal-footer">
+		                          			<button type="button" class="btn btn-primary">Guardar Cambios</button>
+		                      			</div>
+                                        
+                                    </form>                     	
+		                        	</div>
+		                        </div>
+		                       
+		
+		                      	</div>
+		                     </div>
+		                   
+						</td>
+                        </tr>
+                        <%}%>
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>Usuario</th>
+                          <th>Estudiante docente</th>
                           <th>Carrera</th>
                           <th>Oferta</th>
                           <th>Id UCA</th>
@@ -227,12 +270,18 @@
    	   	table.columns( [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ] ).visible( true, true );
    	}
    	
-   	
+   	function mostrar_cualitativa(){
+   		var x = document.getElementById('ev_cualitativa');
+   	    if (x.style.display === "none") {
+   	        x.style.display = "block";
+   	    } else {
+   	        x.style.display = "none";
+   	    }
+   	}
    	
    	
     
     $(document).ready(function() {
-    	
     	
         $('#tbl_Evaluacion').DataTable( {
         	buttons: [  

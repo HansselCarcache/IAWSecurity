@@ -97,20 +97,18 @@
                     <%
                       		ArrayList<Vw_oferta> listaOferta = new ArrayList<Vw_oferta>();
                       		Dt_oferta dtof = new Dt_oferta();
-                      		listaOferta = dtof.listaOfertasCActivos();
+                      		listaOferta = dtof.listaOfActivos();
                       %>
                     
                       <thead>
                         <tr>
-                          <th>ID Oferta <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Nombre <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Descripcion <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Nombre <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Descripcion <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Año<a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Periodo <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Fecha Inicio <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Fecha Final <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Cantidad de capacitaciones asignadas <a onclick="eliminarcolumna(6)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Estado <a onclick="eliminarcolumna(7)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Acciones <a onclick="eliminarcolumna(8)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Capacitaciones ofertadas<a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Estado <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Acciones <a onclick="eliminarcolumna(6)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
                           
                         </tr>
@@ -131,25 +129,24 @@
                       	
                       
                         <tr>
-                          <td><%=oferC.getId_oferta() %></td>
                           <td><%=oferC.getNombre() %></td>
                           <td><%=oferC.getDescripcion() %></td>
-                          <td><%=oferC.getPeriodo() %></td>
-                          <td><%=oferC.getFecha_inicio() %></td>
-                          <td><%=oferC.getFecha_final() %></td>
+                          <td><%=oferC.getYear() %></td>
+                          <td>Del <%=oferC.getFecha_inicio()%> al <%=oferC.getFecha_final() %></td>
+                          
                           <td><%=oferC.getCantidad() %></td>
                           <td><%=estado %></td>
                           <td>
-                           <a href="updateOferta.jsp">
-                            <i class="far fa-edit" title="Editar Opciones"></i>
+                           <a href="updateOferta.jsp?id=<%=oferC.getId_oferta()%>">
+                            <i class="far fa-edit fa-2x" title="Editar Oferta"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readOferta.jsp">
-                            <i class="far fa-eye" title="Visualizar Opciones"></i>
+                          <a href="readOferta.jsp?id=<%=oferC.getId_oferta()%>">
+                            <i class="far fa-eye fa-2x" title="Visualizar Oferta"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteOferta.jsp" >
-                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
+                          <a href="deleteOferta.jsp?id=<%=oferC.getId_oferta()%>" >
+                            <i class="far fa-trash-alt fa-2x" title="Eliminar Oferta"></i>
                           </a>
                           </td>
                           
@@ -163,13 +160,11 @@
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>ID Oferta</th>
                           <th>Nombre</th>
                           <th>Descripcion</th>
+                          <th>Año</th>
                           <th>Periodo</th>
-                          <th>Fecha Inicio</th>
-                          <th>Fecha Final</th>
-                          <th>Cantidad de capacitaciones asignadas</th>
+                          <th>Capacitaciones ofertadas</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                         </tr>

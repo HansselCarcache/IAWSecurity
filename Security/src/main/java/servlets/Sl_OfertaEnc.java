@@ -70,19 +70,20 @@ public class Sl_OfertaEnc extends HttpServlet {
 		}
 		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 		tf.setNombre(request.getParameter("nombre"));
-		tf.setYear(request.getParameter("periodo"));
+		tf.setYear(tf.getFecha_inicial().getYear()+"");
 		tf.setDescripcion(request.getParameter("descr"));
 		
-		
+		int id=0;
 		////////////////////////////////////////////////////////////////////
 		
 		switch(opc) {
 		case 1:
 			try {
 				if(tf.getFecha_inicial().getYear()==tf.getFecha_final().getYear()) {
-					if(dtf.addOferta(tf)) {
+					id =dtf.addOferta(tf); 
+					if(id!=0) {
 						//Si
-						response.sendRedirect("production/addOfertaDet.jsp?msj=1");
+						response.sendRedirect("production/addOfertaDet.jsp?msj=1&id="+id);
 					}else {
 						//No
 						response.sendRedirect("production/addOferta.jsp?msj=2");

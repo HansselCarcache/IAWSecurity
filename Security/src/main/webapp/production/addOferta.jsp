@@ -99,13 +99,6 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Año <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-                                            	<input class="form-control" name="periodo" id="periodo" placeholder="2020"  />
-										
-                                            </div>
-                                        </div>
                                         
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Descripción <span class="required">*</span></label>

@@ -2,6 +2,17 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+<%
+Tbl_oferta to = new Tbl_oferta();
+Dt_oferta dtu = new Dt_oferta();
+
+
+String id = "";
+id = request.getParameter("id")==null?"0":request.getParameter("id");
+						
+to = dtu.getoferta(Integer.parseInt(id));
+
+%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -192,8 +203,8 @@
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 												<%
 							                      	ArrayList<Tbl_capacitacion> listaCapacitacion = new ArrayList<Tbl_capacitacion>();
-							                      	Dt_capacitacion dtu = new Dt_capacitacion();
-							                      	listaCapacitacion = dtu.listacapacitacionesActivas();
+							                      	Dt_capacitacion dtc = new Dt_capacitacion();
+							                      	listaCapacitacion = dtc.listacapacitacionesActivas();
 								                 %>
 												<select class="form-control js-example-basic-single" name="capacitacion" id="capacitacion" required="required">
 												  <option value="">Seleccione...</option>
@@ -214,14 +225,14 @@
 												<%
 												ArrayList<Tbl_facilitadores> listFac = new ArrayList<Tbl_facilitadores>();
 					                      		Dt_facilitadores dtrol = new Dt_facilitadores();
-					                      		listFac = dtrol.listarFacActivos();
+					                      		listFac = dtrol.listaFaciActivos();
 								                 %>
 								                 <select class="form-control js-example-basic-single" name="facilitador" id="facilitador" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
 												  for(Tbl_facilitadores trol :listFac){
 												  %>
-												  <option value="<%=trol.getNombres()+' '+trol.getApellidos()%>"><%=trol.getNombres()+' '+trol.getApellidos()%></option>
+												  <option value="<%=trol.getId_facilitador()%>"><%=trol.getNombres()%></option>
 												  <%
 												  	}
 												  %>
@@ -341,7 +352,7 @@
 							          					<tr>
 							                          <td><%=oferD.getId_oferta_detalle() %></td>
 							                          <td><%=oferD.getCapacitacion() %></td>
-							                          <td><%=oferD.getNombres()+' '+oferD.getApellidos() %></td>
+							                          <td><%=oferD.getFacilitador() %></td>
 							                          <td><%=oferD.getDias() %></td>
 							                          <td>
 							                           <a href="#">

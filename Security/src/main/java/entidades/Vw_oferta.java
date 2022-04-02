@@ -1,15 +1,18 @@
 package entidades;
 
+import java.sql.Date;
+
 public class Vw_oferta {
 	
 	private int id_oferta;
 	private String nombre;
 	private String descripcion;
-	private String periodo;
-	private String fecha_inicio;
-	private String fecha_final;
+	private String year;
+	private Date fecha_inicio;
+	private Date fecha_final;
 	private int estado;
 	private int cantidad;
+	
 	public int getId_oferta() {
 		return id_oferta;
 	}
@@ -28,22 +31,22 @@ public class Vw_oferta {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public String getPeriodo() {
-		return periodo;
+	public String getYear() {
+		return year;
 	}
-	public void setPeriodo(String periodo) {
-		this.periodo = periodo;
+	public void setYear(String year) {
+		this.year = year;
 	}
-	public String getFecha_inicio() {
+	public Date getFecha_inicio() {
 		return fecha_inicio;
 	}
-	public void setFecha_inicio(String fecha_inicio) {
+	public void setFecha_inicio(Date fecha_inicio) {
 		this.fecha_inicio = fecha_inicio;
 	}
-	public String getFecha_final() {
+	public Date getFecha_final() {
 		return fecha_final;
 	}
-	public void setFecha_final(String fecha_final) {
+	public void setFecha_final(Date fecha_final) {
 		this.fecha_final = fecha_final;
 	}
 	public int getEstado() {
