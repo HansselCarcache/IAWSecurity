@@ -240,7 +240,7 @@
 																<%
 																ArrayList<Tbl_facilitadores> listFac = new ArrayList<Tbl_facilitadores>();
 																Dt_facilitadores dtrol = new Dt_facilitadores();
-																listFac = dtrol.listarFacActivos();
+																listFac = dtrol.listaFaciActivos();
 																%>
 																<select class="form-control js-example-basic-single"
 																	name="facilitador" id="facilitador" required="required">
@@ -248,7 +248,7 @@
 																	<%
 																	for (Tbl_facilitadores trol : listFac) {
 																	%>
-																	<option value="4"><%=trol.getNombres() + ' ' + trol.getApellidos()%></option>
+																	<option value="<%=trol.getId_facilitador()%>"><%=trol.getNombres()%></option>
 																	<%
 																	}
 																	//<%=trol.getId_facilitador()
@@ -265,13 +265,15 @@
 															<div class="col-md-6 col-sm-6">
 																<!--<input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
 																<%
-																	// TODO: Crear objetos de modalidad 
+																ArrayList<Tbl_modalidad> listFac = new ArrayList<Tbl_modalidads>();
+																Dt_modalidad dtrol = new Dt_modalidad();
+																listMod = dtrol.listaFaciActivos();
 																%>
 																<select class="form-control js-example-basic-single"
 																	name="modalidad" id="modalidad" required="required">
 																	<option value="">Seleccione...</option>
 																	<%
-																	//for (Tbl_facilitadores trol : listFac) {
+																	for (Tbl_modalidad mod : listMod) {
 																	%>
 																	<option value="1">Prescencial</option>
 																	<%
