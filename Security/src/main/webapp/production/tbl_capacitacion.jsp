@@ -105,8 +105,9 @@
                           
                           <th>Nombre <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Estado <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Modalidad <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
- 	                      <th>Acciones <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Tipo Capacitacion <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Evaluada <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
+ 	                      <th>Acciones <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
                         </tr>
                       </thead>
@@ -115,23 +116,39 @@
 
                       <tbody>
                      
-                     <%
-	                      	for(Vw_capacitacion tcap :listaCapacitacion){
-	                      		String estado= "";
-	                      		if(tcap.getEstado()!=3){
-	                      			estado= "Activo";
-	                      		}
-	                      		else{
-	                      			estado = "Inactivo";
-	                      		}
-	                      %>
-                      	
+	                          <%
+		                      	for(Vw_capacitacion tcap :listaCapacitacion){
+		                      		String estado= "";
+		                      		String evaluada= "";
+		                      		String tipoevaluacion= "";
+		                      		if(tcap.getEstado()!=3){
+		                      			estado= "Activo";
+		                      		}
+		                      		else{
+		                      			estado = "Inactivo";
+		                      		}
+		                      		if(tcap.getEvaluada()!=0){
+		                      			evaluada= "Si";
+		                      		}
+		                      		else{
+		                      			evaluada = "No";
+		                      		}
+// 		                      		if(tcap.getTipo_evaluacion()==1){
+// 		                      			tipoevaluacion= "Cualitativa";
+// 		                      		}
+// 		                      		else{
+// 		                      			tipoevaluacion = "Cuantitativa";
+// 		                      		}
+		                      		
+		                      %>
+		                      
                       
                         <tr>
                           
                           <td><%=tcap.getNombre() %></td>
                           <td><%=estado %></td>
-                          <td><%=tcap.getModalidad() %></td>
+                          <td><%=tcap.getTipo_capacitacion() %></td>
+                          <td><%=evaluada %></td>
                           <td>
                            <a href="updateCapacitacion.jsp">
                             <i class="far fa-edit" title="Editar Capacitación"></i>
@@ -151,6 +168,9 @@
                         
                         <%
                         }
+		                
+		                
+	                    
                         %>
                         
                       </tbody>
@@ -159,7 +179,8 @@
                           
                           <th>Nombre</th>
                           <th>Estado</th>
-                          <th>Modalidad</th>
+                          <th>Tipo Capacitacion</th>
+                          <th>Evaluada</th>
  	                      <th>Acciones</th>
  	                      
                         </tr>

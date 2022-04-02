@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import datos.Dt_capacitacion;
-import entidades.Capacitacion;
+import entidades.Tbl_capacitacion;
 
 /**
  * Servlet implementation class Sl_Facultad
@@ -39,11 +39,13 @@ public class Sl_Capacitacion extends HttpServlet {
 		int opc = 0;
 		opc = Integer.parseInt(request.getParameter("opcion"));
 		// INSTANCIAMOS LOS OBJETOS
-		Capacitacion cp = new Capacitacion();
+		Tbl_capacitacion cp = new Tbl_capacitacion();
 		Dt_capacitacion dc = new Dt_capacitacion();
 		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 		cp.setNombre(request.getParameter("nombre"));
-		cp.setId_modalidad(Integer.parseInt(request.getParameter("modalidad")));
+		cp.setId_tipo_capacitacion(Integer.parseInt(request.getParameter("cbxTipoCap")));
+		cp.setEvaluada(Integer.parseInt(request.getParameter("evaluada")));
+		//cp.setTipo_evaluacion(Integer.parseInt(request.getParameter("tipoevaluacion")));
 		cp.setEstado(1);
 		
 		////////////////////////////////////////////////////////////////////
@@ -57,7 +59,7 @@ public class Sl_Capacitacion extends HttpServlet {
 					response.sendRedirect("production/tbl_capacitacion.jsp?msj=2");
 				}
 			}catch(Exception e) {
-				System.out.println("Error Sl_gestionUserRol opc1: "+e.getMessage());
+				System.out.println("Error Sl_Capacitacion opc1: "+e.getMessage());
 				e.printStackTrace();
 			}
 			break;
