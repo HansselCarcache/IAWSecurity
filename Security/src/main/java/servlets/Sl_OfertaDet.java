@@ -47,10 +47,15 @@ public class Sl_OfertaDet extends HttpServlet {
 		int opc = 0;
 		opc = Integer.parseInt(request.getParameter("opcion"));
 		
+		String frm = "";
+		frm = request.getParameter("frm");
 		// INSTANCIAMOS LOS OBJETOS
 		Vw_ofertadet tod = new Vw_ofertadet();
 		Dt_ofertadet dtf = new Dt_ofertadet();
 		Dt_oferta dto = new Dt_oferta();
+		
+		tod.setId_oferta(Integer.parseInt(request.getParameter("id_oferta")));
+		tod.setId_oferta_detalle(Integer.parseInt(request.getParameter("id_oferta_det")));
 		
 		boolean x = false;
 		try {
@@ -64,7 +69,7 @@ public class Sl_OfertaDet extends HttpServlet {
 			java.util.Date ffinal =  new SimpleDateFormat("yyyy-MM-dd").parse( request.getParameter("ffinald"));
 			java.sql.Date sqlfin= new java.sql.Date(ffinal.getTime());
 			
-			
+			//id_oferta_det
 			
 			Date ffinale =  new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ffinal"));
 			java.sql.Date sqlfine= new java.sql.Date(ffinale.getTime());
@@ -84,13 +89,13 @@ public class Sl_OfertaDet extends HttpServlet {
 				else 
 				{
 					//Fecha final fuera de rango
-					response.sendRedirect("production/addOfertaDet.jsp?msj=4");
+					response.sendRedirect("production/"+frm+"?msj=4&m="+tod.getId_oferta()+"&d="+tod.getId_oferta_detalle());
 				}
 			}
 			else
 			{
 				//Fecha inicio fuera de rango
-				response.sendRedirect("production/addOfertaDet.jsp?msj=3");
+				response.sendRedirect("production/"+frm+"?msj=3&m="+tod.getId_oferta()+"&d="+tod.getId_oferta_detalle());
 			}
 			
 			
@@ -115,7 +120,7 @@ public class Sl_OfertaDet extends HttpServlet {
 		tod.setDescripcion_horaria(horario);
 		tod.setDias(request.getParameter("dias"));
 		tod.setPublico(Integer.parseInt(request.getParameter("publico")));
-		tod.setId_oferta(Integer.parseInt(request.getParameter("id_oferta")));
+		
 		
 		System.out.print(tod.getDescripcion_horaria());
 		////////////////////////////////////////////////////////////////////
@@ -127,17 +132,17 @@ public class Sl_OfertaDet extends HttpServlet {
 				if(x) {
 					if(dtf.addOferta(tod)) {
 						//Si
-						//Habilitar cambiar estado a modif
+						//Habilitar cambiar estado a modif si es el ingreso nuevo de un maestro ya existente
 						int opc2 = 0;
 						opc2 = Integer.parseInt(request.getParameter("estado"));
 						System.out.println("OPCION ESTADO: "+opc2);
 						//Cambiar estado de oferta master
 						if(opc2==1) {
 							dto.setEstado(tod.getId_oferta(),1);
-							response.sendRedirect("production/updateOferta.jsp?msj=1&id="+tod.getId_oferta());
+							response.sendRedirect("production/updateOferta.jsp?msj=1&m="+tod.getId_oferta());
 						}
 						//Redirigir
-						response.sendRedirect("production/addOfertaDet.jsp?msj=1&id="+tod.getId_oferta());
+						response.sendRedirect("production/addOfertaDet.jsp?msj=1&m="+tod.getId_oferta());
 					}else {
 						//No
 						response.sendRedirect("production/addOfertaDet.jsp?msj=2");
@@ -153,7 +158,24 @@ public class Sl_OfertaDet extends HttpServlet {
 			
 		//ingresar detalles de un encabezado a modificar
 		case 2:
-			//codigo
+			try {
+				if(x) {
+					tod.setId_oferta_detalle(Integer.parseInt(request.getParameter("id_oferta_det")));
+					if(dtf.editOfertaDet(tod)) {
+						//Redirigir
+						dto.setEstado(tod.getId_oferta(),1);
+						response.sendRedirect("production/updateOferta.jsp?msj=1&m="+tod.getId_oferta());
+					}else {
+						//No
+						response.sendRedirect("production/updateOferta.jsp?msj=1&m="+tod.getId_oferta());
+					}
+				}
+				
+				
+			}catch(Exception e) {
+				System.out.println("Error Sl_OfertaDet opc1: "+e.getMessage());
+				e.printStackTrace();
+			}
 			break;
 		default:
 			//codigo

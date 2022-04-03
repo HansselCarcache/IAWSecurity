@@ -2,6 +2,22 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+<%
+ArrayList<Vw_ofertadet> listaOferta = new ArrayList<Vw_ofertadet>();
+Tbl_oferta oferta = new Tbl_oferta();
+
+Dt_oferta dto = new Dt_oferta();
+Dt_ofertadet dtod = new Dt_ofertadet();
+
+String of = "";
+of = request.getParameter("m") == null ? "0" : request.getParameter("m");
+
+oferta = dto.getoferta(Integer.parseInt(of));
+listaOferta = dtod.listaOD_id(Integer.parseInt(of));
+
+
+%>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -52,221 +68,198 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-                <div class="">
-                    <div class="page-title">
-                        <div class="title_left">
-                            <h3>Eliminar Oferta</h3>
-                        </div>
+						<div class="">
+							<div class="page-title">
+								<div class="title_left">
+									<h3>Eliminacion de oferta</h3>
+								</div>
 
-                    </div>
-                    <div class="clearfix"></div>
+							</div>
+							<div class="clearfix"></div>
+							
+							<div class="row">
+								<div class="col-md-12 col-sm-12">
+									<div class="x_panel">
+										<div class="x_title">
+											<h2>Eliminar oferta</h2>
+											<ul class="nav navbar-right panel_toolbox">
+												<li><a class="collapse-link"><i
+														class="fa fa-chevron-up"></i></a></li>
 
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Eliminación de ofertas </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
-                                            </div>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
-<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
-<!--                                         </p> -->
-<!--                                         <span class="section">Personal Info</span> -->
-											
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Oferta: <span class="required">*</span></label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="idoferta" name="idoferta" class="form-control" readonly="readonly" placeholder="ID Oferta">
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="x_content">
+											<form class="" action="../Sl_OfertaEnc" method="post" novalidate>
+												<input type="hidden" value="2" id="opcion" name="opcion"/>
+												<input type="hidden" value="<%=of %>" id="id" name="id"/>
+												<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Nombre
+														de Oferta <span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input class="form-control" name="nombre"
+															placeholder="ex. Primer Semestre 2020"
+															value="<%=oferta.getNombre()%>" readonly/>
+
+													</div>
+												</div>
+
+												<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Año <span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input value="<%=oferta.getYear()%>"
+															class="form-control" name="year"
+															id="finicio" readonly />
+
+													</div>
+												</div>
+												<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Fecha
+														Inicio <span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input value="<%=oferta.getFecha_inicial()%>"
+															class="form-control" type="date" name="finicio"
+															id="finicio" readonly />
+
+													</div>
+												</div>
+
+												<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Fecha
+														Final <span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input value="<%=oferta.getFecha_final()%>"
+															class="form-control" type="date" name="ffinal"
+															id="ffinal" placeholder="ex. Primer Semestre 2020" readonly
+															 />
+
+													</div>
+												</div>
+
+												<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Descripción
+														<span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input value="<%=oferta.getDescripcion()%>"
+															class="form-control" name="descr" id="descr"
+															placeholder="ex. ofertas dentro del periodo 1S 2020"
+															readonly />
+
+													</div>
+												</div>
+												<div class="ln_solid">
+													<div class="form-group">
+														<div class="col-md-6 offset-md-3">
+															<button type='submit' class="btn btn-danger">Eliminar</button>
+															<a href="tbl_oferta.jsp" class="btn btn-success">Regresar</a>
+														</div>
+													</div>
+												</div>
+											</form>
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="x_panel">
+										<div class="x_title">
+											<h2>Ofertas para: <%=oferta.getNombre()%> <%=oferta.getYear() %></h2>
+	
+											<div class="clearfix"></div>
+										</div>
+										<div class="x_content">
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="card-box table-responsive">
+<!-- 														<div class="text-muted font-13 col-md-12" -->
+<!-- 															style="text-align: right;"> -->
+<!-- 															<a href="frm_addOfertaDet.jsp"> <i -->
+<!-- 																class="fa fa-2x fa-plus-square" title="Nueva Oferta"></i></a> -->
+<!-- 															<br></br> -->
+<!-- 														</div> -->
+	
+														<table id="tbl_detalle"
+															class="table table-striped table-bordered dataTable facultad"
+															style="width: 100%">
+	
+	
+															<thead>
+																<tr>
+																	<th>Capacitacion</th>
+																	<th>Facilitador</th>
+																	<th>Duracion</th>
+																	<th>Horario</th>
+																	<th>Días de Asistencia</th>
+																	<th>Visibilidad</th>
+																	<th>Acciones</th>
+																</tr>
+															</thead>
+	
+															<tbody>
+	
+																<%
+																for (Vw_ofertadet to : listaOferta) {
+																	String estado = "";
+																	if (to.getPublico() == 2) {
+																		estado = "Publico";
+																	} else {
+																		estado = "Privado";
+																	}
+																%>
+																<tr>
+																	<td><%=to.getTipo_capacitacion()%> <%=to.getCapacitacion()%></td>
+																	<td><%=to.getFacilitador()%></td>
+																	<td>De <%=to.getFecha_inicio()%> a <%=to.getFecha_final()%></td>
+																	<td><%=to.getDescripcion_horaria()%></td>
+																	<td><%=to.getDias()%></td>
+																	<td><%=estado%></td>
+																	<td>
+											                           	<a href="deleteOfertaDet.jsp?m=<%=to.getId_oferta()%>&d=<%=to.getId_oferta_detalle()%>" >
+											                           		<i class="far fa-trash-alt fa-2x" title="Eliminar detalle de Oferta"></i>
+											                          	</a>
+	                          										</td>
+																</tr>
+																<%
+																}
+																%>
+															</tbody>
+	
+															<tfoot>
+																<tr>
+																	<th>Capacitación</th>
+																	<th>Facilitador</th>
+																	<th>Duración</th>
+																	<th>Horario</th>
+																	<th>Días de Asistencia</th>
+																	<th>Visibilidad</th>
+																	<th>Acciones</th>
+																</tr>
+															</tfoot>
+														</table>
+	
+	
+													</div>
+												</div>
 											</div>
 										</div>
-											
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombres" name="nombres" required="required" readonly="readonly" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripcion: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="apellidos" name="apellidos" required="required" readonly="readonly" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Periodo: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="username" name="username" required="required" readonly="readonly" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha inicio: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="username" name="username" required="required" readonly="readonly" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha final: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="username" name="username" required="required" readonly="readonly" class="form-control ">
-											</div>
-										</div>
-										
-                                        
-                                        <div class="ln_solid">
-                                            <div class="form-group">
-                                                <div class="col-md-6 offset-md-3">
-                                                    
-                                                    <button type='reset' class="btn btn-danger">Eliminar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-                                    
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Detalles de oferta </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
-                                            </div>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    
-                                        <!-- Inicio primera tabla -->	
-							              <div class="x_panel">
-						                  
-						                  <div class="x_content">
-						                  <div class="row">
-                 
-						                    <table  id="tbl_detalle"  class="table table-striped table-bordered" style="width:100%">
-						                    
-						                    <%
-						                      		ArrayList<Vw_ofertadet> listaOfertadet = new ArrayList<Vw_ofertadet>();
-						                      		Dt_ofertadet dtof = new Dt_ofertadet();
-						                      		listaOfertadet = dtof.listaOfertasdet();
-						                      %>
-						                      <thead>
-						                        <tr>
-						                          
-						                          <th>Nombre Capacitación</th>
-						                          <th>Facilitador</th>
-						                          <th>Fecha Inicio</th>
-						                          <th>Fecha Final</th>
-						                          <th>Hora Inicio</th>
-						                          <th>Hora Final</th>
-						                          <th>Días</th>
-						                          <th>Público</th>
-						                          <th>Acciones</th>
-						                          
-						                        </tr>
-						                      </thead>
-						
-						
-							                      <tbody>
-							                      <%
-								                      	for(Vw_ofertadet oferD :listaOfertadet){
-								                      		String publico= "";
-								                      		if(oferD.getPublico()!=0){
-								                      			publico= "Público";
-								                      		}
-								                      		else{
-								                      			publico = "No es Público";
-								                      		}
-								                      		
-								                      %>
-							          			  <tr>
-							                          <td><%=oferD.getCapacitacion() %></td>
-							                          <td><%=oferD.getNombres()+' '+oferD.getApellidos() %></td>
-							                          <td><%=oferD.getFecha_inicio() %></td>
-							                          <td><%=oferD.getFecha_final() %></td>
-							                          <td><%=oferD.getHora_inicio() %></td>
-							                          <td><%=oferD.getHora_final() %></td>
-							                          <td><%=oferD.getDias() %></td>
-							                          <td><%=publico %></td>
-							                          <td>
-								                          <a href="#" >
-								                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
-								                          </a>
-							                          </td>
-								                 </tr>
-							                        <%
-									                        }
-									                      %>
-							                      </tbody>
-						                      <tfoot>
-						                        <tr>
-						                          <th>Nombre Capacitación</th>
-						                          <th>Facilitador</th>
-						                          <th>Fecha Inicio</th>
-						                          <th>Fecha Final</th>
-						                          <th>Hora Inicio</th>
-						                          <th>Hora Final</th>
-						                          <th>Días</th>
-						                          <th>Público</th>
-						                          <th>Acciones</th>
-						                        </tr>
-						                      </tfoot>
-						                    </table>
-							                  </div>
-							                  </div>
-							              </div>
-							              <!-- Final primera Tabla -->
-							                </div>
-                                        </div>
-                                        
-                                        </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                </div>
-                            </div>
-                            
-                        </div>
+									</div>
+							</div>
+						</div>
+
+					</div>
                         <div class="col-md-6 col-sm-6 ">
                
               </div>
@@ -360,14 +353,12 @@
                 event.preventDefault();
                 $(this).closest('tr').remove();
             });
-            
-            
         }
         
         $(document).ready(function() {
-            $('#tbl_detalle').DataTable( {
+            $('#tbl_capacitaciones').DataTable( {
             	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
-            	"dom": '<"top"f>rt<"bottom"ip><"clear">',
+            	"dom": '<"top"lf>rt<"bottom"ip><"clear">',
             	
             	"lengthMenu": [ 10, 25, 50, 75, 100 ],
             
@@ -388,7 +379,34 @@
                     "infoFiltered": "(filtered from _MAX_ total records)"
                 }
             } );
+            
+            $('#tbl_detalle').DataTable( {
+            	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
+            	"dom": '<"top"f>rt<"bottom"p><"clear">',
+            	
+            	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+            
+            	"language": {
+                    "lengthMenu": "Mostrar _MENU_ records por pagina",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "emptyTable": "No existen datos en la tabla",
+                    "zeroRecords": "No existe un registro en la BD",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    
+                    "infoEmpty": "No existe registro",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                }
             } );
+        } );
+        
+        
+        
     </script>
 
     <!-- jQuery -->
@@ -429,9 +447,7 @@
     
     <script type="text/javascript">
    
-    </script>
     
-    <script>
           
 </script>
 

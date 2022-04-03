@@ -13,16 +13,16 @@ public class Tbl_ofertadet {
 	private int publico;
 	private int id_capacitacion;
 	private int id_facilitador;
+	private int id_modalidad;
 	
 	
-	private int usuario_creacion;
-	private String fecha_creacion;
-	private int usuario_edicion;
-	private String fecha_edicion;
-	private int usuario_eliminacion;
-	private String fecha_eliminacion;
 	
-	
+	public int getId_modalidad() {
+		return id_modalidad;
+	}
+	public void setId_modalidad(int id_modalidad) {
+		this.id_modalidad = id_modalidad;
+	}
 	public int getId_oferta_detalle() {
 		return id_oferta_detalle;
 	}
@@ -71,42 +71,7 @@ public class Tbl_ofertadet {
 	public void setId_facilitador(int id_facilitador) {
 		this.id_facilitador = id_facilitador;
 	}
-	public int getUsuario_creacion() {
-		return usuario_creacion;
-	}
-	public void setUsuario_creacion(int usuario_creacion) {
-		this.usuario_creacion = usuario_creacion;
-	}
-	public String getFecha_creacion() {
-		return fecha_creacion;
-	}
-	public void setFecha_creacion(String fecha_creacion) {
-		this.fecha_creacion = fecha_creacion;
-	}
-	public int getUsuario_edicion() {
-		return usuario_edicion;
-	}
-	public void setUsuario_edicion(int usuario_edicion) {
-		this.usuario_edicion = usuario_edicion;
-	}
-	public String getFecha_edicion() {
-		return fecha_edicion;
-	}
-	public void setFecha_edicion(String fecha_edicion) {
-		this.fecha_edicion = fecha_edicion;
-	}
-	public int getUsuario_eliminacion() {
-		return usuario_eliminacion;
-	}
-	public void setUsuario_eliminacion(int usuario_eliminacion) {
-		this.usuario_eliminacion = usuario_eliminacion;
-	}
-	public String getFecha_eliminacion() {
-		return fecha_eliminacion;
-	}
-	public void setFecha_eliminacion(String fecha_eliminacion) {
-		this.fecha_eliminacion = fecha_eliminacion;
-	}
+	
 	public String getDescripcion_horaria() {
 		return descripcion_horaria;
 	}

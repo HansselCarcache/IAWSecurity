@@ -26,7 +26,7 @@ public class Dt_oferta {
 			rsOferta = ps.executeQuery();
 		}
 		catch (Exception e){
-			System.out.println("DATOS: ERROR EN LISTAR ROLES "+ e.getMessage());
+			System.out.println("DATOS: ERROR EN LISTAR gestion_docente.oferta; "+ e.getMessage());
 			e.printStackTrace();
 		}
 	}

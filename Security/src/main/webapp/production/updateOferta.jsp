@@ -9,11 +9,13 @@ Tbl_oferta oferta = new Tbl_oferta();
 Dt_oferta dto = new Dt_oferta();
 Dt_ofertadet dtod = new Dt_ofertadet();
 
-String id = "";
-id = request.getParameter("id") == null ? "0" : request.getParameter("id");
+String of = "";
+of = request.getParameter("m") == null ? "0" : request.getParameter("m");
 
-oferta = dto.getoferta(Integer.parseInt(id));
-listaOferta = dtod.listaOD_id(Integer.parseInt(id));
+oferta = dto.getoferta(Integer.parseInt(of));
+listaOferta = dtod.listaOD_id(Integer.parseInt(of));
+
+
 %>
 
 <head>
@@ -90,7 +92,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 										<div class="x_content">
 											<form class="" action="../Sl_OfertaEnc" method="post" novalidate>
 												<input type="hidden" value="2" id="opcion" name="opcion"/>
-												<input type="hidden" value="<%=id %>" id="id" name="id"/>
+												<input type="hidden" value="<%=of %>" id="id" name="id"/>
 												<div class="field item form-group">
 													<label
 														class="col-form-label col-md-3 col-sm-3  label-align">Nombre
@@ -179,6 +181,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 													<input type="hidden" value="<%=oferta.getFecha_inicial() %>" name="finicio" id="finicio"/>
 												   	<input type="hidden" value="<%=oferta.getFecha_final() %>"  name="ffinal" id="ffinal" />
 												   	<input type="hidden" value="1" name="opcion" id="opcion"/>
+												   	<input type="hidden" value="updateOferta.jsp" name="frm" id="frm"/>
 												   	<input type="hidden" value="1" name="estado" id="estado"/>
 												   	<input type="hidden" value="<%=oferta.getId_oferta() %>" name="id_oferta" id="id_oferta"/>
 	
@@ -341,7 +344,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 							<div class="row">
 								<div class="x_panel">
 										<div class="x_title">
-											<h2>Ofertas Registradas</h2>
+											<h2>Ofertas para: <%=oferta.getNombre()%> <%=oferta.getYear() %></h2>
 	
 											<div class="clearfix"></div>
 										</div>
@@ -392,16 +395,16 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 																	<td><%=to.getDias()%></td>
 																	<td><%=estado%></td>
 																	<td>
-											                           	<a href="updateOfertaDet.jsp">
-											                            	<i class="far fa-edit fa-2x" title="Editar Opciones"></i>
+											                           	<a href="updateOfertaDet.jsp?m=<%=to.getId_oferta()%>&d=<%=to.getId_oferta_detalle()%>">
+											                            	<i class="far fa-edit fa-2x" title="Editar detalle de Oferta"></i>
 											                         	</a>
 											                          	&nbsp;&nbsp;
-											                          	<a href="readOfertaDet.jsp">
-											                            	<i class="far fa-eye fa-2x" title="Visualizar Opciones"></i>
+											                          	<a href="readOfertaDet.jsp?id=?m=<%=to.getId_oferta()%>&d=<%=to.getId_oferta_detalle()%>">
+											                            	<i class="far fa-eye fa-2x" title="Visualizar detalle de Oferta"></i>
 											                          	</a> 
 											                          	&nbsp;&nbsp;
-											                          	<a href="deleteOfertaDet.jsp" >
-											                            	<i class="far fa-trash-alt fa-2x" title="Eliminar Opciones"></i>
+											                          	<a href="deleteOfertaDet.jsp?m=<%=to.getId_oferta()%>&d=<%=to.getId_oferta_detalle()%>" >
+											                            	<i class="far fa-trash-alt fa-2x" title="Eliminar detalle de Oferta"></i>
 											                          	</a>
 	                          										</td>
 																</tr>

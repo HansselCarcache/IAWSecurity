@@ -5,15 +5,27 @@
 <%
 ArrayList<Vw_ofertadet> listaOferta = new ArrayList<Vw_ofertadet>();
 Tbl_oferta oferta = new Tbl_oferta();
+Vw_ofertadet ofertaD = new Vw_ofertadet();
+
 
 Dt_oferta dto = new Dt_oferta();
 Dt_ofertadet dtod = new Dt_ofertadet();
 
-String id = "";
-id = request.getParameter("m") == null ? "0" : request.getParameter("m");
+String of = "";
+of = request.getParameter("m") == null ? "0" : request.getParameter("m");
 
-oferta = dto.getoferta(Integer.parseInt(id));
-listaOferta = dtod.listaOD_id(Integer.parseInt(id));
+
+String d = "";
+d = request.getParameter("d") == null ? "0" : request.getParameter("d");
+
+
+oferta = dto.getoferta(Integer.parseInt(of));
+listaOferta = dtod.listaOD_id(Integer.parseInt(of));
+
+if(Integer.parseInt(d) !=0){
+	ofertaD = dtod.getDetalleId(Integer.parseInt(d));
+}
+
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -22,7 +34,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Oferta | Registrar</title>
+<title>Oferta | Visualizar</title>
 
 <!-- Bootstrap -->
 <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -83,7 +95,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 						<div class="">
 							<div class="page-title">
 								<div class="title_left">
-									<h3>Registrar Oferta</h3>
+									<h3>Visualizar Oferta</h3>
 								</div>
 
 							</div>
@@ -93,7 +105,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 								<div class="col-md-12 col-sm-12">
 									<div class="x_panel">
 										<div class="x_title">
-											<h2>Registros de ofertas</h2>
+											<h2>Ver encabezado de la oferta</h2>
 											<ul class="nav navbar-right panel_toolbox">
 												<li><a class="collapse-link"><i
 														class="fa fa-chevron-up"></i></a></li>
@@ -187,7 +199,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 								<div class="col-md-12 col-sm-12">
 									<div class="x_panel">
 										<div class="x_title">
-											<h2>Detalles de oferta</h2>
+											<h2>Visualizar detalle</h2>
 											<ul class="nav navbar-right panel_toolbox">
 												<li><a class="collapse-link"><i
 														class="fa fa-chevron-up"></i></a>
@@ -197,13 +209,13 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 										<div class="x_content">
 											<div class="row">
 												<div class="col-md-12 col-sm-12">
-											<form class="" action="../Sl_OfertaDet" method="post" novalidate>
+											<form class="" action="" method="post" novalidate>
 												<input type="hidden" value="<%=oferta.getFecha_inicial() %>" name="finicio" id="finicio"/>
 											   	<input type="hidden" value="<%=oferta.getFecha_final() %>"  name="ffinal" id="ffinal" />
-											   	<input type="hidden" value="1" name="opcion" id="opcion"/>
-											   	<input type="hidden" value="0" name="estado" id="estado"/>
-											   	<input type="hidden" value="addOfertaDet.jsp" name="frm" id="frm"/>
+											   	<input type="hidden" value="2" name="opcion" id="opcion"/>
+											   	<input type="hidden" value="updateOfertaDet.jsp" name="frm" id="frm"/>
 											   	<input type="hidden" value="<%=oferta.getId_oferta() %>" name="id_oferta" id="id_oferta"/>
+											   	<input type="hidden" value="<%=ofertaD.getId_oferta_detalle() %>" name="id_oferta_det" id="id_oferta_det"/>
 <%-- 									   <textarea onfocus="this.value = 'Mensaje en\ndos lineas'"><%="Mensaje en \n dos lineas" %></textarea> --%>
 												<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 												<!--                                         </p> -->
@@ -222,7 +234,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 																%>
 																<select class="form-control js-example-basic-single"
 																	name="capacitacion" id="capacitacion"
-																	required="required">
+																	required="required" disabled>
 																	<option value="">Seleccione...</option>
 																	<%
 																	for (Tbl_capacitacion tc : listaCapacitacion) {
@@ -247,7 +259,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 																listFac = dtrol.listaFaciActivos();
 																%>
 																<select class="form-control js-example-basic-single"
-																	name="facilitador" id="facilitador" required="required">
+																	name="facilitador" id="facilitador" required="required" disabled>
 																	<option value="">Seleccione...</option>
 																	<%
 																	for (Tbl_facilitadores trol : listFac) {
@@ -273,7 +285,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 																listMod = dtmod.listaModalidadesActivas();
 																%>
 																<select class="form-control js-example-basic-single"
-																	name="modalidad" id="modalidad" required="required">
+																	name="modalidad" id="modalidad" required="required" disabled>
 																	<option value="">Seleccione...</option>
 																	<%
 																	for (Tbl_modalidad mod : listMod) {
@@ -292,8 +304,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 																inicio: <span class="required">*</span>
 															</label>
 															<div class="col-md-6 col-sm-6 ">
-																<input type="date" id="finiciod" name="finiciod"
-																	required="required" class="form-control ">
+																<input type="date" id="finiciod" name="finiciod" class="form-control " readonly>
 															</div>
 														</div>
 
@@ -303,8 +314,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 																final: <span class="required">*</span>
 															</label>
 															<div class="col-md-6 col-sm-6 ">
-																<input type="date" id="ffinald" name="ffinald"
-																	required="required" class="form-control ">
+																<input type="date" id="ffinald" name="ffinald" class="form-control" readonly>
 															</div>
 														</div>
 														<div class="item form-group">
@@ -313,18 +323,24 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 																de Asistencia: <span class="required">*</span>
 															</label>
 															<div class="col-md-6 col-sm-6 ">
-																<input type="text" id="dias" name="dias"
-																	required="required" class="form-control ">
+																<input type="text" id="dias" name="dias" class="form-control " readonly>
 															</div>
 														</div>
 														<div class="item form-group">
-															<label
-																class="col-form-label col-md-3 col-sm-3 label-align">Descripcion
+															<label class="col-form-label col-md-3 col-sm-3 label-align">Descripcion
 																horaria: <span class="required">*</span>
 															</label>
+															<%
+															String horario=null;
+															if(ofertaD.getDescripcion_horaria().isBlank()){
+																horario="";
+															}else{
+																horario=ofertaD.getDescripcion_horaria();
+															}
+															%>
 															<div class="col-md-6 col-sm-6 ">
-																<textarea id="horario" name="horario"
-																	required="required" class="form-control" name="message"></textarea>
+																<textarea id="horario" name="horario" rows="5" readonly
+																	required="required" class="form-control" name="message"><%=horario %></textarea>
 															</div>
 														</div>
 
@@ -338,121 +354,30 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 															</label>
 															<div class="col-md-6 col-sm-6">
 																<select class="form-control js-example-basic-single"
-																	name="publico" id="publico" required="required">
+																	name="publico" id="publico" disabled>
 																	<option value="1">Mantener Privado</option>
 																	<option value="2">Hacer Publico</option>
 																</select>
 															</div>
 														</div>
 														<div class="ln_solid">
-				                                            <div class="form-group">
-				                                                <div class="col-md-6 offset-md-3">
-				                                                    <button type='submit' class="btn btn-primary">Guardar</button>
-				                                                    <a href="tbl_oferta.jsp" class="btn btn-success">Regresar</a>
-				                                                </div>
-				                                            </div>
-                                       					</div>
-												
-											</form>
+															<div class="form-group">
+
+																<a href="tbl_oferta.jsp" title="Regresar a registros">
+																	<i class="fa fa-arrow-circle-o-left fa-2x"> </i>
+																	Regresar a registros
+																</a>
+
+
+															</div>
+														</div>
+
+													</form>
 										</div>
 									</div>
 									</div>
 									</div>
 								</div>
-
-
-
-								<div class="x_panel">
-									<div class="x_title">
-										<h2>Ofertas Registradas</h2>
-
-										<div class="clearfix"></div>
-									</div>
-									<div class="x_content">
-										<div class="row">
-											<div class="col-sm-12">
-												<div class="card-box table-responsive">
-													<div class="text-muted font-13 col-md-12"
-														style="text-align: right;">
-														<a href="frm_addOfertaDet.jsp"> <i
-															class="fa fa-2x fa-plus-square" title="Nueva Oferta"></i></a>
-														<br></br>
-													</div>
-
-													<table id="tbl_detalle"
-														class="table table-striped table-bordered dataTable facultad"
-														style="width: 100%">
-
-
-														<thead>
-															<tr>
-																<th>Capacitacion</th>
-																<th>Facilitador</th>
-																<th>Duracion</th>
-																<th>Horario</th>
-																<th>Días de Asistencia</th>
-																<th>Visibilidad</th>
-																<th>Acciones</th>
-															</tr>
-														</thead>
-
-														<tbody>
-
-															<%
-															for (Vw_ofertadet to : listaOferta) {
-																String estado = "";
-																if (to.getPublico() == 1) {
-																	estado = "Privado";
-																} else {
-																	estado = "Publico";
-																}
-															%>
-															<tr>
-																<td><%=to.getTipo_capacitacion()%> <%=to.getCapacitacion()%></td>
-																<td><%=to.getFacilitador()%></td>
-																<td>De <%=to.getFecha_inicio()%> a <%=to.getFecha_final()%></td>
-																<td><%=to.getDescripcion_horaria()%></td>
-																<td><%=to.getDias()%></td>
-																<td><%=estado%></td>
-																<td>
-											                           	<a href="updateOfertaDet.jsp?m=<%=to.getId_oferta()%>&d=<%=to.getId_oferta_detalle()%>">
-											                            	<i class="far fa-edit fa-2x" title="Editar detalle de la oferta"></i>
-											                         	</a>
-											                          	&nbsp;&nbsp;
-											                          	<a href="readOfertaDet.jsp?id=?m=<%=to.getId_oferta()%>&d=<%=to.getId_oferta_detalle()%>">
-											                            	<i class="far fa-eye fa-2x" title="Visualizar detalle de la oferta"></i>
-											                          	</a> 
-											                          	&nbsp;&nbsp;
-											                          	<a href="deleteOfertaDet.jsp??m=<%=to.getId_oferta()%>&d=<%=to.getId_oferta_detalle()%>" >
-											                            	<i class="far fa-trash-alt fa-2x" title="Eliminar detalle de la oferta"></i>
-											                          	</a>
-	                          									</td>
-															</tr>
-															<%
-															}
-															%>
-														</tbody>
-
-														<tfoot>
-															<tr>
-																<th>Capacitación</th>
-																<th>Facilitador</th>
-																<th>Duración</th>
-																<th>Horario</th>
-																<th>Días de Asistencia</th>
-																<th>Visibilidad</th>
-																<th>Acciones</th>
-															</tr>
-														</tfoot>
-													</table>
-
-
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
 
 							</div>
 						</div>
@@ -528,6 +453,18 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 		}).prop('checked', false);
 
 		$(document).ready(function() {
+			<%if(ofertaD.getId_oferta_detalle() >0){%>
+			
+				$('#capacitacion').val("<%=ofertaD.getId_capacitacion()%>");
+				$('#modalidad').val("<%=ofertaD.getId_modalidad()%>");
+				$('#facilitador').val("<%=ofertaD.getId_facilitador()%>");
+				$('#publico').val("<%=ofertaD.getPublico()%>");
+				$('#ffinald').val("<%=ofertaD.getFecha_final()%>");
+				$('#finiciod').val("<%=ofertaD.getFecha_final()%>");
+				$('#dias').val("<%=ofertaD.getDias()%>");
+			
+			<%}%>
+			
 			$('.js-example-basic-single').select2();
 		});
 

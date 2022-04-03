@@ -65,19 +65,7 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Ofertas registradas</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                          </div>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -86,8 +74,8 @@
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
                             <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
-                            <a href="addOferta.jsp">
-                            	<i class="fa fa-plus-square"></i> Nueva Oferta</a>
+                            <a href="addOferta.jsp" title="Nueva Oferta">
+                            	<i class="fa fa-plus-square fa-2x"></i></a>
                             	<br><br>
                             </div>
                             
@@ -137,15 +125,15 @@
                           <td><%=oferC.getCantidad() %></td>
                           <td><%=estado %></td>
                           <td>
-                           <a href="updateOferta.jsp?id=<%=oferC.getId_oferta()%>">
+                           <a href="updateOferta.jsp?m=<%=oferC.getId_oferta()%>">
                             <i class="far fa-edit fa-2x" title="Editar Oferta"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readOferta.jsp?id=<%=oferC.getId_oferta()%>">
+                          <a href="readOferta.jsp?m=<%=oferC.getId_oferta()%>">
                             <i class="far fa-eye fa-2x" title="Visualizar Oferta"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteOferta.jsp?id=<%=oferC.getId_oferta()%>" >
+                          <a href="deleteOferta.jsp?m=<%=oferC.getId_oferta()%>" >
                             <i class="far fa-trash-alt fa-2x" title="Eliminar Oferta"></i>
                           </a>
                           </td>
