@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Seguridad | Modalidad</title>
+    <title>Gestionar | Modalidad</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -87,7 +87,7 @@
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
                             <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
-                            <a href="addFacultad.jsp">
+                            <a href="addModalidad.jsp">
                             	<i class="fa fa-plus-square"></i> Nueva Modalidad</a>
                             	<br><br>
                             </div>
@@ -133,15 +133,15 @@
                           <td><%=estado %></td>
                           <td>
                            <a href="updateModalidades.jsp">
-                            <i class="far fa-edit" title="Editar Modalidad"></i>
+                            <i class="far fa-edit fa-2x" title="Editar Modalidad"></i>
                           </a>
                           &nbsp;&nbsp;
                           <a href="readModalidades.jsp">
-                            <i class="far fa-eye" title="Visualizar Modalidad"></i>
+                            <i class="far fa-eye fa-2x" title="Visualizar Modalidad"></i>
                           </a> 
                           &nbsp;&nbsp;
                           <a href="deleteModalidades.jsp" >
-                            <i class="far fa-trash-alt" title="Eliminar Modalidad"></i>
+                            <i class="far fa-trash-alt fa-2x" title="Eliminar Modalidad"></i>
                           </a>
                           </td>
                           
