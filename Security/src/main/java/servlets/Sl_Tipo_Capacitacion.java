@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datos.Dt_facultad;
 import datos.Dt_tipo_capacitacion;
-import entidades.Tbl_facultad;
 import entidades.Tbl_tipo_capacitacion;
 
 
@@ -59,19 +57,28 @@ public class Sl_Tipo_Capacitacion extends HttpServlet{
 		switch(opc) {
 		case 1:
 			try {
-				
-				if(dttc.addTipoCapacitacion(TipCap)) {
-					response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=1");
-				}else {
-					response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=2");
-				}
-			}catch(Exception e) {
+				 if(dttc.addTipoCapacitacion(TipCap)) {
+						response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=1");
+				 }else {
+						response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=2");
+				 }
+				}catch(Exception e) {
 				System.out.println("Error Sl_Tipo_Capacitacion opc1: "+e.getMessage());
 				e.printStackTrace();
 			}
 			break;
 		case 2:
-			//codigo
+			try {
+				 if(dttc.getTipoCapacitacionbyID(TipCap)) {
+						response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=1");
+				 }else {
+						response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=2");
+				 }
+				}catch(Exception e) {
+				System.out.println("Error Sl_Tipo_Capacitacion opc1: "+e.getMessage());
+				e.printStackTrace();
+			}
+			break;
 			break;
 		default:
 			//codigo

@@ -2,6 +2,19 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+
+<%
+
+String tc = "";
+tc = request.getParameter("idTC")==null?"0":request.getParameter("idTC");
+
+Tbl_tipo_capacitacion tipcap = new Tbl_tipo_capacitacion();
+Dt_tipo_capacitacion dttipcap = new Dt_tipo_capacitacion();
+
+tipcap = dttipcap.getTipoCapacitacionbyID(Integer.parseInt(tc));
+
+%>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -9,7 +22,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Modalidad | Visualizar </title>
+    <title>Tipo de Capacitación | Visualizar </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +58,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Modalidad</h3>
+                            <h3>Visualización de Tipo de Capacitación</h3>
                         </div>
 
                         
@@ -56,73 +69,52 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Visualización de modalidades </h2>
+                                    <h2>Ver tipo de capacitación </h2>
                                     <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
-                                            </div>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
+                                        <li><a class="collapse-link"><i 
+                                        		class="fa fa-chevron-up"></i></a></li>
+                                        		
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
-<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
-<!--                                         </p> -->
-<!--                                         <span class="section">Personal Info</span> -->
+                                    <form class="" action="..Sl_Tipo_Capacitación" method="post" novalidate>
+                                    	<input type="hidden" value="2" id="opcion" name="opcion"/>
+                                    	<input type="hidden" value="<%=tc %>" id="id" name="id"/>
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="id_modalidad">ID Modalidad <span class="required">*</span>
+										<div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre del Tipo de Capacitación: <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input class="form-control" name="tipo_capacitacion" id="tipo_capacitacion"  placeholder="..." value="<%=tipcap.getTipo_capacitacion()%>" readonly />
+	                                        </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3  label-align">Certificación: <span class="required">*</span>
 											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="1">
+											<div class="col-md-6 col-sm-6">
+												<select id="certificada" name="certificada" class="form-control" value="<%=tipcap.getCertificada()%>" disabled="disabled">
+													<option value="0">No se certifica</option>
+													<option value="1">Se certifica</option>
+												</select>
 											</div>
 										</div>
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Nombre <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombre" readonly="readonly" class="form-control " placeholder="Virtual">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="descripcion">Descripción <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" readonly="readonly" class="form-control " placeholder="Curso Virtual">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="certificada">Certificada <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="certificada" readonly="readonly" class="form-control " placeholder="1">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="estado" readonly="readonly" class="form-control " placeholder="activo">
-											</div>
-										</div>
+                                        
+                                        
+                                          <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Descripción: <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input class="form-control" name="descripcion" id="descripcion" placeholder="..." value="<%=tipcap.getDescripcion()%>" readonly />
+                                        	</div>
+                                          </div>
 
                                         
                                         
                                         <div class="ln_solid">
-                                            <div class="col-md-6 offset-md-3">
-                								<a href="tbl_modalidad.jsp" class="btn btn-primary">Regresar</a>
+                                            <div class="form-group">
+                								<a href="tbl_tipo_capacitacion.jsp" title="Regresar a registros"> 
+                								<i class="fa fa-arrow-circle-o-left fa-2x"> </i>Regresar a registros</a>
                   							</div>
                                         </div>
                                     </form>

@@ -138,25 +138,20 @@
 						  <td><%= tTipCal.getDescripcion() %></td>
 						  <td><%=estado %></td>
 						  
-                          <!-- <td>
-                           <a href="updateModalidad.jsp">
-                            <i class="far fa-edit" title="Editar Modalidad"></i>
+                          <td>
+                           <a href="updateTipoCapacitacion.jsp">
+                            <i class="far fa-edit" title="Modificar Tipo de Capacitación"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readModalidad.jsp">
-                            <i class="far fa-eye" title="Visualizar Modalidad"></i>
+                          <a href="readTipoCapacitacion.jsp">
+                            <i class="far fa-eye" title="Visualizar Tipo de Capacitación"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteModalidad.jsp" >
-                            <i class="far fa-trash-alt" title="Eliminar Modalidad"></i>
+                          <a href="deleteTipoCapacitacion.jsp" >
+                            <i class="far fa-trash-alt" title="Eliminar Tipo de Capacitación"></i>
                           </a>
-                          </td> -->
+                          </td>
                           
-                          <td>
-							<a href="" target="blank"><i class="fa fa-2x fa-edit" title="Modificar Tipo de Capacitación"></i></a> 
-							<a href="" target="blank"><i class="fa fa-eye fa-2x" title="Visualizar Tipo de Capacitación"></i></a> 
-							<a href="" target="blank"><i class="fa fa-2x fa-trash" title="Eliminar Tipo de Capacitación"></i></a>
-						  </td>
                           
                         </tr>
                         
