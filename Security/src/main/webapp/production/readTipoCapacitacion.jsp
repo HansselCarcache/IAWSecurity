@@ -6,7 +6,7 @@
 <%
 
 String tc = "";
-tc = request.getParameter("idTC")==null?"0":request.getParameter("idTC");
+tc = request.getParameter("m")==null?"0":request.getParameter("m");
 
 Tbl_tipo_capacitacion tipcap = new Tbl_tipo_capacitacion();
 Dt_tipo_capacitacion dttipcap = new Dt_tipo_capacitacion();
@@ -94,7 +94,7 @@ tipcap = dttipcap.getTipoCapacitacionbyID(Integer.parseInt(tc));
 											<label class="col-form-label col-md-3 col-sm-3  label-align">Certificación: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6">
-												<select id="certificada" name="certificada" class="form-control" value="<%=tipcap.getCertificada()%>" disabled="disabled">
+												<select id="certificada" name="certificada" class="form-control" disabled="disabled">
 													<option value="0">No se certifica</option>
 													<option value="1">Se certifica</option>
 												</select>
@@ -114,7 +114,7 @@ tipcap = dttipcap.getTipoCapacitacionbyID(Integer.parseInt(tc));
                                         <div class="ln_solid">
                                             <div class="form-group">
                 								<a href="tbl_tipo_capacitacion.jsp" title="Regresar a registros"> 
-                								<i class="fa fa-arrow-circle-o-left fa-2x"> </i>Regresar a registros</a>
+                								<i class="fa fa-arrow-circle-o-left fa-2x"> </i>Regresar a Tipo Capacitación</a>
                   							</div>
                                         </div>
                                     </form>
@@ -129,14 +129,15 @@ tipcap = dttipcap.getTipoCapacitacionbyID(Integer.parseInt(tc));
             <!-- footer content -->
             <footer>
                 <div class="pull-right">
-                    Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                    Gestion de Capacitacion Docente - UCA
                 </div>
                 <div class="clearfix"></div>
             </footer>
             <!-- /footer content -->
         </div>
     </div>
-
+  </div>
+</div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../vendors/validator/multifield.js"></script>
@@ -187,6 +188,8 @@ tipcap = dttipcap.getTipoCapacitacionbyID(Integer.parseInt(tc));
         }).prop('checked', false);
         
         $(document).ready(function() {
+        	$('#certificada').val("<%=tipcap.getCertificada()%>");
+        	
             $('.js-example-basic-single').select2();
         });
     </script>

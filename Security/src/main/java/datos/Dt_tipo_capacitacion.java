@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Tbl_tipo_capacitacion;
-import entidades.Tbl_facultad;
 
 public class Dt_tipo_capacitacion {
 	
@@ -110,13 +109,13 @@ public class Dt_tipo_capacitacion {
 		return guardado;
 	}
 	
-	//Metodo para visualizar tipo capacitacion
-	public Tbl_tipo_capacitacion getTipoCapacitacionbyID(int idTC) {
+	
+	public Tbl_tipo_capacitacion getTipoCapacitacionbyID(int id) {
 		Tbl_tipo_capacitacion tipcap = new Tbl_tipo_capacitacion();
 		try {
 			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT * FROM seguridad.tbl_user where estado <> 3 and id_user=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
-			ps.setInt(1, idTC);
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.tipo_capacitacion where id_tipo_capacitacion = " +id, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			//ps.setInt(1, idTC);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				tipcap.setId_tipo_capacitacion(rs.getInt("id_tipo_capacitacion"));
@@ -177,7 +176,7 @@ public class Dt_tipo_capacitacion {
 			}
 			catch (Exception e)
 			{
-				System.err.println("ERROR AL modificarTipoCapacitacion() "+e.getMessage());
+				System.err.println("ERROR AL updateTipoCapacitacion() "+e.getMessage());
 				e.printStackTrace();
 			}
 			finally

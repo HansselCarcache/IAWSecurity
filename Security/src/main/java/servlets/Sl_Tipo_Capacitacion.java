@@ -32,7 +32,7 @@ public class Sl_Tipo_Capacitacion extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -44,7 +44,9 @@ public class Sl_Tipo_Capacitacion extends HttpServlet{
 		// INSTANCIAMOS LOS OBJETOS
 		Tbl_tipo_capacitacion TipCap = new Tbl_tipo_capacitacion();
 		Dt_tipo_capacitacion dttc = new Dt_tipo_capacitacion();
+		 
 		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
+		TipCap.setId_tipo_capacitacion(Integer.parseInt(request.getParameter("id_tipo_capacitacion")));
 		TipCap.setTipo_capacitacion(request.getParameter("tipo_capacitacion"));
 		 int certif = Integer.parseInt(request.getParameter("certificada"));
 		TipCap.setCertificada(certif);
@@ -68,18 +70,19 @@ public class Sl_Tipo_Capacitacion extends HttpServlet{
 			}
 			break;
 		case 2:
+			
 			try {
-				 if(dttc.getTipoCapacitacionbyID(TipCap)) {
-						response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=1");
+				 if(dttc.updateTipoCapacitacion(TipCap)) {
+						response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=3");
 				 }else {
-						response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=2");
+						response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=4");
 				 }
 				}catch(Exception e) {
 				System.out.println("Error Sl_Tipo_Capacitacion opc1: "+e.getMessage());
 				e.printStackTrace();
 			}
 			break;
-			break;
+			
 		default:
 			//codigo
 			break;

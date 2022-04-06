@@ -139,15 +139,15 @@
 						  <td><%=estado %></td>
 						  
                           <td>
-                           <a href="updateTipoCapacitacion.jsp">
+                           <a href="updateTipoCapacitacion.jsp?m=<%=tTipCal.getId_tipo_capacitacion()%>">
                             <i class="far fa-edit" title="Modificar Tipo de Capacitación"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readTipoCapacitacion.jsp">
+                          <a href="readTipoCapacitacion.jsp?m=<%=tTipCal.getId_tipo_capacitacion()%>">
                             <i class="far fa-eye" title="Visualizar Tipo de Capacitación"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteTipoCapacitacion.jsp" >
+                          <a href="deleteTipoCapacitacion.jsp?m=<%=tTipCal.getId_tipo_capacitacion()%>" >
                             <i class="far fa-trash-alt" title="Eliminar Tipo de Capacitación"></i>
                           </a>
                           </td>

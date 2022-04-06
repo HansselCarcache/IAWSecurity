@@ -22,7 +22,7 @@ public class poolConexion
 	private static String url = "jdbc:mysql://localhost:3306/gestion_docente?autoReconnect=true&useSSL=false&serverTimezone=UTC";
 	private static String user = "root";
 	//private static String pass="My$qlS3rv3rAPS*";
-	private static String pass="12Oswald2409";
+	private static String pass="12345";
 	
 
     //Constructor
