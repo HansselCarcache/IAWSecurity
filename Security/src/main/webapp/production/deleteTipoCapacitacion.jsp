@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Modalidad | Modificar </title>
+    <title>Tipo de Capacitación | Eliminar </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Modificar Modalidad</h3>
+                            <h3>Eliminar Modalidad</h3>
                         </div>
 
                         
@@ -56,7 +56,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Modificación de modalidades </h2>
+                                    <h2>Eliminación de modalidades </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -79,10 +79,18 @@
 <!--                                         <span class="section">Personal Info</span> -->
 
 										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="id_modalidad">ID Modalidad <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" class="form-control" readonly="readonly" placeholder="1">
+											</div>
+										</div>
+
+										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Nombre <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombre" required="required" class="form-control ">
+												<input type="text" id="nombre" readonly="readonly" class="form-control " placeholder="Virtual">
 											</div>
 										</div>
 										
@@ -90,7 +98,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="descripcion">Descripción <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" required="required" class="form-control ">
+												<input type="text" id="descripcion" readonly="readonly" class="form-control " placeholder="Curso Virtual">
 											</div>
 										</div>
 										
@@ -98,7 +106,15 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="certificada">Certificada <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="certificada" required="required" class="form-control ">
+												<input type="text" id="certificada" readonly="readonly" class="form-control " placeholder="1">
+											</div>
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="estado" readonly="readonly" class="form-control " placeholder="activo">
 											</div>
 										</div>
 
@@ -107,8 +123,8 @@
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <a href="tbl_modalidad.jsp" class="btn btn-danger">Cancelar</a>
+                                                    
+                                                    <a href="#" class="btn btn-danger">Eliminar</a>
                                                 </div>
                                             </div>
                                         </div>

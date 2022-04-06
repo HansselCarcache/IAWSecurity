@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datos.Dt_facultad;
 import datos.Dt_tipo_capacitacion;
-import entidades.Tbl_facultad;
 import entidades.Tbl_tipo_capacitacion;
 
 
@@ -34,7 +32,7 @@ public class Sl_Tipo_Capacitacion extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -46,7 +44,9 @@ public class Sl_Tipo_Capacitacion extends HttpServlet{
 		// INSTANCIAMOS LOS OBJETOS
 		Tbl_tipo_capacitacion TipCap = new Tbl_tipo_capacitacion();
 		Dt_tipo_capacitacion dttc = new Dt_tipo_capacitacion();
+		 
 		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
+		TipCap.setId_tipo_capacitacion(Integer.parseInt(request.getParameter("id_tipo_capacitacion")));
 		TipCap.setTipo_capacitacion(request.getParameter("tipo_capacitacion"));
 		 int certif = Integer.parseInt(request.getParameter("certificada"));
 		TipCap.setCertificada(certif);
@@ -59,20 +59,30 @@ public class Sl_Tipo_Capacitacion extends HttpServlet{
 		switch(opc) {
 		case 1:
 			try {
-				
-				if(dttc.addTipoCapacitacion(TipCap)) {
-					response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=1");
-				}else {
-					response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=2");
-				}
-			}catch(Exception e) {
+				 if(dttc.addTipoCapacitacion(TipCap)) {
+						response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=1");
+				 }else {
+						response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=2");
+				 }
+				}catch(Exception e) {
 				System.out.println("Error Sl_Tipo_Capacitacion opc1: "+e.getMessage());
 				e.printStackTrace();
 			}
 			break;
 		case 2:
-			//codigo
+			
+			try {
+				 if(dttc.updateTipoCapacitacion(TipCap)) {
+						response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=3");
+				 }else {
+						response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=4");
+				 }
+				}catch(Exception e) {
+				System.out.println("Error Sl_Tipo_Capacitacion opc1: "+e.getMessage());
+				e.printStackTrace();
+			}
 			break;
+			
 		default:
 			//codigo
 			break;
