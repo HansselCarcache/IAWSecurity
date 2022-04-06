@@ -3,8 +3,27 @@
 
 <!DOCTYPE html>
 <html>
-<% 
+<%
+ArrayList<ArrayList<String>> listas = new ArrayList<ArrayList<String>>();
 	
+	ArrayList<String> lista1 = new ArrayList<String>();
+	lista1.add("a");
+	lista1.add("b");
+	lista1.add("c");
+	
+	ArrayList<String> lista2 = new ArrayList<String>();
+	lista2.add("d");
+	lista2.add("e");
+	lista2.add("f");
+	
+	ArrayList<String> lista3 = new ArrayList<String>();
+	
+	listas.add(lista1);
+	listas.add(lista2);
+	listas.add(lista3);
+	
+	
+	int usuario = 2; 
 %>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -35,6 +54,9 @@
 
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
+    
+    <!-- Select2 -->
+    <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
   </head>
 
   <body class="nav-md">
@@ -81,9 +103,12 @@
                     <table id="tbl_Evaluacion" class="table table-striped table-bordered" style="width:100%">
                     
                      <%
-                      		ArrayList<Vw_inscripcion> listInc = new ArrayList<Vw_inscripcion>();
-                      		Dt_inscripcion dtins = new Dt_inscripcion();
-                      		listInc = dtins.listaIns();
+                      		ArrayList<Vw_evaluacion> listInc = new ArrayList<Vw_evaluacion>();
+                      		String cedula="";
+                      		Dt_evaluacion dtins = new Dt_evaluacion();
+                      		
+                      		cedula = dtins.getCedula(usuario);
+                      		listInc = dtins.listaInscripActivo(cedula);
                       %>
                       
                     
@@ -91,25 +116,36 @@
                       <thead>
                         <tr>
                           <th>Estudiante docente</th>
-                          <th>Carrera</th>
-                          <th>Oferta</th>
-                          <th>Id UCA</th>
-                          <th>Correo</th>
+                          <th>Convocatoria</th>
+                          <th>Capacitacion</th>
+                          <th>Tipo Calificacion</th>
+                          <th>Valor</th>
                           <th>Calificacion</th>
                         </tr>
                       </thead>
                       <tbody>
 	                     <%
-	                      	for(Vw_inscripcion ins : listInc){
+	                      	for(Vw_evaluacion ins : listInc){
 	                      %>
                       
                            
                           <tr>
-                        <td><%=ins.getUsuario() %></td>
-                        <td><%=ins.getNombre_carrera() %></td>
-                        <td><%=ins.getNombre_oferta() %></td>
-                        <td><%=ins.getId_uca() %></td>
-                        <td><%=ins.getCorreo_electronico() %></td>
+                        <td><%=ins.getEstudiante() %></td>
+                        <td><%=ins.getConvocatoria() %></td>
+                        <td><%=ins.getCapacitacion() %></td>
+                         <%
+                        	if(ins.getTipo_calificacion() == null){
+                        		ins.setTipo_calificacion("---");
+                        	}
+                         
+                         	if(ins.getValor1()== null){
+                     			ins.setValor1("---");
+                     		}
+                        	
+                        %>
+                        <td><%=ins.getTipo_calificacion() %></td>
+                       
+                        <td><%=ins.getValor1() %></td>
                         <td>
 							<a data-toggle="modal" data-target=".bs-example-modal-lg" target="blank"><i class="fa fa-2x fa-check" title="Evaluar Docente"></i></a>
 							<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
@@ -117,7 +153,7 @@
 		                        <div class="modal-content">
 		
 		                        <div class="modal-header">
-		                          <h4 class="modal-title" id="myModalLabel">Evaluar a <%=ins.getUsuario() %></h4>
+		                          <h4 class="modal-title" id="myModalLabel">Evaluacion</h4>
 		                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 		                          </button>
 		                        </div>
@@ -134,47 +170,40 @@
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Tipo de Calificación: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												<%
-							                      	ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>();
-							                      	Dt_usuario dtu = new Dt_usuario();
-							                      	listaUsuario = dtu.listaUserActivos();
-							                      	//onChange="mostrar_cualitativa()" 
-								                 %>
-												<select class="form-control js-example-basic-single" name="cbxUser" id="cbxUser" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Tbl_user tu :listaUsuario){
-												  %>
-												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_usuario()%></option>
-												  <%
-												  	}
-												  %>
+<%-- <%-- 												<% --%> 
+<!-- // 							                      	ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>(); -->
+<!-- // 							                      	Dt_usuario dtu = new Dt_usuario(); -->
+<!-- // 							                      	listaUsuario = dtu.listaUserActivos(); -->
+<!-- // 							                      	//onChange="mostrar_cualitativa()"  -->
+<%-- <%-- 								                 %> --%> 
+												<select onchange="mostrar_cualitativa()" class="form-control js-example-basic-single" name="cbxUser" id="tipo_cal" required="required">
+												  <option value="0">Seleccione...</option>
+												  <option value="1">Cuantitativa</option>
+												  <option value="2">Cualitativa</option>
+												  <option value="3">Semi</option>
+												 
+												  
+												  
 												</select>
                                             </div>
                                         </div>
 										
 										
-                                        <div class="field item form-group" id="ev_cualitativa">
+                                        <div style="display:none;" class="field item form-group" id="ev_cualitativa">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Calificación Cualitativa: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
 <!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-												<%
-							                      	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-							                      	Dt_rol dtr = new Dt_rol();
-							                      	listRol = dtr.listaRolActivos();
-								                 %>
-								                 <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" required="required">
-												  <option  value="">Seleccione...</option>
-												  <% 
-												  	for(Tbl_rol trol :listRol){
-												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
-												  <%
-												  	}
-												  %>
+								                 <select  class="form-control js-example-basic-single" name="t_cual" id="t_cual" required="required">
 												</select>
 											</div>
                                         </div>
+                                        
+                                        <div style="display:none;" class="item form-group" id="ev_cuantitativa">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Calificación</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="calificacion" class="form-control" type="text" name="calificacion">
+											</div>
+										</div>
                                         
                                         </div>
 
@@ -257,8 +286,10 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-    
+     <!-- Select2 -->
+    <script src="../vendors/select2/dist/js/select2.min.js"></script>
          <script>
+         
    	function eliminarcolumna(id){
    		var table = $('#tbl_Evaluacion').DataTable();
    	 
@@ -271,12 +302,80 @@
    	}
    	
    	function mostrar_cualitativa(){
-   		var x = document.getElementById('ev_cualitativa');
-   	    if (x.style.display === "none") {
-   	        x.style.display = "block";
-   	    } else {
-   	        x.style.display = "none";
-   	    }
+   		var $select = document.getElementById('t_cual');
+   		//$select.empty();
+   		var cuali = document.getElementById('ev_cualitativa');
+   		var cuanti = document.getElementById('ev_cuantitativa');
+   		
+   		var id = $("#tipo_cal :selected").val()
+   		
+   		if(id == 0)
+   		{
+			if (cuanti.style.display === "block") {
+	   	   	   	cuanti.style.display = "none";
+	   	   }
+	   			
+	   		if (cuali.style.display === "block") 
+	   		{
+	   	   	  	cuali.style.display = "none";
+	   	   	}
+		}
+   		
+   		
+   		if(id != 1 && id !=0)
+   		{
+   	//		$select.empty();
+   			
+   			if(id==2){
+   				$('#t_cual').empty();
+   				<%
+   	   			for(String as: lista1){
+   	   			%>
+   	   				$('#t_cual').append($('<option>', {
+   	   	    			value: 1,
+   	   	    			text: '<%=as%>'
+   	   				}));
+   	   				
+   	   			<%}%>	
+   			}
+   			
+   			if(id==3){
+   				$('#t_cual').empty();
+   				<%
+   	   			for(String as: lista2){
+   	   			%>
+   	   				
+   	   				$('#t_cual').append($('<option>', {
+	   	    			value: 1,
+	   	    			text: '<%=as%>'
+	   				}));
+   	   			<%}%>	
+   			}
+   			
+   			if (cuali.style.display === "none") 
+   			{
+   	   	    	cuali.style.display = "block";
+   	   	    }
+   			
+   			if (cuanti.style.display === "block") 
+   			{
+   	   	    	cuanti.style.display = "none";
+   	   	    }
+   		}
+
+		if(id==1)
+   		{
+//    			$select.empty();
+   			if (cuanti.style.display === "none") {
+   	   	    	cuanti.style.display = "block";
+   	   	    }
+   			
+   			if (cuali.style.display === "block") 
+   			{
+   	   	    	cuali.style.display = "none";
+   	   	    }
+   		}
+   	    
    	}
    	
    	
@@ -289,7 +388,7 @@
 		        		{
 			        		extend: 'csv',
 							text: 'CSV',
-							title: 'Ofertas registradas',
+							title: 'Evaluaciones',
 							action: function ( e, dt, node, config ) {
 			                    //alert( 'Activated!' );
 			                    eliminarcolumna(8);
@@ -302,7 +401,7 @@
         				{
         					extend: 'excel',
         					text: 'Excel',
-        					title: 'Ofertas registradas',
+        					title: 'Evaluaciones',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
         	                    eliminarcolumna(8);
@@ -316,7 +415,7 @@
         				{
         					extend: 'pdf',
         					text: 'PDF',
-        					title: 'Ofertas registradas',
+        					title: 'Evaluaciones',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
         	                    eliminarcolumna(8);
@@ -330,7 +429,7 @@
         				{ 
         					extend: 'print',
         					text: 'Imprimir',
-        					title: 'Ofertas registradas',
+        					title: 'Evaluaciones',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
         	                    eliminarcolumna(8);
@@ -365,8 +464,8 @@
                 "infoFiltered": "(filtered from _MAX_ total records)"
             }
         } );
+        
     } );
-    
     
     
     </script>

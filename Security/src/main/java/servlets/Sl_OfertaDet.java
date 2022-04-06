@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import datos.Dt_oferta;
 import datos.Dt_ofertadet;
 import entidades.Vw_ofertadet;
+import negocio.Ng_Oferta_Det;
 
 /**
  * Servlet implementation class Sl_OfertaDet
@@ -53,11 +54,13 @@ public class Sl_OfertaDet extends HttpServlet {
 		Vw_ofertadet tod = new Vw_ofertadet();
 		Dt_ofertadet dtf = new Dt_ofertadet();
 		Dt_oferta dto = new Dt_oferta();
+		Ng_Oferta_Det ngod = new Ng_Oferta_Det();
+		
 		
 		tod.setId_oferta(Integer.parseInt(request.getParameter("id_oferta")));
 		tod.setId_oferta_detalle(Integer.parseInt(request.getParameter("id_oferta_det")));
-		
-		boolean x = false;
+		int x = 0;
+		//boolean x = false;
 		try {
 			String cfinicio = request.getParameter("finiciod").toString();
 			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
@@ -66,40 +69,38 @@ public class Sl_OfertaDet extends HttpServlet {
 			Date finicio = formato.parse(cfinicio);
 			java.sql.Date sqlinicio= new java.sql.Date(finicio.getTime());
 			
-			java.util.Date ffinal =  new SimpleDateFormat("yyyy-MM-dd").parse( request.getParameter("ffinald"));
+			java.util.Date ffinal =  formato.parse( request.getParameter("ffinald"));
 			java.sql.Date sqlfin= new java.sql.Date(ffinal.getTime());
 			
 			//id_oferta_det
 			
-			Date ffinale =  new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ffinal"));
+			Date ffinale = formato.parse(request.getParameter("ffinal"));
 			java.sql.Date sqlfine= new java.sql.Date(ffinale.getTime());
 			
-			Date finicioe =  new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("finicio"));
+			Date finicioe =  formato.parse(request.getParameter("finicio"));
 			java.sql.Date sqlfinicioe= new java.sql.Date(finicioe.getTime());
 			
-			if( sqlfinicioe.getTime() <= sqlinicio.getTime() && sqlfine.getTime() >= sqlinicio.getTime()) {
-				//Fecha inicio esta en rango
-				
-				if(sqlfinicioe.getTime() <= sqlfin.getTime() && sqlfine.getTime() >= sqlfin.getTime() && sqlinicio.getTime() <= sqlfin.getTime()) {
-					//Fecha en rango y mayor que inicio
-					tod.setFecha_inicio(sqlinicio);
-					tod.setFecha_final(sqlfin);
-					x=true;
-				}
-				else 
-				{
-					//Fecha final fuera de rango
-					response.sendRedirect("production/"+frm+"?msj=4&m="+tod.getId_oferta()+"&d="+tod.getId_oferta_detalle());
-				}
+			x= ngod.verifyDates(sqlinicio, sqlfin, sqlfinicioe, sqlfine);
+			
+			if(x==1) {
+				tod.setFecha_inicio(sqlinicio);
+				tod.setFecha_final(sqlfin);
 			}
-			else
-			{
-				//Fecha inicio fuera de rango
+			
+			if(x==2) {
+				//Inicio mayor que final
 				response.sendRedirect("production/"+frm+"?msj=3&m="+tod.getId_oferta()+"&d="+tod.getId_oferta_detalle());
 			}
 			
+			if(x==3) {
+				//Fecha final fuera de rango
+				response.sendRedirect("production/"+frm+"?msj=4&m="+tod.getId_oferta()+"&d="+tod.getId_oferta_detalle());
+			}
 			
-			
+			if(x==4) {
+				//Fecha inicial fuera de rango
+				response.sendRedirect("production/"+frm+"?msj=5&m="+tod.getId_oferta()+"&d="+tod.getId_oferta_detalle());
+			}
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -129,24 +130,23 @@ public class Sl_OfertaDet extends HttpServlet {
 		//ingresar detalles de un encabezado recien creado
 		case 1:
 			try {
-				if(x) {
-					if(dtf.addOferta(tod)) {
-						//Si
-						//Habilitar cambiar estado a modif si es el ingreso nuevo de un maestro ya existente
-						int opc2 = 0;
-						opc2 = Integer.parseInt(request.getParameter("estado"));
-						System.out.println("OPCION ESTADO: "+opc2);
-						//Cambiar estado de oferta master
-						if(opc2==1) {
-							dto.setEstado(tod.getId_oferta(),1);
-							response.sendRedirect("production/updateOferta.jsp?msj=1&m="+tod.getId_oferta());
-						}
-						//Redirigir
-						response.sendRedirect("production/addOfertaDet.jsp?msj=1&m="+tod.getId_oferta());
-					}else {
-						//No
-						response.sendRedirect("production/addOfertaDet.jsp?msj=2");
+				if (dtf.addOferta(tod)) {
+					// Si
+					// Habilitar cambiar estado a modif si es el ingreso nuevo de un maestro ya
+					// existente
+					int opc2 = 0;
+					opc2 = Integer.parseInt(request.getParameter("estado"));
+					System.out.println("OPCION ESTADO: " + opc2);
+					// Cambiar estado de oferta master
+					if (opc2 == 1) {
+						dto.setEstado(tod.getId_oferta(), 1);
+						response.sendRedirect("production/updateOferta.jsp?msj=6&m=" + tod.getId_oferta());
 					}
+					// Redirigir
+					response.sendRedirect("production/addOfertaDet.jsp?msj=1&m=" + tod.getId_oferta());
+				} else {
+					// No
+					response.sendRedirect("production/addOfertaDet.jsp?msj=2");
 				}
 				
 				
@@ -159,18 +159,15 @@ public class Sl_OfertaDet extends HttpServlet {
 		//ingresar detalles de un encabezado a modificar
 		case 2:
 			try {
-				if(x) {
-					tod.setId_oferta_detalle(Integer.parseInt(request.getParameter("id_oferta_det")));
-					if(dtf.editOfertaDet(tod)) {
-						//Redirigir
-						dto.setEstado(tod.getId_oferta(),1);
-						response.sendRedirect("production/updateOferta.jsp?msj=1&m="+tod.getId_oferta());
-					}else {
-						//No
-						response.sendRedirect("production/updateOferta.jsp?msj=1&m="+tod.getId_oferta());
-					}
-				}
-				
+				tod.setId_oferta_detalle(Integer.parseInt(request.getParameter("id_oferta_det")));
+				if (dtf.editOfertaDet(tod)) {
+					// Redirigir
+					dto.setEstado(tod.getId_oferta(), 1);
+					response.sendRedirect("production/updateOferta.jsp?msj=7&m=" + tod.getId_oferta());
+				} else {
+					// No
+					response.sendRedirect("production/updateOferta.jsp?msj=8&m=" + tod.getId_oferta());
+				}				
 				
 			}catch(Exception e) {
 				System.out.println("Error Sl_OfertaDet opc1: "+e.getMessage());

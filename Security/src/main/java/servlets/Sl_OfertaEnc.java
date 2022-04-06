@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import datos.Dt_oferta;
 import entidades.Tbl_oferta;
+import negocio.Ng_Oferta;
 
 /**
  * Servlet implementation class Sl_OfertaEnc
@@ -47,36 +48,40 @@ public class Sl_OfertaEnc extends HttpServlet {
 		// INSTANCIAMOS LOS OBJETOS
 		Tbl_oferta tf = new Tbl_oferta();
 		Dt_oferta dtf = new Dt_oferta();
+		Ng_Oferta ngo = new Ng_Oferta();
 		//CAMPOS DE CONTROL
 		Date fechaSistema =new Date();
-		boolean x=false;
+//		boolean x=false;
+		int x = 0;
 		
 		try {
 			String cfinicio = request.getParameter("finicio").toString();
 			
 			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+			
 			Date finicio = formato.parse(cfinicio);
 			java.sql.Date sqlinicio= new java.sql.Date(finicio.getTime());
-			
-			
-			
-			java.util.Date ffinal =  new SimpleDateFormat("yyyy-MM-dd").parse( request.getParameter("ffinal"));
+
+			java.util.Date ffinal =  formato.parse( request.getParameter("ffinal"));
 			java.sql.Date sqlfin= new java.sql.Date(ffinal.getTime());
 			
+			x= ngo.verifyDates(sqlinicio, sqlfin);
 			//Validacion de las fechas
-			if(sqlinicio.getYear()==sqlfin.getYear()) {
-				if(sqlinicio.getTime()<=sqlfin.getTime()) {
-					tf.setFecha_inicial(sqlinicio);
-					tf.setFecha_final(sqlfin);
-					x=true;
-				}else {
-					//Inicio es mayor que final so bai
-					response.sendRedirect("production/addOferta.jsp?msj=4");
-				}
-			}else {
+			if(x==1) {
+				tf.setFecha_inicial(sqlinicio);
+				tf.setFecha_final(sqlfin);
+			}
+			
+			if(x==2) {
 				//Fechas en distintos años so no
 				response.sendRedirect("production/addOferta.jsp?msj=3");
 			}
+			
+			if(x==3) {
+				//Inicio es mayor que final so bai
+				response.sendRedirect("production/addOferta.jsp?msj=4");
+			}
+			
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -98,16 +103,14 @@ public class Sl_OfertaEnc extends HttpServlet {
 			tf.setFecha_creacion(new java.sql.Timestamp(fechaSistema.getTime()));
 			tf.setUsuario_creacion(1);
 			try {
-				if(x) {
-					id =dtf.addOferta(tf);
-					
-					if(id!=0) {
-						//Si
-						response.sendRedirect("production/addOfertaDet.jsp?msj=1&id="+id);
-					}else {
-						//No
-						response.sendRedirect("production/addOferta.jsp?msj=2");
-					}
+				id = dtf.addOferta(tf);
+
+				if (id != 0) {
+					// Si
+					response.sendRedirect("production/addOfertaDet.jsp?msj=1&m=" + id);
+				} else {
+					// No
+					response.sendRedirect("production/addOferta.jsp?msj=2");
 				}
 				
 			}catch(Exception e) {
@@ -120,20 +123,16 @@ public class Sl_OfertaEnc extends HttpServlet {
 			tf.setFecha_modificacion(new java.sql.Timestamp(fechaSistema.getTime()));
 			tf.setUsuario_modificacion(1);
 			try {
-				if(x) {
-					//id =dtf.editOferta(tf);
-					
-					if(dtf.editOferta(tf)) {
-						//Si
-						response.sendRedirect("production/updateOferta.jsp?msj=1&id="+tf.getId_oferta());
-					}else {
-						//No
-						response.sendRedirect("production/updateOferta.jsp?msj=2&id="+tf.getId_oferta());
-					}
+				if (dtf.editOferta(tf)) {
+					// Si
+					response.sendRedirect("production/updateOferta.jsp?msj=1&m=" + tf.getId_oferta());
+				} else {
+					// No
+					response.sendRedirect("production/updateOferta.jsp?msj=2&m=" + tf.getId_oferta());
 				}
-				
+
 			}catch(Exception e) {
-				System.out.println("Error Sl_Oferta opc1: "+e.getMessage());
+				System.out.println("Error Sl_Oferta opc2: "+e.getMessage());
 				e.printStackTrace();
 			}
 			break;
