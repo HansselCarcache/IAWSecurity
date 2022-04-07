@@ -14,6 +14,9 @@ id = request.getParameter("m") == null ? "0" : request.getParameter("m");
 
 oferta = dto.getoferta(Integer.parseInt(id));
 listaOferta = dtod.listaOD_id(Integer.parseInt(id));
+
+String msj="";
+msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -61,6 +64,16 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 <!-- Select2 -->
 <link href="../vendors/select2/dist/css/select2.min.css"
 	rel="stylesheet" />
+
+<!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
 </head>
 
@@ -531,6 +544,72 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 			$('.js-example-basic-single').select2();
 		});
 
+		$(document).ready(function() {
+        	try {
+        		<% if(msj.equals("1")) {%>
+        		new PNotify({
+                    type: 'success',
+                    title: 'Ingreso exitoso',
+                    text: 'Se han ingresado los datos existosamente',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+            	
+            	<% if(msj.equals("2")) {%>
+        		new PNotify({
+                    type: 'error',
+                    title: 'Ocurrio un error',
+                    text: 'Vuelva a ingresar los datos e intente nuevamente',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+            	
+            	//FECHAS EN DETALLE
+            	<% if(msj.equals("3")) {%>
+        		new PNotify({
+                    type: 'warning',
+                    title: 'Advertencia',
+                    text: 'La fecha inicial ingresada ocurre luego de la fecha final ingresada',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+            	
+            	<% if(msj.equals("4")) {%>
+        		new PNotify({
+                    type: 'warning',
+                    title: 'Advertencia',
+                    text: 'Asegurese que la fecha final esta dentro del rango del encabezado',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+            	
+            	<% if(msj.equals("5")) {%>
+        		new PNotify({
+                    type: 'warning',
+                    title: 'Advertencia',
+                    text: 'Asegurese que la fecha inicial esta dentro del rango del encabezado',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+        		  
+            	
+        		  
+        		}
+        		catch(err) {
+        		  alert(err.message)
+        		}
+            
+        });
 		function agregarFila() {
 
 			var cap = $('#capacitacion').val();
@@ -609,6 +688,9 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 		});
 	</script>
 
+
+	<!-- Pnotify -->
+	<script src="../vendors/pnotify/dist/pnotify.js"></script>
 	<!-- jQuery -->
 	<script src="../vendors/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->

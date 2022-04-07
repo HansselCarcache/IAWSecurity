@@ -3,6 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<% 
+String msj="";
+
+msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
+
+%>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="ISO-8859-1">
@@ -35,6 +42,16 @@
     <!-- Select2 -->
     <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
 <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
+	<!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 </head>
 
 <body class="nav-md">
@@ -72,6 +89,8 @@
                                 <div class="x_content">
                                     <form class="" action="../Sl_OfertaEnc" method="post" novalidate>
                                     <input type="hidden" value="1" name="opcion" id="opcion"/>
+                                    <input type="hidden" value="0" name="id" id="id"/>
+                                    <input type="hidden" value="addOferta.jsp" name="frm" id="frm"/>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
@@ -117,6 +136,7 @@
                                             </div>
                                         </div>
                                     </form>
+                                   
                                 </div>
                             </div>
 						
@@ -207,7 +227,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../vendors/validator/multifield.js"></script>
     <script src="../vendors/validator/validator.js"></script>
-    
+	 <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+	   
     <!-- Javascript functions	-->
 	<script>
 		function hideshow(){
@@ -227,8 +251,8 @@
 			}
 		}
 	</script>
-
-    <script>
+	
+    <script type="text/javascript">
         // initialize a validator instance from the "FormValidator" constructor.
         // A "<form>" element is optionally passed as an argument, but is not a must
         var validator = new FormValidator({
@@ -252,9 +276,7 @@
                 $('form .alert').remove();
         }).prop('checked', false);
         
-        $(document).ready(function() {
-            $('.js-example-basic-single').select2();
-        });
+        
         
         function agregarFila(){
             
@@ -276,31 +298,55 @@
             });
         }
         
+		
+        
         $(document).ready(function() {
-            $('#tbl_capacitaciones').DataTable( {
-            	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
-            	"dom": '<"top"lf>rt<"bottom"ip><"clear">',
-            	keys: true,
+        	try {
+        		<% if(msj.equals("2")) {%>
+        		new PNotify({
+                    type: 'error',
+                    title: 'Ocurrio un error',
+                    text: 'Vuelva a ingresar los datos e intente nuevamente',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
             	
-            	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+            	<% if(msj.equals("3")) {%>
+        		new PNotify({
+                    type: 'warning',
+                    title: 'Advertencia',
+                    text: 'Asegurese que las fechas ocurran en un mismo año e intente nuevamente',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+            	
+            	<% if(msj.equals("4")) {%>
+        		new PNotify({
+                    type: 'warning',
+                    title: 'Advertencia',
+                    text: 'Asegurese que la fecha final ocurra luego de la fecha inicial e intente nuevamente',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+        		  
+            	
+        		  
+        		}
+        		catch(err) {
+        		  alert(err.message)
+        		}
             
-            	"language": {
-                    "lengthMenu": "Mostrar _MENU_ records por pagina",
-                    "search": "Buscar:",
-                    "paginate": {
-                        "first":      "Primero",
-                        "last":       "Ultimo",
-                        "next":       "Siguiente",
-                        "previous":   "Anterior"
-                    },
-                    "emptyTable": "No existen datos en la tabla",
-                    "zeroRecords": "No existe un registro en la BD",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
-                    
-                    "infoEmpty": "No existe registro",
-                    "infoFiltered": "(filtered from _MAX_ total records)"
-                }
-            } );
+        });
+        
+        $(document).ready(function() {
+
+        	
             
             $('#tbl_detalle').DataTable( {
             	buttons: [ 'copy', 'csv', 'excel','pdf', 'print' ],
@@ -326,11 +372,14 @@
                     "infoFiltered": "(filtered from _MAX_ total records)"
                 }
             } );
-        } );
+            
+            
+        });
         
         
     </script>
-
+	
+	
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -367,11 +416,7 @@
     <script src="../vendors/select2/dist/js/select2.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
     
-    <script type="text/javascript">
-   
-   
-          
-</script>
+    
 
 </body>
 </html>

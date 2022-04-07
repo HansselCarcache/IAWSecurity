@@ -15,6 +15,8 @@ of = request.getParameter("m") == null ? "0" : request.getParameter("m");
 oferta = dto.getoferta(Integer.parseInt(of));
 listaOferta = dtod.listaOD_id(Integer.parseInt(of));
 
+String msj="";
+msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 
 %>
 
@@ -51,6 +53,17 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(of));
     <!-- Select2 -->
     <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
 <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
+
+	<!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 </head>
 
 <body class="nav-md">
@@ -93,6 +106,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(of));
 											<form class="" action="../Sl_OfertaEnc" method="post" novalidate>
 												<input type="hidden" value="2" id="opcion" name="opcion"/>
 												<input type="hidden" value="<%=of %>" id="id" name="id"/>
+												<input type="hidden" value="updateOferta.jsp" name="frm" id="frm"/>
 												<div class="field item form-group">
 													<label
 														class="col-form-label col-md-3 col-sm-3  label-align">Nombre
@@ -462,7 +476,10 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(of));
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../vendors/validator/multifield.js"></script>
     <script src="../vendors/validator/validator.js"></script>
-    
+     <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
     <!-- Javascript functions	-->
 	<script>
 		function hideshow(){
@@ -509,6 +526,95 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(of));
         
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+        });
+        
+        $(document).ready(function() {
+        	try {
+        		//SL_ENCABEZADO
+        		<% if(msj.equals("1")) {%>
+        		new PNotify({
+                    type: 'success',
+                    title: 'Ingreso exitoso',
+                    text: 'Se han ingresado los datos existosamente',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+            	
+        		<% if(msj.equals("2")) {%>
+        		new PNotify({
+                    type: 'error',
+                    title: 'Ocurrio un error',
+                    text: 'Vuelva a ingresar los datos e intente nuevamente',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+            	
+            	//FECHAS ENCABEZADO
+            	<% if(msj.equals("3")) {%>
+        		new PNotify({
+                    type: 'warning',
+                    title: 'Advertencia',
+                    text: 'Asegurese que las fechas ocurran en un mismo año e intente nuevamente',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+            	
+            	<% if(msj.equals("4")) {%>
+        		new PNotify({
+                    type: 'warning',
+                    title: 'Advertencia',
+                    text: 'Asegurese que la fecha final ocurra luego de la fecha inicial e intente nuevamente',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+        		
+            	//INGRESO
+            	<% if(msj.equals("6")) {%>
+        		new PNotify({
+                    type: 'success',
+                    title: 'Ingreso exitoso',
+                    text: 'Se han ingresado los datos existosamente',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+        		  
+            	//ACTUALIZACION
+            	<% if(msj.equals("7")) {%>
+        		new PNotify({
+                    type: 'success',
+                    title: 'Edicion exitosa',
+                    text: 'Se han editado los datos existosamente',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+            	
+            	<% if(msj.equals("8")) {%>
+        		new PNotify({
+                    type: 'error',
+                    title: 'Ocurrio un error',
+                    text: 'Vuelva a ingresar los datos e intente nuevamente',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+        		}
+        		catch(err) {
+        		  alert(err.message)
+        		}
+            
         });
         
         function agregarFila(){

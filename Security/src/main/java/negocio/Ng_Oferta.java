@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Ng_Oferta {
 	
+	@SuppressWarnings("deprecation")
 	public int verifyDates(Date sqlinicio, Date sqlfin) {
 		int x = 0;
 		if(sqlinicio.getYear()==sqlfin.getYear()) {
