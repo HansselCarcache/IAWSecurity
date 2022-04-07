@@ -2,6 +2,17 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+
+<%
+String departamento = "";
+departamento = request.getParameter("idD")==null?"0":request.getParameter("idD");
+						
+Vw_facultad_departamento td = new Vw_facultad_departamento();
+Dt_departamento dtdepa = new Dt_departamento();
+td = dtdepa.getDepartamentobyID(Integer.parseInt(departamento));
+%>
+
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -73,61 +84,35 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
-<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
-<!--                                         </p> -->
-<!--                                         <span class="section">Personal Info</span> -->
+                                     <form action="../Sl_Departamento" method="post" novalidate>
+                                    	<input type="hidden" value="3" name="opcion" id="opcion"/>
+                                    	<input type="hidden" value="<%=td.getId_departamento() %>" name="idDepartamento" id="idDepartamento"/>                                    
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID departamento<span class="required">*</span></label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="ID Facultad">
-											</div>
-										</div>
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="estado" required="required" class="form-control ">
-											</div>
-										</div>
-												<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Facultad <span class="required">*</span></label>
+										 <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Departamento:<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												<%
-							                      	ArrayList<Tbl_facultad> listaFacultad = new ArrayList<Tbl_facultad>();
-							                      	Dt_facultad dtf = new Dt_facultad();
-							                      	listaFacultad = dtf.listaFacultadesActivas();
-								                 %>
-												<select class="form-control js-example-basic-single" name="cbxUser" id="cbxUser" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Tbl_facultad tf :listaFacultad){
-												  %>
-												  <option value="<%=tf.getId_facultad()%>"><%=tf.getNombre_facultad()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
+                                            	<input type="text" value="<%=td.getNombre_departamento() %>" name="txtnombredepartamento" id="txtnombredepartamento" class="form-control" placeholder="" title="Nombre del departamento" readonly="readonly" />
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Facultad:<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input type="text" value="<%=td.getNombre_facultad() %>" name="txtnombrefacultad" id="txtnombrefacultad" class="form-control" placeholder="" title="Nombre de la facultad" readonly="readonly" />
                                             </div>
                                         </div>
 
                                         
                                         
-                                        <div class="ln_solid">
-                                            <div class="col-md-6 offset-md-3">
-                								<button type='reset' class="btn btn-danger">Eliminar</button>
-                  							</div>
+                                           <div class="ln_solid">
+                                            <div class="form-group">
+                                                <div class="col-md-6 offset-md-3">
+                                                    <button type='submit' class="btn btn-danger">Eliminar</button>
+                                                    
+                                                    <a class="btn btn-success" href="tbl_departamento.jsp">Cancelar</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

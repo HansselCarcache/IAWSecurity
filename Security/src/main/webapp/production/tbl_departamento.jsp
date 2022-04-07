@@ -1,7 +1,6 @@
 <%@page import="com.oracle.wls.shaded.org.apache.bcel.generic.FDIV"%>
-<%@page import="entidades.Vw_facultad_departamento"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Vw_facultad_departamento, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Seguridad | Departamentos </title>
+    <title>Gestión Docente | Departamentos </title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -106,7 +105,7 @@
                     
                       <thead>
                         <tr>
-                          
+                          <th>Id</th>
                           <th>Nombre Departamento <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Nombre Facultad <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Estado <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
@@ -118,9 +117,9 @@
 
                       <tbody>
                     	 <%
-                    	 for(Vw_facultad_departamento fd :listaFaDe){
+                    	 for(Vw_facultad_departamento td :listaFaDe){
                     		 String estado= "";
-	                      		if(fd.getEstado()!=3){
+	                      		if(td.getEstado()!=3){
 	                      			estado= "Activo";
 	                      		}
 	                      		else{
@@ -130,23 +129,25 @@
                       	
                       
                         <tr>
-                          
-                          <td><%=fd.getNombre_departamento() %></td>
-                          <td><%=fd.getNombre_facultad() %></td>
+                        
+                          <td><%=td.getId_departamento() %></td>
+                          <td><%=td.getNombre_departamento() %></td>
+                          <td><%=td.getNombre_facultad() %></td>
                           <td><%=estado %></td>
                           
-                          <td>
-                           <a href="updateDepartamento.jsp">
-                            <i class="far fa-edit" title="Editar Departamento"></i>
-                          </a>
-                          &nbsp;&nbsp;
-                          <a href="readDepartamento.jsp">
-                            <i class="far fa-eye" title="Visualizar Departamento"></i>
-                          </a> 
-                          &nbsp;&nbsp;
-                          <a href="deleteDepartamento.jsp" >
-                            <i class="far fa-trash-alt" title="Eliminar Departamento"></i>
-                          </a>
+                        <td>
+                          	<a href="readDepartamento.jsp?idD=<%=td.getId_departamento() %>" title="Visualizar Departamento">
+	                          	<i class="fa fa-eye"></i> 
+                          	</a>
+                          	&nbsp;
+                          	<a href="updateDepartamento.jsp?idD=<%=td.getId_departamento() %>" title="Editar Departamento">
+	                          	<i class="fa fa-edit"></i> 
+                          	</a>
+                          	&nbsp;
+                          	<a href="deleteDepartamento.jsp?idD=<%=td.getId_departamento()%>" title="Eliminar Departamento">
+	                          	<i class="fa fa-trash"></i> 
+                          	</a>
+                          	&nbsp;
                           </td>
                           
                           
@@ -159,7 +160,7 @@
                       </tbody>
                       <tfoot>
                         <tr>
-                          
+                         <th>Id</th>
                           <th>Nombre Departamento</th>
                           <th>Nombre Facultad</th>
                           <th>Estado</th>
@@ -271,7 +272,7 @@
         				{
         					extend: 'pdf',
         					text: 'PDF',
-        					title: 'Departamentos registradas',
+        					title: 'Departamentos registrados',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
         	                    eliminarcolumna(3);
@@ -285,7 +286,7 @@
         				{ 
         					extend: 'print',
         					text: 'Imprimir',
-        					title: 'Departamentos registradas',
+        					title: 'Departamentos registrados',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
         	                    eliminarcolumna(3);
