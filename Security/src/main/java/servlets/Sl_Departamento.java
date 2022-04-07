@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datos.Dt_Departamento ;
-import entidades.Departamento ;
+import datos.Dt_departamento ;
+import entidades.Tbl_departamento;
+import negocio.Ng_departamento;
 
 	@WebServlet("/Sl_Departamento")
 
@@ -21,7 +22,7 @@ import entidades.Departamento ;
 	    /**
 	     * @see HttpServlet#HttpServlet()
 	     */
-	    public Sl_Departamento () {
+	    public Sl_Departamento() {
 	        super();
 	        // TODO Auto-generated constructor stub
 	    }
@@ -29,9 +30,9 @@ import entidades.Departamento ;
 		/**
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
-		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			// TODO Auto-generated method stub
-//			response.getWriter().append("Served at: ").append(request.getContextPath());
+			response.getWriter().append("Served at: ").append(request.getContextPath());
 		}
 
 		/**
@@ -41,39 +42,71 @@ import entidades.Departamento ;
 			int opc = 0;
 			opc = Integer.parseInt(request.getParameter("opcion"));
 			// INSTANCIAMOS LOS OBJETOS
-			Departamento  Dep = new Departamento ();
-			Dt_Departamento  dtm = new Dt_Departamento ();
-			// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
-			Dep.setNombre_departamento(request.getParameter("nombre_departamento"));
-			Dep.setId_facultad(Integer.parseInt(request.getParameter("facultad")));
-			Dep.setEstado(1);
-			
-			
-			
-			////////////////////////////////////////////////////////////////////
+			Tbl_departamento  tdepa = new Tbl_departamento();
+			Dt_departamento  dtdepa = new Dt_departamento();
 			
 			switch(opc) {
 			case 1:
+				// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
+				tdepa.setNombre_departamento(request.getParameter("txtnombredepartamento"));
+				tdepa.setId_facultad(Integer.parseInt(request.getParameter("cbxfacultad")));
+				tdepa.setEstado(1);
+				////////////////////////////////////////////////////////////////////
+				
 				try {
-					
-					if(dtm.addDepartamento (Dep)) {
+					if(dtdepa.addDepartamento(tdepa)) {
 						response.sendRedirect("production/tbl_departamento.jsp?msj=1");
 					}else {
 						response.sendRedirect("production/tbl_departamento.jsp?msj=2");
 					}
 				}catch(Exception e) {
-					System.out.println("Error Sl_gestionUserRol opc1: "+e.getMessage());
+					System.out.println("Error Sl_Departamento opc1: "+e.getMessage());
 					e.printStackTrace();
 				}
 				break;
+				
 			case 2:
-				//codigo
+				// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
+				tdepa.setNombre_departamento(request.getParameter("txtnombredepartamento"));
+				tdepa.setId_facultad(Integer.parseInt(request.getParameter("cbxfacultad")));
+				tdepa.setId_departamento(Integer.parseInt(request.getParameter("idDepartamento")));
+				try {
+					
+					if(dtdepa.modificarDepartamento(tdepa)) {
+						response.sendRedirect("production/tbl_departamento.jsp?msj=3");
+					}
+					else {
+						response.sendRedirect("production/tbl_departamento.jsp?msj=4");
+					}
+				}catch(Exception e) {
+					System.out.println("Error Sl_Departamento opc2: "+e.getMessage());
+					e.printStackTrace();
+				}
 				break;
+				
+			case 3:
+				// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
+				tdepa.setId_departamento(Integer.parseInt(request.getParameter("idDepartamento")));
+				try {
+					
+					if(dtdepa.eliminarDepartamento(tdepa)) {
+						response.sendRedirect("production/tbl_departamento.jsp?msj=5");
+					}
+					else {
+						response.sendRedirect("production/tbl_departamento.jsp?msj=6");
+					}
+				}catch(Exception e) {
+					System.out.println("Error Sl_Departamento opc3: "+e.getMessage());
+					e.printStackTrace();
+				}
+				break;
+				
 			default:
 				//codigo
 				break;
 				
 			}
+			
 		}
 
 	}
