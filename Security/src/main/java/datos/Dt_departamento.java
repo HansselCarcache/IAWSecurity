@@ -203,7 +203,7 @@ public class Dt_departamento {
 			return modificado;
 		}
 		
-		
+	
 		// Metodo para eliminar departamento
 		public boolean eliminarDepartamento(Tbl_departamento tdepa)
 		{
