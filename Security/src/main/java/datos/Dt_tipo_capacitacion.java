@@ -207,8 +207,10 @@ public class Dt_tipo_capacitacion {
 				c = poolConexion.getConnection();
 				this.llenar_rsTipoCapacitacion(c);
 				rsTipoCapacitacion.beforeFirst();
-				while (rsTipoCapacitacion.next()){
-					if(rsTipoCapacitacion.getInt(1)==tc.getId_tipo_capacitacion()){
+				while (rsTipoCapacitacion.next())
+				{
+					if(rsTipoCapacitacion.getInt(1)==tc.getId_tipo_capacitacion())
+					{
 						rsTipoCapacitacion.updateString("tipo_capacitacion", tc.getTipo_capacitacion());
 						rsTipoCapacitacion.updateInt("certificada", tc.getCertificada());
 						rsTipoCapacitacion.updateString("descripcion", tc.getDescripcion());

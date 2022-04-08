@@ -80,12 +80,14 @@ tipcap = dttipcap.getTipoCapacitacionbyID(Integer.parseInt(tc));
                                 <div class="x_content">
                                     <form class="" action="..Sl_Tipo_Capacitación" method="post" novalidate>
                                     	<input type="hidden" value="2" id="opcion" name="opcion"/>
-                                    	<input type="hidden" value="<%=tc %>" id="id" name="id"/>
+                                    	<input type="hidden" value="<%=tipcap.getId_tipo_capacitacion() %>" id="id_tipo_capacitacion" name="id_tipo_capacitacion"/>
+
 
 										<div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre del Tipo de Capacitación: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                            	<input class="form-control" name="tipo_capacitacion" id="tipo_capacitacion"  placeholder="..." value="<%=tipcap.getTipo_capacitacion()%>" readonly />
+                                            	<input class="form-control" name="tipo_capacitacion" id="tipo_capacitacion"  placeholder="..."
+                                            	 value="<%=tipcap.getTipo_capacitacion()%>" readonly />
 	                                        </div>
                                         </div>
                                         
