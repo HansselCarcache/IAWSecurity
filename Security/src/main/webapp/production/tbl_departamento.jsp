@@ -105,7 +105,7 @@
                     
                       <thead>
                         <tr>
-                          <th>Id</th>
+                       
                           <th>Nombre Departamento <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Nombre Facultad <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Estado <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
@@ -130,7 +130,7 @@
                       
                         <tr>
                         
-                          <td><%=td.getId_departamento() %></td>
+                         
                           <td><%=td.getNombre_departamento() %></td>
                           <td><%=td.getNombre_facultad() %></td>
                           <td><%=estado %></td>
@@ -160,7 +160,7 @@
                       </tbody>
                       <tfoot>
                         <tr>
-                         <th>Id</th>
+                         
                           <th>Nombre Departamento</th>
                           <th>Nombre Facultad</th>
                           <th>Estado</th>

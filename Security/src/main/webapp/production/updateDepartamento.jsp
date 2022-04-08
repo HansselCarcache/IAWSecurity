@@ -121,7 +121,7 @@ td = dtdepa.getDepartamentobyID(Integer.parseInt(departamento));
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
                                                     <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <a class="btn btn-success" href="tbl_usuarios.jsp">Cancelar</a>
+                                                    <a class="btn btn-success" href="tbl_departamento.jsp">Cancelar</a>
                                                 </div>
                                             </div>
                                         </div>
