@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 import entidades.Tbl_ofertadet;
 import entidades.Vw_ofertadet;
@@ -34,7 +36,7 @@ public class Dt_ofertadet {
 		ArrayList<Vw_ofertadet> listofc = new ArrayList<Vw_ofertadet>();
 		try{
 			c = poolConexion.getConnection(); //obtenemos una conexion del pool
-			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_ofertadet;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_ofertadet where estado<>3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()){
 				Vw_ofertadet topc = new Vw_ofertadet(); //instanciamos a rol
@@ -79,7 +81,7 @@ public class Dt_ofertadet {
 		Vw_ofertadet od = new Vw_ofertadet();
 		try{
 			c = poolConexion.getConnection(); //obtenemos una PoolConexion del pool
-			ps = c.prepareStatement("SELECT *  from gestion_docente.vw_ofertadet where id_oferta_detalle = "+id, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps = c.prepareStatement("SELECT *  from gestion_docente.vw_ofertadet where estado<>3 and id_oferta_detalle = "+id, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			rs.next();
 			
@@ -133,7 +135,7 @@ public class Dt_ofertadet {
 		ArrayList<Vw_ofertadet> listFac = new ArrayList<Vw_ofertadet>();
 		try{
 			c = poolConexion.getConnection(); //obtenemos una PoolConexion del pool
-			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_ofertadet WHERE id_oferta = "+ id, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_ofertadet WHERE estado<>3 and id_oferta = "+ id, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()){
 				Vw_ofertadet ofd = new Vw_ofertadet(); //instanciamos a rol
@@ -197,7 +199,7 @@ public class Dt_ofertadet {
 			rsOferta.updateInt("id_capacitacion", ofd.getId_capacitacion());
 			rsOferta.updateInt("id_facilitador", ofd.getId_facilitador());
 			rsOferta.updateInt("id_modalidad", ofd.getId_modalidad());
-			
+			rsOferta.updateInt("estado", 1);
 			rsOferta.insertRow();
 			rsOferta.moveToCurrentRow();
 			guardado = true;
@@ -224,7 +226,6 @@ public class Dt_ofertadet {
 		return guardado;
 	}
 
-	
 	public boolean editOfertaDet(Vw_ofertadet tod) {
 		boolean modificado = false;
 		
@@ -246,7 +247,7 @@ public class Dt_ofertadet {
 					rsOferta.updateInt("id_capacitacion", tod.getId_capacitacion());
 					rsOferta.updateInt("id_facilitador", tod.getId_facilitador());
 					rsOferta.updateInt("id_modalidad", tod.getId_modalidad());
-					
+					rsOferta.updateInt("estado", 2);
 					rsOferta.updateRow();
 					modificado=true;
 					break;
@@ -275,5 +276,82 @@ public class Dt_ofertadet {
 		
 		return modificado;
 	}
+
+	public boolean deleteOfertaDetByID(int id)
+	{
+		boolean eliminado=false;	
+		try
+		{
+			c = poolConexion.getConnection();
+			this.llena_rsOFerta_Det(c);
+			rsOferta.beforeFirst();
+			while (rsOferta.next()){
+				if(rsOferta.getInt("id_oferta") == id){
+					rsOferta.updateInt("estado", 3);
+					rsOferta.updateRow();
+					eliminado=true;
+					
+				}
+			}
+		}
+		catch (Exception e){
+			System.err.println("ERROR AL deleteOferta() "+e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rsOferta != null){
+					rsOferta.close();
+				}
+				if(c != null){
+					poolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return eliminado;
+	}
+	
+	public boolean deleteOfertaDet(Vw_ofertadet to)
+	{
+		boolean eliminado=false;	
+		try
+		{
+			c = poolConexion.getConnection();
+			this.llena_rsOFerta_Det(c);
+			rsOferta.beforeFirst();
+			while (rsOferta.next()){
+				if(rsOferta.getInt("id_oferta_detalle") == to.getId_oferta_detalle()){
+					rsOferta.updateInt("estado", 3);
+					rsOferta.updateRow();
+					eliminado=true;
+					break;
+				}
+			}
+		}
+		catch (Exception e){
+			System.err.println("ERROR AL deleteOfertaDet() "+e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rsOferta != null){
+					rsOferta.close();
+				}
+				if(c != null){
+					poolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return eliminado;
+	}
+
 
 }

@@ -15,7 +15,8 @@ of = request.getParameter("m") == null ? "0" : request.getParameter("m");
 oferta = dto.getoferta(Integer.parseInt(of));
 listaOferta = dtod.listaOD_id(Integer.parseInt(of));
 
-
+String msj="";
+msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 %>
 
 <head>
@@ -27,6 +28,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(of));
 
     <title>Oferta | Eliminar </title>
 
+	
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -51,6 +53,15 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(of));
     <!-- Select2 -->
     <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
 <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
+	<!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 </head>
 
 <body class="nav-md">
@@ -91,7 +102,7 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(of));
 										</div>
 										<div class="x_content">
 											<form class="" action="../Sl_OfertaEnc" method="post" novalidate>
-												<input type="hidden" value="2" id="opcion" name="opcion"/>
+												<input type="hidden" value="3" id="opcion" name="opcion"/>
 												<input type="hidden" value="<%=of %>" id="id" name="id"/>
 												<div class="field item form-group">
 													<label
@@ -282,7 +293,8 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(of));
         </div>
     </div>
 
-
+	
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../vendors/validator/multifield.js"></script>
     <script src="../vendors/validator/validator.js"></script>
@@ -405,10 +417,44 @@ listaOferta = dtod.listaOD_id(Integer.parseInt(of));
             } );
         } );
         
-        
+        $(document).ready(function() {
+        	try {
+        		<% if(msj.equals("1")) {%>
+        		new PNotify({
+                    type: 'error',
+                    title: 'Ocurrió un error',
+                    text: 'Revise su conexion he intentelo de nuevo',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+            	
+            	<% if(msj.equals("2")) {%>
+        		new PNotify({
+                    type: 'success',
+                    title: 'Eliminacion Existosa',
+                    text: 'Se ha eliminado la oferta de la capacitacion exitosamente',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+            	
+            	
+        	}
+        	catch(err) {
+        		alert(err.message)
+        	}
+            
+        });
         
     </script>
-
+<!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->

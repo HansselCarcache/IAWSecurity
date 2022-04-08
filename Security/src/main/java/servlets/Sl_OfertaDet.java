@@ -94,12 +94,10 @@ public class Sl_OfertaDet extends HttpServlet {
 
 				
 				// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
-				tod.setId_capacitacion(Integer.parseInt(request.getParameter("capacitacion")));
-				tod.setId_facilitador(Integer.parseInt(request.getParameter("facilitador")));
-				tod.setId_modalidad(Integer.parseInt(request.getParameter("modalidad")));
+				
 				tod.setDescripcion_horaria(horario);
 				tod.setDias(request.getParameter("dias"));
-				tod.setPublico(Integer.parseInt(request.getParameter("publico")));
+				
 				
 				
 				System.out.print(tod.getDescripcion_horaria());
@@ -109,6 +107,11 @@ public class Sl_OfertaDet extends HttpServlet {
 				//ingresar detalles de un encabezado recien creado
 				case 1:
 					try {
+						tod.setPublico(Integer.parseInt(request.getParameter("publico")));
+						tod.setId_capacitacion(Integer.parseInt(request.getParameter("capacitacion")));
+						tod.setId_facilitador(Integer.parseInt(request.getParameter("facilitador")));
+						tod.setId_modalidad(Integer.parseInt(request.getParameter("modalidad")));
+						
 						if (dtf.addOferta(tod)) {
 							// Si
 							// Habilitar cambiar estado a modif si es el ingreso nuevo de un maestro ya
@@ -141,6 +144,11 @@ public class Sl_OfertaDet extends HttpServlet {
 				//ingresar detalles de un encabezado a modificar
 				case 2:
 					try {
+						tod.setPublico(Integer.parseInt(request.getParameter("publico")));
+						tod.setId_capacitacion(Integer.parseInt(request.getParameter("capacitacion")));
+						tod.setId_facilitador(Integer.parseInt(request.getParameter("facilitador")));
+						tod.setId_modalidad(Integer.parseInt(request.getParameter("modalidad")));
+						
 						tod.setId_oferta_detalle(Integer.parseInt(request.getParameter("id_oferta_det")));
 						if (dtf.editOfertaDet(tod)) {
 							// Redirigir
@@ -149,6 +157,23 @@ public class Sl_OfertaDet extends HttpServlet {
 						} else {
 							// No
 							response.sendRedirect("production/updateOferta.jsp?msj=8&m=" + tod.getId_oferta());
+						}				
+						
+					}catch(Exception e) {
+						System.out.println("Error Sl_OfertaDet opc1: "+e.getMessage());
+						e.printStackTrace();
+					}
+					break;
+				case 3:
+					try {
+						tod.setId_oferta_detalle(Integer.parseInt(request.getParameter("id_oferta_det")));
+						if (dtf.deleteOfertaDet(tod)) {
+							// Redirigir
+							dto.setEstado(tod.getId_oferta(), 1);
+							response.sendRedirect("production/deleteOferta.jsp?msj=2&m=" + tod.getId_oferta());
+						} else {
+							// No
+							response.sendRedirect("production/deleteOfertaDet.jsp?msj=1&m=" + tod.getId_oferta()+"&d="+tod.getId_oferta_detalle());
 						}				
 						
 					}catch(Exception e) {

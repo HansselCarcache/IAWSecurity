@@ -3,6 +3,10 @@
 
 <!DOCTYPE html>
 <html>
+<% 
+	String msj="";
+	msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
+%>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -32,6 +36,16 @@
 
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
+    
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
   </head>
 
   <body class="nav-md">
@@ -210,6 +224,10 @@
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
     
+    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
      <script>
    	function eliminarcolumna(id){
    		var table = $('#tbl_oferta').DataTable();
@@ -313,6 +331,25 @@
         } );
     } );
     
+    $(document).ready(function() {
+    	try {
+    		<% if(msj.equals("1")) {%>
+				new PNotify({
+			        type: 'success',
+			        title: 'Eliminacion Exitosa',
+			        text: 'Se ha eliminado los registros de la convocatoria correctamente',
+			        styling: 'bootstrap3',
+			        delay: 2000,
+			        addclass: 'center'
+			    }); 
+			<%}%>
+        	
+    	}
+    	catch(err) {
+    		alert(err.message)
+    	}
+        
+    });
     
     
     </script>

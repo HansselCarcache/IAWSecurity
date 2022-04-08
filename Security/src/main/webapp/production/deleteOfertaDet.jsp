@@ -26,6 +26,8 @@ if(Integer.parseInt(d) !=0){
 	ofertaD = dtod.getDetalleId(Integer.parseInt(d));
 }
 
+String msj="";
+msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -74,6 +76,16 @@ if(Integer.parseInt(d) !=0){
 <link href="../vendors/select2/dist/css/select2.min.css"
 	rel="stylesheet" />
 <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
+
+	<!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 </head>
 
 <body class="nav-md">
@@ -114,7 +126,9 @@ if(Integer.parseInt(d) !=0){
 											<div class="clearfix"></div>
 										</div>
 										<div class="x_content">
-											<form class="" action="" method="post" novalidate>
+											<form class="" action="../Sl_OfertaDet" method="post" novalidate>
+											<input type="hidden" value="<%=oferta.getFecha_inicial() %>" name="finicio" id="finicio"/>
+											   	
 												<div class="field item form-group">
 													<label
 														class="col-form-label col-md-3 col-sm-3  label-align">Nombre
@@ -209,11 +223,11 @@ if(Integer.parseInt(d) !=0){
 										<div class="x_content">
 											<div class="row">
 												<div class="col-md-12 col-sm-12">
-											<form class="" action="" method="post" novalidate>
+											<form class="" action="../Sl_OfertaDet" method="post" novalidate>
 												<input type="hidden" value="<%=oferta.getFecha_inicial() %>" name="finicio" id="finicio"/>
 											   	<input type="hidden" value="<%=oferta.getFecha_final() %>"  name="ffinal" id="ffinal" />
-											   	<input type="hidden" value="2" name="opcion" id="opcion"/>
-											   	<input type="hidden" value="updateOfertaDet.jsp" name="frm" id="frm"/>
+											   	<input type="hidden" value="3" name="opcion" id="opcion"/>
+											   	<input type="hidden" value="deleteOfertaDet.jsp" name="frm" id="frm"/>
 											   	<input type="hidden" value="<%=oferta.getId_oferta() %>" name="id_oferta" id="id_oferta"/>
 											   	<input type="hidden" value="<%=ofertaD.getId_oferta_detalle() %>" name="id_oferta_det" id="id_oferta_det"/>
 <%-- 									   <textarea onfocus="this.value = 'Mensaje en\ndos lineas'"><%="Mensaje en \n dos lineas" %></textarea> --%>
@@ -491,6 +505,26 @@ if(Integer.parseInt(d) !=0){
 		}
 
 		$(document).ready(function() {
+        	try {
+        		<% if(msj.equals("1")) {%>
+        		new PNotify({
+                    type: 'error',
+                    title: 'Ocurrió un error',
+                    text: 'Revise su conexion he intentelo de nuevo',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+                }); 
+            	<%}%>
+            	
+        	}
+        	catch(err) {
+        		alert(err.message)
+        	}
+            
+        });
+		
+		$(document).ready(function() {
 			$('#tbl_capacitaciones').DataTable({
 				buttons : [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
 				"dom" : '<"top"lf>rt<"bottom"ip><"clear">',
@@ -542,7 +576,11 @@ if(Integer.parseInt(d) !=0){
 			});
 		});
 	</script>
-
+	<!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    
 	<!-- jQuery -->
 	<script src="../vendors/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->
@@ -586,10 +624,5 @@ if(Integer.parseInt(d) !=0){
 	<!-- Select2 -->
 	<script src="../vendors/select2/dist/js/select2.min.js"></script>
 	<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
-
-	<script type="text/javascript">
-		
-	</script>
-
 </body>
 </html>

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import entidades.Tbl_oferta;
+import entidades.Tbl_tipo_capacitacion;
 import entidades.Vw_oferta;
 
 public class Dt_oferta {
@@ -167,7 +168,6 @@ public class Dt_oferta {
 		return modificado;
 	}
 
-	
 	public int addOferta(Tbl_oferta fc){
 		int guardado = 0;
 		
@@ -260,5 +260,48 @@ public class Dt_oferta {
 			}
 		}
 		return modificado;
+	}
+
+	public boolean deleteOferta(Tbl_oferta to)
+	{
+		Dt_ofertadet dtod = new Dt_ofertadet();
+		boolean eliminado=false;	
+		try
+		{
+			c = poolConexion.getConnection();
+			this.llena_rsOferta(c);
+			rsOferta.beforeFirst();
+			while (rsOferta.next()){
+				if(rsOferta.getInt(1)==to.getId_oferta()){
+					rsOferta.updateInt("estado", 3);
+					rsOferta.updateTimestamp("fecha_eliminacion", to.getFecha_eliminacion());
+					rsOferta.updateInt("usuario_eliminacion", to.getUsuario_eliminacion());
+					rsOferta.updateRow();
+					eliminado=true;
+					break;
+				}
+			}
+			
+			dtod.deleteOfertaDetByID(to.getId_oferta());
+		}
+		catch (Exception e){
+			System.err.println("ERROR AL deleteOferta() "+e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rsOferta != null){
+					rsOferta.close();
+				}
+				if(c != null){
+					poolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return eliminado;
 	}
 }

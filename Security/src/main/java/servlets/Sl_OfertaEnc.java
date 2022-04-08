@@ -126,6 +126,24 @@ public class Sl_OfertaEnc extends HttpServlet {
 						e.printStackTrace();
 					}
 					break;
+				case 3:
+					tf.setFecha_eliminacion(new java.sql.Timestamp(fechaSistema.getTime()));
+					tf.setUsuario_eliminacion(1);
+					try {
+						if (dtf.deleteOferta(tf)) {
+							// Si
+							response.sendRedirect("production/tbl_oferta.jsp?msj=1");
+						} else {
+							// No
+							response.sendRedirect("production/deleteOferta.jsp?msj=1&m=" + tf.getId_oferta());
+						}
+
+					}catch(Exception e) {
+						System.out.println("Error Sl_Oferta opc3: "+e.getMessage());
+						e.printStackTrace();
+					}
+					
+					break;
 				default:
 					//codigo
 					break;
