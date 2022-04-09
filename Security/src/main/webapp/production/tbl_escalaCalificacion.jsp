@@ -103,7 +103,7 @@
                       <thead>
                         <tr>
                           <th>ID Escala <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Calificación <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Tipo de Calificacion <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Descripción <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Estado <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Acciones <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
@@ -114,7 +114,7 @@
 
                       <tbody>
                       	<%
-                      		for(Tbl_escalaCalificacion tecl :listaEscalaCalificacion){
+                      		for(Tbl_escalaCalificacion tecl :listaEscalaActivo){
                       			String estado= "";
                       			if(tecl.getEstado()!=3){
                       				estado= "Activo";
@@ -128,7 +128,7 @@
                         <tr>
                         
                           <td><%=tecl.getId_escala() %></td>
-                          <td><%=tecl.getCalificacion() %></td>
+                          <td><%=tecl.getTipo_calificacion() %></td>
                           <td><%=tecl.getDescripcion() %></td>
                           <td><%=estado %></td>
                           <td>
@@ -156,7 +156,7 @@
                       <tfoot>
                         <tr>
                           <th>ID Escala</th>
-                          <th>Calificación</th>
+                          <th>Tipo de Calificacion</th>
                           <th>Descripcion</th>
                           <th>Estado</th>
                           <th>Acciones</th>        

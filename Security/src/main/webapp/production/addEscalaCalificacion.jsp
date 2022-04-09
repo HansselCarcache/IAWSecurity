@@ -88,10 +88,10 @@
 <!--                                         <span class="section">Personal Info</span> -->
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Calificación<span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Tipo de Calificación<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="calificacion" name="calificacion" required="required" class="form-control ">
+												<input type="text" id="calificacion" name="tipocalificacion" required="required" class="form-control ">
 											</div>
 										</div>
 										

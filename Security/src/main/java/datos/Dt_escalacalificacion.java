@@ -3,6 +3,7 @@ package datos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Tbl_escalaCalificacion;
@@ -39,7 +40,7 @@ public class Dt_escalacalificacion {
 				while(rs.next()) {
 					Tbl_escalaCalificacion escala = new Tbl_escalaCalificacion();
 					escala.setId_escala(rs.getInt("id_escala"));
-					escala.setCalificacion(rs.getString("calificacion"));
+					escala.setTipo_calificacion(rs.getString("tipo_calificacion"));
 					escala.setDescripcion(rs.getString("descripcion"));
 					escala.setEstado(rs.getInt("estado"));
 					listEscala.add(escala);
@@ -70,4 +71,43 @@ public class Dt_escalacalificacion {
 			return listEscala;
 		}
 		
-	}
+		public boolean addEscalaCalificacion(Tbl_escalaCalificacion ec){
+			boolean guardado = false;
+			
+			try{
+				c = poolConexion.getConnection();
+				this.llenaRsEscala(c);
+				this.rsEscala.moveToInsertRow();
+				rsEscala.updateString("tipo_calificacion", ec.getTipo_calificacion());
+				rsEscala.updateString("descripcion", ec.getDescripcion());
+				rsEscala.updateInt("estado", 1);
+			
+				rsEscala.insertRow();
+				rsEscala.moveToCurrentRow();
+				guardado = true;
+			}
+			catch (Exception e) {
+				System.err.println("ERROR AL GUARDAR ESCALDA CALIFICACIONES: "+e.getMessage());
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rsEscala != null){
+						rsEscala.close();
+					}
+					if(c != null){
+						poolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			return guardado;
+		}
+
+}
+		
+	

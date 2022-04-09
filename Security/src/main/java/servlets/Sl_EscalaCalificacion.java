@@ -6,9 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import datos.Dt_EscalaCalificacion;
-import entidades.EscalaCalificacion;
+import datos.Dt_escalacalificacion;
+import entidades.Tbl_escalaCalificacion;
 
 
 /**
@@ -41,11 +40,11 @@ public class Sl_EscalaCalificacion extends HttpServlet{
 		int opc = 0;
 		opc = Integer.parseInt(request.getParameter("opcion"));
 		// INSTANCIAMOS LOS OBJETOS
-		EscalaCalificacion ec = new EscalaCalificacion();
-		Dt_EscalaCalificacion dec = new Dt_EscalaCalificacion();
+		Tbl_escalaCalificacion ec = new Tbl_escalaCalificacion();
+		Dt_escalacalificacion dec = new Dt_escalacalificacion();
 		
 		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
-		ec.setCalificacion(request.getParameter("calificacion"));
+		ec.setTipo_calificacion(request.getParameter("tipo_calificacion"));
 		ec.setDescripcion(request.getParameter("descripcion"));
 
 		
@@ -55,12 +54,12 @@ public class Sl_EscalaCalificacion extends HttpServlet{
 		case 1:
 			try {
 				if(dec.addEscalaCalificacion(ec)) {
-					response.sendRedirect("production/tbl_EscalaCalificacion.jsp?msj=1");
+					response.sendRedirect("production/tbl_escalaCalificacion.jsp?msj=1");
 				}else {
-					response.sendRedirect("production/tbl_EscalaCalificacion.jsp?msj=2");
+					response.sendRedirect("production/tbl_escalaCalificacion.jsp?msj=2");
 				}
 			}catch(Exception e) {
-				System.out.println("Error Sl_EscalaCalificacion: opc1"+e.getMessage());
+				System.out.println("Error Sl_escalaCalificacion: opc1"+e.getMessage());
 				e.printStackTrace();
 			}
 			break;
