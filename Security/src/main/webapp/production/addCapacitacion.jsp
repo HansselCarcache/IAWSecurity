@@ -131,9 +131,9 @@ display:none;
 											<div class="col-md-6 col-sm-6 ">
 												<select class="form-control js-example-basic-single" name="evaluada" id="evaluada" onchange="display()" required="required">
 								
-	                      	
-	                      			 <option  value = "0">No será evaluada</option>
-												 <option value = "1">Será evaluada</option>
+	                      						<option  value = "">Seleccione...</option>
+	                      			 			<option  value = "0">No será evaluada</option>
+												<option value = "1">Será evaluada</option>
 												  
 									
 									</select>

@@ -29,7 +29,7 @@ public class Sl_Capacitacion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -48,6 +48,8 @@ public class Sl_Capacitacion extends HttpServlet {
 		//cp.setTipo_evaluacion(Integer.parseInt(request.getParameter("tipoevaluacion")));
 		cp.setEstado(1);
 		
+		
+		
 		////////////////////////////////////////////////////////////////////
 		
 		switch(opc) {
@@ -63,8 +65,41 @@ public class Sl_Capacitacion extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+			
 		case 2:
-			//codigo
+			// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
+			cp.setNombre(request.getParameter("nombre"));
+			cp.setId_tipo_capacitacion(Integer.parseInt(request.getParameter("cbxTipoCap")));
+			cp.setEvaluada(Integer.parseInt(request.getParameter("evaluada")));
+			cp.setId_capacitacion(Integer.parseInt(request.getParameter("id_capacitacion")));
+			try {
+				if(dc.modificarCapacitacion(cp)) {
+					response.sendRedirect("production/tbl_capacitacion.jsp?msj=3");
+				}
+				else {
+					response.sendRedirect("production/tbl_capacitacion.jsp?msj=4");
+				}
+			}catch(Exception e) {
+				System.out.println("Error Sl_gestionUser opc2: "+e.getMessage());
+				e.printStackTrace();
+			}
+			break;
+		case 3:
+			// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
+			cp.setId_capacitacion(Integer.parseInt(request.getParameter("id_capacitacion")));
+			try {
+				
+				
+				if(dc.eliminarCapacitacion(cp)) {
+					response.sendRedirect("production/tbl_capacitacion.jsp?msj=5");
+				}
+				else {
+					response.sendRedirect("production/tbl_capacitacion.jsp?msj=6");
+				}
+			}catch(Exception e) {
+				System.out.println("Error Sl_gestionCapacitacion opc3: "+e.getMessage());
+				e.printStackTrace();
+			}
 			break;
 		default:
 			//codigo
