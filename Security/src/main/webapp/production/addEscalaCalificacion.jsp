@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Escala de Evaluaci髇 | Registrar </title>
+    <title>Escala de Evaluaci贸n | Registrar </title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -43,19 +43,19 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa-solid fa-book"></i> <span>Gesti髇 Docente</span></a>
+                        <a href="index.html" class="site_title"><i class="fa-solid fa-book"></i> <span>Gesti贸n Docente</span></a>
                     </div>
 
                     <div class="clearfix"></div>
 
-                    <%@include file="dise駉.jsp"%>
+                    <%@include file="dise帽o.jsp"%>
 
             <!-- page content -->
             <div class="right_col" role="main">
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Registrar escala de evaluaci髇</h3>
+                            <h3>Registrar escala de evaluaci贸n</h3>
                         </div>
 
                     </div>
@@ -65,7 +65,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Registros de escala de evaluaci髇</h2>
+                                    <h2>Registros de escala de evaluaci贸n</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -88,10 +88,10 @@
 <!--                                         <span class="section">Personal Info</span> -->
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Calificaci髇<span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Tipo de Calificaci贸n<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="calificacion" name="calificacion" required="required" class="form-control ">
+												<input type="text" id="calificacion" name="tipocalificacion" required="required" class="form-control ">
 											</div>
 										</div>
 										
