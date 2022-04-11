@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Escala de Evaluación | Registrar </title>
+    <title>Escala de Calificacion | Registrar </title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -43,19 +43,19 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa-solid fa-book"></i> <span>Gestión Docente</span></a>
+                        <a href="index.html" class="site_title"><i class="fa-solid fa-book"></i> <span>GestiÃ³n Docente</span></a>
                     </div>
 
                     <div class="clearfix"></div>
 
-                    <%@include file="diseño.jsp"%>
-
+                 <%@include file="diseño.jsp"%>
+                 
             <!-- page content -->
             <div class="right_col" role="main">
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Registrar escala de evaluación</h3>
+                            <h3>Registrar escala de Calificacion</h3>
                         </div>
 
                     </div>
@@ -65,7 +65,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Registros de escala de evaluación</h2>
+                                    <h2>Registros de escala </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -82,18 +82,27 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form class="" action="../Sl_EscalaCalificacion" method="post" novalidate>
+                                    <input
+                                    name = "opcion"
+                                    value = "1"
+                                    type= "hidden"
+                              />
+                                    
+                                    
+                                    
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Tipo de Calificación<span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Tipo Calificacion<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="calificacion" name="tipocalificacion" required="required" class="form-control ">
+												<input type="text" id="nombre" name="tipo_calificacion" required="required" class="form-control ">
 											</div>
 										</div>
+										
 										
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripcion: <span class="required">*</span>

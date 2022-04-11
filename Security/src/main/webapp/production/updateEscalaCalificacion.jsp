@@ -1,7 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    
+ 
+    
 <!DOCTYPE html>
 <html>
+
+<%
+
+Dt_escalaCalificacionDet dtescd = new Dt_escalaCalificacionDet();
+
+Dt_escalacalificacion dte = new Dt_escalacalificacion();
+
+ArrayList<Tbl_escalaCalificacion> listaEscala = new ArrayList<Tbl_escalaCalificacion>();
+Tbl_escalaCalificacion escala = new Tbl_escalaCalificacion();
+
+
+
+ArrayList<Tbl_escalaCalificacionDet> listaEscalaDet = new ArrayList<Tbl_escalaCalificacionDet>();
+Tbl_escalaCalificacionDet escalaDet = new Tbl_escalaCalificacionDet();
+
+
+
+
+String id = "";
+id = request.getParameter("m") == null ? "0" : request.getParameter("m");
+listaEscalaDet = dtescd.listaESCD_id(Integer.parseInt(id));
+escala = dte.getEscala(Integer.parseInt(id));
+
+
+String msj="";
+msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
+%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -55,7 +85,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Modificar escala de evalaución</h3>
+                            <h3>Modificar escala de Calificacion</h3>
                         </div>
 
                     </div>
@@ -82,33 +112,33 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form class="" action="../Sl_EscalaCalificacion" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
+
+												<input type="hidden" value="2" id="opcion" name="opcion"/>
+												
+												<input type="hidden" value="<%=id %>" id="id" name="id_escala"/>
+												<input type="hidden" value="updateEscalaCalificacion.jsp" name="frm" id="frm"/>
 											
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Escala: <span class="required">*</span></label>
+											<label class="col-form-label col-md-3 col-sm-3 label-align ">Tipo Calificacion: <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="idescala" name="idescala" class="form-control" readonly="readonly" placeholder="ID Escala">
+												<input type="text" id="tipo" name="tipo" class="form-control" value= "<%=escala.getTipo_calificacion() %>" placeholder="">
+											
 											</div>
 										</div>
 											
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Escala: <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripcion <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="escala" name="escala" required="required" class="form-control ">
+												<input type="text" id="desc" name="desc" required="required" value="<%=escala.getDescripcion() %>"class="form-control ">
 											</div>
 										</div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripcion: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" name="descripcion" required="required" class="form-control ">
-											</div>
-										</div>     
+										
                                         
                                         <div class="ln_solid">
                                             <div class="form-group">
@@ -124,15 +154,172 @@
                                 </div>
                             </div>
                         </div>
+                        
+                          </div>
+                            
+                        </div><div class="x_panel">
+										<div class="x_title">
+											<h2>Detalles de Escala Calificacion</h2>
+											<ul class="nav navbar-right panel_toolbox">
+												<li><a class="collapse-link"><i
+														class="fa fa-chevron-up"></i></a>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="x_content">
+											<div class="row">
+												<div class="col-md-12 col-sm-12">
+											<form class="" action="../Sl_escalaCalificacionDet" method="post" novalidate>
+												
+											   	<input type="hidden" value="<%=escala.getId_escala() %>"  name="id_escala" id="id" />
+											   	<input type="hidden" value="1" name="opcion" id="opcion"/>
+											   	<input type="hidden" value="1" name="estado" id="estado"/>
+											   	<input type="hidden" value="addEscalaCalificacionDet.jsp" name="frm" id="frm"/>
+											  
+														
+													<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Primer valor
+														<span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input value=""
+															class="form-control" name="val1" id="descr"/>
+<!-- 															placeholder="ex. escalas dentro del periodo 1S 2020"
+ -->															
+
+													</div>
+													</div>
+													
+													
+													<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Segundo valor
+														<span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input value=""
+															class="form-control" name="val2" id="val2"/>
+															<!--  placeholder="ex. escalas "-->
+															
+
+													</div>
+														</div>
+													<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Descripcion
+														<span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input value=""
+															class="form-control" name="desc" id="descr"/>
+															<!--  placeholder="ex. escalas "-->
+															
+
+													</div>
+													
+					
+					
+													</div>
+														
+					
+														<div class="ln_solid">
+				                                            <div class="form-group">
+				                                                <div class="col-md-6 offset-md-3">
+				                                                    <button type='submit' class="btn btn-primary">Guardar</button>
+				                                                    <a href="tbl_oferta.jsp" class="btn btn-success">Regresar</a>
+				                                                </div>
+				                                            </div>
+                                       					</div>
+												
+											</form>
+										</div>
+									</div>
+									</div>
+									</div>
+                        
+                        		<div class="x_panel">
+									<div class="x_title">
+										<h2>Escalas  Registradas</h2>
+
+										<div class="clearfix"></div>
+									</div>
+									<div class="x_content">
+										<div class="row">
+											<div class="col-sm-12">
+											
+
+													<table id="tbl_detalle"
+														class="table table-striped table-bordered dataTable facultad"
+														style="width: 100%">
+
+
+														<thead>
+															<tr>
+																<th>Valor 1</th>
+																<th>Valor 2</th>
+																<th>Descripcion</th>
+																<th>Acciones</th>
+															</tr>
+														</thead>
+
+														<tbody>
+
+															<%
+															for (Tbl_escalaCalificacionDet det : listaEscalaDet) {
+																String estado = "";
+																
+															%>
+															<tr>
+																<td><%=det.getValor1()%> </td>
+																<td><%=det.getValor2()%></td>
+																<td><%=det.getDescripcion()%></td>
+															
+																<td>
+											                           	<a href="updateEscalaCalificacionDet.jsp?m=<%=det.getId_escala()%>&d=<%=det.getId_det_escalaCalificacion()%>">
+											                            	<i class="far fa-edit fa-2x" title="Editar detalle de la oferta"></i>
+											                         	</a>
+											                          	&nbsp;&nbsp;
+											                          	<a href="readEscalaCalifacionDet.jsp?id=?m=<%=det.getId_escala()%>&d=<%=det.getId_det_escalaCalificacion()%>">
+											                            	<i class="far fa-eye fa-2x" title="Visualizar detalle de la oferta"></i>
+											                          	</a> 
+											                          	&nbsp;&nbsp;
+											                          	<a href="deleteEscalaCalificacionDet.jsp??m=<%=det.getId_escala()%>&d=<%=det.getId_det_escalaCalificacion()%>" >
+											                            	<i class="far fa-trash-alt fa-2x" title="Eliminar detalle de la oferta"></i>
+											                          	</a>
+	                          									</td>
+															</tr>
+															<%
+															}
+															%>
+														</tbody>
+
+														<tfoot>
+															<tr>
+																<th>Valor 1</th>
+																<th>Valor 2</th>
+																<th>Descripcion</th>
+																<th>Acciones</th>
+															</tr>
+														</tfoot>
+													</table>
+
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+                        
+                        
+                        
                     </div>
                     
                     
-                            </div>
-                            
-                        </div>
-                        <div class="col-md-6 col-sm-6 ">
-               
-              </div>
+                          
+                        
+               	<div class="col-md-6 col-sm-6 ">
+                </div>
                     </div>
                     
                  
@@ -222,7 +409,61 @@
                 event.preventDefault();
                 $(this).closest('tr').remove();
             });
+            
+             
         }
+        $(document).ready(function() {
+			$('#tbl_capacitaciones').DataTable({
+				buttons : [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
+				"dom" : '<"top"lf>rt<"bottom"ip><"clear">',
+				keys : true,
+
+				"lengthMenu" : [ 10, 25, 50, 75, 100 ],
+
+				"language" : {
+					"lengthMenu" : "Mostrar _MENU_ records por pagina",
+					"search" : "Buscar:",
+					"paginate" : {
+						"first" : "Primero",
+						"last" : "Ultimo",
+						"next" : "Siguiente",
+						"previous" : "Anterior"
+					},
+					"emptyTable" : "No existen datos en la tabla",
+					"zeroRecords" : "No existe un registro en la BD",
+					"info" : "Mostrando página _PAGE_ de _PAGES_",
+
+					"infoEmpty" : "No existe registro",
+					"infoFiltered" : "(filtered from _MAX_ total records)"
+				}
+			});
+
+			$('#tbl_detalle').DataTable({
+				buttons : [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
+				"dom" : '<"top"lf>rst<"bottom"ip><"clear">',
+				keys : true,
+
+				"lengthMenu" : [ 10, 25, 50, 75, 100 ],
+
+				"language" : {
+					"lengthMenu" : "Mostrar _MENU_ records por pagina",
+					"search" : "Buscar:",
+					"paginate" : {
+						"first" : "Primero",
+						"last" : "Ultimo",
+						"next" : "Siguiente",
+						"previous" : "Anterior"
+					},
+					"emptyTable" : "No existen datos en la tabla",
+					"zeroRecords" : "No existe un registro en la BD",
+					"info" : "Mostrando página _PAGE_ de _PAGES_",
+
+					"infoEmpty" : "No existe registro",
+					"infoFiltered" : "(filtered from _MAX_ total records)"
+				}
+			});
+		});
+        
     </script>
 
     <!-- jQuery -->

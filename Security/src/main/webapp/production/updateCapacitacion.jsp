@@ -2,6 +2,19 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+
+<%
+
+String cap = "";
+cap = request.getParameter("idC")==null?"0":request.getParameter("idC");
+						
+Tbl_capacitacion tu = new Tbl_capacitacion();
+Vw_capacitacion tu2 = new Vw_capacitacion();
+Dt_capacitacion dtu = new Dt_capacitacion();
+tu2 = dtu.getCapacitacionbyID(Integer.parseInt(cap));
+
+%>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -79,16 +92,29 @@ display:none;
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
-<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
-<!--                                         </p> -->
-<!--                                         <span class="section">Personal Info</span> -->
+                                    <form  action="../Sl_Capacitacion" method="post" novalidate>
+										<input type="hidden" value="2" name="opcion" id="opcion"/>
+                                    	<input type="hidden" value="<%=tu2.getId_capacitacion() %>" name="id_capacitacion" id="id_capacitacion"/>
 
+							<%
+ 
+		                     
+		                      		String evaluada= "";
+		                      	
+		                      		if(tu2.getEvaluada()!=0){
+		                      			evaluada= "Sera evaluada";
+		                      		}
+		                      		else{
+		                      			evaluada = "No sera evaluada";
+		                      		}
+		                      		
+// 		                      	
+		                      %>	
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Nombre <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombre" name="nombre" required="required" class="form-control ">
+												<input type="text" id="nombre" name="nombre" value = "<%=tu2.getNombre() %>" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -124,15 +150,15 @@ display:none;
 											</div>
 										</div>
 
-                                        <div class="item form-group">
+                                        <div class="item form-group" >
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="evaluada">Evaluacion <span class="required">*</span>
 											</label>
-											<div class="col-md-6 col-sm-6 ">
+											<div class="col-md-6 col-sm-6 " >
 												<select class="form-control js-example-basic-single" name="evaluada" id="evaluada" onchange="display()" required="required">
 								
-	                      	
+	                      					 <option  value = "">Seleccione...</option>
 	                      			             <option  value = "0">No será evaluada</option>
-												 <option value = "1">Será evaluada</option>
+												 <option  value = "1">Será evaluada</option>
 												  
 									
 									</select>
@@ -241,11 +267,9 @@ display:none;
 function display(){
 	var x = document.getElementById('evaluada').value;
 	
-	if(x == "1"){
-		document.getElementById('tipo').style.display="block";
-	} else if(x == "0"){
-	var x = document.getElementById('tipo').style.display="none";
-	}
+	if(x != "4"){
+		document.getElementById('tipo').style.display="none";
+	} 
 }
 </script>
     <!-- jQuery -->

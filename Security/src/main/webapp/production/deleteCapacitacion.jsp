@@ -2,6 +2,20 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+
+<%
+
+String cap = "";
+cap = request.getParameter("idC")==null?"0":request.getParameter("idC");
+						
+Tbl_capacitacion tu = new Tbl_capacitacion();
+Vw_capacitacion tu2 = new Vw_capacitacion();
+Dt_capacitacion dtu = new Dt_capacitacion();
+tu2 = dtu.getCapacitacionbyID(Integer.parseInt(cap));
+
+%>
+
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -73,126 +87,92 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
-<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
-<!--                                         </p> -->
-<!--                                         <span class="section">Personal Info</span> -->
+                                    <form  action="../Sl_Capacitacion" method="post" novalidate>
+                                    <input type="hidden" value="3" name="opcion" id="opcion"/>
+                                    	<input type="hidden" value="<%=tu2.getId_capacitacion() %>" name="id_capacitacion" id="id_capacitacion"/>
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="id_capacitacion">ID Capacitación <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" >
-											</div>
-										</div>
-
+							<%
+ 
+		                     
+		                      		String evaluada= "";
+		                      	
+		                      		if(tu2.getEvaluada()!=0){
+		                      			evaluada= "Si";
+		                      		}
+		                      		else{
+		                      			evaluada = "No";
+		                      		}
+		                      		
+// 		                      	
+		                      %>		
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Nombre <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" >
+												<input type="text" name="nombre" id="nombre" value="<%=tu2.getNombre() %>"class="form-control" readonly="readonly" >
 											</div>
 										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="estado" readonly="readonly" class="form-control " >
-											</div>
-										</div>
-										
-											<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="modalidad">Tipo Capacitacion <span class="readonly">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-											
-										<%-- 	  <%
-	                      			ArrayList<Tbl_modalidad> listaModalidad = new ArrayList<Tbl_modalidad>();
-	                      			Dt_modalidad dtmodalidad = new Dt_modalidad();
-	                      			listaModalidad = dtmodalidad.listaModalidadesActivas();
-	                      					%>--%>
-												
-									<select class="form-control js-example-basic-single" name="modalidad" id="modalidad" >
-									
-									
-									<option value="">Seleccione...</option>
-											<%--	  <% 
-												  	for(Tbl_modalidad mod :listaModalidad){
-												  %>
-												  <option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre()%></option>
-												  <%
-												  	}
-												  %>--%>
-										</select>
-	                      	
-	                      		
-		                      				
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="modalidad">Evaluada <span class="readonly">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-											
-						<%-- 						  <%
-	                      			ArrayList<Tbl_modalidad> listaModalidad = new ArrayList<Tbl_modalidad>();
-	                      			Dt_modalidad dtmodalidad = new Dt_modalidad();
-	                      			listaModalidad = dtmodalidad.listaModalidadesActivas();
-	                      					%>--%>
-												
-									<select class="form-control js-example-basic-single" name="evaluada" id="evaluada" >
-									
-									
-									<option value="">Seleccione...</option>
-<%-- 												  <%  
-												  	for(Tbl_modalidad mod :listaModalidad){
-												  %> 
- 												  <option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre()%></option> 
- 												  <% 
- 												  	}
- 												  %> --%>
-										</select>
-	                      	
-	                      		
-		                      				
-											</div>
-										</div>
-										
 										
 <!-- 										<div class="item form-group"> -->
-<!-- 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="Tipo Evaluacion">Tipo Evaluacion <span class="readonly">*</span> -->
+<!-- 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Tipo Capacitacion <span class="required">*</span> -->
 <!-- 											</label> -->
 <!-- 											<div class="col-md-6 col-sm-6 "> -->
-											
-<%-- <%-- 											  <%  --%>
-<%-- 	                      			ArrayList<Tbl_modalidad> listaModalidad = new ArrayList<Tbl_modalidad>(); --%>
-<%-- 	                      			Dt_modalidad dtmodalidad = new Dt_modalidad(); --%>
-<%-- 	                      			listaModalidad = dtmodalidad.listaModalidadesActivas(); --%>
-<%-- 	                      					%> --%> --%>
-												
-<!-- 									<select class="form-control js-example-basic-single" name="tipoevaluacion" id="tipoevaluacion" > -->
-									
-									
-<!-- 									<option value="">Seleccione...</option> -->
-<%-- 												  <%  
-<%-- 											  	for(Tbl_modalidad mod :listaModalidad){ --%>
-<%-- 												  %>  --%>
-<%-- 												  <option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre()%></option>  --%>
-<%-- 												  <%  --%>
-<%-- 												  	} --%>
-<%-- 												  %> --%> --%>
-<!-- 										</select> -->
-	                      	
-	                      		
-		                      				
+<%-- 												<input type="text" name="cbxTipoCap" id="cbxTipoCap" value="<%=tu2.getId_tipo_capacitacion() %>"class="form-control" readonly="readonly" > --%>
 <!-- 											</div> -->
 <!-- 										</div> -->
-				                                        
+										
+<!-- 										<div class="item form-group"> -->
+<!-- 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Evaluada <span class="required">*</span> -->
+<!-- 											</label> -->
+<!-- 											<div class="col-md-6 col-sm-6 "> -->
+<%-- 												<input type="text" name="evaluada" id="evaluada" value="<%=tu2.getEvaluada() %>"class="form-control" readonly="readonly" > --%>
+<!-- 											</div> -->
+<!-- 										</div> -->
+																														
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="cbxTipoCap">Tipo Capacitacion <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+											
+											  
+											
+								<select class="form-control js-example-basic-single" name="cbxTipoCap" id="cbxTipoCap" required="required" >
+																			
+												 
+												  <option value="<%=tu2.getId_tipo_capacitacion()%>"><%=tu2.getTipo_capacitacion()%></option>
+											
+									</select>
+	                      	
+	                      			
+	                     
+								
+		                      				
+											</div>
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="evaluada">Evaluada <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<select class="form-control js-example-basic-single" name="evaluada" id="evaluada" onchange="display()" required="required">
+								
+	                      	
+	                      			 <option value="<%=tu2.getEvaluada()%>"><%=evaluada%></option>
+							  
+									
+									</select>
+	                     
+											</div>											
+										</div>
+																																																		                                   
+										
+				          
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
-                								<a href="#" class="btn btn-danger">Eliminar</a>
+                								 <button type='submit' class="btn btn-danger">Eliminar</button>
+                								 <a class="btn btn-success" href="tbl_capacitacion.jsp">Cancelar</a>
+                								
                   							</div>
                                         </div>
                                     </form>

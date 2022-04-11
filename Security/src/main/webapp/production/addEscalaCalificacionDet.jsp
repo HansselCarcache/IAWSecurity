@@ -3,17 +3,27 @@
 <!DOCTYPE html>
 <html>
 <%
-ArrayList<Vw_ofertadet> listaOferta = new ArrayList<Vw_ofertadet>();
-Tbl_oferta oferta = new Tbl_oferta();
 
-Dt_oferta dto = new Dt_oferta();
-Dt_ofertadet dtod = new Dt_ofertadet();
+Dt_escalaCalificacionDet dtescd = new Dt_escalaCalificacionDet();
+
+Dt_escalacalificacion dte = new Dt_escalacalificacion();
+
+ArrayList<Tbl_escalaCalificacion> listaEscala = new ArrayList<Tbl_escalaCalificacion>();
+Tbl_escalaCalificacion escala = new Tbl_escalaCalificacion();
+
+
+
+ArrayList<Tbl_escalaCalificacionDet> listaEscalaDet = new ArrayList<Tbl_escalaCalificacionDet>();
+Tbl_escalaCalificacionDet escalaDet = new Tbl_escalaCalificacionDet();
+
+
+
 
 String id = "";
 id = request.getParameter("m") == null ? "0" : request.getParameter("m");
+listaEscalaDet = dtescd.listaESCD_id(Integer.parseInt(id));
+escala = dte.getEscala(Integer.parseInt(id));
 
-oferta = dto.getoferta(Integer.parseInt(id));
-listaOferta = dtod.listaOD_id(Integer.parseInt(id));
 
 String msj="";
 msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
@@ -25,7 +35,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Oferta | Registrar</title>
+<title>Escala Calificacion | Registrar</title>
 
 <!-- Bootstrap -->
 <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -96,7 +106,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 						<div class="">
 							<div class="page-title">
 								<div class="title_left">
-									<h3>Registrar Oferta</h3>
+									<h3>Registrar Escala</h3>
 								</div>
 
 							</div>
@@ -106,7 +116,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 								<div class="col-md-12 col-sm-12">
 									<div class="x_panel">
 										<div class="x_title">
-											<h2>Registros de ofertas</h2>
+											<h2>Registros de Escala</h2>
 											<ul class="nav navbar-right panel_toolbox">
 												<li><a class="collapse-link"><i
 														class="fa fa-chevron-up"></i></a></li>
@@ -118,67 +128,25 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 											<form class="" action="" method="post" novalidate>
 												<div class="field item form-group">
 													<label
-														class="col-form-label col-md-3 col-sm-3  label-align">Nombre
-														de Oferta <span class="required">*</span>
+														class="col-form-label col-md-3 col-sm-3  label-align">Tipo calificacion<span class="required">*</span>
 													</label>
 													<div class="col-md-6 col-sm-6">
 														<input class="form-control" name="name"
 															placeholder="ex. Primer Semestre 2020"
-															value="<%=oferta.getNombre()%>" readonly />
+															value="<%=escala.getTipo_calificacion()%>" readonly />
 
 													</div>
 												</div>
-
-												<div class="field item form-group">
-													<label
-														class="col-form-label col-md-3 col-sm-3  label-align">Fecha
-														Inicio <span class="required">*</span>
-													</label>
-													<div class="col-md-6 col-sm-6">
-														<input value="<%=oferta.getFecha_inicial()%>"
-															class="form-control" type="date" name="finicio"
-															id="finicio" placeholder="ex. Primer Semestre 2020"
-															readonly />
-
-													</div>
-												</div>
-
-												<div class="field item form-group">
-													<label
-														class="col-form-label col-md-3 col-sm-3  label-align">Fecha
-														Final <span class="required">*</span>
-													</label>
-													<div class="col-md-6 col-sm-6">
-														<input value="<%=oferta.getFecha_final()%>"
-															class="form-control" type="date" name="ffinal"
-															id="ffinal" placeholder="ex. Primer Semestre 2020"
-															readonly />
-
-													</div>
-												</div>
-
-												<div class="field item form-group">
-													<label
-														class="col-form-label col-md-3 col-sm-3  label-align">Año
-														<span class="required">*</span>
-													</label>
-													<div class="col-md-6 col-sm-6">
-														<input value="<%=oferta.getYear()%>" class="form-control"
-															name="periodo" id="periodo" placeholder="ex. 1S2020"
-															readonly />
-
-													</div>
-												</div>
-
-												<div class="field item form-group">
+												
+													<div class="field item form-group">
 													<label
 														class="col-form-label col-md-3 col-sm-3  label-align">Descripción
 														<span class="required">*</span>
 													</label>
 													<div class="col-md-6 col-sm-6">
-														<input value="<%=oferta.getDescripcion()%>"
+														<input value="<%=escala.getDescripcion()%>"
 															class="form-control" name="descr" id="descr"
-															placeholder="ex. ofertas dentro del periodo 1S 2020"
+															placeholder="ex. escalas dentro del periodo 1S 2020"
 															readonly />
 
 													</div>
@@ -200,7 +168,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 								<div class="col-md-12 col-sm-12">
 									<div class="x_panel">
 										<div class="x_title">
-											<h2>Detalles de oferta</h2>
+											<h2>Detalles de Escala Calificacion</h2>
 											<ul class="nav navbar-right panel_toolbox">
 												<li><a class="collapse-link"><i
 														class="fa fa-chevron-up"></i></a>
@@ -210,154 +178,60 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 										<div class="x_content">
 											<div class="row">
 												<div class="col-md-12 col-sm-12">
-											<form class="" action="../Sl_OfertaDet" method="post" novalidate>
-												<input type="hidden" value="<%=oferta.getFecha_inicial() %>" name="finicio" id="finicio"/>
-											   	<input type="hidden" value="<%=oferta.getFecha_final() %>"  name="ffinal" id="ffinal" />
+											<form class="" action="../Sl_escalaCalificacionDet" method="post" novalidate>
+												
+											   	<input type="hidden" value="<%=escala.getId_escala() %>"  name="id_escala" id="id" />
 											   	<input type="hidden" value="1" name="opcion" id="opcion"/>
 											   	<input type="hidden" value="0" name="estado" id="estado"/>
-											   	<input type="hidden" value="addOfertaDet.jsp" name="frm" id="frm"/>
-											   	<input type="hidden" value="<%=oferta.getId_oferta() %>" name="id_oferta" id="id_oferta"/>
-<%-- 									   <textarea onfocus="this.value = 'Mensaje en\ndos lineas'"><%="Mensaje en \n dos lineas" %></textarea> --%>
-												<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
-												<!--                                         </p> -->
-												<!--                                         <span class="section">Personal Info</span> -->
-												
-														<div class="field item form-group">
-															<label
-																class="col-form-label col-md-3 col-sm-3  label-align">Capacitación:<span
-																class="required">*</span></label>
-															<div class="col-md-6 col-sm-6">
-																<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-																<%
-																ArrayList<Tbl_capacitacion> listaCapacitacion = new ArrayList<Tbl_capacitacion>();
-																Dt_capacitacion dtu = new Dt_capacitacion();
-																listaCapacitacion = dtu.listacapacitacionesActivas();
-																%>
-																<select class="form-control js-example-basic-single"
-																	name="capacitacion" id="capacitacion"
-																	required="required">
-																	<option value="">Seleccione...</option>
-																	<%
-																	for (Tbl_capacitacion tc : listaCapacitacion) {
-																	%>
-																	<option value="<%=tc.getId_capacitacion()%>"><%=tc.getNombre()%></option>
-																	<%
-																	}
-																	%>
-																</select>
-															</div>
-														</div>
-														<div class="field item form-group">
-															<label
-																class="col-form-label col-md-3 col-sm-3  label-align">Facilitador:
-																<span class="required">*</span>
-															</label>
-															<div class="col-md-6 col-sm-6">
-																<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-																<%
-																ArrayList<Tbl_facilitadores> listFac = new ArrayList<Tbl_facilitadores>();
-																Dt_facilitadores dtrol = new Dt_facilitadores();
-																listFac = dtrol.listaFaciActivos();
-																%>
-																<select class="form-control js-example-basic-single"
-																	name="facilitador" id="facilitador" required="required">
-																	<option value="">Seleccione...</option>
-																	<%
-																	for (Tbl_facilitadores trol : listFac) {
-																	%>
-																	<option value="<%=trol.getId_facilitador()%>"><%=trol.getNombres()%></option>
-																	<%
-																	}
-																	%>
-																</select>
-															</div>
-														</div>
+											   	<input type="hidden" value="addEscalaCalificacionDet.jsp" name="frm" id="frm"/>
+											  
 														
-														<%-- <div class="field item form-group">
-															<label
-																class="col-form-label col-md-3 col-sm-3  label-align">Modalidad:
-																<span class="required">*</span>
-															</label>
-															<div class="col-md-6 col-sm-6">
-																<!--<input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-																<%
-																ArrayList<Tbl_modalidad> listMod = new ArrayList<Tbl_modalidad>();
-																Dt_modalidad dtmod = new Dt_modalidad();
-																listMod = dtmod.listaModalidadesActivas();
-																%>
-																<select class="form-control js-example-basic-single"
-																	name="modalidad" id="modalidad" required="required">
-																	<option value="">Seleccione...</option>
-																	<%
-																	for (Tbl_modalidad mod : listMod) {
-																	%>
-																	<option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre_modalidad() %></option>
-																	<%
-																	}
-																	%>
-																</select>
-															</div>
+													<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Primer valor
+														<span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input value=""
+															class="form-control" name="val1" id="descr"/>
+<!-- 															placeholder="ex. escalas dentro del periodo 1S 2020"
+ -->															
+
+													</div>
+													</div>
+													
+													
+													<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Segundo valor
+														<span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input value=""
+															class="form-control" name="val2" id="val2"/>
+															<!--  placeholder="ex. escalas "-->
+															
+
+													</div>
 														</div>
+													<div class="field item form-group">
+													<label
+														class="col-form-label col-md-3 col-sm-3  label-align">Descripcion
+														<span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6">
+														<input value=""
+															class="form-control" name="desc" id="descr"/>
+															<!--  placeholder="ex. escalas "-->
+															
 
-														<div class="item form-group">
-															<label
-																class="col-form-label col-md-3 col-sm-3 label-align">Fecha
-																inicio: <span class="required">*</span>
-															</label>
-															<div class="col-md-6 col-sm-6 ">
-																<input type="date" id="finiciod" name="finiciod"
-																	required="required" class="form-control ">
-															</div>
-														</div>
-
-														<div class="item form-group">
-															<label
-																class="col-form-label col-md-3 col-sm-3 label-align">Fecha
-																final: <span class="required">*</span>
-															</label>
-															<div class="col-md-6 col-sm-6 ">
-																<input type="date" id="ffinald" name="ffinald"
-																	required="required" class="form-control ">
-															</div>
-														</div>
-														<div class="item form-group">
-															<label
-																class="col-form-label col-md-3 col-sm-3 label-align">Días
-																de Asistencia: <span class="required">*</span>
-															</label>
-															<div class="col-md-6 col-sm-6 ">
-																<input type="text" id="dias" name="dias"
-																	required="required" class="form-control ">
-															</div>
-														</div>
-														<div class="item form-group">
-															<label
-																class="col-form-label col-md-3 col-sm-3 label-align">Descripcion
-																horaria: <span class="required">*</span>
-															</label>
-															<div class="col-md-6 col-sm-6 ">
-																<textarea id="horario" name="horario"
-																	required="required" class="form-control" name="message"></textarea>
-															</div>
-														</div>
-
-
-
-
-														<div class="field item form-group">
-															<label
-																class="col-form-label col-md-3 col-sm-3  label-align">Visibilidad:
-																<span class="required">*</span>
-															</label>
-															<div class="col-md-6 col-sm-6">
-																<select class="form-control js-example-basic-single"
-																	name="publico" id="publico" required="required">
-																	<option value="1">Mantener Privado</option>
-																	<option value="2">Hacer Publico</option>
-																</select>
-															</div>
-														</div> --%>
+													</div>
+													
+					
+					
+													</div>
 														
+					
 														<div class="ln_solid">
 				                                            <div class="form-group">
 				                                                <div class="col-md-6 offset-md-3">
@@ -378,7 +252,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 
 								<div class="x_panel">
 									<div class="x_title">
-										<h2>Escalas Registradas</h2>
+										<h2>Escalas  Registradas</h2>
 
 										<div class="clearfix"></div>
 									</div>
@@ -400,12 +274,9 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 
 														<thead>
 															<tr>
-																<th>Capacitacion</th>
-																<th>Facilitador</th>
-																<th>Duracion</th>
-																<th>Horario</th>
-																<th>Días de Asistencia</th>
-																<th>Visibilidad</th>
+																<th>Valor 1</th>
+																<th>Valor 2</th>
+																<th>Descripcion</th>
 																<th>Acciones</th>
 															</tr>
 														</thead>
@@ -413,31 +284,25 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 														<tbody>
 
 															<%
-															for (Vw_ofertadet to : listaOferta) {
+															for (Tbl_escalaCalificacionDet det : listaEscalaDet) {
 																String estado = "";
-																if (to.getPublico() == 1) {
-																	estado = "Privado";
-																} else {
-																	estado = "Publico";
-																}
+																
 															%>
 															<tr>
-																<td><%=to.getTipo_capacitacion()%> <%=to.getCapacitacion()%></td>
-																<td><%=to.getFacilitador()%></td>
-																<td>De <%=to.getFecha_inicio()%> a <%=to.getFecha_final()%></td>
-																<td><%=to.getDescripcion_horaria()%></td>
-																<td><%=to.getDias()%></td>
-																<td><%=estado%></td>
+																<td><%=det.getValor1()%> </td>
+																<td><%=det.getValor2()%></td>
+																<td><%=det.getDescripcion()%></td>
+															
 																<td>
-											                           	<a href="updateOfertaDet.jsp?m=<%=to.getId_oferta()%>&d=<%=to.getId_oferta_detalle()%>">
+											                           	<a href="updateOfertaDet.jsp?m=<%=det.getId_escala()%>&d=<%=det.getId_det_escalaCalificacion()%>">
 											                            	<i class="far fa-edit fa-2x" title="Editar detalle de la oferta"></i>
 											                         	</a>
 											                          	&nbsp;&nbsp;
-											                          	<a href="readOfertaDet.jsp?id=?m=<%=to.getId_oferta()%>&d=<%=to.getId_oferta_detalle()%>">
+											                          	<a href="readOfertaDet.jsp?id=?m=<%=det.getId_escala()%>&d=<%=det.getId_det_escalaCalificacion()%>">
 											                            	<i class="far fa-eye fa-2x" title="Visualizar detalle de la oferta"></i>
 											                          	</a> 
 											                          	&nbsp;&nbsp;
-											                          	<a href="deleteOfertaDet.jsp??m=<%=to.getId_oferta()%>&d=<%=to.getId_oferta_detalle()%>" >
+											                          	<a href="deleteOfertaDet.jsp??m=<%=det.getId_escala()%>&d=<%=det.getId_det_escalaCalificacion()%>" >
 											                            	<i class="far fa-trash-alt fa-2x" title="Eliminar detalle de la oferta"></i>
 											                          	</a>
 	                          									</td>
@@ -449,12 +314,9 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 
 														<tfoot>
 															<tr>
-																<th>Capacitación</th>
-																<th>Facilitador</th>
-																<th>Duración</th>
-																<th>Horario</th>
-																<th>Días de Asistencia</th>
-																<th>Visibilidad</th>
+																<th>Valor 1</th>
+																<th>Valor 2</th>
+																<th>Descripcion</th>
 																<th>Acciones</th>
 															</tr>
 														</tfoot>

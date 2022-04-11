@@ -150,15 +150,15 @@
                           <td><%=tcap.getTipo_capacitacion() %></td>
                           <td><%=evaluada %></td>
                           <td>
-                           <a href="updateCapacitacion.jsp">
+                           <a href="updateCapacitacion.jsp?idC=<%=tcap.getId_capacitacion() %>">
                             <i class="far fa-edit" title="Editar Capacitación"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readCapacitacion.jsp">
+                          <a href="readCapacitacion.jsp?idC=<%=tcap.getId_capacitacion() %>">
                             <i class="far fa-eye" title="Visualizar Capacitación"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteCapacitacion.jsp" >
+                          <a href="deleteCapacitacion.jsp?idC=<%=tcap.getId_capacitacion() %>" >
                             <i class="far fa-trash-alt" title="Eliminar Capacitación"></i>
                           </a>
                           </td>

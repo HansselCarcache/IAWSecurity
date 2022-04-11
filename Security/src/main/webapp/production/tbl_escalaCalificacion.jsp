@@ -96,8 +96,8 @@
                     
                     <%
                     		ArrayList<Tbl_escalaCalificacion> listaEscalaCalificacion = new ArrayList<Tbl_escalaCalificacion>();
-              				Dt_escalacalificacion dtecl = new Dt_escalacalificacion();
-              				listaEscalaCalificacion = dtecl.listaEscalaActivo();
+              				Dt_escalacalificacion escala = new Dt_escalacalificacion();
+              				listaEscalaCalificacion = escala.listaEscalaActivo();
                       %>
                     
                       <thead>
@@ -114,7 +114,7 @@
 
                       <tbody>
                       	<%
-                      		for(Tbl_escalaCalificacion tecl :listaEscalaActivo){
+                      		for(Tbl_escalaCalificacion tecl :listaEscalaCalificacion){
                       			String estado= "";
                       			if(tecl.getEstado()!=3){
                       				estado= "Activo";
@@ -132,15 +132,15 @@
                           <td><%=tecl.getDescripcion() %></td>
                           <td><%=estado %></td>
                           <td>
-                           <a href="updateEscalaCalificacion.jsp">
+                           <a href="updateEscalaCalificacion.jsp?m=<%=tecl.getId_escala() %>">
                             <i class="far fa-edit" title="Editar Opciones"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readEscalaCalificacion.jsp">
+                          <a href="readEscalaCalificacion.jsp?m=<%=tecl.getId_escala() %>">
                             <i class="far fa-eye" title="Visualizar Opciones"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteEscalaCalificacion.jsp" >
+                          <a href="deleteEscalaCalificacion.jsp?m=<%=tecl.getId_escala() %>">
                             <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
                           </a>
                           </td>
