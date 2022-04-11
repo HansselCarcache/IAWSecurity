@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Tbl_escalaCalificacion;
+import entidades.Tbl_escalaCalificacionDet;
 import entidades.Tbl_inscripcion;
 import entidades.Vw_evaluacion;
 import entidades.Vw_inscripcion;
@@ -17,14 +18,13 @@ public class Dt_evaluacion {
 		poolConexion pc = poolConexion.getInstance();
 		Connection c = null;
 		private ResultSet rsIncripcion = null;
-		private ResultSet rsInc = null;
 		private ResultSet rs = null;
 		private PreparedStatement ps = null;
 		
 		//Metodo para llenar el ResultSet para insert, update y delete
 		public void llenaRsInscripcion(Connection c) {
 			try {
-				ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_evaluacion;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				ps = c.prepareStatement("SELECT * FROM gestion_docente.inscripcion;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 				rsIncripcion = ps.executeQuery();
 				
 			}
@@ -126,6 +126,52 @@ public class Dt_evaluacion {
 			return cedula;
 		}
 		
-		
+		public ArrayList<Tbl_escalaCalificacionDet> listAllEscDet(){
+			ArrayList<Tbl_escalaCalificacionDet> lted = new ArrayList<Tbl_escalaCalificacionDet>();
+			try{
+				c = poolConexion.getConnection(); //obtenemos una PoolConexion del pool
+				ps = c.prepareStatement("SELECT *  from gestion_docente.det_escalacalificacion where estado<>3 order by id_escala;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				rs = ps.executeQuery();
+				
+				while(rs.next()){
+					Tbl_escalaCalificacionDet ted = new Tbl_escalaCalificacionDet(); //instanciamos a rol
+					ted.setId_det_escalaCalificacion(rs.getInt("id_det_escalaCalificacion"));
+					ted.setValor1(rs.getString("valor1"));
+					ted.setValor2(rs.getString("valor2"));
+					ted.setDescripcion(rs.getString("descripcion"));
+					ted.setId_escala(rs.getInt("id_escala"));
+					
+					lted.add(ted);
+				}
+				
+				
+				
+			}
+			catch (Exception e){
+				System.out.println("DATOS: ERROR EN listAllEscDet(): "+ e.getMessage());
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						poolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+			
+			return lted;
+		}
 	
 }

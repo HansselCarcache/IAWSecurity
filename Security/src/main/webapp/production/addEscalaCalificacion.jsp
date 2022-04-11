@@ -99,7 +99,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Tipo Calificacion<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombre" name="tipo_calificacion" required="required" class="form-control ">
+												<input type="text" id="nombre" name="tipo" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -108,7 +108,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripcion: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" name="descripcion" required="required" class="form-control ">
+												<input type="text" id="descripcion" name="desc" required="required" class="form-control ">
 											</div>
 										</div>
 										

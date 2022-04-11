@@ -236,7 +236,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 				                                            <div class="form-group">
 				                                                <div class="col-md-6 offset-md-3">
 				                                                    <button type='submit' class="btn btn-primary">Guardar</button>
-				                                                    <a href="tbl_oferta.jsp" class="btn btn-success">Regresar</a>
+				                                                    <a href="tbl_escalaCalificacion.jsp" class="btn btn-success">Regresar</a>
 				                                                </div>
 				                                            </div>
                                        					</div>

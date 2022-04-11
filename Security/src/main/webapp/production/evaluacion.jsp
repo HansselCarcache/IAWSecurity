@@ -4,6 +4,12 @@
 <!DOCTYPE html>
 <html>
 <%
+//CONSTRUCTOR DE OBJETOS
+Dt_evaluacion dte = new Dt_evaluacion();
+ArrayList<Tbl_escalaCalificacionDet> listed = new ArrayList<Tbl_escalaCalificacionDet>();
+
+listed = dte.listAllEscDet();
+
 ArrayList<ArrayList<String>> listas = new ArrayList<ArrayList<String>>();
 	
 	ArrayList<String> lista1 = new ArrayList<String>();
@@ -329,11 +335,11 @@ ArrayList<ArrayList<String>> listas = new ArrayList<ArrayList<String>>();
    			if(id==2){
    				$('#t_cual').empty();
    				<%
-   	   			for(String as: lista1){
+   	   			for(Tbl_escalaCalificacionDet as: listed){
    	   			%>
    	   				$('#t_cual').append($('<option>', {
    	   	    			value: 1,
-   	   	    			text: '<%=as%>'
+   	   	    			text: '<%=as.getValor1()%>'
    	   				}));
    	   				
    	   			<%}%>	
