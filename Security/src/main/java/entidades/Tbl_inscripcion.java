@@ -7,12 +7,17 @@ public class Tbl_inscripcion {
 	
 	private int id_inscripcion;
 	private int id_usuario;
-	private int id_facultad;
-	private int id_departamento;
-	private int id_carrera;
+	private String nombre_completo;
+	private String telefono;
+	private String correo;
+	private String otras_dependencias;
 	private String fecha_inscripcion;
 	private int id_oferta_detalle;
 	private int id_escala;
+	private int id_escala_det;
+	private String valor;
+	private String desc_valor;
+	private int estado;
 	
 	//Methods
 	
@@ -28,24 +33,7 @@ public class Tbl_inscripcion {
 	public void setId_usuario(int id_usuario) {
 		this.id_usuario = id_usuario;
 	}
-	public int getId_facultad() {
-		return id_facultad;
-	}
-	public void setId_facultad(int id_facultad) {
-		this.id_facultad = id_facultad;
-	}
-	public int getId_departamento() {
-		return id_departamento;
-	}
-	public void setId_departamento(int id_departamento) {
-		this.id_departamento = id_departamento;
-	}
-	public int getId_carrera() {
-		return id_carrera;
-	}
-	public void setId_carrera(int id_carrera) {
-		this.id_carrera = id_carrera;
-	}
+	
 	public String getFecha_inscripcion() {
 		return fecha_inscripcion;
 	}
@@ -64,5 +52,54 @@ public class Tbl_inscripcion {
 	public void setId_escala(int id_escala) {
 		this.id_escala = id_escala;
 	}
+	public String getNombre_completo() {
+		return nombre_completo;
+	}
+	public void setNombre_completo(String nombre_completo) {
+		this.nombre_completo = nombre_completo;
+	}
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+	public String getCorreo() {
+		return correo;
+	}
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+	public String getOtras_dependencias() {
+		return otras_dependencias;
+	}
+	public void setOtras_dependencias(String otras_dependencias) {
+		this.otras_dependencias = otras_dependencias;
+	}
+	public int getId_escala_det() {
+		return id_escala_det;
+	}
+	public void setId_escala_det(int id_escala_det) {
+		this.id_escala_det = id_escala_det;
+	}
+	public String getValor() {
+		return valor;
+	}
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
+	public String getDesc_valor() {
+		return desc_valor;
+	}
+	public void setDesc_valor(String desc_valor) {
+		this.desc_valor = desc_valor;
+	}
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+	
 	
 }

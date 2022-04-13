@@ -6,28 +6,42 @@
 <%
 //CONSTRUCTOR DE OBJETOS
 Dt_evaluacion dte = new Dt_evaluacion();
-ArrayList<Tbl_escalaCalificacionDet> listed = new ArrayList<Tbl_escalaCalificacionDet>();
+Dt_escalacalificacion des = new Dt_escalacalificacion();
 
+ArrayList<ArrayList<Tbl_escalaCalificacionDet>> listed = new ArrayList<ArrayList<Tbl_escalaCalificacionDet>>();
+ArrayList<Tbl_escalaCalificacion> liste =  new ArrayList<Tbl_escalaCalificacion>();
+
+
+liste=des.listaEscalaActivo();
 listed = dte.listAllEscDet();
 
-ArrayList<ArrayList<String>> listas = new ArrayList<ArrayList<String>>();
+ArrayList<Tbl_escalaCalificacionDet> lista1 = new ArrayList<Tbl_escalaCalificacionDet>();
+ArrayList<Tbl_escalaCalificacionDet> lista2 = new ArrayList<Tbl_escalaCalificacionDet>();
+ArrayList<Tbl_escalaCalificacionDet> lista3 = new ArrayList<Tbl_escalaCalificacionDet>();
+
+for(ArrayList<Tbl_escalaCalificacionDet> ls:listed){
 	
-	ArrayList<String> lista1 = new ArrayList<String>();
-	lista1.add("a");
-	lista1.add("b");
-	lista1.add("c");
-	
-	ArrayList<String> lista2 = new ArrayList<String>();
-	lista2.add("d");
-	lista2.add("e");
-	lista2.add("f");
-	
-	ArrayList<String> lista3 = new ArrayList<String>();
-	
-	listas.add(lista1);
-	listas.add(lista2);
-	listas.add(lista3);
-	
+	for(Tbl_escalaCalificacionDet ed: ls){
+		
+		if(ed.getId_escala() == 1){
+			lista1.add(ed);	
+		}
+		if(ed.getId_escala()==2){
+			lista2.add(ed);
+		}
+		
+		if(ed.getId_escala()==3){
+			lista3.add(ed);
+		}
+		
+		System.out.print(ed.getId_escala());
+	}
+}
+	System.out.print("LOG:");
+	System.out.print(lista1);
+	System.out.print(lista2);
+	System.out.print(lista3);
+
 	
 	int usuario = 2; 
 %>
@@ -151,15 +165,15 @@ ArrayList<ArrayList<String>> listas = new ArrayList<ArrayList<String>>();
                         %>
                         <td><%=ins.getTipo_calificacion() %></td>
                        
-                        <td><%=ins.getValor1() %></td>
+                        <td><%=ins.getValorIns()%><br>///////<br><%=ins.getDescIns()%></td>
                         <td>
-							<a data-toggle="modal" data-target=".bs-example-modal-lg" target="blank"><i class="fa fa-2x fa-check" title="Evaluar Docente"></i></a>
-							<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+							<a data-toggle="modal" data-target=".bs-example-modal-lg<%=ins.getId_inscripcion() %>" target="blank"><i class="fa fa-2x fa-check" title="Evaluar Docente"></i></a>
+							<div class="modal fade bs-example-modal-lg<%=ins.getId_inscripcion() %>" tabindex="-1" role="dialog" aria-hidden="true">
 		                      <div class="modal-dialog modal-lg">
 		                        <div class="modal-content">
 		
 		                        <div class="modal-header">
-		                          <h4 class="modal-title" id="myModalLabel">Evaluacion</h4>
+		                          <h4 class="modal-title" id="myModalLabel">Evaluacion a <%=ins.getEstudiante() %></h4>
 		                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 		                          </button>
 		                        </div>
@@ -167,57 +181,73 @@ ArrayList<ArrayList<String>> listas = new ArrayList<ArrayList<String>>();
 		                        
 		                        	<div class="col-md-12 col-sm-12">
 		                        		
-										<form class="" action="" method="post" novalidate>
-<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
-<!--                                         </p> -->
-<!--                                         <span class="section">Personal Info</span> -->
-										<div class="modal-body">
-										<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Tipo de Calificación: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-<%-- <%-- 												<% --%> 
-<!-- // 							                      	ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>(); -->
-<!-- // 							                      	Dt_usuario dtu = new Dt_usuario(); -->
-<!-- // 							                      	listaUsuario = dtu.listaUserActivos(); -->
-<!-- // 							                      	//onChange="mostrar_cualitativa()"  -->
-<%-- <%-- 								                 %> --%> 
-												<select onchange="mostrar_cualitativa()" class="form-control js-example-basic-single" name="cbxUser" id="tipo_cal" required="required">
-												  <option value="0">Seleccione...</option>
-												  <option value="1">Cuantitativa</option>
-												  <option value="2">Cualitativa</option>
-												  <option value="3">Semi</option>
-												 
-												  
-												  
-												</select>
-                                            </div>
-                                        </div>
-										
-										
-                                        <div style="display:none;" class="field item form-group" id="ev_cualitativa">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Calificación Cualitativa: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-								                 <select  class="form-control js-example-basic-single" name="t_cual" id="t_cual" required="required">
-												</select>
-											</div>
-                                        </div>
+										<form class="" action="../Sl_Evaluacion" method="post" novalidate>
+											<input id="opcion" type="hidden" name="opcion" value="1">
+											<input id="id" class="form-control" value="<%=ins.getId_inscripcion() %>" type="hidden" name="id">
+	<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
+	<!--                                         </p> -->
+	<!--                                         <span class="section">Personal Info</span> -->
+											<div class="modal-body">
+											<div class="field item form-group">
+	                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Tipo de Calificación: <span class="required">*</span></label>
+	                                            <div class="col-md-6 col-sm-6">
+	<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
+	<%-- <%-- 												<% --%> 
+	<!-- // 							                      	ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>(); -->
+	<!-- // 							                      	Dt_usuario dtu = new Dt_usuario(); -->
+	<!-- // 							                      	listaUsuario = dtu.listaUserActivos(); -->
+	<!-- // 							                      	//onChange="mostrar_cualitativa()"  -->
+	<%-- <%-- 								                 %> --%> 
+													<select onchange="mostrar_cualitativa(<%=ins.getId_inscripcion() %>)" class="form-control js-example-basic-single" name="tipo_cal<%=ins.getId_inscripcion() %>" id="tipo_cal<%=ins.getId_inscripcion() %>" required="required">
+													  <option value="0">Seleccione...</option>
+													  
+													  <%for(Tbl_escalaCalificacion ec:liste){ %>
+													  		<option value="<%=ec.getId_escala()%>"><%=ec.getTipo_calificacion() %></option>
+													  <%} %>
+													</select>
+	                                            </div>
+	                                        </div>
+											
+											
+	                                        <div style="display:none;" class="field item form-group" id="ev_cualitativa<%=ins.getId_inscripcion() %>">
+	                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Calificación Cualitativa: <span class="required">*</span></label>
+	                                            <div class="col-md-6 col-sm-6">
+	<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+									                 <select onchange="init(<%=ins.getId_inscripcion() %>)" class="form-control js-example-basic-single" name="t_cual<%=ins.getId_inscripcion() %>" id="t_cual<%=ins.getId_inscripcion() %>" required="required">
+													</select>
+													<div style="display:none;" class="field item form-group" id="ev_cualitativa">
+														<select class="form-control js-example-basic-single" name="descr" id="descr<%=ins.getId_inscripcion() %>" required="required">
+														</select>
+													</div>
+													<input id="valor<%=ins.getId_inscripcion() %>" type="hidden" name="valor<%=ins.getId_inscripcion() %>">
+													
+												</div>
+	                                        </div>
+	                                        <div style="display:none;" id="ev_cuantitativa<%=ins.getId_inscripcion() %>">
+		                                        <div class="item form-group" >
+													<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Calificación</label>
+													<div class="col-md-6 col-sm-6 ">
+														<input id="calificacion<%=ins.getId_inscripcion() %>" class="form-control" type="number" name="calificacion<%=ins.getId_inscripcion() %>">
+													</div>
+													
+													
+												</div>
+												<div class="item form-group" >
+													<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Descripcion:</label>
+													<div class="col-md-6 col-sm-6 ">
+														<input id="descripcion<%=ins.getId_inscripcion() %>" class="form-control" type="text" name="descripcion<%=ins.getId_inscripcion() %>">
+													</div>
+													
+													
+												</div>
+	                                        </div>
+	                                        </div>
+	
+	                                        <div class="modal-footer">
+			                          			<button type="submit" class="btn btn-primary">Guardar Cambios</button>
+			                      			</div>
                                         
-                                        <div style="display:none;" class="item form-group" id="ev_cuantitativa">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Calificación</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="calificacion" class="form-control" type="text" name="calificacion">
-											</div>
-										</div>
-                                        
-                                        </div>
-
-                                        <div class="modal-footer">
-		                          			<button type="button" class="btn btn-primary">Guardar Cambios</button>
-		                      			</div>
-                                        
-                                    </form>                     	
+                                    	</form>                     	
 		                        	</div>
 		                        </div>
 		                       
@@ -263,6 +293,8 @@ ArrayList<ArrayList<String>> listas = new ArrayList<ArrayList<String>>();
       </div>
     </div>
 
+	  </div>
+	</div>
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -307,13 +339,29 @@ ArrayList<ArrayList<String>> listas = new ArrayList<ArrayList<String>>();
    	   	table.columns( [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ] ).visible( true, true );
    	}
    	
-   	function mostrar_cualitativa(){
-   		var $select = document.getElementById('t_cual');
-   		//$select.empty();
-   		var cuali = document.getElementById('ev_cualitativa');
-   		var cuanti = document.getElementById('ev_cuantitativa');
+   	function init(x){
    		
-   		var id = $("#tipo_cal :selected").val()
+		
+   		var text =  $("#t_cual"+x+" :selected").text();
+   		var id = $("#t_cual"+x+" :selected").val();
+   		
+   		$("#descr"+x).val(id);
+   		$("#valor"+x).val(text);
+   		
+   		var text2 = $("#descr"+x+" :selected").text();
+   		
+   		$("#descripcion"+x).val(text2);
+   	}
+   	
+   	function mostrar_cualitativa(x){
+   		
+   		
+   		var $select = document.getElementById('t_cual'+x);
+   		//$select.empty();
+   		var cuali = document.getElementById('ev_cualitativa'+x);
+   		var cuanti = document.getElementById('ev_cuantitativa'+x);
+   		var id = $("#tipo_cal"+x).val();
+   		
    		
    		if(id == 0)
    		{
@@ -328,35 +376,72 @@ ArrayList<ArrayList<String>> listas = new ArrayList<ArrayList<String>>();
 		}
    		
    		
-   		if(id != 1 && id !=0)
+   		
+   		
+   		if(id != 3 && id !=0)
    		{
    	//		$select.empty();
    			
-   			if(id==2){
-   				$('#t_cual').empty();
+   			if(id==1){
+   				$('#t_cual'+x).empty();
+   				$('#descr'+x).empty();
+   				
+   				$('#t_cual'+x).append($('<option>', {
+	    			value: 0,
+	    			text: "Seleccione..."
+	   			}));
+   				
+   				$('#descr'+x).append($('<option>', {
+	    			value: 0,
+	    			text: "Seleccione..."
+	   			}));
    				<%
-   	   			for(Tbl_escalaCalificacionDet as: listed){
+   	   			for(Tbl_escalaCalificacionDet as: lista1){
    	   			%>
-   	   				$('#t_cual').append($('<option>', {
-   	   	    			value: 1,
-   	   	    			text: '<%=as.getValor1()%>'
+   	   				$('#t_cual'+x).append($('<option>', {
+		    			value: <%=as.getId_det_escalaCalificacion()%>,
+		    			text: '<%=as.getValor1()%> - <%=as.getValor2()%>'
    	   				}));
    	   				
-   	   			<%}%>	
-   			}
-   			
-   			if(id==3){
-   				$('#t_cual').empty();
-   				<%
-   	   			for(String as: lista2){
-   	   			%>
-   	   				
-   	   				$('#t_cual').append($('<option>', {
-	   	    			value: 1,
-	   	    			text: '<%=as%>'
+   	   				$('#descr'+x).append($('<option>', {
+		    			value: <%=as.getId_det_escalaCalificacion()%>,
+		    			text: '<%=as.getDescripcion()%>'
 	   				}));
-   	   			<%}%>	
+   	   				
+   	   			<%}%>
+   	   			
    			}
+   			if(id==2){
+				$('#t_cual'+x).empty();
+				$('#descr'+x).empty();
+				
+				$('#t_cual'+x).append($('<option>', {
+	    			value: 0,
+	    			text: "Seleccione..."
+	   			}));
+				
+				$('#descr'+x).append($('<option>', {
+	    			value: 0,
+	    			text: "Seleccione..."
+	   			}));
+				<%
+	   			for(Tbl_escalaCalificacionDet as: lista2){
+	   			%>
+	   				
+	   			$('#t_cual'+x).append($('<option>', {
+	   					value: <%=as.getId_det_escalaCalificacion()%>,
+		    			text: '<%=as.getValor1()%> - <%=as.getValor2()%>'
+   				}));
+	   			
+	   			$('#descr'+x).append($('<option>', {
+	    			value: <%=as.getId_det_escalaCalificacion()%>,
+	    			text: '<%=as.getDescripcion()%>'
+   				}));
+	   			<%}%>	
+			}
+   			
+   			
+   			
    			
    			if (cuali.style.display === "none") 
    			{
@@ -369,18 +454,19 @@ ArrayList<ArrayList<String>> listas = new ArrayList<ArrayList<String>>();
    	   	    }
    		}
 
-		if(id==1)
-   		{
-//    			$select.empty();
-   			if (cuanti.style.display === "none") {
-   	   	    	cuanti.style.display = "block";
-   	   	    }
-   			
-   			if (cuali.style.display === "block") 
-   			{
-   	   	    	cuali.style.display = "none";
-   	   	    }
-   		}
+   		if(id==3)
+	   		{
+   			$("#descripcion"+x).val("");
+//	    			$select.empty();
+	   			if (cuanti.style.display === "none") {
+	   	   	    	cuanti.style.display = "block";
+	   	   	    }
+	   			
+	   			if (cuali.style.display === "block") 
+	   			{
+	   	   	    	cuali.style.display = "none";
+	   	   	    }
+	   		}
    	    
    	}
    	

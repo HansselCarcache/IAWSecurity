@@ -10,6 +10,8 @@ public class Vw_evaluacion {
 	private String tipo_calificacion;
 	private String descripcion ;
 	private String descr_det;
+	private String valorIns ;
+	private String descIns ;
 	private String valor1 ; 
 	private String valor2 ;
 	private String convocatoria ;
@@ -19,6 +21,18 @@ public class Vw_evaluacion {
 	private String cedula ;
 	
 	
+	public String getValorIns() {
+		return valorIns;
+	}
+	public void setValorIns(String valorIns) {
+		this.valorIns = valorIns;
+	}
+	public String getDescIns() {
+		return descIns;
+	}
+	public void setDescIns(String descIns) {
+		this.descIns = descIns;
+	}
 	public int getId_inscripcion() {
 		return id_inscripcion;
 	}
