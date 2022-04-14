@@ -2,6 +2,14 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+<%
+String roluser = "";
+roluser = request.getParameter("idRU")==null?"0":request.getParameter("idRU");
+
+Vw_userrol tusr = new Vw_userrol();
+Dt_roluser dtusr = new Dt_roluser();
+tusr = dtusr.getRoluserbyID(Integer.parseInt(roluser));
+%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -73,15 +81,16 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form action="../Sl_gestionUserRol" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
+										<input type="hidden" value="3" name="opcion" id="opcion"/>
 
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Rol Usuario<span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="ID Rol Usuario">
+												<input type="text" id="idrolu" name="idrolu" class="form-control" placeholder="ID Rol Usuario">
 											</div>
 										</div>
 										
@@ -94,7 +103,7 @@
 							                      	Dt_usuario dtu = new Dt_usuario();
 							                      	listaUsuario = dtu.listaUserActivos();
 								                 %>
-												<select class="form-control js-example-basic-single" disabled name="cbxUser" id="cbxUser" >
+												<select class="form-control js-example-basic-single" name="cbxUser" id="cbxUser" >
 												  <option value="">Seleccione...</option>
 												  <% 
 												  	for(Tbl_user tu :listaUsuario){
@@ -116,12 +125,12 @@
 							                      	Dt_rol dtr = new Dt_rol();
 							                      	listRol = dtr.listaRolActivos();
 								                 %>
-								                 <select class="form-control js-example-basic-single" disabled name="cbxRol" id="cbxRol" >
+								                 <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" >
 												  <option value="">Seleccione...</option>
 												  <% 
 												  	for(Tbl_rol trol :listRol){
 												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
+												  <option value="<%=trol.getId_rol()%>"><%=trol.getNombre_rol()%></option>
 												  <%
 												  	}
 												  %>
@@ -134,9 +143,12 @@
                                         
                                         
                                         <div class="ln_solid">
-                                            <div class="col-md-6 offset-md-3">
-                								<button type='reset' class="btn btn-danger">Eliminar</button>
-                  							</div>
+                                            <div class="form-group">
+                                                <div class="col-md-6 offset-md-3">
+                                                    <button type='submit' class="btn btn-danger">Eliminar</button>
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -207,8 +219,25 @@
                 $('form .alert').remove();
         }).prop('checked', false);
         
+        function setValores()
+        {
+        	
+        	document.getElementById("idrolu").value = "<%=tusr.getId_rol_usuario()%>"
+        	document.getElementById("cbxUser").value = '<%=tusr.getId_usuario()%>'
+        	document.getElementById("cbxUser").text = '<%=tusr.getId_usuario()%>'
+        	$("#cbxUser").select2()	
+        	document.getElementById("cbxRol").value = '<%=tusr.getId_rol()%>'
+        	document.getElementById("cbxRol").text = '<%=tusr.getRol()%>'	 
+        	$("#cbxRol").select2()	
+ 
+        	
+        	
+        }
+        
+        
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+            setValores();
         });
     </script>
 

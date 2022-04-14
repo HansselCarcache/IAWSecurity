@@ -73,10 +73,11 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form action="../Sl_gestionUserRol" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
+										<input type="hidden" value="1" name="opcion" id="opcion"/>
 
 										<div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Usuario: <span class="required">*</span></label>
@@ -115,7 +116,7 @@
 												  <% 
 												  	for(Tbl_rol trol :listRol){
 												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
+												  <option value="<%=trol.getId_rol()%>"><%=trol.getNombre_rol()%></option>
 												  <%
 												  	}
 												  %>

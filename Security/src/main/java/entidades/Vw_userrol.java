@@ -8,6 +8,7 @@ public class Vw_userrol {
 	private String usuario;
 	private int id_rol;
 	private String rol;
+	private int estado;
 	
 	//metodos
 	public int getId_rol_usuario() {
@@ -40,6 +41,13 @@ public class Vw_userrol {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+	
 	
 	
 	

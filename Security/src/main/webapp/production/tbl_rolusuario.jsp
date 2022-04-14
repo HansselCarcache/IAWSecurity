@@ -126,16 +126,16 @@
                           
                           <td><%=rus.getRol() %></td>
                           <td>
-                           <a href="updateRoluser.jsp">
-                            <i class="far fa-edit" title="Editar Opciones"></i>
+                           <a href="updateRoluser.jsp?idRU=<%=rus.getId_rol_usuario()%>">
+                            <i class="far fa-edit" title="Editar Rol Usuario"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readRoluser.jsp">
-                            <i class="far fa-eye" title="Visualizar Opciones"></i>
+                          <a href="readRoluser.jsp?idRU=<%=rus.getId_rol_usuario()%>">
+                            <i class="far fa-eye" title="Visualizar Rol Usuario"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteRoluser.jsp" >
-                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
+                          <a href="deleteRoluser.jsp?idRU=<%=rus.getId_rol_usuario()%>">
+                            <i class="far fa-trash-alt" title="Eliminar Rol Usuario"></i>
                           </a>
                           </td>
                           

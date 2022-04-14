@@ -135,12 +135,12 @@
                           
                           <td><%=tusr.getId_uca() %></td>
                           <td><%=tusr.getNombre_usuario() %></td>
-                          <td><%=tusr.getNombres()+" "+tusr.getApellidos() %></td>
+                          <td><%=tusr.getNombre_real()%></td>
                           <td><%=tusr.getSexo() %></td>
                           <td><%=tusr.getTelefono_contacto() %></td>
                           <td><%=tusr.getCargo() %></td>
                           <td><%=tusr.getCorreo_personal() %></td>
-                          <td><%=tusr.getId_carrera() %></td>
+                          <td></td>
                           <td><%=estado %></td>
                           <td>
                            <a href="updateUsuario.jsp">
