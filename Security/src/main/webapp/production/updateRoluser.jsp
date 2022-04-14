@@ -146,7 +146,7 @@ tusr = dtusr.getRoluserbyID(Integer.parseInt(roluser));
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
                                                     <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
+                                                    <a href="tbl_rolusuario.jsp" class="btn btn-danger">Cancelar</a>
                                                 </div>
                                             </div>
                                         </div>

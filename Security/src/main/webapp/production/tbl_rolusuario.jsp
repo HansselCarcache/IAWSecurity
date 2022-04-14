@@ -4,7 +4,7 @@
 <%
 String VarMsj = "";
 
-	VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 
 
 %>

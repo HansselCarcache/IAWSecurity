@@ -93,7 +93,7 @@
 												  <% 
 												  	for(Tbl_user tu :listaUsuario){
 												  %>
-												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_usuario()%></option>
+												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_real()%></option>
 												  <%
 												  	}
 												  %>
@@ -132,7 +132,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
                                                     <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
+                                                    <a href="tbl_rolusuario.jsp" class="btn btn-danger">Cancelar</a>
                                                 </div>
                                             </div>
                                         </div>
