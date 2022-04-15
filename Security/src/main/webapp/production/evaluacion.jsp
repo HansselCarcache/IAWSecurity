@@ -5,44 +5,16 @@
 <html>
 <%
 //CONSTRUCTOR DE OBJETOS
-Dt_evaluacion dte = new Dt_evaluacion();
-Dt_escalacalificacion des = new Dt_escalacalificacion();
+	Dt_evaluacion dte = new Dt_evaluacion();
+	Dt_escalacalificacion des = new Dt_escalacalificacion();
 
-ArrayList<ArrayList<Tbl_escalaCalificacionDet>> listed = new ArrayList<ArrayList<Tbl_escalaCalificacionDet>>();
-ArrayList<Tbl_escalaCalificacion> liste =  new ArrayList<Tbl_escalaCalificacion>();
+	ArrayList<Tbl_escalaCalificacion> liste =  new ArrayList<Tbl_escalaCalificacion>();
 
 
-liste=des.listaEscalaActivo();
-listed = dte.listAllEscDet();
-
-ArrayList<Tbl_escalaCalificacionDet> lista1 = new ArrayList<Tbl_escalaCalificacionDet>();
-ArrayList<Tbl_escalaCalificacionDet> lista2 = new ArrayList<Tbl_escalaCalificacionDet>();
-ArrayList<Tbl_escalaCalificacionDet> lista3 = new ArrayList<Tbl_escalaCalificacionDet>();
-
-for(ArrayList<Tbl_escalaCalificacionDet> ls:listed){
+	liste=des.listaEscalaActivo();
 	
-	for(Tbl_escalaCalificacionDet ed: ls){
-		
-		if(ed.getId_escala() == 1){
-			lista1.add(ed);	
-		}
-		if(ed.getId_escala()==2){
-			lista2.add(ed);
-		}
-		
-		if(ed.getId_escala()==3){
-			lista3.add(ed);
-		}
-		
-		System.out.print(ed.getId_escala());
-	}
-}
-	System.out.print("LOG:");
-	System.out.print(lista1);
-	System.out.print(lista2);
-	System.out.print(lista3);
-
-	
+	String msj="";
+	msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");	
 	int usuario = 2; 
 %>
   <head>
@@ -77,6 +49,17 @@ for(ArrayList<Tbl_escalaCalificacionDet> ls:listed){
     
     <!-- Select2 -->
     <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
+    
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
   </head>
 
   <body class="nav-md">
@@ -183,62 +166,71 @@ for(ArrayList<Tbl_escalaCalificacionDet> ls:listed){
 		                        		
 										<form class="" action="../Sl_Evaluacion" method="post" novalidate>
 											<input id="opcion" type="hidden" name="opcion" value="1">
+											<input style="display:none;" id="respuesta<%=ins.getId_inscripcion() %>" type="text" name="respuesta<%=ins.getId_inscripcion() %>">
 											<input id="id" class="form-control" value="<%=ins.getId_inscripcion() %>" type="hidden" name="id">
+											<select style="display:none;" class="form-control js-example-basic-single" name="descr" id="descr<%=ins.getId_inscripcion() %>" required="required">
+											</select>
 	<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 	<!--                                         </p> -->
 	<!--                                         <span class="section">Personal Info</span> -->
 											<div class="modal-body">
-											<div class="field item form-group">
-	                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Tipo de Calificación: <span class="required">*</span></label>
-	                                            <div class="col-md-6 col-sm-6">
-	<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-	<%-- <%-- 												<% --%> 
-	<!-- // 							                      	ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>(); -->
-	<!-- // 							                      	Dt_usuario dtu = new Dt_usuario(); -->
-	<!-- // 							                      	listaUsuario = dtu.listaUserActivos(); -->
-	<!-- // 							                      	//onChange="mostrar_cualitativa()"  -->
-	<%-- <%-- 								                 %> --%> 
-													<select onchange="mostrar_cualitativa(<%=ins.getId_inscripcion() %>)" class="form-control js-example-basic-single" name="tipo_cal<%=ins.getId_inscripcion() %>" id="tipo_cal<%=ins.getId_inscripcion() %>" required="required">
-													  <option value="0">Seleccione...</option>
-													  
-													  <%for(Tbl_escalaCalificacion ec:liste){ %>
-													  		<option value="<%=ec.getId_escala()%>"><%=ec.getTipo_calificacion() %></option>
-													  <%} %>
-													</select>
-	                                            </div>
-	                                        </div>
-											
-											
-	                                        <div style="display:none;" class="field item form-group" id="ev_cualitativa<%=ins.getId_inscripcion() %>">
-	                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Calificación Cualitativa: <span class="required">*</span></label>
-	                                            <div class="col-md-6 col-sm-6">
-	<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-									                 <select onchange="init(<%=ins.getId_inscripcion() %>)" class="form-control js-example-basic-single" name="t_cual<%=ins.getId_inscripcion() %>" id="t_cual<%=ins.getId_inscripcion() %>" required="required">
-													</select>
-													<div style="display:none;" class="field item form-group" id="ev_cualitativa">
-														<select class="form-control js-example-basic-single" name="descr" id="descr<%=ins.getId_inscripcion() %>" required="required">
+												<div class="field item form-group">
+		                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Tipo de Calificación: <span class="required">*</span></label>
+		                                            <div class="col-md-6 col-sm-6">
+		<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
+		<%-- <%-- 												<% --%> 
+		<!-- // 							                      	ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>(); -->
+		<!-- // 							                      	Dt_usuario dtu = new Dt_usuario(); -->
+		<!-- // 							                      	listaUsuario = dtu.listaUserActivos(); -->
+		<!-- // 							                      	//onChange="mostrar_cualitativa()"  -->
+		<%-- <%-- 								                 %> --%> 
+														<select onchange="recargarLista(<%=ins.getId_inscripcion() %>)" class="form-control js-example-basic-single" name="tipo_cal<%=ins.getId_inscripcion() %>" id="tipo_cal<%=ins.getId_inscripcion() %>" required="required">
+														  <option value="0">Seleccione...</option>
+														  
+														  <%for(Tbl_escalaCalificacion ec:liste){ %>
+														  		<option value="<%=ec.getId_escala()%>"><%=ec.getTipo_calificacion() %></option>
+														  <%} %>
 														</select>
+		                                            </div>
+		                                        </div>
+												
+													
+												<div>
+												<div style="display:none;" id="ev_cualitativa<%=ins.getId_inscripcion() %>">		
+			                                        <div  class=" item form-group" >
+			                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Calificación Cualitativa: <span class="required">*</span></label>
+			                                            <div class="col-md-6 col-sm-6">
+			<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+											                 <select onchange="init(<%=ins.getId_inscripcion() %>)" class="form-control js-example-basic-single" name="t_cual<%=ins.getId_inscripcion() %>" id="t_cual<%=ins.getId_inscripcion() %>" required="required">
+															</select>
+															
+															<input id="valor<%=ins.getId_inscripcion() %>" type="hidden" name="valor<%=ins.getId_inscripcion() %>">
+															
+														</div>
+														
+														
+			                                        </div>
+			                                        
+			                                       
+		                                        </div>
+		                                        <div style="display:none;" id="ev_cuantitativa<%=ins.getId_inscripcion() %>">
+			                                        <div class="item form-group" >
+														
+															<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Calificación</label>
+														<div class="col-md-6 col-sm-6 ">
+															<input id="calificacion<%=ins.getId_inscripcion() %>" class="form-control" type="number" name="calificacion<%=ins.getId_inscripcion() %>">
+														</div>
+														
+														
 													</div>
-													<input id="valor<%=ins.getId_inscripcion() %>" type="hidden" name="valor<%=ins.getId_inscripcion() %>">
-													
 												</div>
-	                                        </div>
-	                                        <div style="display:none;" id="ev_cuantitativa<%=ins.getId_inscripcion() %>">
-		                                        <div class="item form-group" >
-													<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Calificación</label>
-													<div class="col-md-6 col-sm-6 ">
-														<input id="calificacion<%=ins.getId_inscripcion() %>" class="form-control" type="number" name="calificacion<%=ins.getId_inscripcion() %>">
-													</div>
-													
-													
-												</div>
-												<div class="item form-group" >
-													<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Descripcion:</label>
+												<div style="display:none;" class="field item form-group" id="div_descripcion<%=ins.getId_inscripcion() %>">
+			                                        <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Descripcion:</label>
 													<div class="col-md-6 col-sm-6 ">
 														<input id="descripcion<%=ins.getId_inscripcion() %>" class="form-control" type="text" name="descripcion<%=ins.getId_inscripcion() %>">
 													</div>
-													
-													
+															
+														
 												</div>
 	                                        </div>
 	                                        </div>
@@ -326,7 +318,13 @@ for(ArrayList<Tbl_escalaCalificacionDet> ls:listed){
     <script src="../build/js/custom.min.js"></script>
      <!-- Select2 -->
     <script src="../vendors/select2/dist/js/select2.min.js"></script>
-         <script>
+    
+     <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+     
+     <script>
          
    	function eliminarcolumna(id){
    		var table = $('#tbl_Evaluacion').DataTable();
@@ -340,8 +338,9 @@ for(ArrayList<Tbl_escalaCalificacionDet> ls:listed){
    	}
    	
    	function init(x){
+   		var desc_div = document.getElementById('div_descripcion'+x);
+   		desc_div.style.display ="block";
    		
-		
    		var text =  $("#t_cual"+x+" :selected").text();
    		var id = $("#t_cual"+x+" :selected").val();
    		
@@ -353,18 +352,23 @@ for(ArrayList<Tbl_escalaCalificacionDet> ls:listed){
    		$("#descripcion"+x).val(text2);
    	}
    	
-   	function mostrar_cualitativa(x){
+   	
+   	
+   	function recargarLista(x){
+		var $select = document.getElementById('t_cual'+x);
    		
-   		
-   		var $select = document.getElementById('t_cual'+x);
-   		//$select.empty();
    		var cuali = document.getElementById('ev_cualitativa'+x);
    		var cuanti = document.getElementById('ev_cuantitativa'+x);
-   		var id = $("#tipo_cal"+x).val();
+   		var desc_div = document.getElementById('div_descripcion'+x);
    		
+   		var id = $("#tipo_cal"+x).val();
+   		$("#respuesta"+x).val("");
+   		$("#descripcion"+x).val("");
+   		desc_div.style.display ="none";
    		
    		if(id == 0)
    		{
+   			
 			if (cuanti.style.display === "block") {
 	   	   	   	cuanti.style.display = "none";
 	   	   }
@@ -373,104 +377,60 @@ for(ArrayList<Tbl_escalaCalificacionDet> ls:listed){
 	   		{
 	   	   	  	cuali.style.display = "none";
 	   	   	}
+	   		desc_div.style.display ="none";
+		}else{
+			
+			$.ajax({
+	   			type:"POST",
+	   			url: "data.jsp",
+	   			data:{
+	   				idTipo:id
+	   			},
+	   			success:function(r){
+	   				var cadena = "";
+	   				$("#respuesta"+x).val(r);
+	   				
+	   				cadena =$("#respuesta"+x).val(); 
+	   				var array = cadena.split("*************");
+	   				
+	   				if($("#respuesta"+x).val()==""){
+	   								
+	   					$("#descripcion"+x).val("");
+//		    			$select.empty();
+			   			if (cuanti.style.display === "none") {
+			   	   	    	cuanti.style.display = "block";
+			   	   	    }
+			   			
+			   			if (cuali.style.display === "block") 
+			   			{
+			   	   	    	cuali.style.display = "none";
+			   	   	    }
+			   			desc_div.style.display ="block";
+	   				}else{
+	   					$("#respuesta"+x).val()
+	   					$("#t_cual"+x).html(array[0]);
+	   	   				$("#descr"+x).html(array[1]);
+	   	   				
+		   	   			if (cuali.style.display === "none") 
+		   	   			{
+		   	   	   	    	cuali.style.display = "block";
+		   	   	   	    }
+		   	   			
+		   	   			if (cuanti.style.display === "block") 
+		   	   			{
+		   	   	   	    	cuanti.style.display = "none";
+		   	   	   	    }
+	   				}
+	   				
+	   			},
+	   			error:function(){
+	   				alert("error");
+	   			}
+	   		});
 		}
    		
    		
-   		
-   		
-   		if(id != 3 && id !=0)
-   		{
-   	//		$select.empty();
-   			
-   			if(id==1){
-   				$('#t_cual'+x).empty();
-   				$('#descr'+x).empty();
-   				
-   				$('#t_cual'+x).append($('<option>', {
-	    			value: 0,
-	    			text: "Seleccione..."
-	   			}));
-   				
-   				$('#descr'+x).append($('<option>', {
-	    			value: 0,
-	    			text: "Seleccione..."
-	   			}));
-   				<%
-   	   			for(Tbl_escalaCalificacionDet as: lista1){
-   	   			%>
-   	   				$('#t_cual'+x).append($('<option>', {
-		    			value: <%=as.getId_det_escalaCalificacion()%>,
-		    			text: '<%=as.getValor1()%> - <%=as.getValor2()%>'
-   	   				}));
-   	   				
-   	   				$('#descr'+x).append($('<option>', {
-		    			value: <%=as.getId_det_escalaCalificacion()%>,
-		    			text: '<%=as.getDescripcion()%>'
-	   				}));
-   	   				
-   	   			<%}%>
-   	   			
-   			}
-   			if(id==2){
-				$('#t_cual'+x).empty();
-				$('#descr'+x).empty();
-				
-				$('#t_cual'+x).append($('<option>', {
-	    			value: 0,
-	    			text: "Seleccione..."
-	   			}));
-				
-				$('#descr'+x).append($('<option>', {
-	    			value: 0,
-	    			text: "Seleccione..."
-	   			}));
-				<%
-	   			for(Tbl_escalaCalificacionDet as: lista2){
-	   			%>
-	   				
-	   			$('#t_cual'+x).append($('<option>', {
-	   					value: <%=as.getId_det_escalaCalificacion()%>,
-		    			text: '<%=as.getValor1()%> - <%=as.getValor2()%>'
-   				}));
-	   			
-	   			$('#descr'+x).append($('<option>', {
-	    			value: <%=as.getId_det_escalaCalificacion()%>,
-	    			text: '<%=as.getDescripcion()%>'
-   				}));
-	   			<%}%>	
-			}
-   			
-   			
-   			
-   			
-   			if (cuali.style.display === "none") 
-   			{
-   	   	    	cuali.style.display = "block";
-   	   	    }
-   			
-   			if (cuanti.style.display === "block") 
-   			{
-   	   	    	cuanti.style.display = "none";
-   	   	    }
-   		}
-
-   		if(id==3)
-	   		{
-   			$("#descripcion"+x).val("");
-//	    			$select.empty();
-	   			if (cuanti.style.display === "none") {
-	   	   	    	cuanti.style.display = "block";
-	   	   	    }
-	   			
-	   			if (cuali.style.display === "block") 
-	   			{
-	   	   	    	cuali.style.display = "none";
-	   	   	    }
-	   		}
-   	    
    	}
-   	
-   	
     
     $(document).ready(function() {
     	
@@ -562,5 +522,37 @@ for(ArrayList<Tbl_escalaCalificacionDet> ls:listed){
     
     </script>
 
+	<script>
+	$(document).ready(function() {
+    	try {
+    		<% if(msj.equals("1")) {%>
+    		new PNotify({
+                type: 'success',
+                title: 'Evaluacion Completada',
+                text: 'Se realizo la evaluación correctamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("2")) {%>
+    		new PNotify({
+                type: 'error',
+                title: 'Error',
+                text: 'Ha ocurrido un problema, verfique los datos e intente nuevamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+    	}
+    	catch(err) {
+    	  alert(err.message)
+    	}
+        
+    });
+	</script>
   </body>
 </html>
