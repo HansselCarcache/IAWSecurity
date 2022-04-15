@@ -1,6 +1,6 @@
 <%@page import="entidades.Vw_rolopcion"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Vw_userrol, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.Vw_userrol, entidades.Tbl_userRol, datos.Dt_roluser, java.util.*;"%>
 <%
 String VarMsj = "";
 

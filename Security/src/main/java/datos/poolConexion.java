@@ -19,7 +19,7 @@ public class poolConexion
 	//private static String url = "jdbc:mysql://localhost:3306/dbfdocente?autoReconnect=true&useSSL=false&serverTimezone=UTC";
 	//private static String user = "root";
 	//private static String pass="2503";
-	private static String url = "jdbc:mysql://165.98.12.158:3306/gestion_docente?autoReconnect=true&useSSL=false&serverTimezone=UTC";
+	private static String url = "jdbc:mysql://165.98.12.158:3306/gestion_docente?autoReconnect=true&useSSL=false&serverTimezone=America/Managua";
 	private static String user = "root";
 	private static String pass="My$qlS3rv3rAPS*";
 	//prueba

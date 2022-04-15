@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*;" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +16,8 @@
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   	<link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+  	<!-- JAlert -->
+    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 
@@ -33,7 +35,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                        <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -72,32 +74,32 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form id="frmUser" name="frmUser" action="../Sl_Usuario" method="post" onsubmit="toSubmit(event)">
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
-
-										<div class="item form-group">
+										<input type="hidden" value="1" name="opcion" id="opcion"/>
+										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombres: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombres" name="nombres" required="required" class="form-control ">
+												<input type="text" id="txtnombres" name="txtnombres" data-validate-length-range="5,50" data-validate-words="2" placeholder="ex. Nombre1 Nombre2" title="Primer y Segundo Nombre" required="required" class="form-control ">
 											</div>
 										</div>
 										
-										<div class="item form-group">
+										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Apellidos: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="apellidos" name="apellidos" required="required" class="form-control ">
+												<input type="text" id="txtapellidos" name="txtapellidos" data-validate-length-range="5,50" data-validate-words="2" placeholder="ex. Apellido1 Apellido2" title="Primer y Segundo Apellido" required="required" class="form-control ">
 											</div>
 										</div>
 										
-										<div class="item form-group">
+										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="username" name="username" required="required" class="form-control ">
+												<input type="text" id="txtusername" name="txtusername" data-validate-length-range="5,50" required="required" title="Escriba su nombre de usuario" class="form-control ">
 											</div>
 										</div>
 										
@@ -106,149 +108,94 @@
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 											
-												<select class="form-control js-example-basic-single" name="sexo" id="sexo" required="required">
+												<select class="form-control js-example-basic-single" name="cbxsexo" id="cbxsexo" required="required">
 												  <option value="">Seleccione...</option>
 												  
-												  <option value="M">Masculino</option>
-												  <option value="F">Femenino</option>
+												  <option value="1">Masculino</option>
+												  <option value="2">Femenino</option>
 												  
 												</select>
                                             </div>
                                         </div>
-                                        
-                                        <div class="item form-group">
+                                        <div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cédula: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtcedula" name="txtcedula" data-validate-length-range="5,50" title="Escriba su cédula" required="required" class="form-control ">
+											</div>
+										</div>
+                                        <div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="telefono" name="telefono" required="required" class="form-control ">
+												<input type="text" id="txttelefono" name="txttelefono" data-validate-length-range="5,50" title="Escriba su teléfono de contacto" required="required" class="form-control ">
 											</div>
 										</div>
                                         
-                                        <div class="item form-group">
+                                        <div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="cargo" name="cargo" required="required" class="form-control ">
+												<input type="text" id="txtcargo" name="txtcargo" data-validate-length-range="5,50" title="Escriba el cargo que ocupa actualmente" required="required" class="form-control ">
 											</div>
 										</div>
 										
-										<div class="item form-group">
+										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo personal: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="correop" name="correop" required="required" class="form-control ">
+												<input type="text" id="txtcorreop" name="txtcorreop" title="Escriba su correo personal" required="required" class="form-control ">
 											</div>
 										</div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="iduca" name="iduca" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="correoi" name="correoi" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
+										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Contraseña: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="pwd" name="pwd" required="required" class="form-control ">
+												<input type="password" id="txtpwd" name="txtpwd" title="Escriba su contraseña" required="required" class="form-control ">
 											</div>
 										</div>
 										
-										<div class="item form-group">
+										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Confirmar contraseña: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="pwd2" name="pwd2" required="required" class="form-control ">
+												<input type="password" id="txtpwd2" name="txtpwd2" title="Escriba de nuevo su contraseña" required="required" class="form-control ">
 											</div>
 										</div>
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtiduca" name="txtiduca" title="Escriba su ID UCA"  class="form-control ">
+											</div>
+										</div>
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtcorreoi" name="txtcorreoi" title="Escriba su correo institucional"  class="form-control ">
+											</div>
+										</div>
+										
+										
                                         
 										
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Facultad: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												<%
-							                      	ArrayList<Tbl_facultad> listaFacultad = new ArrayList<Tbl_facultad>();
-							                      	Dt_facultad dtf = new Dt_facultad();
-							                      	listaFacultad = dtf.listaFacultadesActivas();
-								                 %>
-												<select class="form-control js-example-basic-single" name="facultad" id="facultad" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Tbl_facultad tf :listaFacultad){
-												  %>
-												  <option value="<%=tf.getId_facultad()%>"><%=tf.getNombre_facultad()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-                                            </div>
-                                        </div>
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Departamento: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-												<%
-                      		
-						                      		ArrayList<Vw_facultad_departamento> listaFaDe = new ArrayList<Vw_facultad_departamento>();
-						                      		Dt_departamento dtdepa = new Dt_departamento();
-						                      		listaFaDe =  dtdepa.listaDepartamentosActivos();
-                      		
-                      							%>
-								                 <select class="form-control js-example-basic-single" name="departamento" id="departamento" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Vw_facultad_departamento de :listaFaDe){
-												  %>
-												  <option value="<%=de.getId_departamento()%>"><%=de.getNombre_departamento()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-											</div>
-                                        </div>
+                                       
                                         
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Carrera: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												 <%
-						                      		ArrayList<Vw_carrera_departamento> listaCarreras = new ArrayList<Vw_carrera_departamento>();
-						                      		Dt_carreras dtc = new Dt_carreras();
-						                      		listaCarreras = dtc.listaCarreras();
-                      								%>
-												<select class="form-control js-example-basic-single" name="carrera" id="carrera" required="required">
-												  <option value="">Seleccione...</option>
-												  <%
-							                      	for(Vw_carrera_departamento c :listaCarreras){
-							                      		
-	                     						 %>
-												
-												  <option value="<%=c.getId_carrera()%>"><%=c.getNombre_carrera()%></option>
-												 <%
-												  	}
-												  %>
-												</select>
-                                            </div>
-                                        </div>
+                                        
+                                        
                                         
                                         
                                         
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-primary">Guardar</button>
+                                                    <button onclick="comprobarClave()" class="btn btn-primary">Guardar</button>
                                                     <button type='reset' class="btn btn-danger">Cancelar</button>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -304,12 +251,12 @@
             "events": ['blur', 'input', 'change']
         }, document.forms[0]);
         // on form "submit" event
-        document.forms[0].onsubmit = function(e) {
+       /* document.forms[0].onsubmit = function(e) {
             var submit = true,
                 validatorResult = validator.checkAll(this);
             console.log(validatorResult);
             return !!validatorResult.valid;
-        };
+        };*/
         // on form "reset" event
         document.forms[0].onreset = function(e) {
             validator.reset();
@@ -320,6 +267,47 @@
             if (this.checked)
                 $('form .alert').remove();
         }).prop('checked', false);
+        
+        function toSubmit(e){
+    		e.preventDefault(); 
+ 			 try {
+   					someBug();
+  					} catch (e) {
+   					throw new Error(e.message);
+  					}
+  					return false;
+   		}
+   
+   		function submitForm(){
+    		var form = document.getElementById("frmUser");
+			form.onsubmit = function() {
+  			return true;
+			}
+   		}
+   		
+        
+        function comprobarClave(){
+            
+        	
+        	clave1 = document.frmUser.txtpwd.value
+        	clave2 = document.frmUser.txtpwd2.value
+        	sexo= document.frmUser.cbxsexo.value
+        	
+        	if(sexo==""){
+        		errorAlert('Error!', 'Es necesario que escoger un sexo para registrar el usuario');
+        	}else if (clave1 == clave2)
+        	    {
+        	    submitForm();
+        	    
+        	    }    
+        	    else{
+        	      errorAlert('Error!', 'Las contraseñas no son iguales, intente de nuevo!');
+        	      document.frmUser.txtpwd.value = ""
+        	      document.frmUser.txtpwd2.value = ""
+        	      document.frmUser.txtpwd.focus
+        	    }
+            
+        }
         
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
@@ -342,6 +330,9 @@
     
     <!-- Select2 -->
     <script src="../vendors/select2/dist/js/select2.min.js"></script>
+    <!-- JAlert js -->
+	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
     
     <script type="text/javascript">
