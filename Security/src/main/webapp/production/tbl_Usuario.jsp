@@ -68,21 +68,22 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 
             <div class="clearfix"></div>
 
-            <div class="row">
+            <div id="divtabla1" style="display:block;" class="row">
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Usuarios registrados</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
+                            <a onclick="usuariosEliminados()" class="dropdown-item" href="#">Usuarios Inactivos</a>
+                            
                           </div>
                       </li>
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>
@@ -158,15 +159,15 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                           <td><%=estado %></td>
                           <td>
                            <a href="updateUsuario.jsp?idU=<%=tusr.getId_usuario()%>">
-                            <i class="far fa-edit" title="Editar Opciones"></i>
+                            <i class="far fa-edit" title="Editar Usuario"></i>
                           </a>
                           &nbsp;&nbsp;
                           <a href="readUsuario.jsp?idU=<%=tusr.getId_usuario()%>">
-                            <i class="far fa-eye" title="Visualizar Opciones"></i>
+                            <i class="far fa-eye" title="Visualizar Usuario"></i>
                           </a> 
                           &nbsp;&nbsp;
                           <a href="deleteUsuario.jsp?idU=<%=tusr.getId_usuario() %>" >
-                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
+                            <i class="far fa-trash-alt" title="Eliminar Usuario"></i>
                           </a>
                           </td>
                           
@@ -202,6 +203,129 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                 </div>
               </div>
               </div>
+              <!-- INICO DE LA SEGUNDA TABLA -->
+              <div id="divtabla2" style="display:none;" class="row">
+              <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Usuarios Inactivos</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a onclick="usuariosActivos()" class="dropdown-item" href="#">Usuarios Activos</a>
+                            
+                          </div>
+                      </li>
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                      <div class="row">
+                          <div class="col-sm-12">
+                            <div class="card-box table-responsive">
+                            
+                            
+                    
+                    <table id="tbl_user2" class="table table-striped table-bordered" style="width:100%">
+                     <%
+                      		ArrayList<Tbl_user> listaUsuarioInactivos = new ArrayList<Tbl_user>();
+                      		
+                      		listaUsuarioInactivos = dtusr.listaUserInactivos();
+                      %>
+                    
+                      <thead>
+                        <tr>
+                          
+                          <th>ID Uca </th>
+                          <th>Nombre usuario </th>
+                          <th>Nombre completo </th>
+                          <th>Sexo </th>
+                          <th>Telefono </th>
+                          <th>Cargo </th>
+                          <th>Correo personal </th>
+                          <th>Cédula </th>
+                          <th>Estado </th>
+                          <th>Acciones </th>
+                          
+                          
+                        </tr>
+                      </thead>
+
+
+                      <tbody>
+                     	<%
+	                      	for(Tbl_user tusr :listaUsuarioInactivos){
+	                      		String estado= "";
+	                      		if(tusr.getEstado()!=3){
+	                      			estado= "Activo";
+	                      		}
+	                      		else{
+	                      			estado = "Inactivo";
+	                      		}
+	                      		String sexo="";
+	                      		if(tusr.getSexo()==1){
+	                      			sexo="Masculino";
+	                      		}else if(tusr.getSexo()==2){
+	                      			sexo="Femenino";
+	                      		}
+	                      %>
+                      	
+                      
+                        <tr>
+                          
+                          <td><%=tusr.getId_uca() %></td>
+                          <td><%=tusr.getNombre_usuario() %></td>
+                          <td><%=tusr.getNombre_real()%></td>
+                          <td><%=sexo %></td>
+                          <td><%=tusr.getTelefono_contacto() %></td>
+                          <td><%=tusr.getCargo() %></td>
+                          <td><%=tusr.getCorreo_personal() %></td>
+                          <td><%=tusr.getCedula() %></td>
+                          <td><%=estado %></td>
+                          <td>
+                           <a href="restaurarUsuario.jsp?idU=<%=tusr.getId_usuario()%>">
+                            <i class="fa-solid fa-arrow-rotate-left" title="Restaurar Usuario"></i>
+                          </td>
+                          
+                          
+                        </tr>
+                        <%
+                        }
+                        %>
+                        
+                        
+                        
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          
+                          <th>ID Uca</th>
+                          <th>Nombre usuario</th>
+                          <th>Nombre completo</th>
+                          <th>Sexo</th>
+                          <th>Telefono</th>
+                          <th>Cargo</th>
+                          <th>Correo personal</th>
+                          <th>Cédula</th>
+                          <th>Estado</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  </div>
+              </div>
+            </div>
+                </div>
+              </div>
+              </div>
+              
                 </div>
               </div>
         <!-- /page content -->
@@ -269,7 +393,15 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
    	
    	
    	
+   	function usuariosEliminados(){
+   		document.getElementById("divtabla1").style.display = "none";
+   		document.getElementById("divtabla2").style.display = "flex";
+   	}
    	
+   	function usuariosActivos(){
+   		document.getElementById("divtabla1").style.display = "flex";
+   		document.getElementById("divtabla2").style.display = "none";
+   	}
     
     $(document).ready(function() {
     	 var mensaje = 0;
@@ -289,7 +421,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
  	      }
  	      if(mensaje == "4")
  	      {
- 	    	  errorAlert('Exito', 'No se han podido modificar los datos, intente de nuevo');
+ 	    	  errorAlert('Error', 'No se han podido modificar los datos, intente de nuevo');
  	      }
  	      if(mensaje == "5")
  	      {
@@ -297,8 +429,20 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
  	      }
  	      if(mensaje == "6")
  	      {
- 	        errorAlert('Exito', 'No se han podido eliminar los datos, intente de nuevo');
+ 	        errorAlert('Error', 'No se han podido eliminar los datos, intente de nuevo');
  	      }
+ 	      if(mensaje == "7")
+	      {
+ 	    	successAlert('Exito', 'Los datos han sido modificados exitosamente. El IDUCA ya existía en el sistema y no fue modificado.');
+	      }
+ 	      if(mensaje == "8")
+	      {
+	    	successAlert('Exito', 'El usuario fue restaurado con éxito');
+	      }
+ 	      if(mensaje == "9")
+	      {
+	        errorAlert('Error', 'No se ha podido restaurar el usuario. Intente de nuevo.');
+	      }
     	
         $('#tbl_user').DataTable( {
         	buttons: [  
@@ -362,6 +506,89 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
         	keys: true,
         	    
         	"dom": '<Blf<rt>ip>',
+        	
+        	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+        	
+        	"language": {
+                "lengthMenu": "Mostrar _MENU_ records por pagina",
+                "search": "Buscar:",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+                "emptyTable": "No existen datos en la tabla",
+                "zeroRecords": "No existe un registro en la BD",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                
+                "infoEmpty": "No existe registro",
+                "infoFiltered": "(filtered from _MAX_ total records)"
+            }
+        } );
+        //Inicio de segunda tabla
+        $('#tbl_user2').DataTable( {
+        	buttons: [  
+        				
+		        		{
+			        		extend: 'csv',
+							text: 'CSV',
+							title: 'Usuarios registrados',
+							action: function ( e, dt, node, config ) {
+			                    //alert( 'Activated!' );
+			                    eliminarcolumna(9);
+			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
+			                },
+							exportOptions: {
+				                columns: ':visible',
+				            }
+		        		},
+        				{
+        					extend: 'excel',
+        					text: 'Excel',
+        					title: 'Usuarios registrados',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(9);
+        	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+        				
+        				{
+        					extend: 'pdf',
+        					text: 'PDF',
+        					title: 'Usuarios registrados',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(9);
+        	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+      
+        				{ 
+        					extend: 'print',
+        					text: 'Imprimir',
+        					title: 'Usuarios registrados',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(9);
+        	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        					
+        				} 
+        			 ],
+        	keys: true,
+        	    
+        	"dom": '<lf<rt>ip>',
         	
         	"lengthMenu": [ 10, 25, 50, 75, 100 ],
         	

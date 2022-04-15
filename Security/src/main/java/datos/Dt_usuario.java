@@ -90,6 +90,67 @@ public class Dt_usuario {
 		return listUser;
 	}
 	
+	public ArrayList<Tbl_user> listaUserInactivos(){
+		ArrayList<Tbl_user> listUser = new ArrayList<Tbl_user>();
+		try {
+			c = poolConexion.getConnection();
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.usuario WHERE estado = 3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Tbl_user user = new Tbl_user();
+				user.setId_usuario(rs.getInt("id_usuario"));
+				user.setId_uca(rs.getString("id_uca"));
+				user.setNombre_real(rs.getString("nombre_real"));
+				user.setNombre_usuario(rs.getString("nombre_usuario"));
+				user.setPwd(rs.getString("pwd"));
+				user.setCorreo_institucional(rs.getString("correo_institucional"));
+				user.setCorreo_personal(rs.getString("correo_personal"));
+				user.setSexo(rs.getInt("sexo"));
+				user.setCargo(rs.getString("cargo"));
+				user.setTelefono_contacto(rs.getString("telefono_contacto"));
+				user.setEstado(rs.getInt("estado"));
+				user.setCedula(rs.getString("cedula"));
+				
+				
+				
+				/*user.setFecha_registro(rs.getString("fecha_registro"));
+				user.setUrlFoto(rs.getString("urlFoto"));
+				user.setCodVerificacion(rs.getString("codVerificacion"));
+				
+				user.setUsuario_creacion(rs.getInt("usuario_creacion"));
+				user.setFecha_creacion(rs.getString("fecha_creacion"));
+				user.setUsuario_edicion(rs.getInt("usuario_edicion"));
+				user.setFecha_edicion(rs.getString("fecha_edicion"));
+				user.setUsuario_eliminacion(rs.getInt("usuario_eliminacion"));
+				user.setFecha_eliminacion(rs.getString("fecha_eliminacion"));*/
+				listUser.add(user);
+				
+			}
+		}
+		catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR USUARIOS"+ e.getMessage());
+			e.printStackTrace();
+			
+		}
+		finally {
+			try {
+				if(rs!= null) {
+					rs.close();
+				}
+				if(ps!= null) {
+					ps.close();
+				}
+				if(c != null) {
+					poolConexion.closeConnection(c);
+				}
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return listUser;
+	}
+	
 	//Metodo para almacenar nuevo usuario
 	public int guardarUser(Tbl_user tus) {
 		int guardado = 0;
@@ -145,7 +206,7 @@ public class Dt_usuario {
 		Tbl_user tu = new Tbl_user();
 		try {
 			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT * FROM gestion_docente.usuario where estado <> 3 and id_usuario=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.usuario where id_usuario=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			ps.setInt(1,  idUser);
 			rs = ps.executeQuery();
 			if(rs.next()) {
@@ -200,6 +261,7 @@ public class Dt_usuario {
 				if(rsUsuario.getInt(1)==tus.getId_usuario())
 				{
 					rsUsuario.updateString("id_uca", tus.getId_uca());
+					rsUsuario.updateString("correo_institucional", tus.getCorreo_institucional());
 					rsUsuario.updateString("nombre_real", tus.getNombre_real());
 					rsUsuario.updateInt("sexo", tus.getSexo());
 					rsUsuario.updateString("telefono_contacto", tus.getTelefono_contacto());
@@ -234,6 +296,98 @@ public class Dt_usuario {
 		}
 		return modificado;
 	}
+	
+	//metodo para modificar usuario sin IDUCA
+		public boolean modificarUserNoID(Tbl_user tus) {
+			boolean modificado = false;
+			try {
+				c = poolConexion.getConnection();
+				this.llenaRsUsuario(c);
+				rsUsuario.beforeFirst();
+				while(rsUsuario.next())
+				{
+					if(rsUsuario.getInt(1)==tus.getId_usuario())
+					{
+						
+						rsUsuario.updateString("correo_institucional", tus.getCorreo_institucional());
+						rsUsuario.updateString("nombre_real", tus.getNombre_real());
+						rsUsuario.updateInt("sexo", tus.getSexo());
+						rsUsuario.updateString("telefono_contacto", tus.getTelefono_contacto());
+						rsUsuario.updateString("cargo", tus.getCargo());
+						rsUsuario.updateInt("usuario_edicion", tus.getUsuario_edicion());
+						rsUsuario.updateTimestamp("fecha_edicion", tus.getFecha_edicion());
+						rsUsuario.updateInt("estado", 2);
+						rsUsuario.updateRow();
+						modificado = true;
+						break;
+					}
+				}
+			}catch (Exception e)
+			{
+				System.err.println("ERROR AL modificarUser() "+e.getMessage());
+				e.printStackTrace();
+			}
+			finally
+			{
+				try {
+					if(rsUsuario != null){
+						rsUsuario.close();
+					}
+					if(c != null){
+						poolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return modificado;
+		}
+		
+		//metodo para restaurar usuario
+				public boolean restaurarUsuario(Tbl_user tus) {
+					boolean modificado = false;
+					try {
+						c = poolConexion.getConnection();
+						this.llenaRsUsuario(c);
+						rsUsuario.beforeFirst();
+						while(rsUsuario.next())
+						{
+							if(rsUsuario.getInt(1)==tus.getId_usuario())
+							{
+								
+								
+								rsUsuario.updateInt("usuario_edicion", tus.getUsuario_edicion());
+								rsUsuario.updateTimestamp("fecha_edicion", tus.getFecha_edicion());
+								rsUsuario.updateInt("estado", 4);
+								rsUsuario.updateRow();
+								modificado = true;
+								break;
+							}
+						}
+					}catch (Exception e)
+					{
+						System.err.println("ERROR AL modificarUser() "+e.getMessage());
+						e.printStackTrace();
+					}
+					finally
+					{
+						try {
+							if(rsUsuario != null){
+								rsUsuario.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					return modificado;
+				}
 	
 
 	// Metodo para eliminar usuario

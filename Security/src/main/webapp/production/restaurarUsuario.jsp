@@ -2,8 +2,7 @@
    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*;" %>
 <!DOCTYPE html>
 <html>
-<%
-String user = "";
+<% String user = "";
 user = request.getParameter("idU")==null?"0":request.getParameter("idU");
 
 Tbl_user tu = new Tbl_user();
@@ -17,15 +16,13 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Usuario | Modificar </title>
+    <title>Usuarios | Restaurar </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
-    <!-- JAlert -->
-    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 
@@ -55,7 +52,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Modificar usuario</h3>
+                            <h3>Restaurar usuario</h3>
                         </div>
 
                         
@@ -66,7 +63,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Modificación de usuarios </h2>
+                                    <h2>Restauración de usuarios </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -83,67 +80,58 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form id="frmUser" name="frmUser" class="" action="../Sl_Usuario" method="post" novalidate onsubmit="toSubmit(event)">
+                                    <form id="frmUser" name=""frmUser class="" action="../Sl_Usuario" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
+										<input type="hidden" value="4" name="opcion" id="opcion"/>
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Usuario:</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="txtiduser" name="txtiduser" type="text" class="form-control" readonly="readonly" placeholder="ID Usuario">
+											</div>
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha de registro: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtfreg" name="txtfreg" readonly="readonly" required="required" class="form-control ">
+											</div>
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Estado: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtestado" name="txtestado" readonly="readonly" required="required" class="form-control ">
+											</div>
+										</div>
 
-										<input type="hidden" value="2" name="opcion" id="opcion"/>
 										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID usuario: <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Completo: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtiduser" name="txtiduser"  readonly required="required" class="form-control ">
+												<input type="text" id="txtnombreC" name="txtnombreC" readonly="readonly"  required="required" class="form-control ">
 											</div>
 										</div>
 										
-										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtiduca" onkeyup="validarIdU()" name="txtiduca" title="Escriba su ID UCA" readonly class="form-control ">
-											</div>
-										</div>
 										
-										<div id="dividuca" style="display:none;" class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Confirmar ID UCA: 
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtiduca2" onkeyup="validarIdU()" name="txtiduca2" title="Escriba su ID UCA" class="form-control ">
+												<input type="text" id="txtusername" name="txtusername" readonly="readonly"  required="required"  class="form-control ">
 											</div>
 										</div>
 										
 										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcorreoi" onkeyup="validarCorreoi()" name="txtcorreoi" title="Escriba su correo institucional"  readonly class="form-control ">
-											</div>
-										</div>
-										
-										
-										<div id="divcorreoi" style="display:none;" class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Confirmar Correo institucional: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcorreoi2" onkeyup="validarCorreoi()" name="txtcorreoi2" title="Escriba su correo institucional"   class="form-control ">
-											</div>
-										</div>
-										
-										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre completo: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtnombreC" name="txtnombreC" data-validate-length-range="5,100" data-validate-words="4" title="Nombre completo" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Sexo: <span class="required">*</span></label>
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Sexo: </label>
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 											
-												<select class="form-control js-example-basic-single" name="cbxsexo" id="cbxsexo" required="required">
+												<select class="form-control js-example-basic-single" disabled name="cbxsexo" id="cbxsexo" required="required">
 												  
 												  
 												  <option value="1">Masculino</option>
@@ -152,38 +140,60 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
 												</select>
                                             </div>
                                         </div>
-                                        
                                         <div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cédula: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txttelefono" name="txttelefono" data-validate-length-range="5,50" title="Escriba su teléfono de contacto" required="required" class="form-control ">
+												<input type="text" id="txtcedula" name="txtcedula" readonly="readonly"  required="required" class="form-control ">
+											</div>
+										</div>
+                                        <div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txttelefono" name="txttelefono" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
                                         
                                         <div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcargo" name="txtcargo" data-validate-length-range="3,50" title="Escriba el cargo que ocupa actualmente" required="required" class="form-control ">
+												<input type="text" id="txtcargo" name="txtcargo" readonly="readonly" required="required" class="form-control ">
+											</div>
+										</div>
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo personal: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtcorreop" name="txtcorreop" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
 										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtiduca" name="txtiduca" readonly="readonly"   class="form-control ">
+											</div>
+										</div>
 										
-										
-										
-										
-
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtcorreoi" name="txtcorreoi" readonly="readonly"   class="form-control ">
+											</div>
+										</div>
                                         
                                         
                                         <div class="ln_solid">
-                                            <div class="form-group">
-                                                <div class="col-md-6 offset-md-3">
-                                                    <button onclick="validar()" class="btn btn-primary">Guardar</button>
-                                                    <a href="tbl_Usuario.jsp" class="btn btn-danger">Cancelar</a>
-                                                </div>
-                                            </div>
+                                            <div class="col-md-6 offset-md-3">
+                                                <button type="submit" class="btn btn-primary">Restaurar</button>
+                								<a href="tbl_Usuario.jsp" class="btn btn-danger">Cancelar</a>
+                  							</div>
                                         </div>
                                     </form>
                                 </div>
@@ -237,13 +247,12 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
             "events": ['blur', 'input', 'change']
         }, document.forms[0]);
         // on form "submit" event
-       /* document.forms[0].onsubmit = function(e) {
-        	
+        document.forms[0].onsubmit = function(e) {
             var submit = true,
                 validatorResult = validator.checkAll(this);
             console.log(validatorResult);
             return !!validatorResult.valid;
-        };*/
+        };
         // on form "reset" event
         document.forms[0].onreset = function(e) {
             validator.reset();
@@ -254,7 +263,6 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
             if (this.checked)
                 $('form .alert').remove();
         }).prop('checked', false);
-        
         
         function setValores()
         {
@@ -270,140 +278,30 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
         	document.getElementById("txttelefono").value = "<%=tu.getTelefono_contacto()%>"
         	document.getElementById("txtcargo").value = "<%=tu.getCargo()%>"
         	
-        	txtid= "<%=tu.getId_uca()%>"
-        	if(txtid=="null"){
-        		document.getElementById("txtiduca").value = ""
-        	}else{
-        		document.getElementById("txtiduca").value = "<%=tu.getId_uca()%>"
-        			document.getElementById("txtiduca2").value = "<%=tu.getId_uca()%>"
-        	}
-        	
-        	//Si el iduca esta vacío entonces se quita el readonly y se habilita un nuevo campo de texto    	
-            iduca = document.frmUser.txtiduca.value 
-                   
-            if(iduca=="" || iduca=="null"){
-                    
-               $('#txtiduca').removeAttr('readonly');
-               document.getElementById("dividuca").style.display = "flex";
-               
-                    
-            }
-            txtcorreo= "<%=tu.getCorreo_institucional()%>"  
-            if(txtcorreo=="null"){
-            	document.getElementById("txtcorreoi").value = ""
-            }else{
-            	document.getElementById("txtcorreoi").value = "<%=tu.getCorreo_institucional()%>"
-            		document.getElementById("txtcorreoi2").value = "<%=tu.getCorreo_institucional()%>"
-            }
+        	document.getElementById("txtiduca").value = "<%=tu.getId_uca()%>"	
+            document.getElementById("txtcorreoi").value = "<%=tu.getCorreo_institucional()%>"
+            document.getElementById("txtusername").value = "<%=tu.getNombre_usuario()%>"
+            document.getElementById("txtcedula").value = "<%=tu.getCedula()%>"
+            document.getElementById("txtcorreop").value = "<%=tu.getCorreo_personal()%>"
+            document.getElementById("txtfreg").value = "<%=tu.getFecha_creacion()%>"
             
-            //Si el correo instituciona esta vacío entonces se quita el readonly y se habilita un nuevo campo de texto    	
-            correoi = document.frmUser.txtcorreoi.value
-                	
-            if(correoi=="" || correoi=="null"){
-                
-            	$('#txtcorreoi').removeAttr('readonly');
-            	document.getElementById("divcorreoi").style.display = "flex";
-            }
-        	
+            
+            estado = "<%=tu.getEstado()%>" 
+                 
+           	if(estado!="3"){
+                         
+           		document.getElementById("txtestado").value = "Activo"
+                         
+            }    	
+           
  
         	
         	
-        }
-        //Validacion de ID UCA
-        function validarIdU()
-
-        {
-
-            var camp1= document.getElementById('txtiduca');
-            var camp2= document.getElementById('txtiduca2');
-            
-			if (camp1.value=="" || camp2.value==""){
-				
-			}else if (camp1.value != camp2.value) {
-
-                
-                camp1.style.borderColor = "red";
-                camp1.style.borderWidth = "medium";
-            	camp2.style.borderColor = "red";
-            	camp2.style.borderWidth = "medium";
-                
-            }else {
-            	
-            	camp1.style.borderColor = "green";
-            	camp1.style.borderWidth = "medium";
-            	camp2.style.borderColor = "green";
-            	camp2.style.borderWidth = "medium";
-            }
-        }
-        //Validacion de correo institucional
-        function validarCorreoi()
-
-        {
-
-            var camp1= document.getElementById('txtcorreoi');
-            var camp2= document.getElementById('txtcorreoi2');
-            
-			if (camp1.value=="" || camp2.value==""){
-				
-			}else if (camp1.value != camp2.value) {
-
-                
-                camp1.style.borderColor = "red";
-                camp1.style.borderWidth = "medium";
-            	camp2.style.borderColor = "red";
-            	camp2.style.borderWidth = "medium";
-                
-            }else {
-            	
-            	camp1.style.borderColor = "green";
-            	camp1.style.borderWidth = "medium";
-            	camp2.style.borderColor = "green";
-            	camp2.style.borderWidth = "medium";
-            }
-        }
-        
-        function toSubmit(e){
-    		e.preventDefault(); 
- 			 try {
-   					someBug();
-  					} catch (e) {
-   					throw new Error(e.message);
-  					}
-  					return false;
-   		}
-   
-   		function submitForm(){
-    		var form = document.getElementById("frmUser");
-			form.onsubmit = function() {
-  			return true;
-			}
-   		}
-   		
-		function validar(){
-            
-        	
-        	iduca = document.frmUser.txtiduca.value
-        	iduca2 = document.frmUser.txtiduca2.value
-        	correo = document.frmUser.txtcorreoi.value
-        	correo2 = document.frmUser.txtcorreoi2.value
-        	if (iduca == iduca2 && correo == correo2)
-        	    {
-        	    submitForm();
-        	    
-        	    }    
-        	    else{
-        	      errorAlert('Error!', 'El IDUCA y/o el correo institucional no son iguales, intente de nuevo!');
-        	      document.frmUser.txtpwd.value = ""
-        	      document.frmUser.txtpwd2.value = ""
-        	      document.frmUser.txtpwd.focus
-        	    }
-            
         }
         
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
             setValores();
-            
         });
     </script>
 
@@ -423,9 +321,6 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
     
     <!-- Select2 -->
     <script src="../vendors/select2/dist/js/select2.min.js"></script>
-    <!-- JAlert js -->
-	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
-	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
     
     <script type="text/javascript">

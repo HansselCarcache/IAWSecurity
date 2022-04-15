@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*;" %>
+<%
+String VarMsj = "";
+
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -160,8 +167,10 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Confirmar contraseña: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="password" id="txtpwd2" name="txtpwd2" title="Escriba de nuevo su contraseña" required="required" class="form-control ">
+												<input type="password" id="txtpwd2" name="txtpwd2" onkeyUp="habilitar()" title="Escriba de nuevo su contraseña" required="required" class="form-control ">
+												
 											</div>
+											
 										</div>
 										
 										<div class="field item form-group">
@@ -309,8 +318,44 @@
             
         }
         
+        function habilitar()
+
+        {
+
+            var camp1= document.getElementById('txtpwd');
+            var camp2= document.getElementById('txtpwd2');
+            
+			
+            if (camp1.value != camp2.value) {
+
+                
+                camp1.style.borderColor = "red";
+                camp1.style.borderWidth = "medium";
+            	camp2.style.borderColor = "red";
+            	camp2.style.borderWidth = "medium";
+                
+            }else {
+            	
+            	camp1.style.borderColor = "green";
+            	camp1.style.borderWidth = "medium";
+            	camp2.style.borderColor = "green";
+            	camp2.style.borderWidth = "medium";
+            }
+        }
+        
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+            var mensaje = 0;
+     	    mensaje = "<%=VarMsj %>";
+
+     	    if(mensaje == "1")
+     	      {
+     	    	errorAlert('Error', 'Ya existe un usuario con ese IDUCA en el sistema, no se ha podido registrar el usuario.');
+     	      }
+     	    if(mensaje == "2")
+     	      {
+     	        errorAlert('Error', 'Ya existe un usuario con esa cédula en el sistema, no se ha podido registrar el usuario.');
+     	      }
         });
     </script>
 

@@ -16,6 +16,7 @@ import datos.Dt_usuario2;
 import datos.Encrypt;
 import entidades.Tbl_user;
 import entidades.Tbl_user2;
+import negocio.Ng_Usuario;
 
 
 @WebServlet("/Sl_Usuario")
@@ -55,6 +56,7 @@ public class Sl_Usuario extends HttpServlet{
 		Dt_usuario dtus = new Dt_usuario();
 		Dt_usuario2 dtus2 = new Dt_usuario2();
 		Encrypt dtenc = new Encrypt();
+		Ng_Usuario ngu = new Ng_Usuario();
 		
 		//PARA GUARDAR LA FECHA Y HORA DE CREACION/ EDICION/ ELIMINACION
 		Date fechaSistema = new Date();
@@ -66,6 +68,9 @@ public class Sl_Usuario extends HttpServlet{
 		String key = "";
 		String pwd = "";
 		String pwdEncrypt = "";
+		//Variables globales
+		String iduca = request.getParameter("txtiduca");
+		String correoi = request.getParameter("txtcorreoi");
 		
 		
 		////////////////////////////////////////////////////////////////////
@@ -85,8 +90,19 @@ public class Sl_Usuario extends HttpServlet{
 				tus.setCargo(request.getParameter("txtcargo"));
 				tus.setCorreo_personal(request.getParameter("txtcorreop"));
 				tus.setPwd(request.getParameter("txtpwd").trim());
-				tus.setId_uca(request.getParameter("txtiduca"));
-				tus.setCorreo_institucional(request.getParameter("txtcorreoi"));
+				
+				if(iduca.equals("")) {
+					tus.setId_uca(null);
+				}else {
+					tus.setId_uca(iduca);
+				}
+				
+				if(correoi.equals("")) {
+					tus.setCorreo_institucional(null);
+				}else {
+					tus.setCorreo_institucional(correoi);
+				}
+				
 				tus.setUsuario_creacion(2);//2 valor temporal mientras se programa la sesion
 				tus.setFecha_creacion(new java.sql.Timestamp(fechaSistema.getTime()));
 				
@@ -99,6 +115,11 @@ public class Sl_Usuario extends HttpServlet{
 				///////////////////////////
 				
 				try {
+					if(ngu.existeIdUCA(tus.getId_uca())) {
+						response.sendRedirect("production/addUsuario.jsp?msj=1");
+					}else if(ngu.existeCedula(tus.getCedula())) {
+						response.sendRedirect("production/addUsuario.jsp?msj=2");
+					}else
 					tus2.setId_user(dtus.guardarUser(tus));
 					if(tus2.getId_user()>0) {
 						if(dtus2.guardarUser(tus2)) {
@@ -108,6 +129,8 @@ public class Sl_Usuario extends HttpServlet{
 							response.sendRedirect("production/tbl_Usuario.jsp?msj=2");
 						}
 					}
+					
+		
 				}catch(Exception e) {
 					System.out.println("Error Sl_gestionUser opc1: "+e.getMessage());
 					e.printStackTrace();
@@ -117,8 +140,18 @@ public class Sl_Usuario extends HttpServlet{
 		case 2:
 			//CONTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 			tus.setId_usuario(Integer.parseInt(request.getParameter("txtiduser")));
-			tus.setId_uca(request.getParameter("txtiduca"));
-			tus.setCorreo_institucional(request.getParameter("txtcorreoi"));
+			
+			if(iduca.equals("")) {
+				tus.setId_uca(null);
+			}else {
+				tus.setId_uca(iduca);
+			}
+			
+			if(correoi.equals("")) {
+				tus.setCorreo_institucional(null);
+			}else {
+				tus.setCorreo_institucional(request.getParameter("txtcorreoi"));
+			}
 			tus.setNombre_real(request.getParameter("txtnombreC"));
 			tus.setSexo(Integer.parseInt(request.getParameter("cbxsexo")));
 			tus.setTelefono_contacto(request.getParameter("txttelefono"));
@@ -126,7 +159,14 @@ public class Sl_Usuario extends HttpServlet{
 			try {
 				tus.setFecha_edicion(new java.sql.Timestamp(fechaSistema.getTime()));
 				tus.setUsuario_edicion(2);//2 valor temporal mientras se programa la sesion
-				if(dtus.modificarUser(tus)) {
+				//Comprobamos que no exista el idUCA en la BD
+				if(ngu.existeIdUCA(tus.getId_uca())) {
+					
+					if(dtus.modificarUserNoID(tus)) {
+						response.sendRedirect("production/tbl_Usuario.jsp?msj=7");
+					}
+					
+				}else if(dtus.modificarUser(tus)) {
 					response.sendRedirect("production/tbl_Usuario.jsp?msj=3");
 				}
 				else {
@@ -154,7 +194,26 @@ public class Sl_Usuario extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
+		case 4:
+			//CONTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
+			tus.setId_usuario(Integer.parseInt(request.getParameter("txtiduser")));
 			
+			
+			
+			try {
+				tus.setFecha_edicion(new java.sql.Timestamp(fechaSistema.getTime()));
+				tus.setUsuario_edicion(2);//2 valor temporal mientras se programa la sesion
+				if(dtus.restaurarUsuario(tus)) {
+					response.sendRedirect("production/tbl_Usuario.jsp?msj=8");
+				}
+				else {
+					response.sendRedirect("production/tbl_Usuario.jsp?msj=9");
+				}
+			}catch(Exception e) {
+				System.out.println("Error Sl_gestionUser opc2: "+e.getMessage());
+				e.printStackTrace();
+			}
+			break;
 		default:
 			//codigo
 			break;
