@@ -1,4 +1,5 @@
 package entidades;
+import java.sql.Timestamp;
 
 public class Tbl_user {
 	
@@ -10,21 +11,20 @@ public class Tbl_user {
 	private String pwd;
 	private String correo_institucional;
 	private String correo_personal;
-	private String sexo;
+	private int sexo;
 	private String cargo;
 	private String telefono_contacto;
 	private int estado;
 	private String cedula;
-	private String fecha_registro;
+	
 	private String urlFoto;
 	private String codVerificacion;
-	private String key_encriptacion;
 	private int usuario_creacion;
-	private String fecha_creacion;
+	private Timestamp fecha_creacion;
 	private int usuario_edicion;
-	private String fecha_edicion;
+	private Timestamp fecha_edicion;
 	private int usuario_eliminacion;
-	private String fecha_eliminacion;
+	private Timestamp fecha_eliminacion;
 	
 	//metodos
 	public int getId_usuario() {
@@ -69,10 +69,11 @@ public class Tbl_user {
 	public void setCorreo_personal(String correo_personal) {
 		this.correo_personal = correo_personal;
 	}
-	public String getSexo() {
+	
+	public int getSexo() {
 		return sexo;
 	}
-	public void setSexo(String sexo) {
+	public void setSexo(int sexo) {
 		this.sexo = sexo;
 	}
 	public String getCargo() {
@@ -99,12 +100,6 @@ public class Tbl_user {
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}
-	public String getFecha_registro() {
-		return fecha_registro;
-	}
-	public void setFecha_registro(String fecha_registro) {
-		this.fecha_registro = fecha_registro;
-	}
 	public String getUrlFoto() {
 		return urlFoto;
 	}
@@ -117,22 +112,16 @@ public class Tbl_user {
 	public void setCodVerificacion(String codVerificacion) {
 		this.codVerificacion = codVerificacion;
 	}
-	public String getKey_encriptacion() {
-		return key_encriptacion;
-	}
-	public void setKey_encriptacion(String key_encriptacion) {
-		this.key_encriptacion = key_encriptacion;
-	}
 	public int getUsuario_creacion() {
 		return usuario_creacion;
 	}
 	public void setUsuario_creacion(int usuario_creacion) {
 		this.usuario_creacion = usuario_creacion;
 	}
-	public String getFecha_creacion() {
+	public Timestamp getFecha_creacion() {
 		return fecha_creacion;
 	}
-	public void setFecha_creacion(String fecha_creacion) {
+	public void setFecha_creacion(Timestamp fecha_creacion) {
 		this.fecha_creacion = fecha_creacion;
 	}
 	public int getUsuario_edicion() {
@@ -141,10 +130,10 @@ public class Tbl_user {
 	public void setUsuario_edicion(int usuario_edicion) {
 		this.usuario_edicion = usuario_edicion;
 	}
-	public String getFecha_edicion() {
+	public Timestamp getFecha_edicion() {
 		return fecha_edicion;
 	}
-	public void setFecha_edicion(String fecha_edicion) {
+	public void setFecha_edicion(Timestamp fecha_edicion) {
 		this.fecha_edicion = fecha_edicion;
 	}
 	public int getUsuario_eliminacion() {
@@ -153,12 +142,17 @@ public class Tbl_user {
 	public void setUsuario_eliminacion(int usuario_eliminacion) {
 		this.usuario_eliminacion = usuario_eliminacion;
 	}
-	public String getFecha_eliminacion() {
+	public Timestamp getFecha_eliminacion() {
 		return fecha_eliminacion;
 	}
-	public void setFecha_eliminacion(String fecha_eliminacion) {
+	public void setFecha_eliminacion(Timestamp fecha_eliminacion) {
 		this.fecha_eliminacion = fecha_eliminacion;
 	}
+	
+	
+	
+	
+	
 	
 	
 	

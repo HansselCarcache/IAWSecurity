@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_userRol, entidades.Tbl_user,entidades.Vw_userrol,
+    entidades.Tbl_rol , datos.Dt_roluser, datos.Dt_usuario, datos.Dt_rol, java.util.*;" %>
 <!DOCTYPE html>
 <html>
 <%
@@ -103,7 +104,7 @@ tusr = dtusr.getRoluserbyID(Integer.parseInt(roluser));
 							                      	Dt_usuario dtu = new Dt_usuario();
 							                      	listaUsuario = dtu.listaUserActivos();
 								                 %>
-												<select class="form-control js-example-basic-single" name="cbxUser" id="cbxUser" required="required">
+												<select class="form-control js-example-basic-single" name="cbxUser" id="cbxUser" required="required" disabled>
 												  <option value="">Seleccione...</option>
 												  <% 
 												  	for(Tbl_user tu :listaUsuario){
@@ -203,6 +204,8 @@ tusr = dtusr.getRoluserbyID(Integer.parseInt(roluser));
         }, document.forms[0]);
         // on form "submit" event
         document.forms[0].onsubmit = function(e) {
+        	//Se quita el atributo disabled del combobox para que permita modificar los datos correctamente
+        	$('#cbxUser').removeAttr('disabled');
             var submit = true,
                 validatorResult = validator.checkAll(this);
             console.log(validatorResult);

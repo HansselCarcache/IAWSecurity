@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+   pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+<%
+String user = "";
+user = request.getParameter("idU")==null?"0":request.getParameter("idU");
+
+Tbl_user tu = new Tbl_user();
+Dt_usuario dtu = new Dt_usuario();
+tu = dtu.getUserbyID(Integer.parseInt(user));
+%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -73,39 +81,41 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form id="frmUser" name="frmUser" class="" action="../Sl_Usuario" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Usuario<span class="required">*</span></label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="ID Usuario">
-											</div>
-										</div>
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombres: <span class="required">*</span>
+										<input type="hidden" value="2" name="opcion" id="opcion"/>
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID usuario: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombres" name="nombres" required="required" class="form-control ">
+												<input type="text" id="txtiduser" name="txtiduser"  readonly required="required" class="form-control ">
 											</div>
 										</div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Apellidos: <span class="required">*</span>
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="apellidos" name="apellidos" required="required" class="form-control ">
+												<input type="text" id="txtiduca" name="txtiduca" title="Escriba su ID UCA" readonly class="form-control ">
 											</div>
 										</div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: <span class="required">*</span>
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="username" name="username" required="required" class="form-control ">
+												<input type="text" id="txtcorreoi" name="txtcorreoi" title="Escriba su correo institucional"  readonly class="form-control ">
+											</div>
+										</div>
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre completo: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtnombreC" name="txtnombreC" data-validate-length-range="5,100" data-validate-words="4" title="Nombre completo" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -114,141 +124,37 @@
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 											
-												<select class="form-control js-example-basic-single" name="sexo" id="sexo" required="required">
-												  <option value="">Seleccione...</option>
+												<select class="form-control js-example-basic-single" name="cbxsexo" id="cbxsexo" required="required">
 												  
-												  <option value="M">Masculino</option>
-												  <option value="F">Femenino</option>
+												  
+												  <option value="1">Masculino</option>
+												  <option value="2">Femenino</option>
 												  
 												</select>
                                             </div>
                                         </div>
                                         
-                                        <div class="item form-group">
+                                        <div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="telefono" name="telefono" required="required" class="form-control ">
+												<input type="text" id="txttelefono" name="txttelefono" data-validate-length-range="5,50" title="Escriba su teléfono de contacto" required="required" class="form-control ">
 											</div>
 										</div>
                                         
-                                        <div class="item form-group">
+                                        <div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="cargo" name="cargo" required="required" class="form-control ">
+												<input type="text" id="txtcargo" name="txtcargo" data-validate-length-range="3,50" title="Escriba el cargo que ocupa actualmente" required="required" class="form-control ">
 											</div>
 										</div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo personal: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="correop" name="correop" required="required" class="form-control ">
-											</div>
-										</div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="iduca" name="iduca" required="required" class="form-control ">
-											</div>
-										</div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="correoi" name="correoi" required="required" class="form-control ">
-											</div>
-										</div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Contraseña: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="pwd" name="pwd" required="required" class="form-control ">
-											</div>
-										</div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Confirmar contraseña: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="pwd2" name="pwd2" required="required" class="form-control ">
-											</div>
-										</div>
-                                        
 										
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Facultad: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												<%
-							                      	ArrayList<Tbl_facultad> listaFacultad = new ArrayList<Tbl_facultad>();
-							                      	Dt_facultad dtf = new Dt_facultad();
-							                      	listaFacultad = dtf.listaFacultadesActivas();
-								                 %>
-												<select class="form-control js-example-basic-single" name="facultad" id="facultad" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Tbl_facultad tf :listaFacultad){
-												  %>
-												  <option value="<%=tf.getId_facultad()%>"><%=tf.getNombre_facultad()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-                                            </div>
-                                        </div>
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Departamento: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-												<%
-                      		
-						                      		ArrayList<Vw_facultad_departamento> listaFaDe = new ArrayList<Vw_facultad_departamento>();
-						                      		Dt_departamento dtdepa = new Dt_departamento();
-						                      		listaFaDe =  dtdepa.listaDepartamentosActivos();
-                      		
-                      							%>
-								                 <select class="form-control js-example-basic-single" name="departamento" id="departamento" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Vw_facultad_departamento de :listaFaDe){
-												  %>
-												  <option value="<%=de.getId_departamento()%>"><%=de.getNombre_departamento()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-											</div>
-                                        </div>
-                                        
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Carrera: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												 <%
-						                      		ArrayList<Vw_carrera_departamento> listaCarreras = new ArrayList<Vw_carrera_departamento>();
-						                      		Dt_carreras dtc = new Dt_carreras();
-						                      		listaCarreras = dtc.listaCarreras();
-                      								%>
-												<select class="form-control js-example-basic-single" name="carrera" id="carrera" required="required">
-												  <option value="">Seleccione...</option>
-												  <%
-							                      	for(Vw_carrera_departamento c :listaCarreras){
-							                      		
-	                     						 %>
-												
-												  <option value="<%=c.getId_carrera()%>"><%=c.getNombre_carrera()%></option>
-												 <%
-												  	}
-												  %>
-												</select>
-                                            </div>
-                                        </div>
 
                                         
                                         
@@ -313,6 +219,7 @@
         }, document.forms[0]);
         // on form "submit" event
         document.forms[0].onsubmit = function(e) {
+        	
             var submit = true,
                 validatorResult = validator.checkAll(this);
             console.log(validatorResult);
@@ -329,8 +236,48 @@
                 $('form .alert').remove();
         }).prop('checked', false);
         
+        
+        function setValores()
+        {
+        	
+        	
+        	$('#cbxUser').removeAttr('disabled');
+        	document.getElementById("txtiduser").value = "<%=tu.getId_usuario()%>"
+        	
+        	document.getElementById("txtnombreC").value = "<%=tu.getNombre_real()%>"
+        	document.getElementById("cbxsexo").value = '<%=tu.getSexo()%>'
+            document.getElementById("cbxsexo").text = '<%=tu.getSexo()%>'
+            $("#cbxsexo").select2()	
+        	document.getElementById("txttelefono").value = "<%=tu.getTelefono_contacto()%>"
+        	document.getElementById("txtcargo").value = "<%=tu.getCargo()%>"
+        	
+        	document.getElementById("txtiduca").value = "<%=tu.getId_uca()%>"
+                	
+            iduca = document.frmUser.txtiduca.value 
+                    
+            if(iduca=="" || iduca=="null"){
+                    
+               $('#txtiduca').removeAttr('readonly');
+                    
+            }
+                	
+            document.getElementById("txtcorreoi").value = "<%=tu.getCorreo_institucional()%>"
+                	
+            correoi = document.frmUser.txtcorreoi.value
+                	
+            if(correoi=="" || correoi=="null"){
+                		$('#txtcorreoi').removeAttr('readonly');
+            }
+        	
+ 
+        	
+        	
+        }
+        
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+            setValores();
+            
         });
     </script>
 

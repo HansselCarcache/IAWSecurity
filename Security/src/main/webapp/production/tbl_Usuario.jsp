@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*;" %>
+<%
+String VarMsj = "";
 
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+
+
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,6 +24,8 @@
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+    <!-- JAlert -->
+    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
@@ -109,7 +117,7 @@
                           <th>Telefono <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Cargo <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Correo personal <a onclick="eliminarcolumna(6)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Carrera <a onclick="eliminarcolumna(7)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Cédula <a onclick="eliminarcolumna(7)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Estado <a onclick="eliminarcolumna(8)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Acciones <a onclick="eliminarcolumna(9)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
@@ -128,6 +136,12 @@
 	                      		else{
 	                      			estado = "Inactivo";
 	                      		}
+	                      		String sexo="";
+	                      		if(tusr.getSexo()==1){
+	                      			sexo="Masculino";
+	                      		}else if(tusr.getSexo()==2){
+	                      			sexo="Femenino";
+	                      		}
 	                      %>
                       	
                       
@@ -136,22 +150,22 @@
                           <td><%=tusr.getId_uca() %></td>
                           <td><%=tusr.getNombre_usuario() %></td>
                           <td><%=tusr.getNombre_real()%></td>
-                          <td><%=tusr.getSexo() %></td>
+                          <td><%=sexo %></td>
                           <td><%=tusr.getTelefono_contacto() %></td>
                           <td><%=tusr.getCargo() %></td>
                           <td><%=tusr.getCorreo_personal() %></td>
-                          <td></td>
+                          <td><%=tusr.getCedula() %></td>
                           <td><%=estado %></td>
                           <td>
-                           <a href="updateUsuario.jsp">
+                           <a href="updateUsuario.jsp?idU=<%=tusr.getId_usuario()%>">
                             <i class="far fa-edit" title="Editar Opciones"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readUsuario.jsp">
+                          <a href="readUsuario.jsp?idU=<%=tusr.getId_usuario()%>">
                             <i class="far fa-eye" title="Visualizar Opciones"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteUsuario.jsp" >
+                          <a href="deleteUsuario.jsp?idU=<%=tusr.getId_usuario() %>" >
                             <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
                           </a>
                           </td>
@@ -175,7 +189,7 @@
                           <th>Telefono</th>
                           <th>Cargo</th>
                           <th>Correo personal</th>
-                          <th>Carrera</th>
+                          <th>Cédula</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                         </tr>
@@ -233,6 +247,10 @@
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    
+    <!-- JAlert js -->
+	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -254,7 +272,33 @@
    	
     
     $(document).ready(function() {
-    	
+    	 var mensaje = 0;
+ 	    mensaje = "<%=VarMsj %>";
+
+ 	    if(mensaje == "1")
+ 	      {
+ 	    	successAlert('Exito', 'Los datos han sido registrados exitosamente!');
+ 	      }
+ 	    if(mensaje == "2")
+ 	      {
+ 	        errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
+ 	      }
+ 	      if(mensaje == "3")
+ 	      {
+ 	        successAlert('Exito', 'Los datos han sido modificados exitosamente!');
+ 	      }
+ 	      if(mensaje == "4")
+ 	      {
+ 	    	  errorAlert('Exito', 'No se han podido modificar los datos, intente de nuevo');
+ 	      }
+ 	      if(mensaje == "5")
+ 	      {
+ 	        successAlert('Exito', 'Los datos han sido eliminados exitosamente!');
+ 	      }
+ 	      if(mensaje == "6")
+ 	      {
+ 	        errorAlert('Exito', 'No se han podido eliminar los datos, intente de nuevo');
+ 	      }
     	
         $('#tbl_user').DataTable( {
         	buttons: [  
