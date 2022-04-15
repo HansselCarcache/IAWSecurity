@@ -73,10 +73,11 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form action="../Sl_gestionUserRol" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
+										<input type="hidden" value="1" name="opcion" id="opcion"/>
 
 										<div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Usuario: <span class="required">*</span></label>
@@ -92,7 +93,7 @@
 												  <% 
 												  	for(Tbl_user tu :listaUsuario){
 												  %>
-												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_usuario()%></option>
+												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_real()%></option>
 												  <%
 												  	}
 												  %>
@@ -115,7 +116,7 @@
 												  <% 
 												  	for(Tbl_rol trol :listRol){
 												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
+												  <option value="<%=trol.getId_rol()%>"><%=trol.getNombre_rol()%></option>
 												  <%
 												  	}
 												  %>
@@ -131,7 +132,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
                                                     <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
+                                                    <a href="tbl_rolusuario.jsp" class="btn btn-danger">Cancelar</a>
                                                 </div>
                                             </div>
                                         </div>

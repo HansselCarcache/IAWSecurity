@@ -4,8 +4,9 @@ public class Tbl_rol {
 	
 	//atributos
 	private int id_rol;
-	private String rol;
+	private String nombre_rol;
 	private int estado;
+	private String descripcion;
 	
 
 	
@@ -16,11 +17,12 @@ public class Tbl_rol {
 	public void setId_rol(int id_rol) {
 		this.id_rol = id_rol;
 	}
-	public String getRol() {
-		return rol;
+	
+	public String getNombre_rol() {
+		return nombre_rol;
 	}
-	public void setRol(String rol) {
-		this.rol = rol;
+	public void setNombre_rol(String nombre_rol) {
+		this.nombre_rol = nombre_rol;
 	}
 	public int getEstado() {
 		return estado;
@@ -28,4 +30,11 @@ public class Tbl_rol {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
 }

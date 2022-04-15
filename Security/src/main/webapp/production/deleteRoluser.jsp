@@ -2,6 +2,14 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+<%
+String roluser = "";
+roluser = request.getParameter("idRU")==null?"0":request.getParameter("idRU");
+
+Vw_userrol tusr = new Vw_userrol();
+Dt_roluser dtusr = new Dt_roluser();
+tusr = dtusr.getRoluserbyID(Integer.parseInt(roluser));
+%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -16,6 +24,8 @@
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+    <!-- JAlert -->
+    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 
@@ -73,70 +83,46 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form id="frmdelete" name="frmdelete" action="../Sl_gestionUserRol" method="post" onsubmit="toSubmit(event)">
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
+										<input type="hidden" value="3" name="opcion" id="opcion"/>
 
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Rol Usuario<span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="ID Rol Usuario">
+												<input type="text" id="idrolu" name="idrolu" class="form-control" placeholder="ID Rol Usuario" readonly>
+											</div>
+										</div>
+										<input type="hidden" name="cbxUser" id="cbxUser"/>
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align ">Usuario<span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input value="<%=tusr.getId_usuario() %>" type="text" id="txtUser" name="txtUser" class="form-control" readonly>
+											</div>
+										</div>
+										<input type="hidden" name="cbxRol" id="cbxRol"/>
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align ">Rol<span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtRol" name="txtRol" class="form-control" readonly>
 											</div>
 										</div>
 										
-										<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Usuario: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												<%
-							                      	ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>();
-							                      	Dt_usuario dtu = new Dt_usuario();
-							                      	listaUsuario = dtu.listaUserActivos();
-								                 %>
-												<select class="form-control js-example-basic-single" disabled name="cbxUser" id="cbxUser" >
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Tbl_user tu :listaUsuario){
-												  %>
-												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_usuario()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-                                            </div>
-                                        </div>
-
-										<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Rol: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-												<%
-							                      	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-							                      	Dt_rol dtr = new Dt_rol();
-							                      	listRol = dtr.listaRolActivos();
-								                 %>
-								                 <select class="form-control js-example-basic-single" disabled name="cbxRol" id="cbxRol" >
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Tbl_rol trol :listRol){
-												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-											</div>
-                                        </div>
+										
                                         
                                         
 
                                         
                                         
                                         <div class="ln_solid">
-                                            <div class="col-md-6 offset-md-3">
-                								<button type='reset' class="btn btn-danger">Eliminar</button>
-                  							</div>
+                                            <div class="form-group">
+                                                <div class="col-md-6 offset-md-3">
+                                                    <button onclick="deleteRolUser()" class="btn btn-danger">Eliminar</button>
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -190,12 +176,12 @@
             "events": ['blur', 'input', 'change']
         }, document.forms[0]);
         // on form "submit" event
-        document.forms[0].onsubmit = function(e) {
+       /* document.forms[0].onsubmit = function(e) {
             var submit = true,
                 validatorResult = validator.checkAll(this);
             console.log(validatorResult);
             return !!validatorResult.valid;
-        };
+        };*/
         // on form "reset" event
         document.forms[0].onreset = function(e) {
             validator.reset();
@@ -207,8 +193,64 @@
                 $('form .alert').remove();
         }).prop('checked', false);
         
+        //Funciones del formulario
+        function toSubmit(e){
+    		e.preventDefault(); 
+ 			 try {
+   					someBug();
+  					} catch (e) {
+   					throw new Error(e.message);
+  					}
+  					return false;
+   		}
+   
+   		function submitForm(){
+    		var form = document.getElementById("frmdelete");
+			form.onsubmit = function() {
+  			return true;
+			}
+   		}
+        
+        function deleteRolUser(){
+            $.jAlert({
+                'type': 'confirm',
+                'confirmQuestion': '¿Esta seguro que desea eliminar el registro?',
+                'onConfirm': function(e, btn){
+                  e.preventDefault();
+                  //do something here
+                  submitForm();
+                  document.getElementById('frmdelete').submit();
+                  btn.parents('.jAlert').closeAlert();
+                  return false;
+                },
+                'onDeny': function(e, btn){
+                  e.preventDefault();
+                  //do something here
+                  btn.parents('.jAlert').closeAlert();
+                  return false;
+                }
+            });
+        }
+        
+        function setValores()
+        {
+        	
+        	document.getElementById("idrolu").value = "<%=tusr.getId_rol_usuario()%>"
+        	document.getElementById("txtUser").value = "<%=tusr.getUsuario()%>"
+       		document.getElementById("txtRol").value = "<%=tusr.getRol()%>"
+       		document.getElementById("cbxUser").value = "<%=tusr.getId_usuario()%>"
+       		document.getElementById("cbxRol").value = "<%=tusr.getId_rol()%>"
+       		
+        	
+        	
+        	
+        	
+        }
+        
+        
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+            setValores();
         });
     </script>
 
@@ -228,6 +270,9 @@
     
     <!-- Select2 -->
     <script src="../vendors/select2/dist/js/select2.min.js"></script>
+    <!-- JAlert js -->
+	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
     
     <script type="text/javascript">

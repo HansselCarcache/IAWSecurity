@@ -2,6 +2,14 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+<%
+String roluser = "";
+roluser = request.getParameter("idRU")==null?"0":request.getParameter("idRU");
+
+Vw_userrol tusr = new Vw_userrol();
+Dt_roluser dtusr = new Dt_roluser();
+tusr = dtusr.getRoluserbyID(Integer.parseInt(roluser));
+%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -81,7 +89,7 @@
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Rol Usuario<span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="ID Rol Usuario">
+												<input type="text" id="idrolu" name="idrolu" class="form-control" readonly="readonly" placeholder="ID Rol Usuario">
 											</div>
 										</div>
 										
@@ -121,7 +129,7 @@
 												  <% 
 												  	for(Tbl_rol trol :listRol){
 												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
+												  <option value="<%=trol.getId_rol()%>"><%=trol.getNombre_rol()%></option>
 												  <%
 												  	}
 												  %>
@@ -207,8 +215,24 @@
                 $('form .alert').remove();
         }).prop('checked', false);
         
+        function setValores()
+        {
+        	
+        	document.getElementById("idrolu").value = "<%=tusr.getId_rol_usuario()%>"
+        	document.getElementById("cbxUser").value = '<%=tusr.getId_usuario()%>'
+        	document.getElementById("cbxUser").text = '<%=tusr.getId_usuario()%>'
+        	$("#cbxUser").select2()	
+        	document.getElementById("cbxRol").value = '<%=tusr.getId_rol()%>'
+        	document.getElementById("cbxRol").text = '<%=tusr.getRol()%>'	 
+        	$("#cbxRol").select2()	
+ 
+        	
+        	
+        }
+        
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+            setValores();
         });
     </script>
 

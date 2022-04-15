@@ -6,8 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import entidades.UserRol;
-import datos.Dt_userrol;
+
+import entidades.Tbl_userRol;
+import datos.Dt_roluser;
+
 
 /**
  * Servlet implementation class Sl_gestionUserRol
@@ -42,22 +44,26 @@ public class Sl_gestionUserRol extends HttpServlet {
 		//obtenemos el valor de opcion
 		int opc = 0;
 		opc = Integer.parseInt(request.getParameter("opcion"));
+		
+		
 		// INSTANCIAMOS LOS OBJETOS
-		UserRol tur = new UserRol();
-		Dt_userrol dtur = new Dt_userrol();
+		Tbl_userRol tur = new Tbl_userRol();
+		Dt_roluser dtur = new Dt_roluser();
+		
+		
 		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
-		tur.setId_user(Integer.parseInt(request.getParameter("usuario")));
-		tur.setId_rol(Integer.parseInt(request.getParameter("rol")));
+		tur.setId_user(Integer.parseInt(request.getParameter("cbxUser")));
+		tur.setId_rol(Integer.parseInt(request.getParameter("cbxRol")));
 		
 		////////////////////////////////////////////////////////////////////
 		
 		switch(opc) {
 		case 1:
 			try {
-				if(dtur.asignaRol(tur)) {
-					response.sendRedirect("production/tbl_UsuarioRol.jsp?msj=1");
+				if(dtur.guardarRoluser(tur)) {
+					response.sendRedirect("production/tbl_rolusuario.jsp?msj=1");
 				}else {
-					response.sendRedirect("production/tbl_UsuarioRol.jsp?msj=2");
+					response.sendRedirect("production/tbl_rolusuario.jsp?msj=2");
 				}
 			}catch(Exception e) {
 				System.out.println("Error Sl_gestionUserRol opc1: "+e.getMessage());
@@ -65,7 +71,35 @@ public class Sl_gestionUserRol extends HttpServlet {
 			}
 			break;
 		case 2:
-			//codigo
+			tur.setId_userRol(Integer.parseInt(request.getParameter("idrolu")));
+			try {
+				tur.setId_rol(Integer.parseInt(request.getParameter("cbxRol")));
+				if(dtur.modificarRolUser(tur)) {
+					response.sendRedirect("production/tbl_rolusuario.jsp?msj=3");
+				}
+				else {
+					response.sendRedirect("production/tbl_rolusuario.jsp?msj=4");
+				}
+			}catch(Exception e) {
+				System.out.println("Error Sl_gestionUserRol opc2: "+e.getMessage());
+				e.printStackTrace();
+			}
+			break;
+		case 3:
+			tur.setId_userRol(Integer.parseInt(request.getParameter("idrolu")));
+			try {
+				tur.setId_user(Integer.parseInt(request.getParameter("cbxUser")));
+				tur.setId_rol(Integer.parseInt(request.getParameter("cbxRol")));
+				if(dtur.eliminarRolUser(tur)) {
+					response.sendRedirect("production/tbl_rolusuario.jsp?msj=5");
+				}
+				else {
+					response.sendRedirect("production/tbl_rolusuario.jsp?msj=6");
+				}
+			}catch(Exception e) {
+				System.out.println("Error Sl_gestionUserRol opc3: "+e.getMessage());
+				e.printStackTrace();
+			}
 			break;
 		default:
 			//codigo

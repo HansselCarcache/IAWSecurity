@@ -107,9 +107,10 @@
                       <thead>
                         <tr>
                           
-                          <th>Descripcion <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Estado <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Acciones <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Nombre <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Descripcion <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Estado <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Acciones <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
                         </tr>
                       </thead>
@@ -130,7 +131,8 @@
                       
                         <tr>
                           
-                          <td><%=trol.getRol() %></td>
+                          <td><%=trol.getNombre_rol() %></td>
+                          <td><%=trol.getDescripcion() %></td>
                           <td><%=estado %></td>
                           <td>
                            <a href="updateRol.jsp">
@@ -157,6 +159,7 @@
                       <tfoot>
                         <tr>
                           
+                          <th>Nombre</th>
                           <th>Descripcion</th>
                           <th>Estado</th>
                           <th>Acciones</th>
@@ -228,7 +231,7 @@
    	function mostrarcolumna(){
    		var table = $('#tbl_rol').DataTable();
    	    
-   	   	table.columns( [ 0, 1, 2 ] ).visible( true, true );
+   	   	table.columns( [ 0, 1, 2, 3 ] ).visible( true, true );
    	}
    	
    	
@@ -247,7 +250,7 @@
 							title: 'Roles registrados',
 							action: function ( e, dt, node, config ) {
 			                    //alert( 'Activated!' );
-			                    eliminarcolumna(2);
+			                    eliminarcolumna(3);
 			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
 			                },
 							exportOptions: {
@@ -260,7 +263,7 @@
         					title: 'Roles registrados',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(2);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {
@@ -274,7 +277,7 @@
         					title: 'Roles registrados',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(2);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {
@@ -288,7 +291,7 @@
         					title: 'Roles registrados',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(2);
+        	                    eliminarcolumna(3);
         	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
         	                },
         					exportOptions: {

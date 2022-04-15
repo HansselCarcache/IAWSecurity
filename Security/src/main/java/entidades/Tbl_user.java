@@ -4,24 +4,21 @@ public class Tbl_user {
 	
 	//atributos
 	private int id_usuario;
-	private String nombre_usuario;
-	private String nombres;
-	private String apellidos;
-	private String sexo;
-	private String telefono_contacto;
-	private String fecha_registro;
-	private String cargo;
 	private String id_uca;
-	private String correo_personal;
-	private String correo_electronico;
+	private String nombre_real;
+	private String nombre_usuario;
 	private String pwd;
+	private String correo_institucional;
+	private String correo_personal;
+	private String sexo;
+	private String cargo;
+	private String telefono_contacto;
+	private int estado;
+	private String cedula;
+	private String fecha_registro;
 	private String urlFoto;
 	private String codVerificacion;
 	private String key_encriptacion;
-	private int estado;
-	private int id_facultad;
-	private int id_departamento;
-	private int id_carrera;
 	private int usuario_creacion;
 	private String fecha_creacion;
 	private int usuario_edicion;
@@ -36,53 +33,35 @@ public class Tbl_user {
 	public void setId_usuario(int id_usuario) {
 		this.id_usuario = id_usuario;
 	}
+	public String getId_uca() {
+		return id_uca;
+	}
+	public void setId_uca(String id_uca) {
+		this.id_uca = id_uca;
+	}
+	public String getNombre_real() {
+		return nombre_real;
+	}
+	public void setNombre_real(String nombre_real) {
+		this.nombre_real = nombre_real;
+	}
 	public String getNombre_usuario() {
 		return nombre_usuario;
 	}
 	public void setNombre_usuario(String nombre_usuario) {
 		this.nombre_usuario = nombre_usuario;
 	}
-	public String getNombres() {
-		return nombres;
+	public String getPwd() {
+		return pwd;
 	}
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
-	public String getApellidos() {
-		return apellidos;
+	public String getCorreo_institucional() {
+		return correo_institucional;
 	}
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
-	public String getSexo() {
-		return sexo;
-	}
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-	public String getTelefono_contacto() {
-		return telefono_contacto;
-	}
-	public void setTelefono_contacto(String telefono_contacto) {
-		this.telefono_contacto = telefono_contacto;
-	}
-	public String getFecha_registro() {
-		return fecha_registro;
-	}
-	public void setFecha_registro(String fecha_registro) {
-		this.fecha_registro = fecha_registro;
-	}
-	public String getCargo() {
-		return cargo;
-	}
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
-	}
-	public String getId_uca() {
-		return id_uca;
-	}
-	public void setId_uca(String id_uca) {
-		this.id_uca = id_uca;
+	public void setCorreo_institucional(String correo_institucional) {
+		this.correo_institucional = correo_institucional;
 	}
 	public String getCorreo_personal() {
 		return correo_personal;
@@ -90,17 +69,41 @@ public class Tbl_user {
 	public void setCorreo_personal(String correo_personal) {
 		this.correo_personal = correo_personal;
 	}
-	public String getCorreo_electronico() {
-		return correo_electronico;
+	public String getSexo() {
+		return sexo;
 	}
-	public void setCorreo_electronico(String correo_electronico) {
-		this.correo_electronico = correo_electronico;
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
-	public String getPwd() {
-		return pwd;
+	public String getCargo() {
+		return cargo;
 	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+	public String getTelefono_contacto() {
+		return telefono_contacto;
+	}
+	public void setTelefono_contacto(String telefono_contacto) {
+		this.telefono_contacto = telefono_contacto;
+	}
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+	public String getCedula() {
+		return cedula;
+	}
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+	public String getFecha_registro() {
+		return fecha_registro;
+	}
+	public void setFecha_registro(String fecha_registro) {
+		this.fecha_registro = fecha_registro;
 	}
 	public String getUrlFoto() {
 		return urlFoto;
@@ -119,30 +122,6 @@ public class Tbl_user {
 	}
 	public void setKey_encriptacion(String key_encriptacion) {
 		this.key_encriptacion = key_encriptacion;
-	}
-	public int getEstado() {
-		return estado;
-	}
-	public void setEstado(int estado) {
-		this.estado = estado;
-	}
-	public int getId_facultad() {
-		return id_facultad;
-	}
-	public void setId_facultad(int id_facultad) {
-		this.id_facultad = id_facultad;
-	}
-	public int getId_departamento() {
-		return id_departamento;
-	}
-	public void setId_departamento(int id_departamento) {
-		this.id_departamento = id_departamento;
-	}
-	public int getId_carrera() {
-		return id_carrera;
-	}
-	public void setId_carrera(int id_carrera) {
-		this.id_carrera = id_carrera;
 	}
 	public int getUsuario_creacion() {
 		return usuario_creacion;
