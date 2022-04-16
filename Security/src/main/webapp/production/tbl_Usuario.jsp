@@ -143,12 +143,18 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 	                      		}else if(tusr.getSexo()==2){
 	                      			sexo="Femenino";
 	                      		}
+	                      		String iduca = "";
+	                      		if(tusr.getId_uca()==null){
+	                      			iduca = "";
+	                      		}else{
+	                      			iduca=tusr.getId_uca();
+	                      		}
 	                      %>
                       	
                       
                         <tr>
                           
-                          <td><%=tusr.getId_uca() %></td>
+                          <td><%=iduca %></td>
                           <td><%=tusr.getNombre_usuario() %></td>
                           <td><%=tusr.getNombre_real()%></td>
                           <td><%=sexo %></td>
@@ -203,7 +209,8 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                 </div>
               </div>
               </div>
-              <!-- INICO DE LA SEGUNDA TABLA -->
+              
+              <!-- INICIO DE LA SEGUNDA TABLA -->
               <div id="divtabla2" style="display:none;" class="row">
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
@@ -274,12 +281,18 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 	                      		}else if(tusr.getSexo()==2){
 	                      			sexo="Femenino";
 	                      		}
+	                      		String iduca = "";
+	                      		if(tusr.getId_uca()==null){
+	                      			iduca = "";
+	                      		}else{
+	                      			iduca=tusr.getId_uca();
+	                      		}
 	                      %>
                       	
                       
                         <tr>
                           
-                          <td><%=tusr.getId_uca() %></td>
+                          <td><%=iduca %></td>
                           <td><%=tusr.getNombre_usuario() %></td>
                           <td><%=tusr.getNombre_real()%></td>
                           <td><%=sexo %></td>

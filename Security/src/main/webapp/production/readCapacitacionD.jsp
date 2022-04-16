@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-   pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
-<% String user = "";
-user = request.getParameter("idU")==null?"0":request.getParameter("idU");
 
-Tbl_user tu = new Tbl_user();
-Dt_usuario dtu = new Dt_usuario();
-tu = dtu.getUserbyID(Integer.parseInt(user));
+<%
+
+ String cap = ""; 
+ cap = request.getParameter("idC")==null?"0":request.getParameter("idC"); 
+						
+Vw_ofertadet ofd = new Vw_ofertadet(); 
+Dt_ofertadet dtofd = new Dt_ofertadet(); 
+ofd = dtofd.getDetalleId(Integer.parseInt(cap));
+
 %>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -16,7 +21,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Usuarios | Restaurar </title>
+    <title>Capacitación | Visualizar </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -40,19 +45,19 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
+              <a href="../Login.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Oferta</span></a>
             </div>
 
             <div class="clearfix"></div>
 
-            <%@include file="diseño.jsp"%>
+            <%@include file="diseñoDocente.jsp"%>
 
             <!-- page content -->
             <div class="right_col" role="main">
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Restaurar usuario</h3>
+                            <h3>Capacitación</h3>
                         </div>
 
                         
@@ -63,7 +68,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Restauración de usuarios </h2>
+                                    <h2>Visualización de capacitación </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -80,119 +85,84 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form id="frmUser" name=""frmUser class="" action="../Sl_Usuario" method="post" novalidate>
+                                    <form  action="#" method="post" novalidate>
+                                   
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
-										<input type="hidden" value="4" name="opcion" id="opcion"/>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Usuario:</label>
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Capacitación: 
+											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="txtiduser" name="txtiduser" type="text" class="form-control" readonly="readonly" placeholder="ID Usuario">
+												<input type="text" id="txtusername" value="<%=ofd.getCapacitacion() %>" name="txtusername" readonly="readonly"  required="required"  class="form-control ">
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align ">Fecha Inicio:</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="txtiduser" name="txtiduser" value="<%=ofd.getFecha_inicio() %>" type="text" class="form-control" readonly="readonly" placeholder="ID Usuario">
 											</div>
 										</div>
 										
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha de registro: 
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha Final: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtfreg" name="txtfreg" readonly="readonly" required="required" class="form-control ">
+												<input type="text" id="txtfreg" value="<%=ofd.getFecha_final() %>" name="txtfreg" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Estado: 
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Dias: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtestado" name="txtestado" readonly="readonly" required="required" class="form-control ">
+												<input type="text" id="txtestado" value="<%=ofd.getDias() %>" name="txtestado" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 
 										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Completo: 
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripción Horaria: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtnombreC" name="txtnombreC" readonly="readonly"  required="required" class="form-control ">
+												<input type="text" id="txtnombreC" value="<%=ofd.getDescripcion_horaria() %>" name="txtnombreC" readonly="readonly"  required="required" class="form-control ">
 											</div>
 										</div>
 										
 										
-										
 										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: 
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Modalidad: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtusername" name="txtusername" readonly="readonly"  required="required"  class="form-control ">
+												<input type="text" id="txtcargo" value="<%=ofd.getModalidad() %>" name="txtcargo" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
 										
-										<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Sexo: </label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-											
-												<select class="form-control js-example-basic-single" disabled name="cbxsexo" id="cbxsexo" required="required">
-												  
-												  
-												  <option value="1">Masculino</option>
-												  <option value="2">Femenino</option>
-												  
-												</select>
-                                            </div>
-                                        </div>
                                         <div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cédula: 
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Tipo de capacitación: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcedula" name="txtcedula" readonly="readonly"  required="required" class="form-control ">
+												<input type="text" id="txtcedula" value="<%=ofd.getTipo_capacitacion() %>"  name="txtcedula" readonly="readonly"  required="required" class="form-control ">
 											</div>
 										</div>
                                         <div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: 
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Facilitador: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txttelefono" name="txttelefono" readonly="readonly" required="required" class="form-control ">
-											</div>
-										</div>
-                                        
-                                        <div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcargo" name="txtcargo" readonly="readonly" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo personal: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcorreop" name="txtcorreop" readonly="readonly" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										
-										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtiduca" name="txtiduca" readonly="readonly"   class="form-control ">
-											</div>
-										</div>
-										
-										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcorreoi" name="txtcorreoi" readonly="readonly"   class="form-control ">
+												<input type="text" id="txttelefono" value="<%=ofd.getFacilitador() %>" name="txttelefono" readonly="readonly" required="required" class="form-control ">
 											</div>
 										</div>
                                         
                                         
+										
+										
+						
+                        
+																																						                                                                                
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
-                                                <button type="submit" class="btn btn-primary">Restaurar</button>
-                								<a href="tbl_Usuario.jsp" class="btn btn-danger">Cancelar</a>
+                								<a href="tbl_capacitacionD.jsp" class="btn btn-primary">Regresar</a>
                   							</div>
                                         </div>
                                     </form>
@@ -264,44 +234,8 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                 $('form .alert').remove();
         }).prop('checked', false);
         
-        function setValores()
-        {
-        	
-        	
-        	$('#cbxUser').removeAttr('disabled');
-        	document.getElementById("txtiduser").value = "<%=tu.getId_usuario()%>"
-        	
-        	document.getElementById("txtnombreC").value = "<%=tu.getNombre_real()%>"
-        	document.getElementById("cbxsexo").value = '<%=tu.getSexo()%>'
-            document.getElementById("cbxsexo").text = '<%=tu.getSexo()%>'
-            $("#cbxsexo").select2()	
-        	document.getElementById("txttelefono").value = "<%=tu.getTelefono_contacto()%>"
-        	document.getElementById("txtcargo").value = "<%=tu.getCargo()%>"
-        	
-        	document.getElementById("txtiduca").value = "<%=tu.getId_uca()%>"	
-            document.getElementById("txtcorreoi").value = "<%=tu.getCorreo_institucional()%>"
-            document.getElementById("txtusername").value = "<%=tu.getNombre_usuario()%>"
-            document.getElementById("txtcedula").value = "<%=tu.getCedula()%>"
-            document.getElementById("txtcorreop").value = "<%=tu.getCorreo_personal()%>"
-            document.getElementById("txtfreg").value = "<%=tu.getFecha_creacion()%>"
-            
-            
-            estado = "<%=tu.getEstado()%>" 
-                 
-           	if(estado=="3"){
-                         
-           		document.getElementById("txtestado").value = "Inactivo"
-                         
-            }    	
-           
- 
-        	
-        	
-        }
-        
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
-            setValores();
         });
     </script>
 

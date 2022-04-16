@@ -1,8 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datos.Dt_inscripcion;
-
-import entidades.Inscripcion;
+import datos.Dt_carreras;
+import datos.Dt_inscripcionDocente;
+import entidades.Tbl_carrera_inscripcion;
+import entidades.Tbl_inscripcion;
+import entidades.Vw_carrera_departamento;
 
 
 @WebServlet("/Sl_Inscripcion")
@@ -28,35 +29,47 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	int opc = 0;
 	opc = Integer.parseInt(request.getParameter("opcion"));
+	
+	
 	// INSTANCIAMOS LOS OBJETOS
-	Inscripcion cr = new Inscripcion();
-	Dt_inscripcion dtc = new Dt_inscripcion();
+	Tbl_inscripcion tins = new Tbl_inscripcion();
+	Tbl_carrera_inscripcion tcari = new Tbl_carrera_inscripcion();
+	Vw_carrera_departamento cardf = new Vw_carrera_departamento();
+	Dt_inscripcionDocente dti = new Dt_inscripcionDocente();
+	Dt_carreras dtc = new Dt_carreras();
+	
 	// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 	
 	
-	//Date date = new Date();
-	//SimpleDateFormat getYearFormat = new SimpleDateFormat("yyyy");
-	//String currentYear = getYearFormat.format(date);
-	Date dt=new Date();
-	int year=dt.getYear();
-int current_Year=year+1900;
 	
-	cr.setId_departamento(Integer.parseInt(request.getParameter("cbxDepartamento")));
-	cr.setId_carrera(Integer.parseInt(request.getParameter("cbxCarrera")));
-	cr.setId_facultad(Integer.parseInt(request.getParameter("cbxFacultad")));
-	cr.setId_usuario(Integer.parseInt(request.getParameter("cbxUsuario")));
-	cr.setId_oferta_detalle(Integer.parseInt(request.getParameter("cbxOfertaDetalle")));
-	cr.setAno_inscripcion(String.valueOf(current_Year));
 	////////////////////////////////////////////////////////////////////
 	
 	switch(opc) {
 	case 1:
+		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
+		tins.setNombre_completo(request.getParameter("nombre_completo"));
+		tins.setTelefono(request.getParameter("telefono_contacto"));
+		tins.setCorreo(request.getParameter("correo"));
+		tins.setId_usuario(Integer.parseInt(request.getParameter("iduser")));
+		tins.setId_oferta_detalle(Integer.parseInt(request.getParameter("idoferd")));
 		try {
-			if(dtc.addInscripcion(cr)) {
-				response.sendRedirect("production/tbl_inscripcion.jsp?msj=1");
-			}else {
-				response.sendRedirect("production/tbl_inscripcion.jsp?msj=2");
+		// CONSTRUIMOS EL OBJETO CARRERA INSCRIPCION
+		cardf = dtc.getCarreraDFbyID(Integer.parseInt(request.getParameter("cbxCarrera")));
+		tcari.setId_departamento(cardf.getId_departamento());
+		tcari.setId_facultad(cardf.getId_facultad());
+		tcari.setEstado(1);
+		tcari.setId_carrera(cardf.getId_carrera());
+		tcari.setId_inscripcion(dti.guardarInscripcion(tins));
+		if(tcari.getId_inscripcion()>0) {
+			if(dtc.guardarCarrerainsc(tcari)) {
+				response.sendRedirect("production/tbl_capacitacionD.jsp?msj=1");
 			}
+			else {
+				response.sendRedirect("production/tbl_capacitacionD.jsp?msj=2");
+			}
+		}else {
+			response.sendRedirect("production/tbl_capacitacionD.jsp?msj=2");
+		}
 		}catch(Exception e) {
 			System.out.println("Error Sl_Inscripcion opc1: "+e.getMessage());
 			e.printStackTrace();

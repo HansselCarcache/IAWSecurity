@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+<%
+String VarMsj = "";
 
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+
+
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,6 +24,8 @@
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+    <!-- JAlert -->
+    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
@@ -101,7 +109,10 @@
 						                        <tr>
 						                          <th>Id Oferta detalle</th>
 						                          <th>Nombre Capacitación</th>
+						                          <th>Modalidad</th>
 						                          <th>Facilitador</th>
+						                          <th>Fecha Inicio</th>
+						                          <th>Fecha Final</th>
 						                          <th>Dias</th>
 						                          <th>Acciones</th>
 						                        </tr>
@@ -116,14 +127,20 @@
 							          					<tr>
 							                          <td><%=oferD.getId_oferta_detalle() %></td>
 							                          <td><%=oferD.getCapacitacion() %></td>
-							                          <td><%=oferD.getNombres()+' '+oferD.getApellidos() %></td>
+							                          <td><%=oferD.getModalidad() %></td>
+							                          <td><%=oferD.getFacilitador() %></td>
+							                          <td><%=oferD.getFecha_inicio() %></td>
+							                          <td><%=oferD.getFecha_final() %></td>
 							                          <td><%=oferD.getDias() %></td>
 							                          <td>
-							                           <a href="#">
-							                            <i class="far fa-edit" title="Editar Opciones"></i>
+							                           <a href="addInscripcionD.jsp?idC=<%=oferD.getId_oferta_detalle()%>">
+							                            <i class="far fa-edit" title="Inscribir Capacitacion"></i>
+							                            
 							                          </a>
-						
-							                        
+							                           &nbsp;&nbsp;
+							                          <a href="readCapacitacionD.jsp?idC=<%=oferD.getId_oferta_detalle()%>">
+							                            <i class="far fa-eye" title="Visualizar Capacitación"></i>
+							                          </a>
 							                          </td>
 								                        </tr>
 								                         <%
@@ -135,7 +152,10 @@
 						                        <tr>
 						                          <th>Id Oferta detalle</th>
 						                          <th>Nombre Capacitación</th>
+						                          <th>Modalidad</th>
 						                          <th>Facilitador</th>
+						                          <th>Fecha Inicio</th>
+						                          <th>Fecha Final</th>
 						                          <th>Dias</th>
 						                          <th>Acciones</th>
 						                        </tr>
@@ -189,6 +209,9 @@
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    <!-- JAlert js -->
+	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -210,6 +233,17 @@
     
     $(document).ready(function() {
     	
+    	var mensaje = 0;
+ 	    mensaje = "<%=VarMsj %>";
+
+ 	    if(mensaje == "1")
+ 	      {
+ 	    	successAlert('Exito', 'Los datos han sido registrados exitosamente!');
+ 	      }
+ 	    if(mensaje == "2")
+ 	      {
+ 	        errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
+ 	      }
     	
         $('#tbl_detalle').DataTable( {
         	buttons: [  

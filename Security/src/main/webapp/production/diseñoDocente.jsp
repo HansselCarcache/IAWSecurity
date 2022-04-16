@@ -31,7 +31,7 @@
                   <li><a><i class="fa-solid fa-graduation-cap"></i> Oferta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                      <li><a href="tbl_capacitacion2.jsp">Capacitaciones</a></li>
+                      <li><a href="tbl_capacitacionD.jsp">Capacitaciones</a></li>
                       
                       
                     </ul>
@@ -39,13 +39,13 @@
                   
                   <li><a><i class="fa-solid fa-school"></i> Inscripciones <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tbl_inscripcion2.jsp">Inscripciones</a></li>
+                      <li><a href="tbl_inscripcionD.jsp">Inscripciones</a></li>
                       
                     </ul>
                   </li>
                     <li><a><i class="fa-solid fa-school"></i> Calificaciones <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="evaluacion2.jsp">Evaluacion</a></li>
+                      <li><a href="evaluacionD.jsp">Evaluacion</a></li>
                     </ul>
                   </li>
                   

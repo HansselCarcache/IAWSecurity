@@ -3,8 +3,10 @@ package datos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import entidades.Tbl_inscripcion;
 import entidades.Vw_inscripcion_docente;
 import entidades.Vw_userrol;
 
@@ -19,7 +21,7 @@ public class Dt_inscripcionDocente {
 	//Metodo para llenar el ResultSet para insert, update y delete
 	public void llenaRsInscripcion(Connection c) {
 		try {
-			ps = c.prepareStatement("SELECT * FROM dbfdocente.vw_inscripcion_docente;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.inscripcion", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsInscripcion = ps.executeQuery();
 			
 		}
@@ -29,6 +31,7 @@ public class Dt_inscripcionDocente {
 		}
 	}
 	
+	//Esto era del proyecto viejo y quien sabe si se vuelva a ocupar
 	public ArrayList<Vw_inscripcion_docente> listainscripcion(){
 		ArrayList<Vw_inscripcion_docente> listInsc = new ArrayList<Vw_inscripcion_docente>();
 		try {
@@ -75,5 +78,49 @@ public class Dt_inscripcionDocente {
 		}
 		return listInsc;
 	}
+	
+	//Metodo para almacenar nueva inscripcion
+	public int guardarInscripcion(Tbl_inscripcion tins) {
+		int guardado = 0;
+		try {
+			c = poolConexion.getConnection();
+			this.llenaRsInscripcion(c);
+			rsInscripcion.moveToInsertRow();
+			rsInscripcion.updateString("nombre_completo", tins.getNombre_completo());
+			rsInscripcion.updateString("telefono", tins.getTelefono());
+			rsInscripcion.updateString("correo", tins.getCorreo());
+			rsInscripcion.updateInt("estado", 1);
+			rsInscripcion.updateString("otras_dependencias", tins.getOtras_dependencias());
+			rsInscripcion.updateInt("id_usuario", tins.getId_usuario());
+			rsInscripcion.updateInt("id_oferta_detalle", tins.getId_oferta_detalle());
+			rsInscripcion.insertRow();
+			rsInscripcion.moveToCurrentRow();
+			this.llenaRsInscripcion(c);
+			rsInscripcion.last();
+			guardado = rsInscripcion.getInt("id_inscripcion");
+			
+		}
+		catch (Exception e) {
+			System.err.println("ERROR AL GUARDAR Tbl_inscripcion "+e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rsInscripcion != null){
+					rsInscripcion.close();
+				}
+				if(c != null){
+					poolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return guardado;
+	}
+	
+	
 	
 }

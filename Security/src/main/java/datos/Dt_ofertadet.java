@@ -41,14 +41,19 @@ public class Dt_ofertadet {
 			while(rs.next()){
 				Vw_ofertadet topc = new Vw_ofertadet(); //instanciamos a rol
 				topc.setId_oferta_detalle(rs.getInt("id_oferta_detalle"));
-				topc.setId_oferta(rs.getInt("id_oferta"));
-				topc.setPeriodo(rs.getString("periodo"));
+				topc.setFecha_inicio(rs.getDate("fecha_inicial"));
+				topc.setFecha_final(rs.getDate("fecha_final"));
+				topc.setDescripcion_horaria(rs.getString("descripcion_horaria"));
 				topc.setDias(rs.getString("dias"));
 				topc.setPublico(rs.getInt("publico"));
+				topc.setId_oferta(rs.getInt("id_oferta"));
 				topc.setId_capacitacion(rs.getInt("id_capacitacion"));
 				topc.setCapacitacion(rs.getString("capacitacion"));
-				topc.setModalidad(rs.getString("modalidad"));
+				topc.setTipo_capacitacion(rs.getString("tipo_capacitacion"));
 				topc.setId_facilitador(rs.getInt("id_facilitador"));
+				topc.setFacilitador(rs.getString("facilitador"));
+				topc.setId_modalidad(rs.getInt("id_modalidad"));
+				topc.setModalidad(rs.getString("modalidad"));
 				listofc.add(topc);
 			}
 		}
@@ -100,6 +105,7 @@ public class Dt_ofertadet {
 			od.setFacilitador(rs.getString("facilitador"));
 			od.setId_capacitacion(rs.getInt("id_capacitacion"));
 			od.setCapacitacion(rs.getString("capacitacion"));
+			od.setTipo_capacitacion(rs.getString("tipo_capacitacion"));
 			od.setId_modalidad(rs.getInt("id_modalidad"));
 			od.setModalidad(rs.getString("modalidad"));
 			
