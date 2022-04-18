@@ -4,9 +4,16 @@ public class Tbl_rol {
 	
 	//atributos
 	private int id_rol;
+	
 	private String rol;
 	private int estado;
 	
+	public Tbl_rol(int id_rol, String rol, int estado) {
+		super();
+		this.id_rol = id_rol;
+		this.rol = rol;
+		this.estado = estado;
+	}
 
 	
 	//metodos

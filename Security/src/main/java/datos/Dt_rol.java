@@ -4,6 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import com.google.gson.Gson;
+
 import entidades.Tbl_rol;
 
 public class Dt_rol {
@@ -15,6 +18,7 @@ public class Dt_rol {
 	private ResultSet rs = null;
 	private PreparedStatement ps = null;
 	
+	
 	//Metodo para llenar el RusultSet //para insert, update and delete
 	public void llena_rsRol(Connection c){
 		try{
@@ -25,11 +29,18 @@ public class Dt_rol {
 			System.out.println("DATOS: ERROR EN LISTAR ROLES "+ e.getMessage());
 			e.printStackTrace();
 		}
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter("datos_persona.json"))) {
+    	    bw.write(json);
+    	    System.out.println("Fichero creado");
+    	} catch (IOException ex) {
+    	    Logger.getLogger(LeerJsonEj3.class.getName()).log(Level.SEVERE, null, ex);
+    	}
 	}
 	
 	//Metodo para visualizar usuarios registrados y activos
 	public ArrayList<Tbl_rol> listaRolActivos(){
 		ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
+		
 		try{
 			c = poolConexion.getConnection(); //obtenemos una conexion del pool
 			ps = c.prepareStatement("SELECT * FROM seguridad.tbl_rol WHERE estado<>3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
