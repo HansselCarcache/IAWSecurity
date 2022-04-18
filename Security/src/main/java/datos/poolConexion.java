@@ -21,9 +21,9 @@ public class poolConexion
 	private static String user = "root";
 	private static String pass="2503";*/
 	//DATOS DE LA CONEXION REMOTA
-	private static String url = "jdbc:mysql://165.98.12.158:3306/seguridad?autoReconnect=true&useSSL=false&serverTimezone=UTC";
+	private static String url = "jdbc:mysql://localhost/seguridad?autoReconnect=true&useSSL=false&serverTimezone=UTC";
 	private static String user = "root";
-	private static String pass="My$qlS3rv3rAPS*";
+	private static String pass="2503";
 
 
     //Constructor

@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*, com.google.gson.Gson, java.io.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*, java.io.*, com.google.gson.Gson,
+com.google.gson.GsonBuilder, java.nio.file.Files, java.nio.file.FileSystems,
+java.nio.file.Path, java.nio.charset.StandardCharsets;"%>
 
 <!DOCTYPE html>
 <html>
-    <% crearJson cjs = new crearJson();
-    	
-    	%>
-
+   
+ <% ArrayList<Tbl_rol> trol = new ArrayList<Tbl_rol>();
+   	    crearJson crj = new crearJson();
+   	    trol = crj.listaRolActivos();
+   	    	
+   	    	%>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -37,14 +41,26 @@
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
 
-  <body class="nav-md">
-    
- 
-  
-       
-  
-                
-                    <button onclick="crearJson()">boton</button> 
+   <body onload="loadUsers()">
+    <form action="">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" />
+      </div>
+      <div>
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" />
+      </div>
+      <div>
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="description" />
+      </div>
+      <button type="button" onclick="addUser()">Actualizar</button>
+      <!-- Declaro los contenedores de datos  a mostrar -->
+      <div id="showname"></div>
+      <div id="showage"></div>
+      <div id="showdescription"></div>
+    </form>
                 
            
    
@@ -78,15 +94,63 @@
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
     
+    
+   
+    
     <script>
-    function crearJson(){
-    	
-    	alert("hola");
-    }
-    $(document).ready(function() {
-       
-    });
-    </script>
+    
+    
+    // Array para depositar datos tras primer llamada al JSON.
+    let users = [];
 
-  </body>
+    function mostrarUsuarios() {
+      // Variables de contenedores
+      var id_rol = document.getElementById("showname");
+      var rol = document.getElementById("showage");
+      var estado = document.getElementById("showdescription");
+      // Borro los datos para cargar nuevos
+      id_rol.innerHTML = "";
+      rol.innerHTML = "";
+      estado.innerHTML = "";
+  //Agrego el name, age, description por cada persona en JSON
+      users.forEach((element) => {
+    	  id_rol.append(`Nombre: ${element.id_rol}`);
+    	  rol.append(`Description: ${element.rol} `);
+    	  estado.append(`Age: ${element.estado} `);
+      });
+    }
+
+    function addUser() {
+      // Tomo los valores de cada input
+      var id_rol = document.getElementById("name").value;
+      var rol = document.getElementById("age").value;
+      var estado = document.getElementById("description").value;
+
+      // Agrego al array objeto con datos de input, nuevo registro.
+      users.push({ id_rol, rol, estado });
+      mostrarUsuarios(); // Vuelvo a mostrar los datos
+    }
+
+    // Cargo los usuarios desde JSON solo la primera vez que carga página.
+   
+    function loadUsers() {
+      fetch("C:\\payara5\\glassfish\\domains\\domain1\\docroot\\datos_rol.json")
+        .then((respuesta) => respuesta.json())
+        .then((respuesta) => {
+          users = respuesta; // Vuelco respuesta en array users
+          console.log(users[1].rol)
+          mostrarUsuarios();
+        })
+        .catch((error) => alert("Ha ocurrido un error (" + error.message + ")"));
+    }
+    
+    
+   
+    </script>
+    
+     <script>
+   
+    	   	</script>
+
+</body>
 </html>

@@ -29,12 +29,7 @@ public class Dt_rol {
 			System.out.println("DATOS: ERROR EN LISTAR ROLES "+ e.getMessage());
 			e.printStackTrace();
 		}
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter("datos_persona.json"))) {
-    	    bw.write(json);
-    	    System.out.println("Fichero creado");
-    	} catch (IOException ex) {
-    	    Logger.getLogger(LeerJsonEj3.class.getName()).log(Level.SEVERE, null, ex);
-    	}
+		
 	}
 	
 	//Metodo para visualizar usuarios registrados y activos
