@@ -1,9 +1,21 @@
 package datos;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import entidades.Tbl_user;
 
 public class Dt_usuario {
@@ -87,6 +99,78 @@ public class Dt_usuario {
 				e.printStackTrace();
 			}
 		}
+		return listUser;
+	}
+	
+	//CREACION DE JSON DE IDUCA Y CORREO INSTITUCIONAL
+	public ArrayList<Tbl_user> crearJSON(){
+		ArrayList<Tbl_user> listUser = new ArrayList<Tbl_user>();
+		try {
+			c = poolConexion.getConnection();
+			ps = c.prepareStatement("SELECT id_uca, correo_institucional, cedula FROM gestion_docente.usuario;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Tbl_user user = new Tbl_user();
+				
+				user.setId_uca(rs.getString("id_uca"));
+				user.setCorreo_institucional(rs.getString("correo_institucional"));
+				user.setCedula(rs.getString("cedula"));
+				listUser.add(user);
+				
+			}
+		}
+		catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR USUARIOS"+ e.getMessage());
+			e.printStackTrace();
+			
+		}
+		finally {
+			try {
+				if(rs!= null) {
+					rs.close();
+				}
+				if(ps!= null) {
+					ps.close();
+				}
+				if(c != null) {
+					poolConexion.closeConnection(c);
+				}
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		//PARA GUARDAR
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			try (FileWriter writer = new FileWriter("../eclipseApps/Security/production/datos_usuario.json")) {
+	            gson.toJson(listUser, writer);
+	            
+	            
+	           
+	            
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+			//PARA LEER
+			String fileName = "../eclipseApps/Security/production/datos_usuario.json";
+			Path path = new File(fileName).toPath();
+			
+			try (Reader br = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+
+	            
+				Tbl_user[] lista2 = gson.fromJson(br, Tbl_user[].class);
+	            Arrays.stream(lista2).forEach(e -> {
+	            	System.out.println("{"+"\n"+"id_uca: "+e.getId_uca()+",\n"+"correo institucional: "+ e.getCorreo_institucional()+"\n}\n");
+	            });
+
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+			//PARA ELIMINAR EL ARCHIVO PEGARLO EN EL SERVLET
+			/*File archivoJSON = new File("../eclipseApps/Security/production/datos_rol.json");
+			eliminarFichero(archivoJSON);*/
+			//PARA ELIMINAR EL ARCHIVO PEGARLO EN EL SERVLET
+		
 		return listUser;
 	}
 	

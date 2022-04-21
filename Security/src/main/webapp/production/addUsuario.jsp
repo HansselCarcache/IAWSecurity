@@ -4,7 +4,8 @@
 String VarMsj = "";
 
 VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
-
+Dt_usuario dtu = new Dt_usuario();
+dtu.crearJSON();
 
 %>
 <!DOCTYPE html>
@@ -128,7 +129,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cédula: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcedula" name="txtcedula" data-validate-length-range="5,50" title="Escriba su cédula" required="required" class="form-control ">
+												<input type="text" id="txtcedula" name="txtcedula" onchange="comprobarJSON()" data-validate-length-range="5,50" title="Escriba su cédula" required="required" class="form-control ">
 											</div>
 										</div>
                                         <div class="field item form-group">
@@ -177,7 +178,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtiduca" name="txtiduca" title="Escriba su ID UCA"  class="form-control ">
+												<input type="text" id="txtiduca" name="txtiduca" onchange="comprobarJSON()" title="Escriba su ID UCA"  class="form-control ">
 											</div>
 										</div>
 										
@@ -185,7 +186,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcorreoi" name="txtcorreoi" title="Escriba su correo institucional"  class="form-control ">
+												<input type="text" id="txtcorreoi" onchange="comprobarJSON()" name="txtcorreoi" title="Escriba su correo institucional"  class="form-control ">
 											</div>
 										</div>
 										
@@ -316,6 +317,46 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
         	      document.frmUser.txtpwd.focus
         	    }
             
+        }
+        
+        function comprobarJSON(){
+        	var txtiduca = document.getElementById("txtiduca");
+        	var txtcorreoi = document.getElementById("txtcorreoi")
+        	var txtcedula = document.getElementById("txtcedula");
+        	var request = new XMLHttpRequest();
+        	request.open('GET', 'datos_usuario.json', true)
+        	request.onload = function(){
+        		if(request.status === 200){
+        			var ourData = JSON.parse(request.responseText);
+        			//console.log(ourData);
+        			
+        		
+        		for(i=0; i<ourData.length;i++){
+        			//console.log(ourData[i].rol);
+        			
+        			/*var htmlString ="";
+        			htmlString += "<p>" + ourData[i].rol+".</p>";
+        			container.insertAdjacentHTML('beforebegin', htmlString);*/
+        			//alert(txt.value);
+        			
+        			if(txtiduca.value == ourData[i].id_uca){
+        				errorAlert("Ya existe un registro con ese IDUCA, escriba otro diferente.");
+        			}
+        			
+        			if(txtcorreoi.value == ourData[i].correo_institucional){
+        				errorAlert("Ya existe un registro con ese correo institucional, escriba otro diferente.");
+        			}
+        			if(txtcedula.value == ourData[i].cedula){
+        				errorAlert("Ya existe un registro con esa cedula, escriba otra diferente.");
+        			}
+        		}
+        		}
+        		
+        		var ourData = JSON.parse(request.responseText);
+        		//renderHTML(ourData);
+        	}
+        	request.send();
+        	
         }
         
         function habilitar()
