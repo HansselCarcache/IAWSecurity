@@ -114,6 +114,8 @@ public class Dt_escalacalificacion {
 			return guardado;
 		}
 		
+		////////////////////////Visualizar
+		
 		public Tbl_escalaCalificacion getEscala(int id){
 			Tbl_escalaCalificacion gsc = new Tbl_escalaCalificacion(); //instanciamos a rol
 			try{
@@ -248,7 +250,7 @@ public class Dt_escalacalificacion {
 			return modificado;
 		}
 		
-
+////////////////eliminar///////////////
 		
 		public boolean deleteEscala(Tbl_escalaCalificacion to)
 		{
