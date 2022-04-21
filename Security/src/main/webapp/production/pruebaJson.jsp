@@ -41,26 +41,10 @@ java.nio.file.Path, java.nio.charset.StandardCharsets;"%>
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
 
-   <body onload="loadUsers()">
-    <form action="">
-      <div>
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" />
-      </div>
-      <div>
-        <label for="age">Age:</label>
-        <input type="number" name="age" id="age" />
-      </div>
-      <div>
-        <label for="description">Description:</label>
-        <input type="text" name="description" id="description" />
-      </div>
-      <button type="button" onclick="addUser()">Actualizar</button>
-      <!-- Declaro los contenedores de datos  a mostrar -->
-      <div id="showname"></div>
-      <div id="showage"></div>
-      <div id="showdescription"></div>
-    </form>
+   <body >
+   <input type="text" id="txtprueba" name="txtprueba"></input>
+    <button id="btn" onclick="mostrar()" >mostrar</button>
+    <div id="container"></div>
                 
            
    
@@ -98,51 +82,57 @@ java.nio.file.Path, java.nio.charset.StandardCharsets;"%>
    
     
     <script>
+    var container = document.getElementById("container");
+    var txt = document.getElementById("txtprueba");
+    function mostrar(){
+    	var request = new XMLHttpRequest();
+    	request.open('GET', 'datos_rol.json', true)
+    	request.onload = function(){
+    		if(request.status === 200){
+    			var ourData = JSON.parse(request.responseText);
+    			console.log(ourData);
+    			
+    		
+    		for(i=0; i<ourData.length;i++){
+    			//console.log(ourData[i].rol);
+    			
+    			var htmlString ="";
+    			htmlString += "<p>" + ourData[i].rol+".</p>";
+    			container.insertAdjacentHTML('beforebegin', htmlString);
+    			//alert(txt.value);
+    			
+    			if(txt.value == ourData[i].rol){
+    				alert("Ya existe un registro con ese nombre");
+    			}
+    		}
+    		}
+    		
+    		var ourData = JSON.parse(request.responseText);
+    		//renderHTML(ourData);
+    	}
+    	request.send();
+
+    	
+    }
     
     
-    // Array para depositar datos tras primer llamada al JSON.
-    let users = [];
-
-    function mostrarUsuarios() {
-      // Variables de contenedores
-      var id_rol = document.getElementById("showname");
-      var rol = document.getElementById("showage");
-      var estado = document.getElementById("showdescription");
-      // Borro los datos para cargar nuevos
-      id_rol.innerHTML = "";
-      rol.innerHTML = "";
-      estado.innerHTML = "";
-  //Agrego el name, age, description por cada persona en JSON
-      users.forEach((element) => {
-    	  id_rol.append(`Nombre: ${element.id_rol}`);
-    	  rol.append(`Description: ${element.rol} `);
-    	  estado.append(`Age: ${element.estado} `);
-      });
-    }
-
-    function addUser() {
-      // Tomo los valores de cada input
-      var id_rol = document.getElementById("name").value;
-      var rol = document.getElementById("age").value;
-      var estado = document.getElementById("description").value;
-
-      // Agrego al array objeto con datos de input, nuevo registro.
-      users.push({ id_rol, rol, estado });
-      mostrarUsuarios(); // Vuelvo a mostrar los datos
-    }
-
-    // Cargo los usuarios desde JSON solo la primera vez que carga página.
    
-    function loadUsers() {
-      fetch("C:\\payara5\\glassfish\\domains\\domain1\\docroot\\datos_rol.json")
-        .then((respuesta) => respuesta.json())
-        .then((respuesta) => {
-          users = respuesta; // Vuelco respuesta en array users
-          console.log(users[1].rol)
-          mostrarUsuarios();
-        })
-        .catch((error) => alert("Ha ocurrido un error (" + error.message + ")"));
-    }
+    	
+    	   	
+    
+    
+   
+   	
+   	
+    $(document).ready(function() {
+   	<%-- <%
+   	File fichero2 = new File("datos_rol.json");
+	crj.eliminarFichero(fichero2);
+   	%> --%>
+   	    	
+   });
+    
+   
     
     
    

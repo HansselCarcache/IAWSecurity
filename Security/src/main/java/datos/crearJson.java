@@ -53,6 +53,7 @@ public class crearJson {
 				trol.setEstado(rs.getInt("estado"));
 				listRol.add(trol);
 			}
+			
 		}
 		catch (Exception e){
 			System.out.println("DATOS: ERROR EN LISTAR ROLES "+ e.getMessage());
@@ -67,7 +68,9 @@ public class crearJson {
 					ps.close();
 				}
 				if(c != null){
+					
 					poolConexion.closeConnection(c);
+					
 				}
 				
 			} catch (SQLException e) {
@@ -78,8 +81,9 @@ public class crearJson {
 		}
 		
 		//PARA GUARDAR
-		try (FileWriter writer = new FileWriter("Security:\\\\\\\\src\\\\\\\\main\\\\\\\\datos_rol.json")) {
+		try (FileWriter writer = new FileWriter("../eclipseApps/Security/production/datos_rol.json")) {
             gson.toJson(listRol, writer);
+            
             
            
             
@@ -87,7 +91,7 @@ public class crearJson {
             e.printStackTrace();
         }
 		//PARA LEER
-		String fileName = "C:\\\\\\\\payara5\\\\\\\\glassfish\\\\\\\\domains\\\\\\\\domain1\\\\\\\\config\\\\\\\\datos_rol.json";
+		String fileName = "../eclipseApps/Security/production/datos_rol.json";
 		Path path = new File(fileName).toPath();
 		
 		try (Reader br = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
@@ -101,11 +105,16 @@ public class crearJson {
         } catch (IOException e) {
             e.printStackTrace();
         }
+		//PARA ELIMINAR EL ARCHIVO PEGARLO EN EL SERVLET
+		/*File archivoJSON = new File("../eclipseApps/Security/production/datos_rol.json");
+		eliminarFichero(archivoJSON);*/
+		//PARA ELIMINAR EL ARCHIVO PEGARLO EN EL SERVLET
 		return listRol;
+		
 	}
 	
 	
-	public static void writeJsonSimpleDemo(String filename) throws Exception {
+	/*public static void writeJsonSimpleDemo(String filename) throws Exception {
 	    JSONObject sampleObject = new JSONObject();
 	    sampleObject.put("name", "Pharos.shr");
 	    sampleObject.put("age", 35);
@@ -122,7 +131,7 @@ public class crearJson {
 	    FileReader reader = new FileReader(filename);
 	    JSONParser jsonParser = new JSONParser();
 	    return jsonParser.parse(reader);
-	}
+	}*/
 	
 	public File eliminarFichero(File fichero) {
 		 if (!fichero.exists()) {
