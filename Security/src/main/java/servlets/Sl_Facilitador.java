@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import datos.Dt_facilitadores;
 
 import entidades.Tbl_facilitadores;
+import negocio.Ng_Facilitador;
 
 	@WebServlet("/Sl_Facilitador")
 
@@ -44,6 +45,7 @@ import entidades.Tbl_facilitadores;
 			opc = Integer.parseInt(request.getParameter("opcion"));
 			// INSTANCIAMOS LOS OBJETOS
 			Tbl_facilitadores Faci = new Tbl_facilitadores();
+			Ng_Facilitador Ngf = new Ng_Facilitador();
 			Dt_facilitadores dtm = new Dt_facilitadores();
 			// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 			Faci.setEmail(request.getParameter("email"));
@@ -60,19 +62,38 @@ import entidades.Tbl_facilitadores;
 			switch(opc) {
 			case 1:
 				try {
-					
-					if(dtm.addFacilitador(Faci)) {
-						response.sendRedirect("production/tbl_facilitadores.jsp?msj=1");
-					}else {
-						response.sendRedirect("production/tbl_facilitadores.jsp?msj=2");
+					if(Ngf.existeCedula(Faci.getCedula())) {
+						if(dtm.addFacilitador(Faci)) {
+							response.sendRedirect("production/tbl_facilitadores.jsp?msj=1");
+						}else {
+							response.sendRedirect("production/tbl_facilitadores.jsp?msj=2");
+						}
+						
 					}
+					
+					
 				}catch(Exception e) {
 					System.out.println("Error Sl_gestionUserRol opc1: "+e.getMessage());
 					e.printStackTrace();
 				}
 				break;
 			case 2:
+				Faci.setId_facilitador(Integer.parseInt(request.getParameter("id_facilitador")));
+				if(dtm.updateFacilitador(Faci)) {
+					response.sendRedirect("production/tbl_facilitadores.jsp?msj=3");
+				}else {
+					response.sendRedirect("production/tbl_facilitadores.jsp?msj=4");
+				}
 				//codigo
+				break;
+			case 3:
+				Faci.setId_facilitador(Integer.parseInt(request.getParameter("id_facilitador")));
+				if(dtm.DeleteFacilitador(Faci)) {
+					response.sendRedirect("production/tbl_facilitadores.jsp?msj=5");
+				}else {
+					
+					response.sendRedirect("production/tbl_facilitadores.jsp?msj=6");
+				}
 				break;
 			default:
 				//codigo

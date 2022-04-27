@@ -130,15 +130,15 @@
                           <td><%=trol.getGrado_academico()  %></td>
                          
                           <td>
-                           <a href="updateFacilitadores.jsp">
+                           <a href="updateFacilitadores.jsp?Fac=<%=trol.getId_facilitador()%>">
                             <i class="far fa-edit" title="Editar"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readFacilitadores.jsp">
+                          <a href="readFacilitadores.jsp?Fac=<%=trol.getId_facilitador()%>">
                             <i class="far fa-eye" title="Visualizar"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteFacilitadores.jsp" >
+                          <a href="deleteFacilitadores.jsp?Fac=<%=trol.getId_facilitador()%>" >
                             <i class="far fa-trash-alt" title="Eliminar"></i>
                           </a>
                           </td>

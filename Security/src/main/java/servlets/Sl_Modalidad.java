@@ -62,13 +62,26 @@ public class Sl_Modalidad extends HttpServlet {
 			}
 			break;
 		case 2:
+			tf.setId_modalidad(Integer.parseInt(request.getParameter("id_modalidad")));
+			if(dtf.updateModalidad(tf)) {
+				response.sendRedirect("production/tbl_modalidad.jsp?msj=3");
+			}else {
+				response.sendRedirect("production/tbl_modalidad.jsp?msj=4");
+			}
 			//codigo
 			break;
-		default:
-			//codigo
+		case 3:
+			tf.setId_modalidad(Integer.parseInt(request.getParameter("id_modalidad")));
+			if(dtf.DeleteModalidad(tf)) {
+				response.sendRedirect("production/tbl_modalidad.jsp?msj=5");
+			}else {
+				
+				response.sendRedirect("production/tbl_modalidad.jsp?msj=6");
+			}
 			break;
 			
 		}
+		
 	}
 
 }

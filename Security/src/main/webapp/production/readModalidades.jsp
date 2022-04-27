@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
+<%
+
+String tc = "";
+tc = request.getParameter("mod")==null?"0":request.getParameter("mod");
+
+Tbl_modalidad tmod = new Tbl_modalidad();
+Dt_modalidad dt = new Dt_modalidad();
+
+tmod = dt.getModalidadbyID(Integer.parseInt(tc));
+
+%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -9,7 +20,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Modalidad | Visualizar </title>
+    <title> Modalidad | Visualizar </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +56,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Modalidad</h3>
+                            <h3>Visualizar Modalidad</h3>
                         </div>
 
                         
@@ -56,7 +67,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Visualización de modalidades </h2>
+                                    <h2>Visualizacion de modalidades </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -73,32 +84,31 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form class="" action="../Sl_Modalidad" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 
-										
+										<input type="hidden" value="2" id="opcion" name="opcion"/>
+                                    <input type="hidden" value="<%=tmod.getId_modalidad() %>" id="id_modalidad" name="id_modalidad"/>
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre Modalidad<span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" required="required" readonly="readonly" placeholder="Nombre de la facultad" class="form-control ">
+												<input readonly value = "<%=tmod.getNombre_modalidad()%>" type="text" id="modalidad"  name ="modalidad" required="required" class="form-control ">
 											</div>
 										</div>
-											<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="estado" required="required" class="form-control " placeholder="Activo" readonly="readonly">
-											</div>
-										</div>
+
+                                        
                                         
                                         <div class="ln_solid">
-                                            <div class="col-md-6 offset-md-3">
-                								<a href="tbl_facultad.jsp" class="btn btn-primary">Regresar</a>
-                  							</div>
+                                            <div class="form-group">
+                                                <div class="col-md-6 offset-md-3">
+                                                    <a href="tbl_modalidad.jsp" class="btn btn-primary">Regresar</a>
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

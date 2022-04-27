@@ -2,6 +2,17 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+<%
+
+String tc = "";
+tc = request.getParameter("Fac")==null?"0":request.getParameter("Fac");
+
+Tbl_facilitadores Faci = new Tbl_facilitadores();
+Dt_facilitadores dt = new Dt_facilitadores();
+
+Faci = dt.getFacilitadoresbyID(Integer.parseInt(tc));
+
+%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -82,7 +93,9 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form class="" action="../Sl_Facilitador" method="post" novalidate>
+                                    <input type="hidden" value="2" id="opcion" name="opcion"/>
+                                    <input type="hidden" value="<%=Faci.getId_facilitador() %>" id="id_facilitador" name="id_facilitador"/>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
@@ -91,31 +104,25 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="id_uca" name="id_uca" required="required" readonly="readonly" class="form-control ">
+												<input  readonly value = "<%=Faci.getId_uca()%>" type="text" id="id_uca" name="id_uca" required="required" class="form-control ">
 											</div>
 										</div>
 										
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre<span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Completo<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombre" name="nombre" required="required" readonly="readonly" class="form-control ">
+												<input readonly value = "<%=Faci.getNombres()%>" type="text" id="nombre" name="nombre" required="required" class="form-control ">
 											</div>
 										</div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Apellido<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="apellido" name="apellido" required="required" readonly="readonly" class="form-control ">
-											</div>
-										</div>
+										
 										
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Telefono: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="telefono" name="telefono" required="required" readonly="readonly" class="form-control ">
+												<input readonly value = "<%=Faci.getTelefono()%>" type="text" id="telefono" name="telefono" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -123,7 +130,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Email<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="email" name="email" required="required" readonly="readonly" class="form-control ">
+												<input readonly value = "<%=Faci.getEmail()%>" type="text" id="email" name="email" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -131,15 +138,22 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Grado Academico<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="grado_academico" name="grado_academico" required="required" readonly="readonly" class="form-control ">
+												<input readonly value = "<%=Faci.getGrado_academico()%>" type="text" id="grado_academico" name="grado_academico" required="required" class="form-control ">
 											</div>
 										</div>
-										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cedula<span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input readonly value = "<%=Faci.getCedula()%>" type="text" id="cedula" name="cedula" required="required" class="form-control ">
+											</div>
+										</div>
                                         
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
-                                                   <button type="button" class="btn btn-primary">Regresar</button>
+                                                    <a href="tbl_facilitadores.jsp" class="btn btn-primary">Regresar</a>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -295,3 +309,4 @@
 </script>
 
 </body>
+</html>

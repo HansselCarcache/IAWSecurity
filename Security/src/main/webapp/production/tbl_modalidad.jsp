@@ -132,15 +132,15 @@
                           <td><%=tmod.getNombre_modalidad()%></td>
                           <td><%=estado %></td>
                           <td>
-                           <a href="updateModalidades.jsp">
+                           <a href="updateModalidades.jsp?mod=<%=tmod.getId_modalidad()%>">
                             <i class="far fa-edit fa-2x" title="Editar Modalidad"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readModalidades.jsp">
+                          <a href="readModalidades.jsp?mod=<%=tmod.getId_modalidad()%>">
                             <i class="far fa-eye fa-2x" title="Visualizar Modalidad"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteModalidades.jsp" >
+                          <a href="deleteModalidades.jsp?mod=<%=tmod.getId_modalidad()%>" >
                             <i class="far fa-trash-alt fa-2x" title="Eliminar Modalidad"></i>
                           </a>
                           </td>
