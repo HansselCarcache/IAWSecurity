@@ -2,6 +2,17 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+<%
+
+String fac = "";
+fac = request.getParameter("idF") == null?"0":request.getParameter("idF");
+
+Tbl_facultad tfacu = new Tbl_facultad();
+Dt_facultad dtfacu = new Dt_facultad();
+
+tfacu = dtfacu.getFacultadbyID(Integer.parseInt(fac));
+
+%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -73,40 +84,35 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                   <form action="../Sl_Facultad" method="post" novalidate>
+                                    	<input type="hidden" value="3" name="opcion" id="opcion"/>
+                                    	<input type="hidden" value="<%=tfacu.getId_facultad() %>" name="idFacultad" id="idFacultad"/>                                    
+                                    	
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID facultad<span class="required">*</span></label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="ID Facultad">
-											</div>
-										</div>
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" required="required" class="form-control ">
-											</div>
-										</div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="estado" required="required" class="form-control ">
-											</div>
-										</div>
+
+										
+										 <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Facultad:<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input type="text" value="<%=tfacu.getNombre_facultad() %>" name="txtnombrefacultad" id="txtnombrefacultad" class="form-control" placeholder="" title="Nombre del departamento" readonly="readonly" />
+                                            </div>
+                                        </div>
+										
+							
 
                                         
-                                        
-                                        <div class="ln_solid">
-                                            <div class="col-md-6 offset-md-3">
-                								<button type='reset' class="btn btn-danger">Eliminar</button>
-                  							</div>
+                                         <div class="ln_solid">
+                                            <div class="form-group">
+                                                <div class="col-md-6 offset-md-3">
+                                                    <button type='submit' class="btn btn-danger">Eliminar</button>
+                                                    
+                                                    <a class="btn btn-success" href="tbl_facultad.jsp">Cancelar</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

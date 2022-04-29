@@ -97,9 +97,9 @@
                     
                     <%
                       		
-                      		ArrayList<Tbl_facultad> listaFacu = new ArrayList<Tbl_facultad>();
+                      		ArrayList<Tbl_facultad> listFacu = new ArrayList<Tbl_facultad>();
                       		Dt_facultad dtfacu = new Dt_facultad();
-                      		listaFacu =  dtfacu.listaFacultadesActivas();
+                      		listFacu =  dtfacu.listaFacultadActivos();
                       		
                       %>
                     
@@ -116,7 +116,7 @@
 
                       <tbody>
                     	 <%
-	                      	for(Tbl_facultad tfacu :listaFacu){
+	                      	for(Tbl_facultad tfacu :listFacu){
 	                      		String estado= "";
 	                      		if(tfacu.getEstado()!=3){
 	                      			estado= "Activo";
@@ -131,18 +131,20 @@
                           
                           <td><%=tfacu.getNombre_facultad()%></td>
                           <td><%=estado %></td>
-                          <td>
-                           <a href="updateFacultad.jsp">
-                            <i class="far fa-edit" title="Editar Facultad"></i>
-                          </a>
-                          &nbsp;&nbsp;
-                          <a href="readFacultad.jsp">
-                            <i class="far fa-eye" title="Visualizar Facultad"></i>
-                          </a> 
-                          &nbsp;&nbsp;
-                          <a href="deleteFacultad.jsp" >
-                            <i class="far fa-trash-alt" title="Eliminar Facultad"></i>
-                          </a>
+                       
+                        <td>
+                          	<a href="readFacultad.jsp?idF=<%=tfacu.getId_facultad() %>" title="Visualizar facultad">
+	                          	<i class="fa fa-eye"></i> 
+                          	</a>
+                          	&nbsp;
+                          	<a href="updateFacultad.jsp?idF=<%=tfacu.getId_facultad() %>" title="Editar facultad">
+	                          	<i class="fa fa-edit"></i> 
+                          	</a>
+                          	&nbsp;
+                          	<a href="deleteFacultad.jsp?idF=<%=tfacu.getId_facultad()%>" title="Eliminar facultad">
+	                          	<i class="fa fa-trash"></i> 
+                          	</a>
+                          	&nbsp;
                           </td>
                           
                           

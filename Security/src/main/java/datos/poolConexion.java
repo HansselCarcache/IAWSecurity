@@ -19,9 +19,9 @@ public class poolConexion
 	//private static String url = "jdbc:mysql://localhost:3306/dbfdocente?autoReconnect=true&useSSL=false&serverTimezone=UTC";
 	//private static String user = "root";
 	//private static String pass="2503";
-	private static String url = "jdbc:mysql://165.98.12.158:3306/gestion_docente?autoReconnect=true&useSSL=false&serverTimezone=America/Managua";
+	private static String url = "jdbc:mysql://localhost:3306/gestion_docente?autoReconnect=true&useSSL=false&serverTimezone=America/Managua";
 	private static String user = "root";
-	private static String pass="My$qlS3rv3rAPS*";
+	private static String pass="abc123";
 	//prueba
 
     //Constructor
@@ -88,7 +88,7 @@ public class poolConexion
 		   		try 
 		   		{
 					con = poolConexion.dataSource.getConnection();
-					System.out.println("se conecto a dbFDocente!!!");
+					System.out.println("se conecto a Gestion Docente!!!");
 				} 
 		   		catch (SQLException e) 
 		   		{
@@ -131,13 +131,13 @@ public class poolConexion
 	    	con = poolConexion.getConnection();
 	    	if(con!=null)
 	    	{
-	    		JOptionPane.showMessageDialog(null, "Conectado a dbFDocente");
-	    		System.out.println("Conectado a dbFDocente!!!");
+	    		JOptionPane.showMessageDialog(null, "Conectado a Gestion Docente");
+	    		System.out.println("Conectado a Gestion Docente!!!");
 	    	}
 	    	else
 	    	{
-	    		JOptionPane.showMessageDialog(null, "Error al Conectr a dbFDocente!!!");
-	    		System.out.println("Error al Conectar a dbFDocente!!!");
+	    		JOptionPane.showMessageDialog(null, "Error al conectar a Gestion Docente!!!");
+	    		System.out.println("Error al Conectar a Gestion Docente!!!");
 	    	}
         }
         finally
@@ -145,7 +145,7 @@ public class poolConexion
             try 
             {
                con.close();
-               System.out.println("Se desconectó de dbFDocente!!!");
+               System.out.println("Se desconectó de Gestion Docente!!!");
             } 
             catch (SQLException ex) 
             {

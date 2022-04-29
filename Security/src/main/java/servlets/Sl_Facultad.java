@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datos.Dt_Facultad;
-import entidades.Facultad;
+import datos.Dt_facultad;
+import entidades.Tbl_facultad;
 
 /**
  * Servlet implementation class Sl_Facultad
@@ -40,29 +40,60 @@ public class Sl_Facultad extends HttpServlet {
 		int opc = 0;
 		opc = Integer.parseInt(request.getParameter("opcion"));
 		// INSTANCIAMOS LOS OBJETOS
-		Facultad tf = new Facultad();
-		Dt_Facultad dtf = new Dt_Facultad();
-		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
-		tf.setNombre_facultad(request.getParameter("nFacultad"));
+		Tbl_facultad tfacu = new Tbl_facultad();
+		Dt_facultad dtfacu = new Dt_facultad();
+		
 		
 		
 		////////////////////////////////////////////////////////////////////
 		
 		switch(opc) {
 		case 1:
+			// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
+			tfacu.setNombre_facultad(request.getParameter("txtnombrefacultad"));
+			tfacu.setEstado(1);
+		////////////////////////////////////////////////////////////////////
+			
 			try {
-				if(dtf.addFacultad(tf)) {
+				if(dtfacu.addFacultad(tfacu)) {
 					response.sendRedirect("production/tbl_facultad.jsp?msj=1");
 				}else {
 					response.sendRedirect("production/tbl_facultad.jsp?msj=2");
 				}
 			}catch(Exception e) {
-				System.out.println("Error Sl_gestionUserRol opc1: "+e.getMessage());
+				System.out.println("Error Sl_facultad opc1: "+e.getMessage());
 				e.printStackTrace();
 			}
 			break;
 		case 2:
-			//codigo
+			tfacu.setId_facultad(Integer.parseInt(request.getParameter("idFacultad")));
+			tfacu.setNombre_facultad(request.getParameter("txtnombrefacultad"));
+			
+			try {
+			if(dtfacu.modificarFacultad(tfacu)) {
+				response.sendRedirect("production/tbl_facultad.jsp?msj=3");
+			}else {
+				response.sendRedirect("production/tbl_facultad.jsp?msj=4");
+			}
+		}catch(Exception e) {
+				System.out.println("Error Sl_Facultad opc2: "+e.getMessage());
+				e.printStackTrace();
+			}
+			
+			break;
+		case 3:
+			tfacu.setId_facultad(Integer.parseInt(request.getParameter("idFacultad")));
+			try {
+			if(dtfacu.eliminarFacultad(tfacu)) {
+				response.sendRedirect("production/tbl_facultad.jsp?msj=5");
+			}else {
+				
+				response.sendRedirect("production/tbl_facultad.jsp?msj=6");
+			}
+			}catch(Exception e) {
+				System.out.println("Error Sl_Facultad opc2: "+e.getMessage());
+				e.printStackTrace();
+			}
 			break;
 		default:
 			//codigo

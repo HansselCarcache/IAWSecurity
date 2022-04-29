@@ -2,6 +2,17 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+<%
+
+String fac = "";
+fac = request.getParameter("idF") == null?"0":request.getParameter("idF");
+
+Tbl_facultad tfacu = new Tbl_facultad();
+Dt_facultad dtfacu = new Dt_facultad();
+
+tfacu = dtfacu.getFacultadbyID(Integer.parseInt(fac));
+
+%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -9,15 +20,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Facultad | Visualizar </title>
+    <title>Visualizar | Facultad </title>
 
     <!-- Bootstrap -->
+    <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+  	<link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
@@ -29,26 +50,25 @@
 
 <body class="nav-md">
     <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
-            </div>
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                    </div>
 
-            <div class="clearfix"></div>
+                    <div class="clearfix"></div>
 
-            <%@include file="diseño.jsp"%>
+                    <%@include file="diseño.jsp"%>
 
             <!-- page content -->
             <div class="right_col" role="main">
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Facultad</h3>
+                            <h3>Visualizar Facultad</h3>
                         </div>
 
-                        
                     </div>
                     <div class="clearfix"></div>
 
@@ -72,39 +92,30 @@
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
-                                <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                  <div class="x_content">
+                                    <form action="#" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID facultad<span class="required">*</span></label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="ID Facultad">
-											</div>
-										</div>
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre Facultad<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" required="required" readonly="readonly" placeholder="Nombre de la facultad" class="form-control ">
-											</div>
-										</div>
-											<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="estado" required="required" class="form-control " placeholder="Activo" readonly="readonly">
-											</div>
-										</div>
+                                                                           
                                         
-                                        <div class="ln_solid">
-                                            <div class="col-md-6 offset-md-3">
-                								<a href="tbl_facultad.jsp" class="btn btn-primary">Regresar</a>
-                  							</div>
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Facultad:<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input type="text" name="txtnombrefacultad" id="txtnombrefacultad"  class="form-control" placeholder="" title="Nombre de la facultad" readonly="readonly" />
+                                            </div>
                                         </div>
+                                        
+                                        
+                                         <div class="ln_solid">
+                                            <div class="form-group" align="center">
+                                                    <a href="tbl_facultad.jsp" title="Retornar a la página anterior">
+                                                    	<i class="fa fa-arrow-circle-o-left"></i>
+                                                    	Regresar
+                                                    </a>
+                                            </div>
+                                        </div>
+                                        
                                     </form>
                                 </div>
                             </div>
@@ -130,7 +141,7 @@
     <script src="../vendors/validator/multifield.js"></script>
     <script src="../vendors/validator/validator.js"></script>
     
-    <!-- Javascript functions	-->
+ <!-- Javascript functions	-->
 	<script>
 		function hideshow(){
 			var password = document.getElementById("password1");
@@ -151,6 +162,16 @@
 	</script>
 
     <script>
+	    $(document).ready(function() {
+	        $('.js-example-basic-single').select2();
+	        
+	        ///CARGAMOS VALORES EN LOS CONTROLES///
+	        
+	        $("#txtnombrefacultad").val("<%=tfacu.getNombre_facultad()%>");
+	
+			///////////////////////////////////////
+	    });
+    
         // initialize a validator instance from the "FormValidator" constructor.
         // A "<form>" element is optionally passed as an argument, but is not a must
         var validator = new FormValidator({
@@ -173,10 +194,6 @@
             if (this.checked)
                 $('form .alert').remove();
         }).prop('checked', false);
-        
-        $(document).ready(function() {
-            $('.js-example-basic-single').select2();
-        });
     </script>
 
     <!-- jQuery -->
@@ -196,10 +213,7 @@
     <!-- Select2 -->
     <script src="../vendors/select2/dist/js/select2.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
-    
-    <script type="text/javascript">
    
-    </script>
 
 </body>
 </html>
