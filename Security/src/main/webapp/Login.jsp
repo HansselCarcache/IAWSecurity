@@ -93,6 +93,14 @@
 
                 <div class="clearfix"></div>
                 <br />
+                
+                <div class="separator">
+                <p class="change_link">
+                  <a href="registrarNuevoDocente.jsp" class="to_register"> Registrarse en la plataforma </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
 
                 <div>
                   <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
