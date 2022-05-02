@@ -103,7 +103,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
                                                     <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
+                                                    <a class="btn btn-success" href="Tbl_opciones.jsp">Cancelar</a>
                                                 </div>
                                             </div>
                                         </div>

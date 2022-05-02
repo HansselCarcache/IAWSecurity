@@ -2,6 +2,17 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+<%
+
+String opc = "";
+opc = request.getParameter("idOpc") == null?"0":request.getParameter("idOpc");
+
+Tbl_opcion top= new Tbl_opcion();
+Dt_Opciones dtop = new Dt_Opciones();
+
+top = dtop.getOpcionbyID(Integer.parseInt(opc));
+
+%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -12,12 +23,22 @@
     <title>Opción | Visualizar </title>
 
     <!-- Bootstrap -->
+    <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+  	<link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
@@ -73,39 +94,31 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form action="#" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Opción<span class="required">*</span></label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="ID Opción">
-											</div>
-										</div>
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Descripcion <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align">Opción <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" required="required" readonly="readonly" class="form-control ">
+												<input type="text" id="txtnombreopcion" name="txtnombreopcion" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
 										
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align">Descripcion <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="estado" required="required" readonly="readonly" class="form-control ">
+												<input type="text" id="txtdescripcion" name="txtdescripcion" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
-
-                                        
-                                        
+								          
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
-                								<a href="Tbl_opciones.jsp" class="btn btn-primary">Regresar</a>
+                								<a href="Tbl_opciones.jsp" class="fa fa-arrow-circle-o-left"
+                								title="Regresar a la página anterior">Regresar</a>
                   							</div>
                                         </div>
                                     </form>
@@ -126,6 +139,8 @@
             </footer>
             <!-- /footer content -->
         </div>
+    </div>
+    </div>
     </div>
 
 
@@ -154,6 +169,18 @@
 	</script>
 
     <script>
+    
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+        
+        ///CARGAMOS VALORES EN LOS CONTROLES///
+        
+        $("#txtnombreopcion").val("<%=top.getNombre_opcion()%>");
+        $("#txtdescripcion").val("<%=top.getDescripcion()%>");
+
+		///////////////////////////////////////
+    });
+    
         // initialize a validator instance from the "FormValidator" constructor.
         // A "<form>" element is optionally passed as an argument, but is not a must
         var validator = new FormValidator({

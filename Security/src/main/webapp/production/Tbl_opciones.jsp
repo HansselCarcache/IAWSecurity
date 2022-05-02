@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.Tbl_opcion, datos.*, java.util.*;"%>
+<%
+String VarMsj = "";
 
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+
+
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,12 +24,13 @@
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+    <!-- JAlert -->
+    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
-    
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
@@ -60,21 +67,22 @@
 
             <div class="clearfix"></div>
 
-            <div class="row">
+            <div id="divtabla1" style="display:block;" class="row">
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Opciones registradas</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
+                            <a onclick="opcionesEliminados()" class="dropdown-item" href="#">Opciones Inactivas</a>
+                            
                           </div>
                       </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                      
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>
@@ -85,7 +93,7 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                            <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
+                             <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
                             <a href="addOpcion.jsp">
                             	<i class="fa fa-plus-square"></i> Nueva opción</a>
                             	<br><br>
@@ -94,17 +102,17 @@
                     
                     <table id="tbl_opcion" class="table table-striped table-bordered" style="width:100%">
                     <%
-                      		ArrayList<Tbl_opcion> listaOpciones = new ArrayList<Tbl_opcion>();
-                      		Dt_Opciones dtopc = new Dt_Opciones();
-                      		listaOpciones = dtopc.listaOpcionesActivos();
+                      		ArrayList<Tbl_opcion> listaOpcion = new ArrayList<Tbl_opcion>();
+                      		Dt_Opciones dtop = new Dt_Opciones();
+                      		listaOpcion = dtop.listaOpcionesActivos();
                       %>
-                    
                       <thead>
                         <tr>
                           
-                          <th>Descripcion <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Estado <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Acciones <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Opción <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Descripcion <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Estado <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Acciones <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
                         </tr>
                       </thead>
@@ -112,7 +120,7 @@
 
                       <tbody>
 	                     <%
-	                      	for(Tbl_opcion topc :listaOpciones){
+	                      	for(Tbl_opcion topc :listaOpcion){
 	                      		String estado= "";
 	                      		if(topc.getEstado()!=3){
 	                      			estado= "Activo";
@@ -124,35 +132,35 @@
                       	
                       
                         <tr>
-                          
-                          <td><%=topc.getOpcion()%></td>
+                        
+                          <td><%=topc.getNombre_opcion()%></td>
+						  <td><%=topc.getDescripcion()%></td>
                           <td><%=estado%></td>
                           <td>
-                           <a href="updateOpcion.jsp">
-                            <i class="far fa-edit" title="Editar Opciones"></i>
+                           
+                          <a href="readOpcion.jsp?idOpc=<%=topc.getId_opcion()%>">
+                            <i class="far fa-eye" title="Visualizar Opciones"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readOpcion.jsp">
-                            <i class="far fa-eye" title="Visualizar Opciones"></i>
+                          <a href="updateOpcion.jsp?idOpc=<%=topc.getId_opcion()%>">
+                            <i class="far fa-edit" title="Editar Opciones"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteOpcion.jsp" >
+                          <a href="deleteOpcion.jsp?idOpc=<%=topc.getId_opcion()%>" >
                             <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
                           </a>
                           </td>
-                          
-                          
+                             
                         </tr>
                         <%
                         }
                         %>
                         
-                        
-                        
                       </tbody>
                       <tfoot>
                         <tr>
                           
+                          <th>Opción</th>
                           <th>Descripcion</th>
                           <th>Estado</th>
                           <th>Acciones</th>
@@ -180,7 +188,8 @@
         <!-- /footer content -->
       </div>
     </div>
-
+</div>
+</div>
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -208,6 +217,10 @@
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
+	<!-- JAlert js -->
+	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
     
@@ -222,12 +235,36 @@
    	    
    	   	table.columns( [ 0, 1, 2 ] ).visible( true, true );
    	}
-   	
-   	
-   	
-   	
-    
+   	 
     $(document).ready(function() {
+    	
+    	var mensaje = 0;
+ 	    mensaje = "<%=VarMsj %>";
+
+ 	    if(mensaje == "1")
+ 	      {
+ 	    	successAlert('Exito', 'Los datos han sido registrados exitosamente!');
+ 	      }
+ 	    if(mensaje == "2")
+ 	      {
+ 	        errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
+ 	      }
+ 	      if(mensaje == "3")
+ 	      {
+ 	        successAlert('Exito', 'Los datos han sido modificados exitosamente!');
+ 	      }
+ 	      if(mensaje == "4")
+ 	      {
+ 	    	  errorAlert('Error', 'No se han podido modificar los datos, intente de nuevo');
+ 	      }
+ 	      if(mensaje == "5")
+ 	      {
+ 	        successAlert('Exito', 'Los datos han sido eliminados exitosamente!');
+ 	      }
+ 	      if(mensaje == "6")
+ 	      {
+ 	        errorAlert('Error', 'No se han podido eliminar los datos, intente de nuevo');
+ 	      }
     	
     	
         $('#tbl_opcion').DataTable( {
