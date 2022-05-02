@@ -58,8 +58,7 @@ top = dtop.getOpcionbyID(Integer.parseInt(opc));
                         <div class="title_left">
                             <h3>Eliminar opción</h3>
                         </div>
-
-                        
+                      
                     </div>
                     <div class="clearfix"></div>
 
