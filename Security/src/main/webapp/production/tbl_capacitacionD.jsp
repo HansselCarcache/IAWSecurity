@@ -244,6 +244,10 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
  	      {
  	        errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
  	      }
+ 	   if(mensaje == "3")
+	      {
+	        errorAlert('Error', 'Usted ya está inscrito en este curso.');
+	      }
     	
         $('#tbl_detalle').DataTable( {
         	buttons: [  

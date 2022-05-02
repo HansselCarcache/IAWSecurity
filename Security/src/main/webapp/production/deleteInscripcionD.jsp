@@ -2,23 +2,14 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
-
 <%
+String user = "";
+user = request.getParameter("idI")==null?"0":request.getParameter("idI");
 
- String cap = ""; 
- cap = request.getParameter("idC")==null?"0":request.getParameter("idC"); 
-						
-Vw_ofertadet ofd = new Vw_ofertadet(); 
-Dt_ofertadet dtofd = new Dt_ofertadet(); 
-ofd = dtofd.getDetalleId(Integer.parseInt(cap));
-//Para mientras se programa la sesión solo se pueden hacer inscripciones con el user 3
-String user= "3";
-Tbl_user tu = new Tbl_user();
-Dt_usuario dtu = new Dt_usuario();
-tu = dtu.getUserbyID(Integer.parseInt(user));
-
+Vw_inscripcion_docente insc = new Vw_inscripcion_docente();
+Dt_inscripcionDocente dtinsc = new Dt_inscripcionDocente();
+insc = dtinsc.getInscripcionbyID(Integer.parseInt(user));
 %>
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -26,16 +17,25 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Inscripción Capacitación </title>
+    <title>Inscripción | Registrar </title>
 
     <!-- Bootstrap -->
+    <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-
+<!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
     
@@ -50,7 +50,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="../Login.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Oferta</span></a>
+              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -62,10 +62,8 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Inscripción</h3>
+                            <h3>Registrar inscripción</h3>
                         </div>
-
-                        
                     </div>
                     <div class="clearfix"></div>
 
@@ -73,7 +71,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Inscripción de capacitación </h2>
+                                    <h2>Registro de inscripciones </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -90,112 +88,51 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form  action="../Sl_Inscripcion" method="post" >
-                                   
+                                    <form class="" action="../Sl_Inscripcion" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
-										<input type="hidden" value="1" name="opcion" id="opcion"/>
-										<input type="hidden" value="<%=ofd.getId_oferta_detalle() %>" name="idoferd" id="idoferd"/>
-										<input type="hidden" value="<%=tu.getId_usuario() %>" name="iduser" id="iduser"/>
-										<input type="hidden" value="<%=tu.getNombre_real() %>" name="nombre_completo" id="nombre_completo"/>
-										<input type="hidden" value="<%=tu.getTelefono_contacto() %>" name="telefono_contacto" id="telefono_contacto"/>
-										<!-- Para mientras solo se hace con el correo personal pero después se hara una validación para que elija el correo institucional si este existe. -->
-										<input type="hidden" value="<%=tu.getCorreo_personal() %>" name="correo" id="correo"/>
-										
+										<input type="hidden" value="2" name="opcion" id="opcion"/>
+										<input type="hidden" value="<%=insc.getId_inscripcion() %>" name="id_inscripcion" id="id_inscripcion"/>
 										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Capacitación: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtusername" value="<%=ofd.getCapacitacion() %>" name="txtusername" readonly="readonly"  required="required"  class="form-control ">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre: <span class="required">*</span></label>
+                                           <div class="col-md-6 col-sm-6 ">
+												<input type="text" id="nombre" name="nombre" class="form-control" readonly="readonly" placeholder="Nombre">
 											</div>
-										</div>
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">Fecha Inicio:</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="txtiduser" name="txtiduser" value="<%=ofd.getFecha_inicio() %>" type="text" class="form-control" readonly="readonly" placeholder="ID Usuario">
-											</div>
-										</div>
+                                        </div>
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha Final: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtfreg" value="<%=ofd.getFecha_final() %>" name="txtfreg" readonly="readonly" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Dias: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtestado" value="<%=ofd.getDias() %>" name="txtestado" readonly="readonly" required="required" class="form-control ">
-											</div>
-										</div>
-
-										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripción Horaria: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtnombreC" value="<%=ofd.getDescripcion_horaria() %>" name="txtnombreC" readonly="readonly"  required="required" class="form-control ">
-											</div>
-										</div>
-										
-										
-										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Modalidad: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcargo" value="<%=ofd.getModalidad() %>" name="txtcargo" readonly="readonly" required="required" class="form-control ">
-											</div>
-										</div>
 										
                                         <div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Facilitador: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txttelefono" value="<%=ofd.getFacilitador() %>" name="txttelefono" readonly="readonly" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Carrera: <span class="required">*</span></label>
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Correo: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-												<%
-							                      	ArrayList<Vw_carrera_departamento> listCarreras = new ArrayList<Vw_carrera_departamento>();
-							                      	Dt_carrerasInsc dtcar = new Dt_carrerasInsc();
-							                      	listCarreras = dtcar.listaCarreras();
-								                 %>
-								                 <select class="form-control js-example-basic-single" name="cbxCarrera" id="cbxCarrera" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Vw_carrera_departamento cardf :listCarreras){
-												  %>
-												  <option value="<%=cardf.getId_carrera()%>"><%=cardf.getNombre_carrera()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
+												<input type="text" id="correo" name="correo" class="form-control" readonly="readonly" placeholder="Facultad">
 											</div>
-                                       </div>
+                                        </div>
+                                        
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Capacitación: <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            <input type="text" id="capacitacion" name="capacitacion" class="form-control" readonly="readonly" placeholder="Departamento">
+											</div>
+                                        </div>
                                         
                                         
-										
-										
-						
-                        
-																																						                                                                                
+
+                                        
+                                        
                                         <div class="ln_solid">
-                                            <div class="col-md-6 offset-md-3">
-                								<button type="submit" class="btn btn-primary">Inscribir</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
-                  							</div>
+                                            <div class="form-group">
+                                                <div class="col-md-6 offset-md-3">
+                                                    <button type='submit' class="btn btn-danger">Eliminar</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
+                            
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -265,6 +202,33 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
+        
+        function eliminarcolumna(id){
+       		var table = $('#tbl_capacitaciones').DataTable();
+       	 
+       		table.column( id).visible( false );
+       	}
+       	function mostrarcolumna(){
+       		var table = $('#tbl_capacitaciones').DataTable();
+       	    
+       	   	table.columns( [ 0, 1, 2 ] ).visible( true, true );
+       	}
+       	
+       	
+       	function setValores()
+        {
+       		document.getElementById("nombre").value = "<%=insc.getNombre_completo()%>"
+       		document.getElementById("correo").value = "<%=insc.getCorreo()%>"
+    		document.getElementById("capacitacion").value = "<%=insc.getId_oferta_detalle()%>"
+        }
+       	
+        
+        $(document).ready(function() {
+        	
+        	setValores();
+            
+        } );
+        
     </script>
 
     <!-- jQuery -->

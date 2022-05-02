@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import datos.Dt_carreras;
+import datos.Dt_carrerasInsc;
 import datos.Dt_inscripcionDocente;
 import entidades.Tbl_carrera_inscripcion;
 import entidades.Tbl_inscripcion;
 import entidades.Vw_carrera_departamento;
+import negocio.Ng_InscripcionD;
 
 
 @WebServlet("/Sl_Inscripcion")
@@ -36,7 +38,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	Tbl_carrera_inscripcion tcari = new Tbl_carrera_inscripcion();
 	Vw_carrera_departamento cardf = new Vw_carrera_departamento();
 	Dt_inscripcionDocente dti = new Dt_inscripcionDocente();
-	Dt_carreras dtc = new Dt_carreras();
+	Dt_carrerasInsc dtc = new Dt_carrerasInsc();
+	Ng_InscripcionD ngi = new Ng_InscripcionD();
 	
 	// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 	
@@ -59,24 +62,36 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		tcari.setId_facultad(cardf.getId_facultad());
 		tcari.setEstado(1);
 		tcari.setId_carrera(cardf.getId_carrera());
-		tcari.setId_inscripcion(dti.guardarInscripcion(tins));
-		if(tcari.getId_inscripcion()>0) {
-			if(dtc.guardarCarrerainsc(tcari)) {
-				response.sendRedirect("production/tbl_capacitacionD.jsp?msj=1");
-			}
-			else {
+		if(ngi.existeInscripcion(tins.getId_oferta_detalle(), tins.getId_usuario())) {
+			response.sendRedirect("production/tbl_capacitacionD.jsp?msj=3");
+		}else {
+			tcari.setId_inscripcion(dti.guardarInscripcion(tins));
+			if(tcari.getId_inscripcion()>0) {
+				if(dtc.guardarCarrerainsc(tcari)) {
+					response.sendRedirect("production/tbl_capacitacionD.jsp?msj=1");
+				}
+				else {
+					response.sendRedirect("production/tbl_capacitacionD.jsp?msj=2");
+				}
+			}else {
 				response.sendRedirect("production/tbl_capacitacionD.jsp?msj=2");
 			}
-		}else {
-			response.sendRedirect("production/tbl_capacitacionD.jsp?msj=2");
 		}
+		
+		
 		}catch(Exception e) {
 			System.out.println("Error Sl_Inscripcion opc1: "+e.getMessage());
 			e.printStackTrace();
 		}
 		break;
 	case 2:
-		//codigo
+		tins.setId_inscripcion(Integer.parseInt(request.getParameter("id_inscripcion")));
+		dtc.eliminarCarreraInsc(tins.getId_inscripcion());
+		if(dti.eliminarInsc(tins.getId_inscripcion())) {
+			response.sendRedirect("production/tbl_inscripcionD.jsp?msj=1");
+		}else {
+			response.sendRedirect("production/tbl_inscripcionD.jsp?msj=2");
+		}
 		break;
 	default:
 		//codigo
