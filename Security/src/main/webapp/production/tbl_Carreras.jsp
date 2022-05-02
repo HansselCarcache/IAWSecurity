@@ -1,7 +1,7 @@
 <%@page import="com.oracle.wls.shaded.org.apache.bcel.generic.FDIV"%>
 <%@page import="entidades.Vw_carrera_departamento"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Vw_userrol, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.Vw_carrera_departamento, datos.*, java.util.*;"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Universidad | Carreras </title>
+    <title>Gestion Docente | Carreras </title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -96,9 +96,9 @@
                     
            <table id="tbl_Carreras" class="table table-striped table-bordered" style="width:100%">
                     <%
-                      		ArrayList<Vw_carrera_departamento> listaCarreras = new ArrayList<Vw_carrera_departamento>();
+                      		ArrayList<Vw_carrera_departamento> listCarreras = new ArrayList<Vw_carrera_departamento>();
                       		Dt_carreras dtc = new Dt_carreras();
-                      		listaCarreras = dtc.listaCarreras();
+                      		listCarreras = dtc.listCarrera();
                       %>
                     
                       <thead>
@@ -115,9 +115,9 @@
 
                       <tbody>
                      	<%
-	                      	for(Vw_carrera_departamento c :listaCarreras){
+	                      	for(Vw_carrera_departamento tc :listCarreras){
 	                      		 String estado= "";
-	                      		if(c.getEstado()!=3){
+	                      		if(tc.getEstado()!=3){
 	                      			estado= "Activo";
 	                      		}
 	                      		else{
@@ -127,19 +127,19 @@
                       	
                       
                         <tr>
-                           <td><%=c.getNombre_carrera() %></td>
-                          <td><%=c.getNombre_departamento() %></td>
+                           <td><%=tc.getNombre_carrera() %></td>
+                          <td><%=tc.getNombre_departamento() %></td>
                            <td><%=estado %></td>
                           <td>
-                           <a href="updateCarrera.jsp">
+                           <a href="updateCarrera.jsp?idC=<%=tc.getId_carrera() %>" title="Modificar carrera">
                             <i class="far fa-edit" title="Editar Carreras"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readCarrera.jsp">
+                          <a href="readCarrera.jsp?idC=<%=tc.getId_carrera() %>" title="Visualizar carrera">
                             <i class="far fa-eye" title="Visualizar Carreras"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteCarrera.jsp" >
+                          <a href="deleteCarrera.jsp?idC=<%=tc.getId_carrera() %>" title="Eliminar carrera">
                             <i class="far fa-trash-alt" title="Eliminar Carreras"></i>
                           </a>
                           </td>
