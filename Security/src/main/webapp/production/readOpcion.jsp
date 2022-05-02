@@ -68,7 +68,8 @@ top = dtop.getOpcionbyID(Integer.parseInt(opc));
                         <div class="title_left">
                             <h3>Visualizar opción</h3>
                         </div>
-           
+
+                        
                     </div>
                     <div class="clearfix"></div>
 

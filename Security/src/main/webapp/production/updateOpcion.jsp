@@ -106,7 +106,8 @@ top = dtop.getOpcionbyID(Integer.parseInt(opc));
 												<input type="text" value="<%=top.getDescripcion()%>" id="txtdescripcion" name="txtdescripcion" required="required" class="form-control ">
 											</div>
 										</div>
-                 
+
+                                        
                                         
                                         <div class="ln_solid">
                                             <div class="form-group">

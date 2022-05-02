@@ -7,7 +7,7 @@ public class Tbl_opcion {
 	private String nombre_opcion;
 	private String descripcion;
 	private int estado;
-	 
+	
 	//metodos
 	public int getId_opcion() {
 		return id_opcion;
