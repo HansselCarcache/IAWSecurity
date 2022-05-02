@@ -165,7 +165,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
 <!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
 												<%
 							                      	ArrayList<Vw_carrera_departamento> listCarreras = new ArrayList<Vw_carrera_departamento>();
-							                      	Dt_carreras dtcar = new Dt_carreras();
+							                      	Dt_carrerasInsc dtcar = new Dt_carrerasInsc();
 							                      	listCarreras = dtcar.listaCarreras();
 								                 %>
 								                 <select class="form-control js-example-basic-single" name="cbxCarrera" id="cbxCarrera" required="required">
