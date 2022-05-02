@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import datos.Dt_enviarEmail;
 import datos.Dt_usuario;
 import datos.Dt_usuario2;
 import datos.Encrypt;
@@ -57,6 +57,7 @@ public class Sl_Usuario extends HttpServlet{
 		Dt_usuario2 dtus2 = new Dt_usuario2();
 		Encrypt dtenc = new Encrypt();
 		Ng_Usuario ngu = new Ng_Usuario();
+		Dt_enviarEmail dtem = new Dt_enviarEmail();
 		
 		//PARA GUARDAR LA FECHA Y HORA DE CREACION/ EDICION/ ELIMINACION
 		Date fechaSistema = new Date();
@@ -123,6 +124,7 @@ public class Sl_Usuario extends HttpServlet{
 					tus2.setId_user(dtus.guardarUser(tus));
 					if(tus2.getId_user()>0) {
 						if(dtus2.guardarUser(tus2)) {
+							if(dtem.enviarEmailVerificacion(tus.getNombre_usuario(), tus.getCorreo_personal(), tus.getCodVerificacion()))
 							response.sendRedirect("production/tbl_Usuario.jsp?msj=1");
 						}
 						else {
