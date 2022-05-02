@@ -117,7 +117,6 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                         </tr>
                       </thead>
 
-
                       <tbody>
 	                     <%
 	                      	for(Tbl_opcion topc :listaOpcion){
@@ -129,8 +128,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 	                      			estado = "Inactivo";
 	                      		}
 	                      %>
-                      	
-                      
+                      	      
                         <tr>
                         
                           <td><%=topc.getNombre_opcion()%></td>

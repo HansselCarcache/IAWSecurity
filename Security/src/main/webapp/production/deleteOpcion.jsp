@@ -107,8 +107,7 @@ top = dtop.getOpcionbyID(Integer.parseInt(opc));
 											</div>
 										</div>
 
-                                        
-                                        
+                                                                     
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
                 								<button type="submit" class="btn btn-danger">Eliminar</button>

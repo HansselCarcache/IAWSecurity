@@ -201,7 +201,6 @@ public class Dt_Opciones {
 					return modificado;
 				}
 				
-			
 				// Metodo para eliminar opcion
 				public boolean eliminarOpcion (Tbl_opcion topc)
 				{
