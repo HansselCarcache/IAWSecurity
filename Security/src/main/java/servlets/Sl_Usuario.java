@@ -124,8 +124,10 @@ public class Sl_Usuario extends HttpServlet{
 					tus2.setId_user(dtus.guardarUser(tus));
 					if(tus2.getId_user()>0) {
 						if(dtus2.guardarUser(tus2)) {
-							if(dtem.enviarEmailVerificacion(tus.getNombre_usuario(), tus.getCorreo_personal(), tus.getCodVerificacion()))
-							response.sendRedirect("production/tbl_Usuario.jsp?msj=1");
+							if(dtem.enviarEmailVerificacion(tus.getNombre_usuario(), tus.getCorreo_personal(), tus.getCodVerificacion())) {
+								response.sendRedirect("production/tbl_Usuario.jsp?msj=1");
+							}
+							
 						}
 						else {
 							response.sendRedirect("production/tbl_Usuario.jsp?msj=2");
