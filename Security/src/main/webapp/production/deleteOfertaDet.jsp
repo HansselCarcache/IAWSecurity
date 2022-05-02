@@ -68,7 +68,10 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 <link
 	href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"
 	rel="stylesheet">
-
+	
+<!-- JAlert -->
+    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
+    
 <!-- Custom Theme Style -->
 <link href="../custom.min.css" rel="stylesheet">
 
@@ -126,7 +129,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 											<div class="clearfix"></div>
 										</div>
 										<div class="x_content">
-											<form class="" action="../Sl_OfertaDet" method="post" novalidate>
+											<form class="" method="post" novalidate>
 											<input type="hidden" value="<%=oferta.getFecha_inicial() %>" name="finicio" id="finicio"/>
 											   	
 												<div class="field item form-group">
@@ -223,7 +226,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 										<div class="x_content">
 											<div class="row">
 												<div class="col-md-12 col-sm-12">
-											<form class="" action="../Sl_OfertaDet" method="post" novalidate>
+											<form id="frm_det" name="frm_det" class="" action="../Sl_OfertaDet" onsubmit="toSubmit(event)" method="post" novalidate>
 												<input type="hidden" value="<%=oferta.getFecha_inicial() %>" name="finicio" id="finicio"/>
 											   	<input type="hidden" value="<%=oferta.getFecha_final() %>"  name="ffinal" id="ffinal" />
 											   	<input type="hidden" value="3" name="opcion" id="opcion"/>
@@ -246,10 +249,13 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 																Dt_capacitacion dtu = new Dt_capacitacion();
 																listaCapacitacion = dtu.listacapacitacionesActivas();
 																%>
-																<select class="form-control js-example-basic-single"
+
+																<input readonly type="text" class="form-control" value="<%=ofertaD.getCapacitacion()%>" name="cpt" id="cpt">
+																
+																<select style="display:none;" 
 																	name="capacitacion" id="capacitacion"
 																	required="required" disabled>
-																	<option value="">Seleccione...</option>
+																	<option value="0">Seleccione...</option>
 																	<%
 																	for (Tbl_capacitacion tc : listaCapacitacion) {
 																	%>
@@ -272,9 +278,13 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 																Dt_facilitadores dtrol = new Dt_facilitadores();
 																listFac = dtrol.listaFaciActivos();
 																%>
-																<select class="form-control js-example-basic-single"
+																<input readonly type="text" class="form-control"
+																	value="<%=ofertaD.getFacilitador()%>" name="cpt"
+																	id="cpt"> 
+																
+																<select class="form-control" style="display:none;" 
 																	name="facilitador" id="facilitador" required="required" disabled>
-																	<option value="">Seleccione...</option>
+																	<option value="0">Seleccione...</option>
 																	<%
 																	for (Tbl_facilitadores trol : listFac) {
 																	%>
@@ -298,9 +308,14 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 																Dt_modalidad dtmod = new Dt_modalidad();
 																listMod = dtmod.listaModalidadesActivas();
 																%>
-																<select class="form-control js-example-basic-single"
+																
+																<input readonly type="text" class="form-control"
+																	value="<%=ofertaD.getModalidad()%>" name="cpt"
+																	id="cpt">
+																	
+																<select class="form-control" style="display:none;" 
 																	name="modalidad" id="modalidad" required="required" disabled>
-																	<option value="">Seleccione...</option>
+																	<option value="0">Seleccione...</option>
 																	<%
 																	for (Tbl_modalidad mod : listMod) {
 																	%>
@@ -377,7 +392,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 														<div class="ln_solid">
 															<div class="form-group">
 																<div class="col-md-6 offset-md-3">
-																	<button type='submit' class="btn btn-danger">Eliminar</button>
+																	<button onclick="deleteDet()" class="btn btn-danger">Eliminar</button>
 																	<a href="tbl_oferta.jsp" class="btn btn-success">Regresar</a>
 																</div>
 															</div>
@@ -413,16 +428,86 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 		</footer>
 		<!-- /footer content -->
 	</div>
-	</div>
+	
 
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="../vendors/validator/multifield.js"></script>
 	<script src="../vendors/validator/validator.js"></script>
-
+<!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.confirm.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 	<!-- Javascript functions	-->
+	<script type="text/javascript">
+	//Funciones del formulario
+	function toSubmit(e){
+		e.preventDefault(); 
+		try {
+			someBug();
+		} catch (e) {
+			throw new Error(e.message);
+		}
+		return false;
+	}
+	
+	function submitForm(){
+		var form = document.getElementById("frm_det");
+		form.onsubmit = function() {
+			return true;
+		}
+	}
+
+	function deleteDet(){
+		try {
+			new PNotify({
+			    title: 'Confirmar eliminación',
+			    text: '¿Esta seguro que desea eliminar el registro?',
+			    icon: 'glyphicon glyphicon-question-sign',
+			    styling: "bootstrap3",
+			    addclass: "dark",
+			    type:"info",
+			    hide: false,
+			    confirm: {
+			        confirm: true,
+			        buttons: [
+			        {
+			            text: 'Si',
+			            addClass: 'btn-success',
+			            click: function(notice) {
+			            	submitForm();
+							document.getElementById('frm_det').submit();
+			            }
+			        },
+			        {
+			        	text: 'No',
+			            addClass: 'btn-primary',
+			            click: function(notice) {
+			            	PNotify.removeAll()
+			            }
+			        }
+			      ]
+			    },
+			    buttons: {
+			        closer: false,
+			        sticker: false
+			    },
+			    history: {
+			        history: false
+			    }
+			});
+			
+		}
+		catch (e) {
+			alert(e);
+		}
+	}
+	</script>
 	<script>
+		
+	
 		function hideshow() {
 			var password = document.getElementById("password1");
 			var slash = document.getElementById("slash");
@@ -479,31 +564,6 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 			$('.js-example-basic-single').select2();
 		});
 
-		function agregarFila() {
-
-			var cap = $('#capacitacion').val();
-			var fac = $('#facilitador').val();
-			var dias = $('#dias').val();
-
-			document.getElementById("tbl_detalle").insertRow(1).innerHTML = '<td>'
-					+ cap
-					+ '</td>'
-					+ '<td>'
-					+ fac
-					+ '</td>'
-					+ '<td>'
-					+ dias
-					+ '</td>'
-					+ '<td><button type="button" onclick="eliminarFila()" class="btn btn-sm btn-danger borrar"><i class="fas fa-trash-alt"></i></button></td>';
-		}
-
-		function eliminarFila() {
-			$(document).on('click', '.borrar', function(event) {
-				event.preventDefault();
-				$(this).closest('tr').remove();
-			});
-		}
-
 		$(document).ready(function() {
         	try {
         		<% if(msj.equals("1")) {%>
@@ -525,30 +585,6 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
         });
 		
 		$(document).ready(function() {
-			$('#tbl_capacitaciones').DataTable({
-				buttons : [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
-				"dom" : '<"top"lf>rt<"bottom"ip><"clear">',
-				keys : true,
-
-				"lengthMenu" : [ 10, 25, 50, 75, 100 ],
-
-				"language" : {
-					"lengthMenu" : "Mostrar _MENU_ records por pagina",
-					"search" : "Buscar:",
-					"paginate" : {
-						"first" : "Primero",
-						"last" : "Ultimo",
-						"next" : "Siguiente",
-						"previous" : "Anterior"
-					},
-					"emptyTable" : "No existen datos en la tabla",
-					"zeroRecords" : "No existe un registro en la BD",
-					"info" : "Mostrando página _PAGE_ de _PAGES_",
-
-					"infoEmpty" : "No existe registro",
-					"infoFiltered" : "(filtered from _MAX_ total records)"
-				}
-			});
 
 			$('#tbl_detalle').DataTable({
 				buttons : [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
@@ -576,10 +612,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 			});
 		});
 	</script>
-	<!-- PNotify -->
-    <script src="../vendors/pnotify/dist/pnotify.js"></script>
-    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
-    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+	
     
 	<!-- jQuery -->
 	<script src="../vendors/jquery/dist/jquery.min.js"></script>
@@ -620,6 +653,10 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 
 	<!-- Custom Theme Scripts -->
 	<script src="../build/js/custom.min.js"></script>
+	
+	<!-- JAlert js -->
+	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
 
 	<!-- Select2 -->
 	<script src="../vendors/select2/dist/js/select2.min.js"></script>

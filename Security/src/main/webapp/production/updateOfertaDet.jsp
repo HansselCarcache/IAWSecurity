@@ -235,7 +235,7 @@ if(Integer.parseInt(d) !=0){
 																<select class="form-control js-example-basic-single"
 																	name="capacitacion" id="capacitacion"
 																	required="required">
-																	<option value="">Seleccione...</option>
+																	<option value="0">Seleccione...</option>
 																	<%
 																	for (Tbl_capacitacion tc : listaCapacitacion) {
 																	%>
@@ -260,7 +260,7 @@ if(Integer.parseInt(d) !=0){
 																%>
 																<select class="form-control js-example-basic-single"
 																	name="facilitador" id="facilitador" required="required" >
-																	<option value="">Seleccione...</option>
+																	<option value="0">Seleccione...</option>
 																	<%
 																	for (Tbl_facilitadores trol : listFac) {
 																	%>
@@ -286,7 +286,7 @@ if(Integer.parseInt(d) !=0){
 																%>
 																<select class="form-control js-example-basic-single"
 																	name="modalidad" id="modalidad" required="required">
-																	<option value="">Seleccione...</option>
+																	<option value="0">Seleccione...</option>
 																	<%
 																	for (Tbl_modalidad mod : listMod) {
 																	%>
@@ -551,8 +551,24 @@ if(Integer.parseInt(d) !=0){
 			<%if(ofertaD.getId_oferta_detalle() >0){%>
 			
 				$('#capacitacion').val("<%=ofertaD.getId_capacitacion()%>");
+				
+				if($('#capacitacion').val() === null){
+					$('#capacitacion').val(0);
+				}
+				
 				$('#modalidad').val("<%=ofertaD.getId_modalidad()%>");
+				
+				if($('#modalidad').val() === null){
+					$('#modalidad').val(0);
+				}
+				
 				$('#facilitador').val("<%=ofertaD.getId_facilitador()%>");
+				
+				if($('#facilitador').val() === null){
+					$('#facilitador').val(0);
+				}
+				
+				
 				$('#publico').val("<%=ofertaD.getPublico()%>");
 				$('#ffinald').val("<%=ofertaD.getFecha_final()%>");
 				$('#finiciod').val("<%=ofertaD.getFecha_final()%>");

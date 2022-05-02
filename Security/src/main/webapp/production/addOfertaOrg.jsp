@@ -201,14 +201,14 @@
 												<%
 												ArrayList<Tbl_facilitadores> listFac = new ArrayList<Tbl_facilitadores>();
 					                      		Dt_facilitadores dtrol = new Dt_facilitadores();
-					                      		listFac = dtrol.listarFacActivos();
+					                      		listFac = dtrol.listaFaciActivos();
 								                 %>
 								                 <select class="form-control js-example-basic-single" name="facilitador" id="facilitador" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
 												  for(Tbl_facilitadores trol :listFac){
 												  %>
-												  <option value="<%=trol.getNombres()+' '+trol.getApellidos()%>"><%=trol.getNombres()+' '+trol.getApellidos()%></option>
+												  <option value="<%=trol.getId_facilitador()%>"><%=trol.getNombres()%></option>
 												  <%
 												  	}
 												  %>
@@ -407,7 +407,7 @@
 							          
 								                        <tr>
 								                          <td><%=cap.getNombre() %></td>
-								                          <td><%=cap.getModalidad() %></td>
+								                          <td><%=cap.getTipo_capacitacion()%></td>
 								                          <td><%=estado %></td>
 								                  
 								                        </tr>

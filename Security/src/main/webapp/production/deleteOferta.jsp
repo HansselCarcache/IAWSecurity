@@ -57,6 +57,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
     <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
     <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
     <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    
     <style type="text/css">
 		.center{
 			right: calc(50% - 150px) !important;
@@ -101,7 +102,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 											<div class="clearfix"></div>
 										</div>
 										<div class="x_content">
-											<form class="" action="../Sl_OfertaEnc" method="post" novalidate>
+											<form id="frm_oferta" name="frm_oferta" class="" action="../Sl_OfertaEnc" method="post" novalidate>
 												<input type="hidden" value="3" id="opcion" name="opcion"/>
 												<input type="hidden" value="<%=of %>" id="id" name="id"/>
 												<div class="field item form-group">
@@ -111,7 +112,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 													</label>
 													<div class="col-md-6 col-sm-6">
 														<input class="form-control" name="nombre"
-															placeholder="ex. Primer Semestre 2020"
+															placeholder="Convocatoria xxx"
 															value="<%=oferta.getNombre()%>" readonly/>
 
 													</div>
@@ -171,7 +172,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 												<div class="ln_solid">
 													<div class="form-group">
 														<div class="col-md-6 offset-md-3">
-															<button type='submit' class="btn btn-danger">Eliminar</button>
+															<button  type="button" onclick="deleteDet()" class="btn btn-danger">Eliminar</button>
 															<a href="tbl_oferta.jsp" class="btn btn-success">Regresar</a>
 														</div>
 													</div>
@@ -187,7 +188,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 							<div class="row">
 								<div class="x_panel">
 										<div class="x_title">
-											<h2>Ofertas para: <%=oferta.getNombre()%> <%=oferta.getYear() %></h2>
+											<h2>Ofertas para: <%=oferta.getNombre()%></h2>
 	
 											<div class="clearfix"></div>
 										</div>
@@ -291,7 +292,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
             </footer>
             <!-- /footer content -->
         </div>
-    </div>
+
 
 	
     
@@ -299,7 +300,82 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
     <script src="../vendors/validator/multifield.js"></script>
     <script src="../vendors/validator/validator.js"></script>
     
+    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.confirm.js"></script>
+    
     <!-- Javascript functions	-->
+    <script type="text/javascript">
+    var form = document.getElementById("frm_oferta"); 
+    form.onsubmit = function() { return false; }
+
+    
+	//Funciones del formulario
+	function toSubmit(e){
+		e.preventDefault(); 
+		try {
+			someBug();
+		} catch (e) {
+			alert(e);
+			throw new Error(e.message);
+		}
+		return false;
+	}
+	
+	function submitForm(){
+		var form = document.getElementById('frm_oferta');
+		form.onsubmit = function() {
+			return true;
+		}
+	}
+
+	function deleteDet(){
+		try {
+			new PNotify({
+			    title: 'Confirmar eliminación',
+			    text: '¿Esta seguro que desea eliminar el registro?',
+			    icon: 'glyphicon glyphicon-question-sign',
+			    styling: "bootstrap3",
+			    addclass: "dark",
+			    type:"info",
+			    hide: false,
+			    confirm: {
+			        confirm: true,
+			        buttons: [
+			        {
+			            text: 'Si',
+			            addClass: 'btn-success',
+			            click: function(notice) {
+			            	submitForm();
+							document.getElementById('frm_oferta').submit();
+			            }
+			        },
+			        {
+			        	text: 'No',
+			            addClass: 'btn-primary',
+			            click: function(notice) {
+			            	PNotify.removeAll()
+			            }
+			        }
+			      ]
+			    },
+			    buttons: {
+			        closer: false,
+			        sticker: false
+			    },
+			    history: {
+			        history: false
+			    }
+			});
+			
+		}
+		catch (e) {
+			alert(e);
+		}
+	}
+	</script>
 	<script>
 		function hideshow(){
 			var password = document.getElementById("password1");
@@ -419,6 +495,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
         
         $(document).ready(function() {
         	try {
+     
         		<% if(msj.equals("1")) {%>
         		new PNotify({
                     type: 'error',
@@ -450,10 +527,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
         });
         
     </script>
-<!-- PNotify -->
-    <script src="../vendors/pnotify/dist/pnotify.js"></script>
-    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
-    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+	
     
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>

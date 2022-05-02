@@ -214,6 +214,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 												<input type="hidden" value="<%=oferta.getFecha_inicial() %>" name="finicio" id="finicio"/>
 											   	<input type="hidden" value="<%=oferta.getFecha_final() %>"  name="ffinal" id="ffinal" />
 											   	<input type="hidden" value="1" name="opcion" id="opcion"/>
+											   	<input type="hidden" value="0" name="id_oferta_det" id="id_oferta_det"/>
 											   	<input type="hidden" value="0" name="estado" id="estado"/>
 											   	<input type="hidden" value="addOfertaDet.jsp" name="frm" id="frm"/>
 											   	<input type="hidden" value="<%=oferta.getId_oferta() %>" name="id_oferta" id="id_oferta"/>
@@ -273,7 +274,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 															</div>
 														</div>
 														
-														<%-- <div class="field item form-group">
+														<div class="field item form-group">
 															<label
 																class="col-form-label col-md-3 col-sm-3  label-align">Modalidad:
 																<span class="required">*</span>
@@ -356,7 +357,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 																	<option value="2">Hacer Publico</option>
 																</select>
 															</div>
-														</div> --%>
+														</div> 
 														
 														<div class="ln_solid">
 				                                            <div class="form-group">
@@ -386,12 +387,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="card-box table-responsive">
-													<div class="text-muted font-13 col-md-12"
-														style="text-align: right;">
-														<a href="frm_addOfertaDet.jsp"> <i
-															class="fa fa-2x fa-plus-square" title="Nueva Oferta"></i></a>
-														<br></br>
-													</div>
+													
 
 													<table id="tbl_detalle"
 														class="table table-striped table-bordered dataTable facultad"

@@ -164,7 +164,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 													<div class="form-group">
 														<div class="col-md-6 offset-md-3">
 
-															<button type="submit" class="btn btn-primary">Guardar</button>
+															<button type="submit" class="btn btn-primary">Editar</button>
 															<a href="tbl_oferta.jsp" class="btn btn-success">Regresar</a>
 														</div>
 													</div>
@@ -358,7 +358,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 							<div class="row">
 								<div class="x_panel">
 										<div class="x_title">
-											<h2>Ofertas para: <%=oferta.getNombre()%> <%=oferta.getYear() %></h2>
+											<h2>Ofertas para: <%=oferta.getNombre()%></h2>
 	
 											<div class="clearfix"></div>
 										</div>

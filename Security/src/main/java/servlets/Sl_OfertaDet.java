@@ -156,7 +156,7 @@ public class Sl_OfertaDet extends HttpServlet {
 							response.sendRedirect("production/updateOferta.jsp?msj=7&m=" + tod.getId_oferta());
 						} else {
 							// No
-							response.sendRedirect("production/updateOferta.jsp?msj=8&m=" + tod.getId_oferta());
+							response.sendRedirect("production/updateOfertaDet.jsp?msj=8&m=" + tod.getId_oferta()+"&d="+tod.getId_oferta_detalle());
 						}				
 						
 					}catch(Exception e) {
