@@ -3,6 +3,13 @@
     
 <!DOCTYPE html>
 <html>
+
+<!-- Para mandar los mensajes -->
+<% 
+	String msj="";
+	msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
+%>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -26,6 +33,17 @@
     <!-- Select2 -->
     <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
 <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
+
+<!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 </head>
 
 <body class="nav-md">
@@ -59,19 +77,7 @@
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2>Ingrese un nuevo tipo de capacitación </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
-                                            </div>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
+                                    
                                     
                                     <div class="clearfix"></div>
                                 </div>
@@ -141,11 +147,19 @@
             <!-- /footer content -->
         </div>
     </div>
+  </div>
+</div>
+   
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../vendors/validator/multifield.js"></script>
     <script src="../vendors/validator/validator.js"></script>
+    
+    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
     
     <!-- Javascript functions	-->
 	<script>
@@ -194,6 +208,10 @@
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
+        
+        
+        
+        
     </script>
 
     <!-- jQuery -->

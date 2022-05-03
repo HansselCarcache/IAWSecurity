@@ -480,8 +480,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 		<!-- footer content -->
 		<footer>
 			<div class="pull-right">
-				Gentelella - Bootstrap Admin Template by <a
-					href="https://colorlib.com">Colorlib</a>
+				Gestion de Capacitacion Docente - UCA
 			</div>
 			<div class="clearfix"></div>
 		</footer>

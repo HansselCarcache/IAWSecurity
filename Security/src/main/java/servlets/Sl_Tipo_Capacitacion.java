@@ -59,6 +59,7 @@ public class Sl_Tipo_Capacitacion extends HttpServlet{
 			int certif = Integer.parseInt(request.getParameter("certificada"));
 			TipCap.setCertificada(certif);
 			try {
+				//opcion para agregar
 				 if(dttc.addTipoCapacitacion(TipCap)) {
 						response.sendRedirect("production/tbl_tipo_capacitacion.jsp?msj=1");
 				 }else {
@@ -70,6 +71,7 @@ public class Sl_Tipo_Capacitacion extends HttpServlet{
 			}
 			break;
 		case 2:
+			//opcion para actualizar
 			TipCap.setId_tipo_capacitacion(Integer.parseInt(request.getParameter("id_tipo_capacitacion")));
 			int certif2 = Integer.parseInt(request.getParameter("certificada"));
 			TipCap.setCertificada(certif2);
@@ -86,6 +88,7 @@ public class Sl_Tipo_Capacitacion extends HttpServlet{
 			}
 			break;
 		case 3:
+			//opcion para eliminar
 			TipCap.setId_tipo_capacitacion(Integer.parseInt(request.getParameter("id_tipo_capacitacion")));
 
 			try {
