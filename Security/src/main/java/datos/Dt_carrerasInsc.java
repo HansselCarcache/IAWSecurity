@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Tbl_carrera_inscripcion;
+import entidades.Tbl_user;
 import entidades.Vw_carrera_departamento;
 
 public class Dt_carrerasInsc {
@@ -161,4 +162,45 @@ public class Dt_carrerasInsc {
 		}
 		return cardf;
 	}
+	
+	// Metodo para eliminar usuario
+		public boolean eliminarCarreraInsc(int id_inscripcion)
+		{
+			boolean eliminado=false;	
+			try
+			{
+				c = poolConexion.getConnection();
+				this.llenaRsCarrerasInsc(c);
+				rsCarrerasins.beforeFirst();
+				while (rsCarrerasins.next()){
+					if(rsCarrerasins.getInt(6)==id_inscripcion){
+						
+						rsCarrerasins.deleteRow();
+						eliminado=true;
+						break;
+					}
+				}
+			}
+			catch (Exception e){
+				System.err.println("ERROR AL eliminarCarreraInsc() "+e.getMessage());
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rsCarrerasins != null){
+						rsCarrerasins.close();
+					}
+					if(c != null){
+						poolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return eliminado;
+		}
+	
+	
 }

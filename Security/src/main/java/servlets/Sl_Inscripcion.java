@@ -85,7 +85,13 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		}
 		break;
 	case 2:
-		//codigo
+		tins.setId_inscripcion(Integer.parseInt(request.getParameter("id_inscripcion")));
+		dtc.eliminarCarreraInsc(tins.getId_inscripcion());
+		if(dti.eliminarInsc(tins.getId_inscripcion())) {
+			response.sendRedirect("production/tbl_inscripcionD.jsp?msj=1");
+		}else {
+			response.sendRedirect("production/tbl_inscripcionD.jsp?msj=2");
+		}
 		break;
 	default:
 		//codigo

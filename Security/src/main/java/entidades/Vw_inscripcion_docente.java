@@ -5,76 +5,77 @@ public class Vw_inscripcion_docente {
 	//Attributes
 	
 		private int id_inscripcion;
-		private String Nombres;
-		private String nombre_facultad;
-		private String nombre_departamento;
-		private String nombre_carrera;
-		private String fecha_inscripcion;
-		private String nombre_oferta;
-		private int id_escala;
-		private String id_uca;
-		private String correo_electronico;
-		
+		private String nombre_completo;
+		private String telefono;
+		private String correo;
+		private int id_usuario;
+		private int id_oferta_detalle;
+		private String valor;
+		private String desc_valor;
+		private int estado;
+		private String otras_dependencias;
 		public int getId_inscripcion() {
 			return id_inscripcion;
 		}
 		public void setId_inscripcion(int id_inscripcion) {
 			this.id_inscripcion = id_inscripcion;
 		}
-		public String getNombres() {
-			return Nombres;
+		public String getNombre_completo() {
+			return nombre_completo;
 		}
-		public void setNombres(String nombres) {
-			Nombres = nombres;
+		public void setNombre_completo(String nombre_completo) {
+			this.nombre_completo = nombre_completo;
 		}
-		public String getNombre_facultad() {
-			return nombre_facultad;
+		public String getTelefono() {
+			return telefono;
 		}
-		public void setNombre_facultad(String nombre_facultad) {
-			this.nombre_facultad = nombre_facultad;
+		public void setTelefono(String telefono) {
+			this.telefono = telefono;
 		}
-		public String getNombre_departamento() {
-			return nombre_departamento;
+		public String getCorreo() {
+			return correo;
 		}
-		public void setNombre_departamento(String nombre_departamento) {
-			this.nombre_departamento = nombre_departamento;
+		public void setCorreo(String correo) {
+			this.correo = correo;
 		}
-		public String getNombre_carrera() {
-			return nombre_carrera;
+		public int getId_usuario() {
+			return id_usuario;
 		}
-		public void setNombre_carrera(String nombre_carrera) {
-			this.nombre_carrera = nombre_carrera;
+		public void setId_usuario(int id_usuario) {
+			this.id_usuario = id_usuario;
 		}
-		public String getFecha_inscripcion() {
-			return fecha_inscripcion;
+		public int getId_oferta_detalle() {
+			return id_oferta_detalle;
 		}
-		public void setFecha_inscripcion(String fecha_inscripcion) {
-			this.fecha_inscripcion = fecha_inscripcion;
+		public void setId_oferta_detalle(int id_oferta_detalle) {
+			this.id_oferta_detalle = id_oferta_detalle;
 		}
-		public String getNombre_oferta() {
-			return nombre_oferta;
+		public String getValor() {
+			return valor;
 		}
-		public void setNombre_oferta(String nombre_oferta) {
-			this.nombre_oferta = nombre_oferta;
+		public void setValor(String valor) {
+			this.valor = valor;
 		}
-		public int getId_escala() {
-			return id_escala;
+		public String getDesc_valor() {
+			return desc_valor;
 		}
-		public void setId_escala(int id_escala) {
-			this.id_escala = id_escala;
+		public void setDesc_valor(String desc_valor) {
+			this.desc_valor = desc_valor;
 		}
-		public String getId_uca() {
-			return id_uca;
+		public int getEstado() {
+			return estado;
 		}
-		public void setId_uca(String id_uca) {
-			this.id_uca = id_uca;
+		public void setEstado(int estado) {
+			this.estado = estado;
 		}
-		public String getCorreo_electronico() {
-			return correo_electronico;
+		public String getOtras_dependencias() {
+			return otras_dependencias;
 		}
-		public void setCorreo_electronico(String correo_electronico) {
-			this.correo_electronico = correo_electronico;
+		public void setOtras_dependencias(String otras_dependencias) {
+			this.otras_dependencias = otras_dependencias;
 		}
+		
+		
 		
 	//Methods
 		

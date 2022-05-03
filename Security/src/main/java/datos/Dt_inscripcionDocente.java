@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Tbl_inscripcion;
+import entidades.Tbl_user;
 import entidades.Vw_inscripcion_docente;
 import entidades.Vw_userrol;
 
@@ -36,20 +37,20 @@ public class Dt_inscripcionDocente {
 		ArrayList<Vw_inscripcion_docente> listInsc = new ArrayList<Vw_inscripcion_docente>();
 		try {
 			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT * FROM dbfdocente.vw_inscripcion_docente;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_inscripcion;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				Vw_inscripcion_docente insc = new Vw_inscripcion_docente();
 				insc.setId_inscripcion(rs.getInt("id_inscripcion"));
-				insc.setNombres(rs.getString("Nombre"));
-				insc.setNombre_facultad(rs.getString("nombre_facultad"));
-				insc.setNombre_departamento(rs.getString("nombre_departamento"));
-				insc.setNombre_carrera(rs.getString("nombre_carrera"));
-				insc.setFecha_inscripcion(rs.getString("fecha_inscripcion"));
-				insc.setNombre_oferta(rs.getString("Oferta"));
-				insc.setId_escala(rs.getInt("id_escala"));
-				insc.setId_uca(rs.getString("id_uca"));
-				insc.setCorreo_electronico(rs.getString("correo_electronico"));
+				insc.setNombre_completo(rs.getString("nombre_completo"));
+				insc.setTelefono(rs.getString("telefono"));
+				insc.setCorreo(rs.getString("correo"));
+				insc.setId_usuario(rs.getInt("id_usuario"));
+				insc.setId_oferta_detalle(rs.getInt("id_oferta_detalle"));
+				insc.setValor(rs.getString("valor"));
+				insc.setDesc_valor(rs.getString("desc_valor"));
+				insc.setEstado(rs.getInt("estado"));
+				insc.setOtras_dependencias(rs.getString("otras_dependencias"));
 				
 				listInsc.add(insc);
 				
@@ -78,6 +79,102 @@ public class Dt_inscripcionDocente {
 		}
 		return listInsc;
 	}
+	
+	public ArrayList<Vw_inscripcion_docente> listainscripcionPersonal(int idUser) {
+		ArrayList<Vw_inscripcion_docente> listInsc = new ArrayList<Vw_inscripcion_docente>();
+		try {
+			c = poolConexion.getConnection();
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_inscripcion where id_usuario=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1,  idUser);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Vw_inscripcion_docente insc = new Vw_inscripcion_docente();
+				insc.setId_inscripcion(rs.getInt("id_inscripcion"));
+				insc.setNombre_completo(rs.getString("nombre_completo"));
+				insc.setTelefono(rs.getString("telefono"));
+				insc.setCorreo(rs.getString("correo"));
+				insc.setId_usuario(rs.getInt("id_usuario"));
+				insc.setId_oferta_detalle(rs.getInt("id_oferta_detalle"));
+				insc.setValor(rs.getString("valor"));
+				insc.setDesc_valor(rs.getString("desc_valor"));
+				insc.setEstado(rs.getInt("estado"));
+				insc.setOtras_dependencias(rs.getString("otras_dependencias"));
+				
+				listInsc.add(insc);
+				
+			}
+		}
+		catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR INSCRIPCION"+ e.getMessage());
+			e.printStackTrace();
+			
+		}
+		finally {
+			try {
+				if(rs!= null) {
+					rs.close();
+				}
+				if(ps!= null) {
+					ps.close();
+				}
+				if(c != null) {
+					poolConexion.closeConnection(c);
+				}
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return listInsc;
+	}
+	
+	
+	public Vw_inscripcion_docente getInscripcionbyID(int id_inscripcion) {
+		Vw_inscripcion_docente insc = new Vw_inscripcion_docente();
+		try {
+			c = poolConexion.getConnection();
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_inscripcion where id_inscripcion=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1,  id_inscripcion);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				insc.setId_inscripcion(rs.getInt("id_inscripcion"));
+				insc.setNombre_completo(rs.getString("nombre_completo"));
+				insc.setTelefono(rs.getString("telefono"));
+				insc.setCorreo(rs.getString("correo"));
+				insc.setId_usuario(rs.getInt("id_usuario"));
+				insc.setId_oferta_detalle(rs.getInt("id_oferta_detalle"));
+				insc.setValor(rs.getString("valor"));
+				insc.setDesc_valor(rs.getString("desc_valor"));
+				insc.setEstado(rs.getInt("estado"));
+				insc.setOtras_dependencias(rs.getString("otras_dependencias"));
+				
+			}
+		}catch (Exception e)
+		{
+			System.out.println("DATOS ERROR getUserbyID(): "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					poolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return insc;
+	}
+	
+	
 	
 	//Metodo para almacenar nueva inscripcion
 	public int guardarInscripcion(Tbl_inscripcion tins) {
@@ -119,6 +216,44 @@ public class Dt_inscripcionDocente {
 			}
 		}
 		return guardado;
+	}
+	
+	public boolean eliminarInsc(int id_inscripcion)
+	{
+		boolean eliminado=false;	
+		try
+		{
+			c = poolConexion.getConnection();
+			this.llenaRsInscripcion(c);
+			rsInscripcion.beforeFirst();
+			while (rsInscripcion.next()){
+				if(rsInscripcion.getInt(1)==id_inscripcion){
+					
+					rsInscripcion.deleteRow();
+					eliminado=true;
+					break;
+				}
+			}
+		}
+		catch (Exception e){
+			System.err.println("ERROR AL eliminarInsc() "+e.getMessage());
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if(rsInscripcion != null){
+					rsInscripcion.close();
+				}
+				if(c != null){
+					poolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return eliminado;
 	}
 	
 	

@@ -527,5 +527,7 @@ public class Dt_usuario {
 			}
 			return builder.toString();
 		}
+		
+		
 	
 }

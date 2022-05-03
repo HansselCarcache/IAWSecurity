@@ -1,5 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_rol, datos.Dt_rol, java.util.*;"%>
+    
+    <%
+	// INVALIDA LA CACHE DEL NAVEGADOR //
+	response.setHeader( "Pragma", "no-cache" );
+	response.setHeader( "Cache-Control", "no-store" );
+	response.setDateHeader( "Expires", 0 );
+	response.setDateHeader( "Expires", -1 );
+	
+	HttpSession hts = request.getSession(false);
+	hts.removeAttribute("acceso");
+	hts.invalidate();
+	
+	/* String mensaje = request.getParameter("msj");
+ 	mensaje=mensaje==null?"":mensaje; */
+	
+ 	int opcion = 0;
+	String codigo = request.getParameter("codverif");
+	codigo=codigo==null?"":codigo;
+	if(codigo.equals("")){
+		opcion = 1;
+	}
+	else{
+		opcion = 2;
+	}
+%>    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -70,6 +95,8 @@
           <section class="login_content">
             <form>
               <h1>Acceso de Usuarios</h1>
+              <input type="hidden" name="opcion" id="opcion" value="<%=opcion%>">
+              <input type="hidden" name="codVerificacion" value="<%=codigo%>">
               <div>
                 <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario" required="required" />
               </div>
@@ -78,6 +105,19 @@
               </div>
               <div>
                 <select class="form-control" name="rol" id="rol" required="required">
+                 <%
+                  	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
+                  	Dt_rol dtr = new Dt_rol();
+                  	listRol = dtr.listaRolActivos();
+              	%>
+                	<option value="">Seleccione...</option>
+                <% 
+				  	for(Tbl_rol trol:listRol){
+				  %>
+				  <option value="<%=trol.getId_rol()%>"><%=trol.getNombre_rol()%></option>
+				  <%
+				  	}
+				  %>
 				</select>
               </div>
               <div class="clearfix"></div>
