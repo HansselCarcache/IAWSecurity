@@ -57,7 +57,7 @@ public class Sl_login extends HttpServlet {
 		switch(opc) {
 		case 1:
 			try {
-				if(dtu.verificarLogin(usuario, clave, rolId)) {
+				if(dtu.dtverificarLogin(usuario, clave, rolId)) {
 					vwur = dtu.dtGetVwUR(usuario);
 					HttpSession hts = request.getSession(true);
 					hts.setAttribute("acceso", vwur);
@@ -75,7 +75,7 @@ public class Sl_login extends HttpServlet {
 		
 		case 2:
 			try {
-				if(dtu.dtverficarLogin2(usuario,clave, rolId, codigoV)) {
+				if(dtu.dtverificarLogin2(usuario,clave, rolId, codigoV)) {
 					vwur = dtu.dtGetVwUR(usuario);
 					HttpSession hts = request.getSession(true);
 					hts.setAttribute("acceso", vwur);

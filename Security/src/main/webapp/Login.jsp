@@ -93,7 +93,7 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form method="post" action="./Sl_login">
               <h1>Acceso de Usuarios</h1>
               <input type="hidden" name="opcion" id="opcion" value="<%=opcion%>">
               <input type="hidden" name="codVerificacion" value="<%=codigo%>">
@@ -123,7 +123,7 @@
               <div class="clearfix"></div>
 				<div class="separator"></div>
               <div>
-              	<input onclick="location.href='production/Inicio.jsp'" type="submit" class="btn btn-primary" value="Ingresar"/>
+              	<input type="submit" class="btn btn-primary" value="Ingresar"/>
               	<input type="reset" class="btn btn-danger" value="Cancelar"/>
               </div>
               <div class="separator">
