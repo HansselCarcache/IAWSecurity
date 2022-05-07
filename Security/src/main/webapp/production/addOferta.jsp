@@ -97,7 +97,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre de Oferta <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                            	<input class="form-control" id="nombre" name="nombre" placeholder="Primer Semestre 2020"  />
+                                            	<input class="form-control" required="required" id="nombre" name="nombre" placeholder="Primer Semestre 2020"  />
 										
                                             </div>
                                         </div>
@@ -163,11 +163,11 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 													<tr>
 														<th>Capacitacion</th>
 														<th>Facilitador</th>
-														<th>Fecha Inicial</th>
-														<th>Fecha Final</th>
-														<th>Hora de Inicio</th>
-														<th>Hora de Finalización</th>
+														<th>Duracion</th>
+														<th>Horario</th>
 														<th>Días de Asistencia</th>
+														<th>Visibilidad</th>
+														<th>Acciones</th>
 														
 													</tr>
 												</thead>
@@ -181,11 +181,11 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 													<tr>
 														<th>Capacitacion</th>
 														<th>Facilitador</th>
-														<th>Fecha Inicial</th>
-														<th>Fecha Final</th>
-														<th>Hora de Inicio</th>
-														<th>Hora de Finalización</th>
+														<th>Duracion</th>
+														<th>Horario</th>
 														<th>Días de Asistencia</th>
+														<th>Visibilidad</th>
+														<th>Acciones</th>
 														
 													</tr>
 												</tfoot>
@@ -276,7 +276,21 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
                 $('form .alert').remove();
         }).prop('checked', false);
         
-        
+        function initEnc(){
+        	if ( $('#nombre').is('[readonly]') ) {
+        		$('#nombre').prop("readonly",false);
+            	$('#finicio').prop("readonly",false);
+            	$('#ffinal').prop("readonly",false);
+            	$('#descr').prop("readonly",false);
+            	$('#btn_guardar').text("Guardar");
+        	}else{
+        		$('#nombre').prop("readonly",true);
+            	$('#finicio').prop("readonly",true);
+            	$('#ffinal').prop("readonly",true);
+            	$('#descr').prop("readonly",true);
+            	$('#btn_guardar').text("Reactivar");
+        	}        	
+        }
         
         function agregarFila(){
             

@@ -317,7 +317,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 																final: <span class="required">*</span>
 															</label>
 															<div class="col-md-6 col-sm-6 ">
-																<input type="date" id="ffinald" name="ffinald"
+																<input type="date" id="ffinald" name="finiciod"
 																	required="required" class="form-control ">
 															</div>
 														</div>
@@ -362,8 +362,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 														<div class="ln_solid">
 				                                            <div class="form-group">
 				                                                <div class="col-md-6 offset-md-3">
-				                                                    <button type='submit' class="btn btn-primary">Guardar</button>
-				                                                    <a href="tbl_oferta.jsp" class="btn btn-success">Regresar</a>
+				                                                    <button type='button' onclick="agregarFila()" class="btn btn-primary">Registrar apacitacion</button>
 				                                                </div>
 				                                            </div>
                                        					</div>

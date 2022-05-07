@@ -22,6 +22,7 @@
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    
     <!-- Datatables -->
     
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -66,83 +67,64 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Registros de ofertas </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
-                                            </div>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
+                                    <h2>Ingrese un Encabezado para su oferta </h2>
+                                    
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form class="" action="" method="post" data-parsley-validate>
+                                    <input type="hidden" value="1" name="opcion" id="opcion"/>
+                                    <input type="hidden" value="0" name="id" id="id"/>
+                                    <input type="hidden" value="addOferta.jsp" name="frm" id="frm"/>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="nombres" name="nombres" required="required" class="form-control ">
-											</div>
-										</div>
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre de Oferta <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input class="form-control" required="required" id="nombre" name="nombre" placeholder="Primer Semestre 2020"  />
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripcion: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="apellidos" name="apellidos" required="required" class="form-control ">
-											</div>
-										</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha Inicio <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input class="form-control" type="date" name="finicio" id="finicio" />
 										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Periodo: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="username" name="username" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha inicio: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="username" name="username" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha final: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="username" name="username" required="required" class="form-control ">
-											</div>
-										</div>
-										
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha Final <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input class="form-control" type="date" name="ffinal" id="ffinal"   />
+												<p id="txt" style="display:none;">Revise el orden de las fechas</p>
+                                            </div>
+                                        </div>
                                         
                                         
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Descripción <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input class="form-control" required="required" name="descr" id="descr" placeholder="capacitaciones ofertadas...." />
+										
+                                            </div>
+                                        </div>
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
+                                                
+                                                	<button id="btn_guardar" type="button" onclick="initEnc()" class="btn btn-primary">Guardar</button>
+                                                    <a href="tbl_oferta.jsp" class="btn btn-success">Regresar</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
-                                    
-                                    
+                                   
                                 </div>
                             </div>
+						
                         </div>
                     </div>
                     
@@ -154,15 +136,7 @@
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
-                                            </div>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
+                                        
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
@@ -172,108 +146,149 @@
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 									<div class="row">
-                        				<div class="col-md-6 col-sm-6">
+                        				<div class="col-md-12 col-sm-12">
 											<div class="field item form-group">
-                                            	<label class="col-form-label col-md-3 col-sm-3  label-align">Capacitación:<span class="required">*</span></label>
-                                            	<div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												<%
-							                      	ArrayList<Tbl_capacitacion> listaCapacitacion = new ArrayList<Tbl_capacitacion>();
-							                      	Dt_capacitacion dtu = new Dt_capacitacion();
-							                      	listaCapacitacion = dtu.listacapacitacionesActivas();
-								                 %>
-												<select class="form-control js-example-basic-single" name="capacitacion" id="capacitacion" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Tbl_capacitacion tc :listaCapacitacion){
-												  %>
-												  <option value="<%=tc.getNombre()%>"><%=tc.getNombre()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-                                            </div>
-                                        </div>
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Facilitador: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-												<%
-												ArrayList<Tbl_facilitadores> listFac = new ArrayList<Tbl_facilitadores>();
-					                      		Dt_facilitadores dtrol = new Dt_facilitadores();
-					                      		listFac = dtrol.listaFaciActivos();
-								                 %>
-								                 <select class="form-control js-example-basic-single" name="facilitador" id="facilitador" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  for(Tbl_facilitadores trol :listFac){
-												  %>
-												  <option value="<%=trol.getId_facilitador()%>"><%=trol.getNombres()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-											</div>
-                                        </div>
+															<label
+																class="col-form-label col-md-3 col-sm-3  label-align">Capacitación:<span
+																class="required">*</span></label>
+															<div class="col-md-6 col-sm-6">
+																<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
+																<%
+																ArrayList<Tbl_capacitacion> listaCapacitacion = new ArrayList<Tbl_capacitacion>();
+																Dt_capacitacion dtu = new Dt_capacitacion();
+																listaCapacitacion = dtu.listacapacitacionesActivas();
+																%>
+																<select disabled="disabled" class="form-control js-example-basic-single"
+																	name="capacitacion" id="capacitacion"
+																	required="required">
+																	<option value="">Seleccione...</option>
+																	<%
+																	for (Tbl_capacitacion tc : listaCapacitacion) {
+																	%>
+																	<option value="<%=tc.getId_capacitacion()%>"><%=tc.getNombre()%></option>
+																	<%
+																	}
+																	%>
+																</select>
+															</div>
+														</div>
+														<div class="field item form-group">
+															<label
+																class="col-form-label col-md-3 col-sm-3  label-align">Facilitador:
+																<span class="required">*</span>
+															</label>
+															<div class="col-md-6 col-sm-6">
+																<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+																<%
+																ArrayList<Tbl_facilitadores> listFac = new ArrayList<Tbl_facilitadores>();
+																Dt_facilitadores dtrol = new Dt_facilitadores();
+																listFac = dtrol.listaFaciActivos();
+																%>
+																<select disabled class="form-control js-example-basic-single"
+																	name="facilitador" id="facilitador" required="required">
+																	<option value="">Seleccione...</option>
+																	<%
+																	for (Tbl_facilitadores trol : listFac) {
+																	%>
+																	<option value="<%=trol.getId_facilitador()%>"><%=trol.getNombres()%></option>
+																	<%
+																	}
+																	%>
+																</select>
+															</div>
+														</div>
+														
+														<div class="field item form-group">
+															<label
+																class="col-form-label col-md-3 col-sm-3  label-align">Modalidad:
+																<span class="required">*</span>
+															</label>
+															<div class="col-md-6 col-sm-6">
+																<!--<input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+																<%
+																ArrayList<Tbl_modalidad> listMod = new ArrayList<Tbl_modalidad>();
+																Dt_modalidad dtmod = new Dt_modalidad();
+																listMod = dtmod.listaModalidadesActivas();
+																%>
+																<select disabled class="form-control js-example-basic-single"
+																	name="modalidad" id="modalidad" required="required">
+																	<option value="">Seleccione...</option>
+																	<%
+																	for (Tbl_modalidad mod : listMod) {
+																	%>
+																	<option value="<%=mod.getId_modalidad()%>"><%=mod.getNombre_modalidad() %></option>
+																	<%
+																	}
+																	%>
+																</select>
+															</div>
+														</div>
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha inicio: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="finicio" name="finicio" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha final: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="date" id="ffinal" name="ffinal" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Hora inicio: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="time" id="hinicio" name="hinicio" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Hora final: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="time" id="hfinal" name="hfinal" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Días: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="dias" name="dias" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Publico: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												
-												<select class="form-control js-example-basic-single" name="publico" id="publico" required="required">
-												  <option value="">Seleccione...</option>
-												
-												  <option value="1">Si</option>
-												  <option value="2">No</option>
-												 
-												</select>
-                                            </div>
-                                        </div>
+														<div class="item form-group">
+															<label
+																class="col-form-label col-md-3 col-sm-3 label-align">Fecha
+																inicio: <span class="required">*</span>
+															</label>
+															<div class="col-md-6 col-sm-6 ">
+																<input type="date" id="finiciod" name="finiciod"
+																	readonly required="required" class="form-control ">
+																<p style="display:none;" id="txtid">Confirme que se encuentre dentro del rango de encabezado</p>
+															</div>
+														</div>
+
+														<div class="item form-group">
+															<label
+																class="col-form-label col-md-3 col-sm-3 label-align">Fecha
+																final: <span class="required">*</span>
+															</label>
+															<div class="col-md-6 col-sm-6 ">
+																<input readonly type="date" id="ffinald" name="ffinald"
+																	required="required" class="form-control ">
+																<p style="display:none;" id="txtfd">Confirme que se encuentre dentro del rango de encabezado</p>
+															</div>
+														</div>
+														<div class="item form-group">
+															<label
+																class="col-form-label col-md-3 col-sm-3 label-align">Días
+																de Asistencia: <span class="required">*</span>
+															</label>
+															<div class="col-md-6 col-sm-6 ">
+																<input readonly type="text" id="dias" name="dias"
+																	required="required" class="form-control ">
+																
+															</div>
+														</div>
+														<div class="item form-group">
+															<label
+																class="col-form-label col-md-3 col-sm-3 label-align">Descripcion
+																horaria: <span class="required">*</span>
+															</label>
+															<div class="col-md-6 col-sm-6 ">
+																<textarea readonly id="horario" name="horario"
+																	required="required" class="form-control" name="message"></textarea>
+															</div>
+														</div>
+
+
+
+
+														<div class="field item form-group">
+															<label
+																class="col-form-label col-md-3 col-sm-3  label-align">Visibilidad:
+																<span class="required">*</span>
+															</label>
+															<div class="col-md-6 col-sm-6">
+																<select disabled class="form-control js-example-basic-single"
+																	name="publico" id="publico" required="required">
+																	<option value="1">Mantener Privado</option>
+																	<option value="2">Hacer Publico</option>
+																</select>
+															</div>
+														</div> 
                                         <div class="item form-group">
 											
 											<div class="col-md-6 offset-md-3">
-												<button type="button" class="btn btn-primary" onclick="agregarFila()">Registrar nuevo</button>
+												<button type="button" class="btn btn-primary" onclick="initDet()">Registrar nuevo</button>
 											</div>
 										</div>
                                         
@@ -282,63 +297,77 @@
                                         
                                         <!-- Inicio segunda tabla -->	
 							              <div class="x_panel">
-						                  <div class="x_title">
-						                    <h2>Oferta detalle</h2>
-						                    <ul class="nav navbar-right panel_toolbox">
-						                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-						                      </li>
-						                      <li class="dropdown">
-						                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-						                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						                            <a class="dropdown-item" href="#">Settings 1</a>
-						                            <a class="dropdown-item" href="#">Settings 2</a>
-						                          </div>
-						                      </li>
-						                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-						                      </li>
-						                    </ul>
-						                    <div class="clearfix"></div>
-						                  </div>
-						                  <div class="x_content">
-						                  <div class="row">
-                 
-						                    <table  id="tbl_detalle"  class="table table-striped table-bordered" style="width:100%">
-						                    
-						                    
-						                    
-						                      <thead>
-						                        <tr>
-						                          <th>Nombre Capacitación</th>
-						                          <th>Facilitador</th>
-						                          <th>Dias</th>
-						                          <th>Acciones</th>
-						                        </tr>
-						                      </thead>
-						
-						
-							                      <tbody>
-							          
-								                        <tr>
-								                        <td></td>
-								                        <td></td>
-								                        <td></td>
-								                        <td></td>
-								                        
-								                        </tr>
-							                        
-							                      </tbody>
-						                      <tfoot>
-						                        <tr>
-						                          <th>Nombre Capacitación</th>
-						                          <th>Facilitador</th>
-						                          <th>Dias</th>
-						                          <th>Acciones</th>
-						                        </tr>
-						                      </tfoot>
-						                    </table>
-							                  </div>
-							                  </div>
-							              </div>
+									<div class="x_title">
+										<h2>Escalas Registradas</h2>
+
+										<div class="clearfix"></div>
+									</div>
+									<div class="x_content">
+										<div class="row">
+											<div class="col-sm-12">
+												<div class="card-box table-responsive">
+													
+
+													<table id="tbl_detalle"
+														class="table table-striped table-bordered dataTable facultad"
+														style="width: 100%">
+
+
+														<thead>
+															<tr>
+																<th>Capacitacion</th>
+																<th>Facilitador</th>
+																<th>Duracion</th>
+																<th>Horario</th>
+																<th>Días de Asistencia</th>
+																<th>Visibilidad</th>
+																<th>Acciones</th>
+															</tr>
+														</thead>
+
+														<tbody>
+
+															
+															<tr>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+															</tr>
+															
+														</tbody>
+
+														<tfoot>
+															<tr>
+																<th>Capacitación</th>
+																<th>Facilitador</th>
+																<th>Duración</th>
+																<th>Horario</th>
+																<th>Días de Asistencia</th>
+																<th>Visibilidad</th>
+																<th>Acciones</th>
+															</tr>
+														</tfoot>
+													</table>
+
+
+													<select  name="fechasIniciales" id="fechasIniciales" size="5" ></select>
+													<select  name="fechasFinales" id="fechasFinales" size="5" ></select>
+													<select  name="capacitaciones" id="capacitaciones" size="5" ></select>
+													<select  name="facilitadores" id="facilitadores" size="5" ></select>
+													<select  name="modalidades" id="modalidades" size="5" ></select>
+													<select  name="diasAsistencia" id="diasAsistencia" size="5" ></select>
+													<select  name="horarios" id="horarios" size="5" ></select>
+													<select  name="visibilidades" id="visibilidades" size="5" ></select>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							              <!-- Final Segunda Tabla -->
 										
                                         
@@ -353,84 +382,7 @@
                                         </div>
                                         </div>
                                         </form>
-                                        <!-- Inicio de la partición del medio -->
-                                        <div class="col-md-6 col-sm-6">
-                                        <!-- Inicio Tabla Capacitaciones -->
-                                         <div class="x_panel">
-						                  <div class="x_title">
-						                    <h2>Capacitaciones registradas</h2>
-						                    <ul class="nav navbar-right panel_toolbox">
-						                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-						                      </li>
-						                      <li class="dropdown">
-						                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-						                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						                            <a class="dropdown-item" href="#">Settings 1</a>
-						                            <a class="dropdown-item" href="#">Settings 2</a>
-						                          </div>
-						                      </li>
-						                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-						                      </li>
-						                    </ul>
-						                    <div class="clearfix"></div>
-						                  </div>
-						                  <div class="x_content">
-						                  <div class="row">
-                 
-						                    <table id="tbl_capacitaciones" class="table table-striped table-bordered" style="width:100%">
-									          <%
-					                      		ArrayList<Vw_capacitacion> listaCapacitacionV = new ArrayList<Vw_capacitacion>();
-					                      		Dt_capacitacion dtcapacitacion = new Dt_capacitacion();
-					                      		listaCapacitacionV = dtcapacitacion.listarcapacitacionesV();
-			                    			  %>
-						                    
-						                      <thead>
-						                        <tr>
-						                          <th>Nombre Capacitación</th>
-						                          <th>Modalidad</th>
-						                          <th>Estado</th>
-						                        </tr>
-						                      </thead>
-						
-						
-							                      <tbody>
-							                      <%
-							                      	for(Vw_capacitacion cap :listaCapacitacionV){
-							                      		String estado= "";
-							                      		if(cap.getEstado()!=3){
-							                      			estado= "Activo";
-							                      		}
-							                      		else{
-							                      			estado = "Inactivo";
-							                      		}
-	                     						 %>
-							          
-								                        <tr>
-								                          <td><%=cap.getNombre() %></td>
-								                          <td><%=cap.getTipo_capacitacion()%></td>
-								                          <td><%=estado %></td>
-								                  
-								                        </tr>
-								                        <%
-                        									}
-                        								%>
-							                        
-							                      </tbody>
-						                      <tfoot>
-						                        <tr>
-						                          <th>Nombre Capacitación</th>
-						                          <th>Modalidad</th>
-						                          <th>Estado</th>
-						                        </tr>
-						                      </tfoot>
-						                    </table>
-							                  </div>
-							                  </div>
-							              </div>
-							              <!-- Final tabla Capacitaciones -->
-							             
-							            </div>
-							            <!-- Final de la partición del medio -->
+                                        
 							                </div>
                                         </div>
                                         
@@ -471,7 +423,205 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../vendors/validator/multifield.js"></script>
     <script src="../vendors/validator/validator.js"></script>
+    <script>
     
+    function initEnc(){
+    	if($('#nombre').val() === '' && $('#descr').val() === '' ){
+    		alert('placeholder'); 	        		  
+    	}else{
+    		if(compararFechas()){
+        		if ( $('#nombre').is('[readonly]') ) {
+            		
+        			setEncFalse();
+        			setDetTrue();
+            	}else{
+            		
+            		setEncTrue();
+            		setDetFalse();
+            	}
+        		$('#txt').css('display','none')
+        	}
+        	else{
+        		$('#finicio').css('background-color', '#FFF4E7');
+        		$('#ffinal').css('background-color', '#FFF4E7');
+        		$('#finicio').css('border-color', '#FFC075');
+        		$('#ffinal').css('border-color', '#FFC075');
+        		
+        		$('#txt').css('display','block')
+        	}
+    	}
+    	      	
+    }
+    
+    
+    function compararFechas(){
+    	if ($('#finicio').val() <= $('#ffinal').val() ) {
+			return true;
+		}else{
+			return false;
+		}
+    }
+    <%
+	ArrayList<Tbl_ofertadet> insert = new ArrayList<Tbl_ofertadet>();
+	
+	%>
+    
+    function initDet(){
+    	if($('#finicio').val() <= $('#finiciod').val() && $('#ffinal').val() >= $('#finiciod').val()){
+    		//Fecha inicio detalle en rango
+    		if($('#finiciod').val() <= $('#ffinald').val() &&  $('#ffinald').val() <= $('#ffinal').val()){
+    			//Fecha final detalle en rango
+    			$('#txtfd').css('display','none')
+    			$('#txtid').css('display','none')
+    			setDetFalse();
+    			
+    			//Aqui empieza codigo para crear arrayList<FacturaDet>()
+    			agregarFila();
+    			agregarOpciones();
+    		}else{
+    			//Preventiva por css
+    			$('#ffinald').css('background-color', '#FFF4E7');
+        		$('#ffinald').css('border-color', '#FFC075');
+        		$('#txtfd').css('display','block')
+        		
+        		$('#finiciod').css('background-color', '#FFFFFF');
+        		$('#finiciod').css('border-color', '#ced4da');
+        		$('#txtid').css('display','none')
+    		}
+    	}else{
+    		//Preventiva por css
+    		$('#finiciod').css('background-color', '#FFF4E7');
+    		$('#finiciod').css('border-color', '#FFC075');
+    		$('#txtid').css('display','block')
+    	}
+    }
+    
+    function setEncFalse(){
+    	$('#nombre').prop("readonly",false);
+    	$('#finicio').prop("readonly",false);
+    	$('#ffinal').prop("readonly",false);
+    	$('#descr').prop("readonly",false);
+    	$('#btn_guardar').text("Guardar");
+    	
+    	$('#finicio').css('background-color', '#FFFFFF');
+		$('#ffinal').css('background-color', '#FFFFFF');
+		$('#finicio').css('border-color', '#ced4da');
+		$('#ffinal').css('border-color', '#ced4da');
+    }
+    
+    function setEncTrue(){
+    	$('#nombre').prop("readonly",true);
+    	$('#finicio').prop("readonly",true);
+    	$('#ffinal').prop("readonly",true);
+    	$('#descr').prop("readonly",true);
+    	$('#btn_guardar').text("Reactivar");
+    	
+    	$('#finicio').css('background-color', '#e9ecef');
+		$('#ffinal').css('background-color', '#e9ecef');
+		$('#finicio').css('border-color', '#ced4da');
+		$('#ffinal').css('border-color', '#ced4da');
+    }
+    
+    function setDetFalse(){
+    	$('#capacitacion').prop("disabled",false);
+    	$('#facilitador').prop("disabled",false);
+    	$('#modalidad').prop("disabled",false);
+    	$('#finiciod').prop("readonly",false);
+    	$('#ffinald').prop("readonly",false);
+    	$('#dias').prop("readonly",false);
+    	$('#horario').prop("readonly",false);
+    	$('#publico').prop("disabled",false);
+    	
+    	$('#finiciod').css('background-color', '#FFFFFF');
+		$('#ffinald').css('background-color', '#FFFFFF');
+		$('#finiciod').css('border-color', '#ced4da');
+		$('#ffinald').css('border-color', '#ced4da');
+		$('#txtid').css('display','none')
+		$('#txtfd').css('display','none')
+    }
+    
+    function setDetTrue(){
+    	$('#capacitacion').prop("disabled",true);
+    	$('#facilitador').prop("disabled",true);
+    	$('#modalidad').prop("disabled",true);
+    	$('#finiciod').prop("readonly",true);
+    	$('#ffinald').prop("readonly",true);
+    	$('#dias').prop("readonly",true);
+    	$('#horario').prop("readonly",true);
+    	$('#publico').prop("disabled",true);
+    	
+    	$('#finiciod').css('background-color', '#e9ecef');
+		$('#ffinald').css('background-color', '#e9ecef');
+		$('#finiciod').css('border-color', '#ced4da');
+		$('#ffinald').css('border-color', '#ced4da');
+    }
+    
+    
+    
+    function agregarFila(){
+             	
+        var cap =  $('#capacitacion option:selected').text();
+        var fac = $('#facilitador option:selected').text();
+        var fid = $('#finiciod').val();
+        var ffd = $('#ffinald').val();
+        var hor = $('#horario').val();
+        var dias = $('#dias').val();
+        var pub = $('#publico option:selected').text();
+        
+        
+         document.getElementById("tbl_detalle").insertRow(1).innerHTML = 
+         '<td>'+ cap +'</td>'+
+         '<td>'+ fac +'</td>' + 
+         '<td> Del'+ fid +' al '+ ffd +'</td>' +
+         '<td>'+ hor +'</td>' +
+         '<td>'+ dias +'</td>' +
+         '<td>'+ pub +'</td>' +
+         '<td><button type="button" onclick="eliminarFila()" class="btn btn-sm btn-danger borrar"><i class="fas fa-trash-alt"></i></button></td>';
+    }
+    
+    
+    function agregarOpciones(){
+    	var cap =  $('#capacitacion').val();
+        var fac = $('#facilitador').val();
+        var mod = $('#modalidad').val();
+        var fid = $('#finiciod').val();
+        var ffd = $('#ffinald').val();
+        var hor = $('#horario').val();
+        var dias = $('#dias').val();
+        var pub = $('#publico').val();
+        
+        $('#fechasIniciales').prepend(new Option(fid,fid));
+        $('#fechasFinales').prepend(new Option(ffd,ffd));
+        $('#capacitaciones').prepend(new Option(cap,cap));
+        $('#facilitadores').prepend(new Option(fac,fac));
+        $('#modalidades').prepend(new Option(mod,mod));
+        $('#diasAsistencia').prepend(new Option(dias,dias));
+        $('#horarios').prepend(new Option(hor,hor));
+        $('#visibilidades').prepend(new Option(pub,pub));
+    }
+    
+    
+    
+    function eliminarFila () {
+        $(document).on('click', '.borrar', function (event) {
+            event.preventDefault();
+            eliminarOpciones($(this).closest('tr').index());
+            $(this).closest('tr').remove();
+        });
+    }
+    
+    function eliminarOpciones(id){
+    	$('#fechasIniciales option:eq('+id+')').remove();
+        $('#fechasFinales option:eq('+id+')').remove();
+        $('#capacitaciones option:eq('+id+')').remove();
+        $('#facilitadores option:eq('+id+')').remove();
+        $('#modalidades option:eq('+id+')').remove();
+        $('#diasAsistencia option:eq('+id+')').remove();
+        $('#horarios option:eq('+id+')').remove();
+        $('#visibilidades option:eq('+id+')').remove();
+    }
+    
+    </script>
     <!-- Javascript functions	-->
 	<script>
 		function hideshow(){
@@ -520,24 +670,7 @@
             $('.js-example-basic-single').select2();
         });
         
-        function agregarFila(){
-            
-            var cap =  $('#capacitacion').val();
-            var fac = $('#facilitador').val();
-            var dias = $('#dias').val();
-             document.getElementById("tbl_detalle").insertRow(1).innerHTML = 
-             '<td>'+ cap +'</td>'+
-             '<td>'+ fac +'</td>' + 
-             '<td>'+ dias +'</td>' + 
-             '<td><button type="button" onclick="eliminarFila()" class="btn btn-sm btn-danger borrar"><i class="fas fa-trash-alt"></i></button></td>';
-        }
-      
-        function eliminarFila () {
-            $(document).on('click', '.borrar', function (event) {
-                event.preventDefault();
-                $(this).closest('tr').remove();
-            });
-        }
+        
         
         $(document).ready(function() {
             $('#tbl_capacitaciones').DataTable( {
