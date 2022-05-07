@@ -36,7 +36,7 @@ CarIns=dtInsAdm.listaCaInscripcion(InsAdm.getId_inscripcion());
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Inscripciones | Visualización </title>
+    <title>Inscripciones | Editar </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -79,7 +79,7 @@ display:none;
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Ver Inscripciones</h3>
+                            <h3>Editar Inscripciones</h3>
                         </div>
 
                         
@@ -90,7 +90,7 @@ display:none;
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Vista de inscripciones </h2>
+                                    <h2>Edición de inscripciones </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -114,27 +114,52 @@ display:none;
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
-<!-- 
 
-
- -->
-										
+										<div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Seleccione el usuario: <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
+											
+												<select class="form-control js-example-basic-single" name="id_usuarios" id="usuario" required="required">
+												  <option value="0">Seleccione...</option>
+												  
+												  <%
+												  ArrayList<Tbl_user> users = new ArrayList<Tbl_user>();
+												  Dt_usuario dt = new Dt_usuario();
+												  users= dt.listaUserActivos();
+												  
+												  for(Tbl_user u : users){
+													  String correo = "";
+												  
+													  if(u.getCorreo_institucional()==null){
+														  correo = u.getCorreo_personal();
+													  }else{
+														  correo = u.getCorreo_institucional();
+													  }
+												  %>
+												  <option value="<%=u.getId_usuario()%>" data-nombre="<%=u.getNombre_real()%>" data-telefono="<%=u.getTelefono_contacto()%>" data-correo="<%=correo%>" > <%=u.getNombre_real()%></option>
+												  <%
+												  }
+												  
+												  %>
+												  
+												</select>
+                                            </div>
+                                        </div>
                                         
-										<input  type="hidden" value="<%=InsAdm.getId_usuario()%>"  id="id_usuario" name="id_usuario" required="required" class="form-control " >
+										<input  type="hidden" value="<%=InsAdm.getNombre_completo()%>"  id="nombre_completo" name="nombre_completo" required="required" class="form-control " >
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Usuario:<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input value=<%=InsAdm.getNombre_completo() %> type="text" id="nombre_completo" name="nombre_completo" required="required" class="form-control " readonly="readonly">
-											</div>
-										</div>
+										
+                                       
+											
+									
+                                       
 										
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Teléfono:<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input value=<%=InsAdm.getTelefono() %> type="text" id="telefono" name="telefono" required="required" class="form-control " readonly="readonly">
+												<input value=<%=InsAdm.getTelefono() %> type="text" id="telefono" name="telefono" required="required" class="form-control " >
 											</div>
 										</div>
 										
@@ -143,7 +168,7 @@ display:none;
 											</label>
 											<div class="col-md-6 col-sm-6 ">
 											
-												<input  value="<%=InsAdm.getCorreo()%>" type="text" id="correo" name="correo" required="required" class="form-control " readonly="readonly" >
+												<input  value="<%=InsAdm.getCorreo()%>" type="text" id="correo" name="correo" required="required" class="form-control " >
 											</div>
 										</div>
 										
@@ -152,7 +177,7 @@ display:none;
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 											
-												<select disabled class="form-control js-example-basic-single" name="oferta" id="ofertas" required="required">
+												<select class="form-control js-example-basic-single" name="oferta" id="ofertas" required="required">
 												  <option value="0">Seleccione...</option>
 												  
 												  <%
@@ -163,7 +188,7 @@ display:none;
 												  for(Vw_ofertadet u : ofertadet){
 													  
 												  %>
-												  <option disabled value="<%=u.getId_oferta_detalle()%>" data-fechai="<%=u.getFecha_inicio()%>" data-fechaf="<%=u.getFecha_final()%>" data-desch="<%=u.getDescripcion_horaria()%>" > <%=u.getCapacitacion()%> - <%=u.getFacilitador()%></option>
+												  <option value="<%=u.getId_oferta_detalle()%>" data-fechai="<%=u.getFecha_inicio()%>" data-fechaf="<%=u.getFecha_final()%>" data-desch="<%=u.getDescripcion_horaria()%>" > <%=u.getCapacitacion()%> - <%=u.getFacilitador()%></option>
 												  <%
 												  }
 												  
@@ -201,7 +226,7 @@ display:none;
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Otras dependencias:<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input value="<%=InsAdm.getOtras_dependencias() %>" type="text" id="otras_dependencias" name="otras_dependencias" required="required" class="form-control " readonly="readonly">
+												<input value="<%=InsAdm.getOtras_dependencias() %>" type="text" id="otras_dependencias" name="otras_dependencias" required="required" class="form-control " >
 											</div>
 										</div>
 
@@ -216,7 +241,7 @@ display:none;
 	
 													
 													/*
-													Solo dios sabe como funciona esto, no pregunten
+													Solo Dios sabe como funciona esto, no pregunten
 													*/
 													
 													boolean x = false; 
@@ -230,24 +255,25 @@ display:none;
 																
 																if(c.getId_carrera()==ci.getId_carrera()){
 																	%>
-																	<input disabled checked  type="checkbox" name="carreras" id="carrera <%=c.getId_carrera()%>" value="<%=c.getId_carrera() %>" class="flat"/> <%=c.getNombre_carrera() %>
+																	<input checked  type="checkbox" name="carreras" id="carrera <%=c.getId_carrera()%>" value="<%=c.getId_carrera() %>" class="flat"/> <%=c.getNombre_carrera() %>
 																	<br>
 																	<%
 																	break;
 																}else{
 																	if(i == size){
 																		%>
-																		<input disabled type="checkbox" name="carreras" id="carrera <%=c.getId_carrera()%>" value="<%=c.getId_carrera() %>" class="flat"/> <%=c.getNombre_carrera() %>
+																		<input  type="checkbox" name="carreras" id="carrera <%=c.getId_carrera()%>" value="<%=c.getId_carrera() %>" class="flat"/> <%=c.getNombre_carrera() %>
 																		<br>
 																		<%
 																	}
 																}
 																i++;
 															}
+															
 														}
 													if(CarIns.isEmpty()){
 														for(Vw_carrera_departamento u : listaCarreras){%>
-															<input disabled type="checkbox" name="carreras" id="carrera <%=u.getId_carrera()%>" value="<%=u.getId_carrera() %>" class="flat"/> <%=u.getNombre_carrera() %>
+															<input  type="checkbox" name="carreras" id="carrera <%=u.getId_carrera()%>" value="<%=u.getId_carrera() %>" class="flat"/> <%=u.getNombre_carrera() %>
 															<br>
 														<%}
 													}
@@ -262,7 +288,8 @@ display:none;
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
-                                                    <a href="tbl_inscripcion.jsp" class="btn btn-danger">Atrás</a>
+                                                    <button type='submit' class="btn btn-primary">Editar</button>
+                                                    <a href="tbl_inscripcion.jsp" class="btn btn-danger">Cancelar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -336,17 +363,21 @@ display:none;
         }).prop('checked', false);
         
         $(document).ready(function() {
-        	$('#id_usuario').val("<%=InsAdm.getId_usuario()%>");
-			 if($('#id_usuario').val() === null){
-					$('#id_usuario').val(0);
+			$('#usuario').val("<%=InsAdm.getId_usuario()%>");
+			 if($('#usuario').val() === null){
+					$('#usuario').val(0);
 				}
 			$('#ofertas').val("<%=InsAdm.getId_oferta_detalle()%>");
-           $('.js-example-basic-single').select2();
-           if($('#ofertas').val() === null){
+            $('.js-example-basic-single').select2();
+            if($('#ofertas').val() === null){
 				$('#ofertas').val(0);
 			}
+            
+           
+            
             document.getElementById(datos[i]).checked = true;
-
+            
+           
             
            
         });
@@ -386,12 +417,6 @@ function display(){
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
     
     <script type="text/javascript"> 
-    
-    function init(){
-    	
-    	
-    }
-    
     document.getElementById('usuario').onchange = function() {
     	  /* Referencia a los atributos data de la opción seleccionada */
     	  var mData = this.options[this.selectedIndex].dataset;
@@ -422,13 +447,8 @@ function display(){
         	  elDescH.value = mData.desch;
         	};
     </script>
-    
-    
-    
     <!-- iCheck -->
 	<script src="../vendors/iCheck/icheck.min.js"></script>
-
-	
 	</body>
 			
 </html>

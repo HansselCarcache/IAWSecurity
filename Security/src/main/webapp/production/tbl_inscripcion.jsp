@@ -1,7 +1,6 @@
-<%@page import="entidades.Vw_inscripcion_docente"%>
-<%@page import="entidades.Vw_rolopcion"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Vw_userrol, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Inscripciones | Inscripcion</title>
+    <title>Inscripciones | Inscripciones</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -42,131 +41,170 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
+              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Oferta</span></a>
             </div>
 
             <div class="clearfix"></div>
 
            <%@include file="diseño.jsp"%>
+           
+           
+           
 
         <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Inscripciones </h3>
-              </div>
-            </div>
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3> Gestion de Inscripciones </h3>
+						</div>
 
-            <div class="clearfix"></div>
+						<div class="title_right">
+							<div
+								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+								
+							</div>
+						</div>
+					</div>
 
-            <div class="row">
-              <div class="col-md-12 col-sm-12 ">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Inscripciones registradas</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                          </div>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                      <div class="row">
-                          <div class="col-sm-12">
-                            <div class="card-box table-responsive">
-                            <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                            <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
-                            <a href="addInscripcion.jsp">
-                            	<i class="fa fa-plus-square"></i> Nueva inscripción</a>
-                            	<br><br>
-                            </div>
-                            
+
+					<div class="clearfix"></div>
+
+
+					<div class="col-md-12 col-sm-12 ">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2> Inscripciones </h2>
+								
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="card-box table-responsive">
+											<div class="text-muted font-13 col-md-12"
+												style="text-align: right;">
+												<a href="addInscripcion.jsp"> <i class="fa fa-2x fa-plus-square" title="Nueva Inscripción"></i></a>
+												<br></br>
+											</div>
+										
+											<table id="tbl_insAdm" class="table table-striped table-bordered" style="width: 100%">
                     
-                    <table id="tbl_inscr" class="table table-striped table-bordered" style="width:100%">
                     
-                    <%
-                    ArrayList<Vw_inscripcion_docente> listaInsc = new ArrayList<Vw_inscripcion_docente>();
-              		Dt_inscripcionDocente dtinsc = new Dt_inscripcionDocente();
-              		listaInsc = dtinsc.listainscripcion();
-                      %>
+						                    <%
+						                    ArrayList<Vw_inscripcionAdmin> listaInsAdm = new ArrayList<Vw_inscripcionAdmin>();
+						                    Dt_inscripcionAdmin dtinsadm= new Dt_inscripcionAdmin();
+						                    listaInsAdm = dtinsadm.listaInsAdmActivos();
+						                    %>
+						                    
+						                    <%
+						                   
+						                    %>
+						                    
                     
                       <thead>
-                        <tr>
-                          
-                          <th>Id UCA <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Nombre completo <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Correo electronico <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Carrera <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Fecha de inscripción <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Capacitación <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Acciones <a onclick="eliminarcolumna(6)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          
-                        </tr>
+	                        <tr>
+	                          <th>ID Inscripción<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+	                          <th>Nombre Completo<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+	                          <th>Teléfono<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+	                          <th>Correo<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+	                          <th>Otras dependencias<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+	                          <th>Carrera<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>	                          
+	                          <th>Estado<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>                        
+	                          <th>Acciones <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
+	                          
+	                        </tr>
                       </thead>
 
+						
 
                       <tbody>
-                     	<%
-	                      	for(Vw_inscripcion_docente ins :listaInsc){
-	                      		
-	                      %>
-                      	
+                     
+	                     <%
+	                     for(Vw_inscripcionAdmin tInsAdm : listaInsAdm){
+	                     String estado = "";
+						 String certificado="";
+						 if (tInsAdm.getEstado() != 3) {
+						 estado = "Activa";
+						 } else {
+						 estado = "Modificada";
+						 }
+						 %>
                       
                         <tr>
-                          <td><%=ins.getId_uca()%></td>
                           
-                          <td><%=ins.getNombres()%></td>
-                          
-                          <td><%=ins.getCorreo_electronico() %></td>
-                          
-                          <td><%=ins.getNombre_carrera() %></td>
-                          
-                          <td><%=ins.getFecha_inscripcion() %></td>
-                          
-                          <td><%=ins.getNombre_oferta() %></td>
+                          <td><%=tInsAdm.getId_inscripcion() %></td>
+						  <td><%=tInsAdm.getNombre_completo() %></td>
+						  <td><%=tInsAdm.getTelefono() %></td>
+						  <td><%=tInsAdm.getCorreo()%></td>
+						  <%
+						  String dep;
+						  if(tInsAdm.getOtras_dependencias()==null){
+							  dep="<i>Sin dependencias de momento</i>";
+						  }
+						  else{
+							  dep=tInsAdm.getOtras_dependencias();
+						  }
+						  %>
+						  <td><%=dep%> </td>
+						  <td><%
+						  
+						  
+						  ArrayList<Vw_carreraInscripcion> listaCaInscripcion = new ArrayList<Vw_carreraInscripcion>();
+		                  listaCaInscripcion = dtinsadm.listaCaInscripcion(tInsAdm.getId_inscripcion());
+						  
+		                  String Carreras="";
+		                  for(Vw_carreraInscripcion c : listaCaInscripcion){
+		                	  Carreras += c.getNombre_carrera()+"<br>";
+		                  }
+						  if(Carreras==""){
+							  Carreras="<i>Sin carrera de momento</i>";
+						  }
+		                  
+						  %>
+						  <%=
+		                    
+						  Carreras
+						  %>
+						  </td>
+						  
+						  <td><%=estado%></td>
+						  
+						  
                           <td>
-                           <a href="updateInscripcion.jsp">
-                            <i class="far fa-edit" title="Editar Opciones"></i>
+                           <a href="updateInscripcionAdmin.jsp?m=<%=tInsAdm.getId_inscripcion()%>">
+                            <i class="far fa-edit" title="Modificar Inscripción"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readInscripcion.jsp">
-                            <i class="far fa-eye" title="Visualizar Opciones"></i>
+                          <a href="readInscripcion.jsp?m=<%=tInsAdm.getId_inscripcion()%>">
+                            <i class="far fa-eye" title="Visualizar Inscripcion"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteInscripcion.jsp" >
-                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
+                          <a href="deleteInscripcion.jsp?m=<%=tInsAdm.getId_inscripcion()%>" >
+                            <i class="far fa-trash-alt" title="Eliminar Inscripción"></i>
                           </a>
                           </td>
                           
                           
                         </tr>
+                        
                         <%
                         }
                         %>
                         
-                        
                       </tbody>
                       <tfoot>
-                        <tr>
-                          
-                          <th>Id UCA</th>
-                          <th>Nombre completo</th>
-                          <th>Correo electronico</th>
-                          <th>Carrera</th>
-                          <th>Fecha de inscripción</th>
-                          <th>Capacitación</th>
-                          <th>Acciones</th>
-                        </tr>
+                         <tr>
+							<th>ID Inscripción</th>
+	                          <th>Nombre Completo</th>
+	                          <th>Teléfono</th>
+	                          <th>Correo</th>
+	                          <th>Otras dependencias</th>
+	                          <th>Carrera</th>	 	                          
+	                          
+	                          <th>Estado</th>	                          
+	                          <th>Acciones </th>
+						</tr>
                       </tfoot>
                     </table>
                   </div>
@@ -181,17 +219,16 @@
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
+			<footer>
+				<div class="pull-right">
+					Gestion de Capacitacion Docente - UCA
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
       </div>
     </div>
-    </div>
-    </div>
+  </div>
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
@@ -223,110 +260,110 @@
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
     
-     <script>
-     function eliminarcolumna(id){
-    		var table = $('#tbl_inscr').DataTable();
-    	 
-    		table.column( id).visible( false );
-    	}
-    	function mostrarcolumna(){
-    		var table = $('#tbl_inscr').DataTable();
-    	    
-    	   	table.columns( [ 0, 1, 2, 3, 4, 5, 6 ] ).visible( true, true );
-    	}
+    <script>
+	function eliminarcolumna(id){
+   		var table = $('#tbl_modalidad').DataTable();
+   	 
+   		table.column( id).visible( false );
+   	}
+   	function mostrarcolumna(){
+   		var table = $('#tbl_modalidad').DataTable();
+   	    
+   	   	table.columns( [ 0, 1, 2, 3, 4] ).visible( true, true );
+   	}
+   	
+   	
+   	
+   	
+    
+    $(document).ready(function() {
     	
     	
-    	
-    	
-     
-     $(document).ready(function() {
-     	
-     	
-         $('#tbl_inscr').DataTable( {
-         	buttons: [  
-         				
- 		        		{
- 			        		extend: 'csv',
- 							text: 'CSV',
- 							title: 'Inscripciones registradas',
- 							action: function ( e, dt, node, config ) {
- 			                    //alert( 'Activated!' );
- 			                    eliminarcolumna(6);
- 			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
- 			                },
- 							exportOptions: {
- 				                columns: ':visible',
- 				            }
- 		        		},
-         				{
-         					extend: 'excel',
-         					text: 'Excel',
-         					title: 'Inscripciones registradas',
-         					action: function ( e, dt, node, config ) {
-         	                    //alert( 'Activated!' );
-         	                    eliminarcolumna(6);
-         	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
-         	                },
-         					exportOptions: {
-         		                columns: ':visible',
-         		            }
-         				},
-         				
-         				{
-         					extend: 'pdf',
-         					text: 'PDF',
-         					title: 'Inscripciones registradas',
-         					action: function ( e, dt, node, config ) {
-         	                    //alert( 'Activated!' );
-         	                    eliminarcolumna(6);
-         	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
-         	                },
-         					exportOptions: {
-         		                columns: ':visible',
-         		            }
-         				},
-       
-         				{ 
-         					extend: 'print',
-         					text: 'Imprimir',
-         					title: 'Inscripciones registradas',
-         					action: function ( e, dt, node, config ) {
-         	                    //alert( 'Activated!' );
-         	                    eliminarcolumna(6);
-         	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
-         	                },
-         					exportOptions: {
-         		                columns: ':visible',
-         		            }
-         					
-         				} 
-         			 ],
-         	keys: true,
-         	    
-         	"dom": '<Blf<rt>ip>',
-         	
-         	"lengthMenu": [ 10, 25, 50, 75, 100 ],
-         	
-         	"language": {
-                 "lengthMenu": "Mostrar _MENU_ records por pagina",
-                 "search": "Buscar:",
-                 "paginate": {
-                     "first":      "Primero",
-                     "last":       "Ultimo",
-                     "next":       "Siguiente",
-                     "previous":   "Anterior"
-                 },
-                 "emptyTable": "No existen datos en la tabla",
-                 "zeroRecords": "No existe un registro en la BD",
-                 "info": "Mostrando página _PAGE_ de _PAGES_",
-                 
-                 "infoEmpty": "No existe registro",
-                 "infoFiltered": "(filtered from _MAX_ total records)"
-             }
-         } );
-     } );
+        $('#tbl_tipocap').DataTable( {
+        	buttons: [  
+        				
+		        		{
+			        		extend: 'csv',
+							text: 'CSV',
+							title: 'Tipo de Capacitacion registradas',
+							action: function ( e, dt, node, config ) {
+			                    //alert( 'Activated!' );
+			                    eliminarcolumna(4);
+			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
+			                },
+							exportOptions: {
+				                columns: ':visible',
+				            }
+		        		},
+        				{
+        					extend: 'excel',
+        					text: 'Excel',
+        					title: 'Tipo de Capacitacion registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(4);
+        	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+        				
+        				{
+        					extend: 'pdf',
+        					text: 'PDF',
+        					title: 'Tipo de Capacitacion registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(4);
+        	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        				},
+      
+        				{ 
+        					extend: 'print',
+        					text: 'Imprimir',
+        					title: 'Tipo de Capacitacion registradas',
+        					action: function ( e, dt, node, config ) {
+        	                    //alert( 'Activated!' );
+        	                    eliminarcolumna(4);
+        	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
+        	                },
+        					exportOptions: {
+        		                columns: ':visible',
+        		            }
+        					
+        				} 
+        			 ],
+        	keys: true,
+        	    
+        	"dom": '<Blf<rt>ip>',
+        	
+        	"lengthMenu": [ 10, 25, 50, 75, 100 ],
+        	
+        	"language": {
+                "lengthMenu": "Mostrar _MENU_ records por pagina",
+                "search": "Buscar:",
+                "paginate": {
+                    "first":      "Primero",
+                    "last":       "Ultimo",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+                "emptyTable": "No existen datos en la tabla",
+                "zeroRecords": "No existe un registro en la BD",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                
+                "infoEmpty": "No existe registro",
+                "infoFiltered": "(filtered from _MAX_ total records)"
+            }
+        } );
+    } );
     
     </script>
 
-  </body>
-</html>
+    </body>
+  </html>
