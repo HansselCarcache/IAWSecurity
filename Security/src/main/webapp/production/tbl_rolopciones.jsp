@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Vw_rolopcion, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    
+    <%
+String VarMsj = "";
+
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+
+
+%>
 
 <!DOCTYPE html>
 <html>
@@ -23,6 +31,9 @@
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
+          <!-- JAlert -->
+  <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
+    
     
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -120,17 +131,17 @@
                         <tr>
                           
                           <td><%=rop.getRol() %></td>
-                          <td><%=rop.getOpcion() %></td>
+                          <td><%=rop.getnombre_opcion() %></td>
                           <td>
-                           <a href="updateRolop.jsp">
+                           <a href="updateRolop.jsp?idR=<%=rop.getId_rol_opciones()%>">
                             <i class="far fa-edit" title="Editar Opciones"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readRolop.jsp">
+                          <a href="readRolop.jsp?idR=<%=rop.getId_rol_opciones()%>">
                             <i class="far fa-eye" title="Visualizar Opciones"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteRolop.jsp" >
+                          <a href="deleteRolop.jsp?idR=<%=rop.getId_rol_opciones()%>" >
                             <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
                           </a>
                           </td>
@@ -175,6 +186,9 @@
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    
+    <!-- JAlert -->
+    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- Bootstrap -->
    <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- FastClick -->
@@ -199,6 +213,10 @@
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    
+            <!-- JAlert js -->
+	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -216,11 +234,45 @@
    	}
    	
    	
+
+    	
+    
+   	
    	
    	
     
     $(document).ready(function() {
     	
+    	
+
+    	 var mensaje = 0;
+	    mensaje = "<%=VarMsj %>";
+
+	    if(mensaje == "1")
+	      {
+	    	successAlert('Exito', 'Los datos han sido registrados exitosamente!');
+	      }
+	    if(mensaje == "2")
+	      {
+	        errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
+	      }
+	      if(mensaje == "3")
+	      {
+	        successAlert('Exito', 'Los datos han sido modificados exitosamente!');
+	      }
+	      if(mensaje == "4")
+	      {
+	    	  errorAlert('Exito', 'No se han podido modificar los datos, intente de nuevo');
+	      }
+	      if(mensaje == "5")
+	      {
+	        successAlert('Exito', 'Los datos han sido eliminados exitosamente!');
+	      }
+	      if(mensaje == "6")
+	      {
+	        errorAlert('Exito', 'No se han podido eliminar los datos, intente de nuevo');
+	      }
+   	
     	
         $('#tbl_rolopc').DataTable( {
         	buttons: [  

@@ -2,6 +2,14 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+<%
+String rol = "";
+rol = request.getParameter("idR")==null?"0":request.getParameter("idR");
+Tbl_rol tr = new Tbl_rol();
+Dt_rol dtusr = new Dt_rol();
+tr = dtusr.getRolID(Integer.parseInt(rol));
+
+%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -73,23 +81,33 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form class="" action="../Sl_Rol" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
+                                             <input type="hidden" value="2" name="opcion" id="opcion"/>
 
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Rol<span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="ID Rol">
+												<input id="idrol" value="<%=tr.getId_rol()%>" name="idrol" type="text" class="form-control" readonly="readonly" placeholder="ID Rol">
+											</div>
+										</div>
+										
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="namewartan9">Nombre <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" value="<%=tr.getNombre_rol()%>" name="name" id="name" required="required" class="form-control ">
 											</div>
 										</div>
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Descripcion <span class="required">*</span>
+											<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="desc">Descripcion <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="first-name" required="required" class="form-control ">
+												<input type="text" value="<%=tr.getDescripcion()%>" name="desc" id="desc" required="required" class="form-control ">
 											</div>
 										</div>
 
@@ -146,7 +164,12 @@
 				eye.style.display = "block";
 			}
 		}
+		
+		
 	</script>
+	
+
+      
 
     <script>
         // initialize a validator instance from the "FormValidator" constructor.

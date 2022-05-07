@@ -6,7 +6,7 @@ public class Vw_rolopcion {
 	private int id_rol;
 	private String rol;
 	private int id_opcion;
-	private String opcion;
+	private String nombre_opcion;
 	
 	//metodos
 	public int getId_rol_opciones() {
@@ -33,11 +33,11 @@ public class Vw_rolopcion {
 	public void setId_opcion(int id_opcion) {
 		this.id_opcion = id_opcion;
 	}
-	public String getOpcion() {
-		return opcion;
+	public String getnombre_opcion() {
+		return nombre_opcion;
 	}
-	public void setOpcion(String opcion) {
-		this.opcion = opcion;
+	public void setnombre_opcion(String nombre_opcion) {
+		this.nombre_opcion = nombre_opcion;
 	}
 	
 	
