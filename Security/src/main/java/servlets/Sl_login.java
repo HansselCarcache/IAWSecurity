@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import datos.Dt_usuario;
 import entidades.Vw_userrol;
+import negocio.Ng_Usuario;
 
 /**
  * Servlet implementation class Sl_login
@@ -42,6 +43,7 @@ public class Sl_login extends HttpServlet {
 		//doGet(request, response);
 		Dt_usuario dtu = new Dt_usuario();
 		Vw_userrol vwur = new Vw_userrol();
+		Ng_Usuario ngu = new Ng_Usuario();
 		String usuario = "";
 		String clave = "";
 		String codigoV = "";
@@ -57,15 +59,29 @@ public class Sl_login extends HttpServlet {
 		switch(opc) {
 		case 1:
 			try {
-				if(dtu.dtverificarLogin(usuario, clave, rolId)) {
-					vwur = dtu.dtGetVwUR(usuario);
-					HttpSession hts = request.getSession(true);
-					hts.setAttribute("acceso", vwur);
-					response.sendRedirect("production/Inicio.jsp");
+				if(ngu.accesoDocente(rolId)) {
+					if(dtu.dtverificarLogin(usuario, clave, rolId)) {
+						vwur = dtu.dtGetVwUR(usuario, rolId);
+						HttpSession hts = request.getSession(true);
+						hts.setAttribute("acceso", vwur);
+						response.sendRedirect("production/Inicio.jsp");
+					}
+					else {
+						response.sendRedirect("Login.jsp?msj=403");
+					}
+					
+				}else {
+					if(dtu.dtverificarLogin(usuario, clave, rolId)) {
+						vwur = dtu.dtGetVwUR(usuario, rolId);
+						HttpSession hts = request.getSession(true);
+						hts.setAttribute("acceso", vwur);
+						response.sendRedirect("production/InicioDocente.jsp");
+					}
+					else {
+						response.sendRedirect("Login.jsp?msj=403");
+					}
 				}
-				else {
-					response.sendRedirect("Login.jsp?msj=403");
-				}
+				
 			}
 			catch(Exception e){
 				System.out.println("Servlet: El error es: "+e.getMessage());
@@ -76,7 +92,7 @@ public class Sl_login extends HttpServlet {
 		case 2:
 			try {
 				if(dtu.dtverificarLogin2(usuario,clave, rolId, codigoV)) {
-					vwur = dtu.dtGetVwUR(usuario);
+					vwur = dtu.dtGetVwUR(usuario, rolId);
 					HttpSession hts = request.getSession(true);
 					hts.setAttribute("acceso", vwur);
 					response.sendRedirect("production/Inicio.jsp");

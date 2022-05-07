@@ -92,6 +92,7 @@ public class Sl_Usuario extends HttpServlet{
 				tus.setCorreo_personal(request.getParameter("txtcorreop"));
 				tus.setPwd(request.getParameter("txtpwd").trim());
 				
+				
 				if(iduca.equals("")) {
 					tus.setId_uca(null);
 				}else {
@@ -104,7 +105,7 @@ public class Sl_Usuario extends HttpServlet{
 					tus.setCorreo_institucional(correoi);
 				}
 				
-				tus.setUsuario_creacion(2);//2 valor temporal mientras se programa la sesion
+				tus.setUsuario_creacion(Integer.parseInt(request.getParameter("usuario_creacion")));//2 valor temporal mientras se programa la sesion
 				tus.setFecha_creacion(new java.sql.Timestamp(fechaSistema.getTime()));
 				
 				//PARA ENCRIPTAR LA PWD//	
@@ -164,7 +165,7 @@ public class Sl_Usuario extends HttpServlet{
 			tus.setCargo(request.getParameter("txtcargo"));
 			try {
 				tus.setFecha_edicion(new java.sql.Timestamp(fechaSistema.getTime()));
-				tus.setUsuario_edicion(2);//2 valor temporal mientras se programa la sesion
+				tus.setUsuario_edicion(Integer.parseInt(request.getParameter("usuario_modificacion")));//2 valor temporal mientras se programa la sesion
 				//Comprobamos que no exista el idUCA en la BD
 				if(ngu.existeIdUCA(tus.getId_uca())) {
 					
@@ -188,7 +189,7 @@ public class Sl_Usuario extends HttpServlet{
 			tus.setId_usuario(Integer.parseInt(request.getParameter("txtiduser")));
 			try {
 				tus.setFecha_eliminacion(new java.sql.Timestamp(fechaSistema.getTime()));
-				tus.setUsuario_eliminacion(2);//2 valor temporal mientras se programa la sesion
+				tus.setUsuario_eliminacion(Integer.parseInt(request.getParameter("usuario_eliminacion")));//2 valor temporal mientras se programa la sesion
 				if(dtus.eliminarUser(tus)) {
 					response.sendRedirect("production/tbl_Usuario.jsp?msj=5");
 				}
@@ -208,7 +209,7 @@ public class Sl_Usuario extends HttpServlet{
 			
 			try {
 				tus.setFecha_edicion(new java.sql.Timestamp(fechaSistema.getTime()));
-				tus.setUsuario_edicion(2);//2 valor temporal mientras se programa la sesion
+				tus.setUsuario_edicion(Integer.parseInt(request.getParameter("usuario_modificacion")));//2 valor temporal mientras se programa la sesion
 				if(dtus.restaurarUsuario(tus)) {
 					response.sendRedirect("production/tbl_Usuario.jsp?msj=8");
 				}

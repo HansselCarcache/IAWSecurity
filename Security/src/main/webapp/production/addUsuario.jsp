@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, entidades.Vw_userrol, 
+    entidades.Vw_rolopcion, datos.Dt_usuario, datos.Dt_usuario2, datos.Dt_rolopciones, java.util.*;" %>
+    
+ 
 <%
 String VarMsj = "";
 
@@ -87,6 +90,7 @@ dtu.crearJSON();
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 										<input type="hidden" value="1" name="opcion" id="opcion"/>
+										<input type="hidden" value="<%=vwur.getId_usuario() %>" name="usuario_creacion" id="usuario_creacion" />
 										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombres: <span class="required">*</span>
 											</label>

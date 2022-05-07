@@ -24,7 +24,15 @@
 	else{
 		opcion = 2;
 	}
-%>    
+%>   
+
+<%
+String VarMsj = "";
+
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+
+
+%> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -71,6 +79,8 @@
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- JAlert -->
+    <link href="vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- Animate.css -->
@@ -192,5 +202,35 @@
     <div>
       
     </div>
+    
+     <!-- jQuery -->
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+   <script src="vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <!-- JAlert js -->
+	<script src="vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="vendors/jAlert/dist/jAlert-functions.min.js"></script>
+	
+	<script>
+	 $(document).ready(function() {
+    	 var mensaje = 0;
+ 	    mensaje = "<%=VarMsj %>";
+
+ 	    if(mensaje == "401")
+ 	      {
+ 	    	errorAlert('Error', 'Su sesión ha caducado, ingrese de nuevo al sistema.');
+ 	      }
+ 	    if(mensaje == "403")
+ 	      {
+ 	        errorAlert('Error', 'Los datos de inicio de sesión son incorrectos, revise e intente  de nuevo.');
+ 	      }
+	 } );
+	</script>
   </body>
 </html>

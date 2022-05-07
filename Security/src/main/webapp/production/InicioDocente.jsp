@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Facilitadores</title>
+    <title>Inicio | Sistema de gestión docente</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -40,19 +42,19 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Oferta</span></a>
+              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
             </div>
 
             <div class="clearfix"></div>
 
-           <%@include file="diseñoDocente.jsp"%>
+            <%@include file="diseñoDocente.jsp"%>
 
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Evaluacion</h3>
+                <h3>Inicio </h3>
               </div>
 
 
@@ -60,11 +62,11 @@
 
             <div class="clearfix"></div>
 
-            <div class="row">
+            <!--  <div class="row">
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Docentes Inscritos </h2>
+                    <h2>Usuarios registrados</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -84,67 +86,21 @@
                       <div class="row">
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
-                           
+                            <div class="text-muted font-13 col-md-12" style="text-align: right;">
+                            <a href="addUsuario.jsp">
+                            	<i class="fa fa-plus-square"></i>Nuevo usuario</a>
+                            	<br><br>
+                            </div>
                             
                     
-                    <table id="tbl_Evaluacion" class="table table-striped table-bordered" style="width:100%">
                     
-                     <%
-                      		ArrayList<Vw_inscripcion> listInc = new ArrayList<Vw_inscripcion>();
-                      		Dt_inscripcion dtins = new Dt_inscripcion();
-                      		listInc = dtins.listaIns();
-                      %>
-                      
-                    
-                    
-                      <thead>
-                        <tr>
-                          <th>Usuario</th>
-                          <th>Carrera</th>
-                          <th>Oferta</th>
-                          <th>Id UCA</th>
-                          <th>Correo</th>
-                          <th>Calificacion</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      
-                                 <%
-	                      	for(Vw_inscripcion ins : listInc){
-	                      		
-	                      	
-	                      %>
-                      
-                           
-                          <tr>
-                        <td><%=ins.getUsuario() %></td>
-                        <td><%=ins.getNombre_carrera() %></td>
-                        <td><%=ins.getNombre_oferta() %></td>
-                        <td><%=ins.getId_uca() %></td>
-                        <td><%=ins.getCorreo_electronico() %></td>
-                        
-                        <td>      </td>
-                        </tr><%}%>
-                      </tbody>
-                      <tfoot>
-                        <tr>
-                          <th>Usuario</th>
-                          <th>Carrera</th>
-                          <th>Oferta</th>
-                          <th>Id UCA</th>
-                          <th>Correo</th>
-                          <th>Calificacion</th>
-  
-                        </tr>
-                      </tfoot>
-                    </table>
                   </div>
                   </div>
               </div>
             </div>
                 </div>
               </div>
-              </div>
+              </div>-->
                 </div>
               </div>
         <!-- /page content -->
@@ -189,113 +145,6 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-    
-         <script>
-   	function eliminarcolumna(id){
-   		var table = $('#tbl_Evaluacion').DataTable();
-   	 
-   		table.column( id).visible( false );
-   	}
-   	function mostrarcolumna(){
-   		var table = $('#tbl_Evaluacion').DataTable();
-   	    
-   	   	table.columns( [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ] ).visible( true, true );
-   	}
-   	
-   	
-   	
-   	
-    
-    $(document).ready(function() {
-    	
-    	
-        $('#tbl_Evaluacion').DataTable( {
-        	buttons: [  
-        				
-		        		{
-			        		extend: 'csv',
-							text: 'CSV',
-							title: 'Ofertas registradas',
-							action: function ( e, dt, node, config ) {
-			                    //alert( 'Activated!' );
-			                    eliminarcolumna(8);
-			                    $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
-			                },
-							exportOptions: {
-				                columns: ':visible',
-				            }
-		        		},
-        				{
-        					extend: 'excel',
-        					text: 'Excel',
-        					title: 'Ofertas registradas',
-        					action: function ( e, dt, node, config ) {
-        	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(8);
-        	                    $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
-        	                },
-        					exportOptions: {
-        		                columns: ':visible',
-        		            }
-        				},
-        				
-        				{
-        					extend: 'pdf',
-        					text: 'PDF',
-        					title: 'Ofertas registradas',
-        					action: function ( e, dt, node, config ) {
-        	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(8);
-        	                    $.fn.dataTable.ext.buttons.pdfHtml5.action.call(this, e, dt, node, config);
-        	                },
-        					exportOptions: {
-        		                columns: ':visible',
-        		            }
-        				},
-      
-        				{ 
-        					extend: 'print',
-        					text: 'Imprimir',
-        					title: 'Ofertas registradas',
-        					action: function ( e, dt, node, config ) {
-        	                    //alert( 'Activated!' );
-        	                    eliminarcolumna(8);
-        	                    $.fn.dataTable.ext.buttons.print.action.call(this, e, dt, node, config);
-        	                },
-        					exportOptions: {
-        		                columns: ':visible',
-        		            }
-        					
-        				} 
-        			 ],
-        	keys: true,
-        	    
-        	"dom": '<lf<rt>ip>',
-        	
-        	"lengthMenu": [ 10, 25, 50, 75, 100 ],
-        	
-        	"language": {
-                "lengthMenu": "Mostrar _MENU_ records por pagina",
-                "search": "Buscar:",
-                "paginate": {
-                    "first":      "Primero",
-                    "last":       "Ultimo",
-                    "next":       "Siguiente",
-                    "previous":   "Anterior"
-                },
-                "emptyTable": "No existen datos en la tabla",
-                "zeroRecords": "No existe un registro en la BD",
-                "info": "Mostrando página _PAGE_ de _PAGES_",
-                
-                "infoEmpty": "No existe registro",
-                "infoFiltered": "(filtered from _MAX_ total records)"
-            }
-        } );
-    } );
-    
-    
-    
-    </script>
 
   </body>
 </html>

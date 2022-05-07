@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import entidades.Tbl_user;
+import entidades.Vw_rolopcion;
 import entidades.Vw_userrol;
 
 public class Dt_usuario {
@@ -41,6 +42,8 @@ public class Dt_usuario {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	public ArrayList<Tbl_user> listaUserActivos(){
 		ArrayList<Tbl_user> listUser = new ArrayList<Tbl_user>();
@@ -569,13 +572,14 @@ public class Dt_usuario {
 		}
 		
 		// METODO PARA OBTENER UN OBJETO DE TIPO Vw_userrol //
-				public Vw_userrol dtGetVwUR(String login){
+				public Vw_userrol dtGetVwUR(String login, int rol){
 					Vw_userrol vwur = new Vw_userrol();
-					String SQL = ("SELECT * FROM gestion_docente.vw_rol_usuarios WHERE nombre_usuario=? and estado<>3");
+					String SQL = ("SELECT * FROM gestion_docente.vw_rol_usuarios WHERE nombre_usuario=? and id_rol=? and estado<>3");
 					try{
 						c = poolConexion.getConnection();
 						ps = c.prepareStatement(SQL);
 						ps.setString(1, login);
+						ps.setInt(2, rol);
 						rs = ps.executeQuery();
 						if(rs.next()){
 							vwur.setId_usuario(rs.getInt("id_usuario"));
@@ -623,7 +627,7 @@ public class Dt_usuario {
 						/////// DESENCRIPTACION DE LA PWD //////////
 						Vw_userrol vwur = new Vw_userrol();
 						Encrypt enc = new Encrypt();
-						vwur = this.dtGetVwUR(login);
+						vwur = this.dtGetVwUR(login, rol);
 						String pwdDecrypt = "";
 						String pwdEncrypt = "";
 						
@@ -682,7 +686,7 @@ public class Dt_usuario {
 						/////// DESENCRIPTACION DE LA PWD //////////
 						Vw_userrol vwur = new Vw_userrol();
 						Encrypt enc = new Encrypt();
-						vwur = this.dtGetVwUR(login);
+						vwur = this.dtGetVwUR(login, rol);
 						String pwdDecrypt = "";
 						String pwdEncrypt = "";
 						

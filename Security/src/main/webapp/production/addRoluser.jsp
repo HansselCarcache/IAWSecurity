@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Tbl_userRol, entidades.Tbl_user,entidades.Vw_userrol,
-    entidades.Tbl_rol , datos.Dt_roluser, datos.Dt_usuario, datos.Dt_rol, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_userRol,entidades.Vw_rolopcion, entidades.Tbl_user,entidades.Vw_userrol,
+    entidades.Tbl_rol , datos.Dt_roluser, datos.Dt_usuario, datos.Dt_rol,datos.Dt_rolopciones, java.util.*;" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,7 +80,7 @@
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
-
+										<input type="hidden" value="1" name="opcion" id="opcion"/>
 										<div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Usuario: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">

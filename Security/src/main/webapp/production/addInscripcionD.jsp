@@ -12,10 +12,8 @@ Vw_ofertadet ofd = new Vw_ofertadet();
 Dt_ofertadet dtofd = new Dt_ofertadet(); 
 ofd = dtofd.getDetalleId(Integer.parseInt(cap));
 //Para mientras se programa la sesión solo se pueden hacer inscripciones con el user 3
-String user= "3";
-Tbl_user tu = new Tbl_user();
-Dt_usuario dtu = new Dt_usuario();
-tu = dtu.getUserbyID(Integer.parseInt(user));
+
+
 
 %>
 
@@ -50,7 +48,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="../Login.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Oferta</span></a>
+              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Oferta</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -91,6 +89,11 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                                 </div>
                                 <div class="x_content">
                                     <form  action="../Sl_Inscripcion" method="post" >
+                                    <%
+                                    Tbl_user tu = new Tbl_user();
+                                    Dt_usuario dtu = new Dt_usuario();
+                                    tu = dtu.getUserbyID(vwur.getId_usuario());
+                                    %>
                                    
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->

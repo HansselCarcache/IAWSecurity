@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+
+
 <%
 
 String opc = "";
@@ -13,6 +15,8 @@ Dt_Opciones dtop = new Dt_Opciones();
 top = dtop.getOpcionbyID(Integer.parseInt(opc));
 
 %>
+
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->

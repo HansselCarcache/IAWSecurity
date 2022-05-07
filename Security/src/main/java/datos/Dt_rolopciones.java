@@ -45,6 +45,49 @@ public class Dt_rolopciones {
 		}
 	}
 	
+	//Metodo para visualizar las opciones de un rol
+			public ArrayList<Vw_rolopcion> listaRolOpc(int idRol){
+				ArrayList<Vw_rolopcion> listropc = new ArrayList<Vw_rolopcion>();
+				try{
+					c = poolConexion.getConnection();
+					ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_rol_opciones WHERE id_rol=?;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+					ps.setInt(1, idRol);
+					rs = ps.executeQuery();
+					while(rs.next()){
+						Vw_rolopcion vwrop = new Vw_rolopcion();
+						vwrop.setId_rol_opciones(rs.getInt("id_opcion_rol"));
+						vwrop.setId_rol(rs.getInt("id_rol"));
+						vwrop.setRol(rs.getString("nombre_rol"));
+						vwrop.setId_opcion(rs.getInt("id_opcion"));
+						vwrop.setnombre_opcion(rs.getString("nombre_opcion"));
+						listropc.add(vwrop);
+					}
+				}
+				catch (Exception e){
+					System.out.println("DATOS: ERROR EN listaRolOpc() "+ e.getMessage());
+					e.printStackTrace();
+				}
+				finally{
+					try {
+						if(rs != null){
+							rs.close();
+						}
+						if(ps != null){
+							ps.close();
+						}
+						if(c != null){
+							poolConexion.closeConnection(c);
+						}
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				return listropc;
+			}
+	
 	public ArrayList<Vw_rolopcion> listarolopcion(){
 		ArrayList<Vw_rolopcion> listRolop = new ArrayList<Vw_rolopcion>();
 		try {

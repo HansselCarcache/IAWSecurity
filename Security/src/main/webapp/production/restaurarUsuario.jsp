@@ -85,6 +85,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 										<input type="hidden" value="4" name="opcion" id="opcion"/>
+										<input type="hidden" value="<%=vwur.getId_usuario() %>" name="usuario_modificacion" id="usuario_modificacion" />
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Usuario:</label>
 											<div class="col-md-6 col-sm-6 ">

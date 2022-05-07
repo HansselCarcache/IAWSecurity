@@ -1,5 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    import="entidades.Vw_userrol, entidades.Vw_rolopcion, datos.Dt_rolopciones, java.util.*" pageEncoding="ISO-8859-1"%>
+    
+   <%
+	//INVALIDA LA CACHE DEL NAVEGADOR //
+	response.setHeader( "Pragma", "no-cache" );
+	response.setHeader( "Cache-Control", "no-store" );
+	response.setDateHeader( "Expires", 0 );
+	response.setDateHeader( "Expires", -1 );
+	
+	//DECLARACIONES
+	Vw_userrol vwur = new Vw_userrol();
+	Dt_rolopciones dtro = new Dt_rolopciones();
+	ArrayList<Vw_rolopcion> listOpc = new ArrayList<Vw_rolopcion>();
+	boolean permiso = false; //VARIABLE DE CONTROL
+	
+	//OBTENEMOS LA SESION
+	vwur = (Vw_userrol) session.getAttribute("acceso");
+	
+	if(vwur!=null){
+		//OBTENEMOS LA LISTA DE OPCIONES ASIGNADAS AL ROL
+		listOpc = dtro.listaRolOpc(vwur.getId_rol());
+		
+		//RECUPERAMOS LA URL = MI OPCION ACTUAL
+		int index = request.getRequestURL().lastIndexOf("/");
+		String miPagina = request.getRequestURL().substring(index+1);
+		
+		//VALIDAR SI EL ROL CONTIENE LA OPCION ACTUAL DENTRO DE LA MATRIZ DE OPCIONES
+		for(Vw_rolopcion vrop : listOpc){
+			if(vrop.getnombre_opcion().trim().equals(miPagina.trim())){
+				permiso = true; //ACCESO CONCEDIDO
+				break;
+			}
+		}
+	}
+	else{
+		response.sendRedirect("../Login.jsp?msj=401");
+		return;
+	}
+		
+	if(!permiso){
+		// response.sendRedirect("../login.jsp?msj=401");
+		response.sendRedirect("page_403D.jsp");
+		return;
+	}
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +59,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenido,</span>
-                <h2>Sandra Ruiz</h2>
+                <h2><%=vwur.getUsuario() %></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -84,7 +129,7 @@
                 <ul class=" navbar-right">
                   <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                      <img src="images/logoUCA.png" alt="">Sandra Ruiz
+                      <img src="images/logoUCA.png" alt=""><%=vwur.getUsuario() %>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item"  href="javascript:;"> Perfil</a>
