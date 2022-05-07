@@ -120,6 +120,8 @@ public class Sl_Usuario extends HttpServlet{
 						response.sendRedirect("production/addUsuario.jsp?msj=1");
 					}else if(ngu.existeCedula(tus.getCedula())) {
 						response.sendRedirect("production/addUsuario.jsp?msj=2");
+					}else if(ngu.existeUsuario(tus.getNombre_usuario())) {
+						response.sendRedirect("production/addUsuario.jsp?msj=3");
 					}else
 					tus2.setId_user(dtus.guardarUser(tus));
 					if(tus2.getId_user()>0) {

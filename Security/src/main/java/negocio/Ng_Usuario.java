@@ -85,6 +85,41 @@ public class Ng_Usuario {
 		return existe;
 	}
 	
+	public boolean existeUsuario(String user) {
+		boolean existe = false;
+		try {
+			c = poolConexion.getConnection();
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.usuario where nombre_usuario=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setString(1, user);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				existe = true;
+			}
+		}catch (Exception e){
+			System.out.println("DATOS ERROR existeCedula(): "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					poolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return existe;
+	}
+	
 	
 	
 }

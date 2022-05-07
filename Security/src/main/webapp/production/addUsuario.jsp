@@ -107,7 +107,7 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtusername" name="txtusername" data-validate-length-range="5,50" required="required" title="Escriba su nombre de usuario" class="form-control ">
+												<input type="text" id="txtusername" name="txtusername" onchange="comprobarJSON()"  data-validate-length-range="5,50" required="required" title="Escriba su nombre de usuario" class="form-control ">
 											</div>
 										</div>
 										
@@ -320,6 +320,7 @@ dtu.crearJSON();
         }
         
         function comprobarJSON(){
+        	var txtuser = document.getElementById("txtusername");
         	var txtiduca = document.getElementById("txtiduca");
         	var txtcorreoi = document.getElementById("txtcorreoi")
         	var txtcedula = document.getElementById("txtcedula");
@@ -338,6 +339,10 @@ dtu.crearJSON();
         			htmlString += "<p>" + ourData[i].rol+".</p>";
         			container.insertAdjacentHTML('beforebegin', htmlString);*/
         			//alert(txt.value);
+        			
+        			if(txtuser.value == ourData[i].nombre_usuario){
+        				errorAlert("Ya existe un registro con ese nombre de usuario, escriba otro diferente.");
+        			}
         			
         			if(txtiduca.value == ourData[i].id_uca){
         				errorAlert("Ya existe un registro con ese IDUCA, escriba otro diferente.");
@@ -397,6 +402,10 @@ dtu.crearJSON();
      	      {
      	        errorAlert('Error', 'Ya existe un usuario con esa cédula en el sistema, no se ha podido registrar el usuario.');
      	      }
+     	   if(mensaje == "3")
+  	      {
+  	        errorAlert('Error', 'Ya existe un usuario con esa nombre de usuario en el sistema, no se ha podido registrar el usuario.');
+  	      }
         });
     </script>
 
