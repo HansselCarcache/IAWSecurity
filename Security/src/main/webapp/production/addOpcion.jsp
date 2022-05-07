@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,13 +10,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Opción | Registrar </title>
+    <title>Opciones | Registrar </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+      	<!-- JAlert -->
+    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 
@@ -73,16 +76,25 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form action="../Sl_Opcion" method="post" novalidate>
+                                    <input type="hidden" value="1" name="opcion" id="opcion"/>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Descripcion <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align">Opción: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="first-name" required="required" class="form-control ">
+												<input type="text" id="txtnombreopcion" name="txtnombreopcion" data-validate-length-range="5,50" data-validate-words="2" placeholder="ex. tbl_ejemplo" title="Nombre de la opción" required="required" class="form-control ">
+											</div>
+										</div>
+										
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align">Descripción: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtdescripcion" name="txtdescripcion" data-validate-length-range="5,50" data-validate-words="2" placeholder="Descripción de la opción" title="Descripción de la opción" required="required" class="form-control ">
 											</div>
 										</div>
 
@@ -92,7 +104,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
                                                     <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
+                                                    <a class="btn btn-success" href="Tbl_opciones.jsp">Cancelar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -164,6 +176,7 @@
             if (this.checked)
                 $('form .alert').remove();
         }).prop('checked', false);
+        
         
         $(document).ready(function() {
             $('.js-example-basic-single').select2();

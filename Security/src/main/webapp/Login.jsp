@@ -1,99 +1,236 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_rol, datos.Dt_rol, java.util.*;"%>
+    
+    <%
+	// INVALIDA LA CACHE DEL NAVEGADOR //
+	response.setHeader( "Pragma", "no-cache" );
+	response.setHeader( "Cache-Control", "no-store" );
+	response.setDateHeader( "Expires", 0 );
+	response.setDateHeader( "Expires", -1 );
+	
+	HttpSession hts = request.getSession(false);
+	hts.removeAttribute("acceso");
+	hts.invalidate();
+	
+	/* String mensaje = request.getParameter("msj");
+ 	mensaje=mensaje==null?"":mensaje; */
+	
+ 	int opcion = 0;
+	String codigo = request.getParameter("codverif");
+	codigo=codigo==null?"":codigo;
+	if(codigo.equals("")){
+		opcion = 1;
+	}
+	else{
+		opcion = 2;
+	}
+%>   
+
+<%
+String VarMsj = "";
+
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+
+
+%> 
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
-
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px 15px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box; 
-}
-
-button {
-  background-color: #5979a9;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
-
-.imgcontainer {
-  text-align: center;
-  margin: 20px 0 10px 0;
-}
-
-img.avatar {
-  width: 5%;
-  border-radius: 50%;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
+<html lang="en">
+  <head>
+  <style>
+  .contenedor{
+  	height: 713px;
+  	display: flex;
   }
-  .cancelbtn {
-     width: 100%;
-  }
-}
-</style>
-</head>
-<body>
-
-<h2>Inicio de sesión</h2>
-
-<!-- <form action="/action_page.php" method="post">
-   <div class="imgcontainer">
-    <img src="https://img2.freepng.es/20180504/phe/kisspng-professional-computer-icons-avatar-job-5aec571ec854c8.3222584415254382388206.jpg" alt="Avatar" class="avatar">
-  </div> -->
-
-  <div class="container">
-    <label for="uname"><b>Usuario</b></label>
-    <input type="text" placeholder="Introduzca su nombre de usuario" name="uname" >
-
-    <label for="psw"><b>Contraseña</b></label>
-    <input type="password" placeholder="Introduzca su contraseña" name="psw" >
-        
- 
-   <button onclick="location.href='production/Inicio.jsp'">Iniciar Sesión</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Recordar mi contraseña
-    </label>
-  </div>
-
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">¿Olvidó su <a href="#">contraseña?</a></span>
-  </div>
   
-</form>
+  .contenedorizq{
+  	padding:80px 50px 100px 50px; 
+  	background-color: #081c44; 
+  	width: 60%;
+  }
+  
+  .contenedorder{
+  	background-color: #f8f9fa; 
+  	width: 40%;
+  }
+  
+  .imagen{
+  	border-radius:5px;
+  	border-color: #f8f9fa;
+    border-width: 5px;
+    border-style: outset;  
+  	width:100%;
+  	height:100%;
+  }
+  .titulo{
+  	font-size: 20px;
+  	text-align: center;
+  	color: white;
+  }
+  </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-</body>
+    <title>Acceso de usuarios </title>
+
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- JAlert -->
+    <link href="vendors/jAlert/dist/jAlert.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="vendors/animate.css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="build/css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body class="login">
+  <div class="contenedor">
+  <div class="contenedorizq">
+  <p class="titulo">Formación docente</p>
+  <img class="imagen" src="production/images/UCA.jpg" alt="..." >
+  </div>
+   <div class="contenedorder">
+   <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form method="post" action="./Sl_login">
+              <h1>Acceso de Usuarios</h1>
+              <input type="hidden" name="opcion" id="opcion" value="<%=opcion%>">
+              <input type="hidden" name="codVerificacion" value="<%=codigo%>">
+              <div>
+                <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario" required="required" />
+              </div>
+              <div>
+                <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Contraseña" required="required" />
+              </div>
+              <div>
+                <select class="form-control" name="rol" id="rol" required="required">
+                 <%
+                  	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
+                  	Dt_rol dtr = new Dt_rol();
+                  	listRol = dtr.listaRolActivos();
+              	%>
+                	<option value="">Seleccione...</option>
+                <% 
+				  	for(Tbl_rol trol:listRol){
+				  %>
+				  <option value="<%=trol.getId_rol()%>"><%=trol.getNombre_rol()%></option>
+				  <%
+				  	}
+				  %>
+				</select>
+              </div>
+              <div class="clearfix"></div>
+				<div class="separator"></div>
+              <div>
+              	<input type="submit" class="btn btn-primary" value="Ingresar"/>
+              	<input type="reset" class="btn btn-danger" value="Cancelar"/>
+              </div>
+              <div class="separator">
+                <p class="change_link">
+                  <a href="#signup" class="to_register"> Recuperar Contraseña </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+                
+                <div class="separator">
+                <p class="change_link">
+                  <a href="registrarNuevoDocente.jsp" class="to_register"> Registrarse en la plataforma </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <div id="register" class="animate form registration_form">
+          <section class="login_content">
+            <form>
+              <h1>Recuperar Contraseña</h1>
+              <div>
+                <input type="text" class="form-control" placeholder="Usuario" required />
+              </div>
+              <div>
+                <input type="email" class="form-control" placeholder="Email" required />
+              </div>
+              
+              <div style="margin-right: 38px; margin-left: -38px;">
+                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Enviar">
+              </div>
+
+              <div class="clearfix"></div>
+              <div class="clearfix"></div>
+              <div>
+                <a class="btn btn-secondary btn-lg btn-block" type="button" href="#signin">Regresar</a>
+              </div>
+
+              <div class="separator">
+               
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+   </div>
+  </div>
+    <div>
+      
+    </div>
+    
+     <!-- jQuery -->
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+   <script src="vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <!-- JAlert js -->
+	<script src="vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="vendors/jAlert/dist/jAlert-functions.min.js"></script>
+	
+	<script>
+	 $(document).ready(function() {
+    	 var mensaje = 0;
+ 	    mensaje = "<%=VarMsj %>";
+
+ 	    if(mensaje == "401")
+ 	      {
+ 	    	errorAlert('Error', 'Su sesión ha caducado, ingrese de nuevo al sistema.');
+ 	      }
+ 	    if(mensaje == "403")
+ 	      {
+ 	        errorAlert('Error', 'Los datos de inicio de sesión son incorrectos, revise e intente  de nuevo.');
+ 	      }
+	 } );
+	</script>
+  </body>
 </html>

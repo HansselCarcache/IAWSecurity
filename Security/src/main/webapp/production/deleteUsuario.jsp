@@ -87,7 +87,8 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
-										<input type="hidden" value="3" name="opcion" id="opcion"/>	
+										<input type="hidden" value="3" name="opcion" id="opcion"/>
+										<input type="hidden" value="<%=vwur.getId_usuario() %>" name="usuario_eliminacion" id="usuario_eliminacion" />	
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Usuario:</label>
 											<div class="col-md-6 col-sm-6 ">

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,16 +75,25 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form class="" action="../Sl_Rol" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
+	                                        <input type="hidden" value="1" name="opcion" id="opcion"/>
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Descripcion <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="namewartan9">Nombre <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="first-name" required="required" class="form-control ">
+												<input type="text" name="name" id="name" required="required" class="form-control ">
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="desc">Descripcion <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" name="desc" id="desc" required="required" class="form-control ">
 											</div>
 										</div>
 
@@ -168,6 +179,8 @@
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
+
+   		
     </script>
 
     <!-- jQuery -->

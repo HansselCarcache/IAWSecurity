@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, entidades.Vw_userrol,
+     entidades.Vw_rolopcion, datos.Dt_usuario, datos.Dt_usuario2,datos.Dt_rolopciones, java.util.*;" %>
+    
+
 <%
 String VarMsj = "";
 

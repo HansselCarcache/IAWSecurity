@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Carrera | Registrar </title>
+    <title> Carrera | Registrar </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Registrar carrera</h3>
+                            <h3>Registrar nueva carrera</h3>
                         </div>
 
                         
@@ -73,7 +73,8 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form action="../Sl_Carrera" method="post" novalidate>
+                                    <input type="hidden" value="1" name="opcion" id="opcion"/>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
@@ -82,20 +83,20 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Nombre de la Carrera <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="first-name" required="required" class="form-control ">
+												<input type="text" id="txtnombrecarrera" name="txtnombrecarrera" required="required" class="form-control ">
 											</div>
 										   </div>
 										
 										   <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Departamento: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+												
 												<%
-							                      	ArrayList<Vw_facultad_departamento> listDepa = new ArrayList<Vw_facultad_departamento>();
-							                      	Dt_departamento dtdepa = new Dt_departamento();
-							                      	listDepa = dtdepa.listaDepartamentosActivos();
+												ArrayList<Vw_facultad_departamento> listDepa = new ArrayList<Vw_facultad_departamento>();
+				                      			Dt_departamento dtdepa = new Dt_departamento();
+				                      			listDepa = dtdepa.listaDepartamentosActivos();
 								                 %>
-								                 <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" required="required">
+								                 <select class="form-control js-example-basic-single" name="cbxdepartamento" id="cbxdepartamento" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
 												  	for(Vw_facultad_departamento tdepa :listDepa){

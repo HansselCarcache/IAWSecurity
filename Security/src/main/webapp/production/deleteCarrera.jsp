@@ -2,6 +2,15 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 <!DOCTYPE html>
 <html>
+<%
+String carrera = "";
+carrera = request.getParameter("idC")==null?"0":request.getParameter("idC");
+						
+Vw_carrera_departamento tc = new Vw_carrera_departamento();
+Dt_carreras dtc = new Dt_carreras();
+tc = dtc.getCarreraDFbyID(Integer.parseInt(carrera));
+%>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -73,60 +82,38 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
-<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
-<!--                                         </p> -->
-<!--                                         <span class="section">Personal Info</span> -->
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Carrera<span class="required">*</span></label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="ID Carrera">
-											</div>
-										</div>
-										
-										  <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="descripcion" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Estado <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="estado" required="required" class="form-control ">
-											</div>
-										</div>
-										
-									    <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Departamento: <span class="required">*</span></label>
+                                     <form action="../Sl_Carrera" method="post" novalidate>
+                                     <input type="hidden" value="3" name="opcion" id="opcion"/>
+                                    	<input type="hidden" value="<%=tc.getId_carrera() %>" name="idcarrera" id="idcarrera"/>
+	
+									 <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre de la carrera:<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-												<%
-							                      	ArrayList<Vw_facultad_departamento> listDepa = new ArrayList<Vw_facultad_departamento>();
-							                      	Dt_departamento dtdepa = new Dt_departamento();
-							                      	listDepa = dtdepa.listaDepartamentosActivos();
-								                 %>
-								                 <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Vw_facultad_departamento tdepa :listDepa){
-												  %>
-												  <option value="<%=tdepa.getId_departamento()%>"><%=tdepa.getNombre_departamento()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-											</div>
+                                            	<input type="text" value="<%=tc.getNombre_carrera()%>" name="txtnombrecarrera" id="txtnombrecarrera" readonly class="form-control" placeholder="" title="Nombre carrera" required="required"/>
+                                            </div>
+                                            
                                         </div>
+                                        	 <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre del departamento:<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                            	<input type="text" value="<%=tc.getNombre_departamento()%>" name="txtnombredepartamento" readonly id="txtnombredepartamento" class="form-control" placeholder="" title="Nombre carrera" required="required"/>
+                                            </div>
+                                        </div>
+									
+									
+									
+								
+										
+								
                                         
                                         
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
-                								<button type='reset' class="btn btn-danger">Eliminar</button>
+                								 
+                                                    <button type='submit' class="btn btn-danger">Eliminar</button>
+                                                    
+                                                    <a class="btn btn-success" href="tbl_Carreras.jsp">Cancelar</a>
+                                                </div>
                   							</div>
                                         </div>
                                     </form>

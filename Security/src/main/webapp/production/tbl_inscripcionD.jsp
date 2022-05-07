@@ -1,7 +1,15 @@
 <%@page import="entidades.Vw_inscripcion_docente"%>
 <%@page import="entidades.Vw_rolopcion"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Vw_userrol, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    
+    <%
+String VarMsj = "";
+
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+
+
+%>
 
 <!DOCTYPE html>
 <html>
@@ -20,6 +28,8 @@
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+    <!-- JAlert -->
+    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
@@ -42,7 +52,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="../Login.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Oferta</span></a>
+              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Oferta</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -64,7 +74,7 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Inscripciones registradas</h2>
+                    <h2>Mis inscripciones</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -95,18 +105,18 @@
                     <%
                     ArrayList<Vw_inscripcion_docente> listaInsc = new ArrayList<Vw_inscripcion_docente>();
               		Dt_inscripcionDocente dtinsc = new Dt_inscripcionDocente();
-              		listaInsc = dtinsc.listainscripcion();
+              		listaInsc = dtinsc.listainscripcionPersonal(vwur.getId_usuario());
                       %>
                     
                       <thead>
                         <tr>
                           
-                          <th>Id UCA </th>
+                          <th>ID_inscripcion </th>
                           <th>Nombre completo </th>
-                          <th>Correo electronico </th>
-                          <th>Carrera </th>
-                          <th>Fecha de inscripción </th>
-                          <th>Capacitación </th>
+                          <th>Correo </th>
+                          <th>id_oferta_detalle </th>
+                          <th>Valor </th>
+                          <th>Desc_valor </th>
                           <th>Acciones </th>
                           
                         </tr>
@@ -121,27 +131,24 @@
                       	
                       
                         <tr>
-                          <td><%=ins.getId_uca()%></td>
+                          <td><%=ins.getId_inscripcion()%></td>
                           
-                          <td><%=ins.getNombres()%></td>
+                          <td><%=ins.getNombre_completo()%></td>
                           
-                          <td><%=ins.getCorreo_electronico() %></td>
+                          <td><%=ins.getCorreo() %></td>
                           
-                          <td><%=ins.getNombre_carrera() %></td>
+                          <td><%=ins.getId_oferta_detalle() %></td>
                           
-                          <td><%=ins.getFecha_inscripcion() %></td>
+                          <td><%=ins.getValor() %></td>
                           
-                          <td><%=ins.getNombre_oferta() %></td>
+                          <td><%=ins.getDesc_valor() %></td>
                           <td>
-                           <a href="updateInscripcion.jsp">
-                            <i class="far fa-edit" title="Editar Opciones"></i>
-                          </a>
-                          &nbsp;&nbsp;
-                          <a href="readInscripcion.jsp">
-                            <i class="far fa-eye" title="Visualizar Opciones"></i>
-                          </a> 
-                          &nbsp;&nbsp;
-                          <a href="deleteInscripcion.jsp" >
+                          
+<!--                           <a href="readInscripcion.jsp"> -->
+<!--                             <i class="far fa-eye" title="Visualizar Opciones"></i> -->
+<!--                           </a>  -->
+<!--                           &nbsp;&nbsp; -->
+                          <a href="deleteInscripcionD.jsp?idI=<%=ins.getId_inscripcion() %>" >
                             <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
                           </a>
                           </td>
@@ -157,13 +164,13 @@
                       <tfoot>
                         <tr>
                           
-                          <th>Id UCA</th>
-                          <th>Nombre completo</th>
-                          <th>Correo electronico</th>
-                          <th>Carrera</th>
-                          <th>Fecha de inscripción</th>
-                          <th>Capacitación</th>
-                          <th>Acciones</th>
+                          <th>ID_inscripcion </th>
+                          <th>Nombre completo </th>
+                          <th>Correo </th>
+                          <th>id_oferta_detalle </th>
+                          <th>Valor </th>
+                          <th>Desc_valor </th>
+                          <th>Acciones </th>
                         </tr>
                       </tfoot>
                     </table>
@@ -217,6 +224,10 @@
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    
+     <!-- JAlert js -->
+	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -238,8 +249,17 @@
     	
      
      $(document).ready(function() {
-     	
-     	
+    	 var mensaje = 0;
+  	    mensaje = "<%=VarMsj %>";
+    	 if(mensaje == "1")
+	      {
+	    	successAlert('Exito', 'Los datos han sido registrados exitosamente!');
+	      }
+	    if(mensaje == "2")
+	      {
+	        errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
+	      }
+	    
          $('#tbl_inscr').DataTable( {
          	buttons: [  
          				

@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.* , datos.* , java.util.*;" %>
 <!DOCTYPE html>
 <html>
+<%
+String roluser = "";
+roluser = request.getParameter("idR")==null?"0":request.getParameter("idR");
+
+Vw_rolopcion tusr = new Vw_rolopcion();
+Dt_rolopciones dtusr = new Dt_rolopciones();
+tusr = dtusr.getRolID(Integer.parseInt(roluser));
+%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -9,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Rol opciones | Modificar </title>
+    <title>Rol Opciones | Modificar</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +53,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Modificar opción de rol</h3>
+                            <h3>Visualizar roles de usuario</h3>
                         </div>
 
                         
@@ -56,7 +64,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Modificación de opciones de rol </h2>
+                                    <h2>Visualización de roles de usuario </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -73,33 +81,55 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                    <form class="" action="../Sl_OpcionRol" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Rol Opción<span class="required">*</span></label>
+                                            <input type="hidden" value="2" name="opcion" id="opcion"/>
+											<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Rol_opciones<span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" readonly="readonly" placeholder="ID Rol Opción">
+												<input id="idrolop" value="<%=tusr.getId_rol_opciones()%>" name="idrolop" type="text" class="form-control" readonly="readonly" placeholder="ID Rol">
 											</div>
-										</div>
-
+										    </div>
+										
 										<div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Rol: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 												<%
-							                      	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-							                      	Dt_rol dtr = new Dt_rol();
-							                      	listRol = dtr.listaRolActivos();
+							                      	ArrayList<Tbl_rol> listaRol = new ArrayList<Tbl_rol>();
+							                      	Dt_rol dtu = new Dt_rol();
+							                      	listaRol = dtu.listaRolActivos();
 								                 %>
-								                 <select class="form-control js-example-basic-single"  name="cbxRol" id="cbxRol" required="required">
+												<select class="form-control js-example-basic-single"  name="cbxRol" id="cbxRol" >
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_rol trol :listRol){
+												  	for(Tbl_rol tu :listaRol){
 												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
+												  <option value="<%=tu.getId_rol()%>"><%=tu.getNombre_rol()%></option>
+												  <%
+												  	}
+												  %>
+												</select>
+                                            </div>
+                                        </div>
+
+										<div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Opcion: <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+												<%
+							                      	ArrayList<Tbl_opcion> listOp = new ArrayList<Tbl_opcion>();
+							                      	Dt_Opciones dtr = new Dt_Opciones();
+							                      	listOp = dtr.listaOpcionesActivos();
+								                 %>
+								                 <select class="form-control js-example-basic-single"  name="cbxOpc" id="cbxOpc" >
+												  <option value="">Seleccione...</option>
+												  <% 
+												  	for(Tbl_opcion trol :listOp){
+												  %>
+												  <option value="<%=trol.getId_opcion()%>"><%=trol.getNombre_opcion()%></option>
 												  <%
 												  	}
 												  %>
@@ -107,37 +137,15 @@
 											</div>
                                         </div>
                                         
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Opciones: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												<%
-							                      	ArrayList<Tbl_opcion> listaOpcion = new ArrayList<Tbl_opcion>();
-							                      	Dt_Opciones dtopc = new Dt_Opciones();
-							                      	listaOpcion = dtopc.listaOpcionesActivos();
-								                 %>
-												<select class="form-control js-example-basic-single" name="cbxUser" id="cbxUser" required="required">
-												  <option value="">Seleccione...</option>
-												   <% 
-												  	for(Tbl_opcion tu :listaOpcion){
-												  %>
-												  <option value="<%=tu.getId_opcion()%>"><%=tu.getOpcion()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
-                                            </div>
-                                        </div>
+                                        
 
                                         
                                         
                                         <div class="ln_solid">
-                                            <div class="form-group">
-                                                <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
-                                                </div>
-                                            </div>
+                                            <div class="col-md-6 offset-md-3">
+                                                <button type='submit' class="btn btn-primary">Guardar</button>
+                								<a href="tbl_rolopciones.jsp" class="btn btn-primary">Cancelar</a>
+                  							</div>
                                         </div>
                                     </form>
                                 </div>
@@ -208,8 +216,24 @@
                 $('form .alert').remove();
         }).prop('checked', false);
         
+        function setValores()
+        {
+        	
+        	
+        	document.getElementById("cbxRol").value = '<%=tusr.getId_rol()%>'
+        	document.getElementById("cbxRol").text = '<%=tusr.getId_rol()%>'
+        	$("#cbxRol").select2()	
+        	document.getElementById("cbxOpc").value = '<%=tusr.getId_opcion()%>'
+        	document.getElementById("cbxOpc").text = '<%=tusr.getId_opcion()%>'	 
+        	$("#cbxOpc").select2()	
+ 
+        	
+        	
+        }
+        
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+            setValores();
         });
     </script>
 

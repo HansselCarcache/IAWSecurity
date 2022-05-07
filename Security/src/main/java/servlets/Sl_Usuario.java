@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import datos.Dt_enviarEmail;
 import datos.Dt_usuario;
 import datos.Dt_usuario2;
 import datos.Encrypt;
@@ -57,6 +57,7 @@ public class Sl_Usuario extends HttpServlet{
 		Dt_usuario2 dtus2 = new Dt_usuario2();
 		Encrypt dtenc = new Encrypt();
 		Ng_Usuario ngu = new Ng_Usuario();
+		Dt_enviarEmail dtem = new Dt_enviarEmail();
 		
 		//PARA GUARDAR LA FECHA Y HORA DE CREACION/ EDICION/ ELIMINACION
 		Date fechaSistema = new Date();
@@ -91,6 +92,7 @@ public class Sl_Usuario extends HttpServlet{
 				tus.setCorreo_personal(request.getParameter("txtcorreop"));
 				tus.setPwd(request.getParameter("txtpwd").trim());
 				
+				
 				if(iduca.equals("")) {
 					tus.setId_uca(null);
 				}else {
@@ -103,7 +105,7 @@ public class Sl_Usuario extends HttpServlet{
 					tus.setCorreo_institucional(correoi);
 				}
 				
-				tus.setUsuario_creacion(2);//2 valor temporal mientras se programa la sesion
+				tus.setUsuario_creacion(Integer.parseInt(request.getParameter("usuario_creacion")));//2 valor temporal mientras se programa la sesion
 				tus.setFecha_creacion(new java.sql.Timestamp(fechaSistema.getTime()));
 				
 				//PARA ENCRIPTAR LA PWD//	
@@ -119,11 +121,16 @@ public class Sl_Usuario extends HttpServlet{
 						response.sendRedirect("production/addUsuario.jsp?msj=1");
 					}else if(ngu.existeCedula(tus.getCedula())) {
 						response.sendRedirect("production/addUsuario.jsp?msj=2");
+					}else if(ngu.existeUsuario(tus.getNombre_usuario())) {
+						response.sendRedirect("production/addUsuario.jsp?msj=3");
 					}else
 					tus2.setId_user(dtus.guardarUser(tus));
 					if(tus2.getId_user()>0) {
 						if(dtus2.guardarUser(tus2)) {
-							response.sendRedirect("production/tbl_Usuario.jsp?msj=1");
+							if(dtem.enviarEmailVerificacion(tus.getNombre_usuario(), tus.getCorreo_personal(), tus.getCodVerificacion())) {
+								response.sendRedirect("production/tbl_Usuario.jsp?msj=1");
+							}
+							
 						}
 						else {
 							response.sendRedirect("production/tbl_Usuario.jsp?msj=2");
@@ -158,7 +165,7 @@ public class Sl_Usuario extends HttpServlet{
 			tus.setCargo(request.getParameter("txtcargo"));
 			try {
 				tus.setFecha_edicion(new java.sql.Timestamp(fechaSistema.getTime()));
-				tus.setUsuario_edicion(2);//2 valor temporal mientras se programa la sesion
+				tus.setUsuario_edicion(Integer.parseInt(request.getParameter("usuario_modificacion")));//2 valor temporal mientras se programa la sesion
 				//Comprobamos que no exista el idUCA en la BD
 				if(ngu.existeIdUCA(tus.getId_uca())) {
 					
@@ -182,7 +189,7 @@ public class Sl_Usuario extends HttpServlet{
 			tus.setId_usuario(Integer.parseInt(request.getParameter("txtiduser")));
 			try {
 				tus.setFecha_eliminacion(new java.sql.Timestamp(fechaSistema.getTime()));
-				tus.setUsuario_eliminacion(2);//2 valor temporal mientras se programa la sesion
+				tus.setUsuario_eliminacion(Integer.parseInt(request.getParameter("usuario_eliminacion")));//2 valor temporal mientras se programa la sesion
 				if(dtus.eliminarUser(tus)) {
 					response.sendRedirect("production/tbl_Usuario.jsp?msj=5");
 				}
@@ -202,7 +209,7 @@ public class Sl_Usuario extends HttpServlet{
 			
 			try {
 				tus.setFecha_edicion(new java.sql.Timestamp(fechaSistema.getTime()));
-				tus.setUsuario_edicion(2);//2 valor temporal mientras se programa la sesion
+				tus.setUsuario_edicion(Integer.parseInt(request.getParameter("usuario_modificacion")));//2 valor temporal mientras se programa la sesion
 				if(dtus.restaurarUsuario(tus)) {
 					response.sendRedirect("production/tbl_Usuario.jsp?msj=8");
 				}

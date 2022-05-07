@@ -4,6 +4,11 @@
 
 <!DOCTYPE html>
 <html>
+<!-- Para mandar los mensajes -->
+<% 
+	String msj="";
+	msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
+%>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -33,6 +38,17 @@
 
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
+    
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
+    
   </head>
 
   <body class="nav-md">
@@ -48,9 +64,6 @@
 
            <%@include file="diseño.jsp"%>
            
-           
-           
-
         <!-- page content -->
 			<div class="right_col" role="main">
 				<div class="">
@@ -84,7 +97,8 @@
 										<div class="card-box table-responsive">
 											<div class="text-muted font-13 col-md-12"
 												style="text-align: right;">
-												<a href="addTipoCapacitacion.jsp"> <i class="fa fa-2x fa-plus-square" title="Nuevo Tipo de Capacitación"></i></a>
+												<a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
+												<a href="addTipoCapacitacion.jsp"> <i class="fa fa-plus-square fa-2x" title="Nuevo Tipo de Capacitación"></i></a>
 												<br></br>
 											</div>
 										
@@ -97,89 +111,88 @@
 						                    listaTipCap = dttipcap.listaTipCapActivos();
 						                    %>
                     
-                      <thead>
-	                        <tr>
-	                          
-	                          <th>Id<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-	                          <th>Tipo Capacitación <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
-	                          <th>Certificación <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
-	                          <th>Descripcion <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
-	                          <th>Estado <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
-	                          <th>Acciones <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
-	                          
-	                        </tr>
-                      </thead>
+					                      <thead>
+						                        <tr>
+						                          
+						                          <th>Id<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Tipo Capacitación <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Certificación <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Descripcion <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Estado <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Acciones <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          
+						                        </tr>
+					                      </thead>
 
 						
-
-                      <tbody>
-                     
-	                     <%
-	                     for(Tbl_tipo_capacitacion tTipCal : listaTipCap){
-	                     String estado = "";
-						 String certificado="";
-						 if (tTipCal.getEstado() != 3) {
-						 estado = "Activa";
-						 } else {
-						 estado = "Modificada";
-						 }
-						 if(tTipCal.getCertificada() ==0){
-						 certificado = "No se certifica";
-						 }else{
-						 certificado = "Es certificada";
-						 }
-						 %>
-                      
-                        <tr>
-                          
-                          <td><%=tTipCal.getId_tipo_capacitacion() %></td>
-						  <td><%=tTipCal.getTipo_capacitacion() %></td>
-						  <td><%=certificado %></td>
-						  <td><%= tTipCal.getDescripcion() %></td>
-						  <td><%=estado %></td>
-						  
-                          <td>
-                           <a href="updateTipoCapacitacion.jsp?m=<%=tTipCal.getId_tipo_capacitacion()%>">
-                            <i class="far fa-edit" title="Modificar Tipo de Capacitación"></i>
-                          </a>
-                          &nbsp;&nbsp;
-                          <a href="readTipoCapacitacion.jsp?m=<%=tTipCal.getId_tipo_capacitacion()%>">
-                            <i class="far fa-eye" title="Visualizar Tipo de Capacitación"></i>
-                          </a> 
-                          &nbsp;&nbsp;
-                          <a href="deleteTipoCapacitacion.jsp?m=<%=tTipCal.getId_tipo_capacitacion()%>" >
-                            <i class="far fa-trash-alt" title="Eliminar Tipo de Capacitación"></i>
-                          </a>
-                          </td>
-                          
-                          
-                        </tr>
-                        
-                        <%
-                        }
-                        %>
-                        
-                      </tbody>
-                      <tfoot>
-                         <tr>
-							<th>Id </th>
-							<th>Tipo Capacitación </th>
-							<th>Certificada</th>
-							<th>Descripcion</th>
-							<th>Estado</th>
-							<th>Acciones</th>
-						</tr>
-                      </tfoot>
-                    </table>
-                  </div>
-                  </div>
+					                      <tbody>
+					                     
+						                     <%
+						                     for(Tbl_tipo_capacitacion tTipCal : listaTipCap){
+						                     String estado = "";
+											 String certificado="";
+											 if (tTipCal.getEstado() != 3) {
+											 estado = "Activa";
+											 } else {
+											 estado = "Modificada";
+											 }
+											 if(tTipCal.getCertificada() ==0){
+											 certificado = "No se certifica";
+											 }else{
+											 certificado = "Es certificada";
+											 }
+											 %>
+					                      
+					                        <tr>
+					                          
+					                          <td><%=tTipCal.getId_tipo_capacitacion() %></td>
+											  <td><%=tTipCal.getTipo_capacitacion() %></td>
+											  <td><%=certificado %></td>
+											  <td><%= tTipCal.getDescripcion() %></td>
+											  <td><%=estado %></td>
+											  
+					                          <td>
+					                           <a href="updateTipoCapacitacion.jsp?m=<%=tTipCal.getId_tipo_capacitacion()%>">
+					                            <i class="far fa-edit" title="Modificar Tipo de Capacitación"></i>
+					                          </a>
+					                          &nbsp;&nbsp;
+					                          <a href="readTipoCapacitacion.jsp?m=<%=tTipCal.getId_tipo_capacitacion()%>">
+					                            <i class="far fa-eye" title="Visualizar Tipo de Capacitación"></i>
+					                          </a> 
+					                          &nbsp;&nbsp;
+					                          <a href="deleteTipoCapacitacion.jsp?m=<%=tTipCal.getId_tipo_capacitacion()%>" >
+					                            <i class="far fa-trash-alt" title="Eliminar Tipo de Capacitación"></i>
+					                          </a>
+					                          </td>
+					                          
+					                          
+					                        </tr>
+					                        
+					                        <%
+					                        }
+					                        %>
+					                        
+					                      </tbody>
+					                      <tfoot>
+					                         <tr>
+												<th>Id </th>
+												<th>Tipo Capacitación </th>
+												<th>Certificada</th>
+												<th>Descripcion</th>
+												<th>Estado</th>
+												<th>Acciones</th>
+											</tr>
+					                      </tfoot>
+                    						</table>
+                  						</div>
+                  					</div>
+              					</div>
+            				</div>
+                	</div>
+              	</div>
               </div>
             </div>
-                </div>
-              </div>
-              </div>
-                </div>
-              </div>
+          </div>
         <!-- /page content -->
 
         <!-- footer content -->
@@ -224,14 +237,19 @@
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
     
+    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    
     <script>
 	function eliminarcolumna(id){
-   		var table = $('#tbl_modalidad').DataTable();
+   		var table = $('#tbl_tipocap').DataTable();
    	 
    		table.column( id).visible( false );
    	}
    	function mostrarcolumna(){
-   		var table = $('#tbl_modalidad').DataTable();
+   		var table = $('#tbl_tipocap').DataTable();
    	    
    	   	table.columns( [ 0, 1, 2, 3, 4] ).visible( true, true );
    	}
@@ -326,6 +344,83 @@
             }
         } );
     } );
+    
+    $(document).ready(function() {
+    	try {
+    		<% if(msj.equals("1")) {%>
+    		new PNotify({
+                type: 'success',
+                title: 'Ingreso exitoso',
+                text: 'Se han ingresado los datos existosamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("2")) {%>
+    		new PNotify({
+                type: 'error',
+                title: 'Ocurrio un error al agregar',
+                text: 'Vuelva a ingresar los datos e intente nuevamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("3")) {%>
+    		new PNotify({
+                type: 'success',
+                title: 'Edicion exitosa',
+                text: 'Se han editado los datos existosamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("4")) {%>
+    		new PNotify({
+                type: 'error',
+                title: 'Ocurrio un error al editar',
+                text: 'Vuelva a ingresar los datos e intente nuevamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("5")) {%>
+    		new PNotify({
+                type: 'success',
+                title: 'Eliminacion existosa',
+                text: 'Se ha eliminado la oferta de la capacitacion exitosamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("6")) {%>
+    		new PNotify({
+                type: 'error',
+                title: 'Ocurrio un error al eliminar',
+                text: 'Revise su conexion he intentelo de nuevo',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+    		  
+        	
+    		  
+    		}
+    		catch(err) {
+    		  alert(err.message)
+    		}
+        
+    });
     
     </script>
 

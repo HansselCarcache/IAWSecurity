@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, entidades.Vw_userrol, 
+    entidades.Vw_rolopcion, datos.Dt_usuario, datos.Dt_usuario2, datos.Dt_rolopciones, java.util.*;" %>
+    
+ 
 <%
 String VarMsj = "";
 
@@ -87,6 +90,7 @@ dtu.crearJSON();
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 										<input type="hidden" value="1" name="opcion" id="opcion"/>
+										<input type="hidden" value="<%=vwur.getId_usuario() %>" name="usuario_creacion" id="usuario_creacion" />
 										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombres: <span class="required">*</span>
 											</label>
@@ -107,7 +111,7 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtusername" name="txtusername" data-validate-length-range="5,50" required="required" title="Escriba su nombre de usuario" class="form-control ">
+												<input type="text" id="txtusername" name="txtusername" onchange="comprobarJSON()"  data-validate-length-range="5,50" required="required" title="Escriba su nombre de usuario" class="form-control ">
 											</div>
 										</div>
 										
@@ -320,6 +324,7 @@ dtu.crearJSON();
         }
         
         function comprobarJSON(){
+        	var txtuser = document.getElementById("txtusername");
         	var txtiduca = document.getElementById("txtiduca");
         	var txtcorreoi = document.getElementById("txtcorreoi")
         	var txtcedula = document.getElementById("txtcedula");
@@ -338,6 +343,10 @@ dtu.crearJSON();
         			htmlString += "<p>" + ourData[i].rol+".</p>";
         			container.insertAdjacentHTML('beforebegin', htmlString);*/
         			//alert(txt.value);
+        			
+        			if(txtuser.value == ourData[i].nombre_usuario){
+        				errorAlert("Ya existe un registro con ese nombre de usuario, escriba otro diferente.");
+        			}
         			
         			if(txtiduca.value == ourData[i].id_uca){
         				errorAlert("Ya existe un registro con ese IDUCA, escriba otro diferente.");
@@ -397,6 +406,10 @@ dtu.crearJSON();
      	      {
      	        errorAlert('Error', 'Ya existe un usuario con esa cédula en el sistema, no se ha podido registrar el usuario.');
      	      }
+     	   if(mensaje == "3")
+  	      {
+  	        errorAlert('Error', 'Ya existe un usuario con esa nombre de usuario en el sistema, no se ha podido registrar el usuario.');
+  	      }
         });
     </script>
 

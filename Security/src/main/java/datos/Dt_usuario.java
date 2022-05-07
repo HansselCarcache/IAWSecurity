@@ -17,6 +17,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import entidades.Tbl_user;
+import entidades.Vw_rolopcion;
+import entidades.Vw_userrol;
 
 public class Dt_usuario {
 	
@@ -40,6 +42,8 @@ public class Dt_usuario {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	public ArrayList<Tbl_user> listaUserActivos(){
 		ArrayList<Tbl_user> listUser = new ArrayList<Tbl_user>();
@@ -107,11 +111,11 @@ public class Dt_usuario {
 		ArrayList<Tbl_user> listUser = new ArrayList<Tbl_user>();
 		try {
 			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT id_uca, correo_institucional, cedula FROM gestion_docente.usuario;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps = c.prepareStatement("SELECT nombre_usuario, id_uca, correo_institucional, cedula FROM gestion_docente.usuario;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				Tbl_user user = new Tbl_user();
-				
+				user.setNombre_usuario(rs.getString("nombre_usuario"));
 				user.setId_uca(rs.getString("id_uca"));
 				user.setCorreo_institucional(rs.getString("correo_institucional"));
 				user.setCedula(rs.getString("cedula"));
@@ -160,7 +164,7 @@ public class Dt_usuario {
 	            
 				Tbl_user[] lista2 = gson.fromJson(br, Tbl_user[].class);
 	            Arrays.stream(lista2).forEach(e -> {
-	            	System.out.println("{"+"\n"+"id_uca: "+e.getId_uca()+",\n"+"correo institucional: "+ e.getCorreo_institucional()+"\n}\n");
+	            	//System.out.println("{"+"\n"+"id_uca: "+e.getId_uca()+",\n"+"correo institucional: "+ e.getCorreo_institucional()+"\n}\n");
 	            });
 
 	        } catch (IOException e) {
@@ -527,5 +531,207 @@ public class Dt_usuario {
 			}
 			return builder.toString();
 		}
+		
+		// Metodo para actualizar el estado del Usuario //Cuando es verificado
+		public boolean updEstado(String login)
+		{
+			boolean actualizado = false;
+			try{
+				c = poolConexion.getConnection();
+				this.llenaRsUsuario(c);	
+				rsUsuario.beforeFirst();
+				while(rsUsuario.next()){
+					if(rsUsuario.getString("nombre_usuario").equals(login)){
+						rsUsuario.updateInt("estado", 1);
+						rsUsuario.updateRow();
+						actualizado = true;
+						break;
+					}
+				}
+			}
+			catch (Exception e) {
+				System.err.println("ERROR updEstado() "+e.getMessage());
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rsUsuario != null){
+						rsUsuario.close();
+					}
+					if(c != null){
+						poolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			return actualizado;
+		}
+		
+		// METODO PARA OBTENER UN OBJETO DE TIPO Vw_userrol //
+				public Vw_userrol dtGetVwUR(String login, int rol){
+					Vw_userrol vwur = new Vw_userrol();
+					String SQL = ("SELECT * FROM gestion_docente.vw_rol_usuarios WHERE nombre_usuario=? and id_rol=? and estado<>3");
+					try{
+						c = poolConexion.getConnection();
+						ps = c.prepareStatement(SQL);
+						ps.setString(1, login);
+						ps.setInt(2, rol);
+						rs = ps.executeQuery();
+						if(rs.next()){
+							vwur.setId_usuario(rs.getInt("id_usuario"));
+							vwur.setNombre_usuario(rs.getString("nombre_usuario"));
+							vwur.setUsuario(rs.getString("nombre_real"));
+							vwur.setPwd(rs.getString("pwd"));
+							vwur.setKey(rs.getString("token"));
+							vwur.setCodVerificacion(rs.getString("codVerificacion"));
+							vwur.setId_rol(rs.getInt("id_rol"));
+							vwur.setRol(rs.getString("rol_descripcion"));
+							vwur.setEstado(rs.getInt("estado"));
+						}
+					}
+					catch (Exception e){
+						System.out.println("DATOS: ERROR EN dtGetVwUR "+ e.getMessage());
+						e.printStackTrace();
+					}
+					finally {
+						try {
+							if(rs != null){
+								rs.close();
+							}
+							if(ps != null){
+								ps.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				
+					return vwur;
+				}
+		
+				// METODO PARA VERIFICAR USUARIO, PWD, ROL Y CODIGO DE VERIFICACION // POR PRIMERA VEZ
+				public boolean dtverificarLogin2(String login, String clave, int rol, String codigo)
+				{
+					boolean existe=false;
+					String SQL = ("SELECT * FROM gestion_docente.vw_rol_usuarios WHERE nombre_usuario=? AND pwd=? AND id_rol=? AND codVerificacion=? AND estado=0");
+					try{
+						/////// DESENCRIPTACION DE LA PWD //////////
+						Vw_userrol vwur = new Vw_userrol();
+						Encrypt enc = new Encrypt();
+						vwur = this.dtGetVwUR(login, rol);
+						String pwdDecrypt = "";
+						String pwdEncrypt = "";
+						
+						pwdEncrypt = vwur.getPwd();
+						pwdDecrypt = enc.getAESDecrypt(pwdEncrypt,vwur.getKey());
+						/////////////////////////////////////////
+						c = poolConexion.getConnection();
+						ps = c.prepareStatement(SQL);
+						ps.setString(1, login);
+						if(clave.equals(pwdDecrypt)){
+							ps.setString(2, pwdEncrypt);
+						}
+						else {
+							ps.setString(2, clave);
+						}
+						
+						ps.setInt(3, rol);
+						ps.setString(4, codigo);
+						rs = ps.executeQuery();
+						if(rs.next()){
+							existe=true;
+							this.updEstado(login);
+						}
+					}
+					catch (Exception e){
+						System.out.println("DATOS: ERROR dtverificarLogin2() "+ e.getMessage());
+						e.printStackTrace();
+					}
+					finally {
+						try {
+							if(rs != null){
+								rs.close();
+							}
+							if(ps != null){
+								ps.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				
+					return existe;
+				}
+		
+				// METODO PARA VERIFICAR USUARIO, PWD Y ROL //
+				public boolean dtverificarLogin(String login, String clave, int rol)
+				{
+					boolean existe=false;
+					String SQL = ("SELECT * FROM gestion_docente.vw_rol_usuarios WHERE nombre_usuario=? AND pwd=? AND id_rol=? AND estado>0 AND estado<3");
+					try{
+						/////// DESENCRIPTACION DE LA PWD //////////
+						Vw_userrol vwur = new Vw_userrol();
+						Encrypt enc = new Encrypt();
+						vwur = this.dtGetVwUR(login, rol);
+						String pwdDecrypt = "";
+						String pwdEncrypt = "";
+						
+						pwdEncrypt = vwur.getPwd();
+						pwdDecrypt = enc.getAESDecrypt(pwdEncrypt,vwur.getKey());
+						/////////////////////////////////////////
+						c = poolConexion.getConnection();
+						ps = c.prepareStatement(SQL);
+						ps.setString(1, login);
+						
+						if(clave.equals(pwdDecrypt)){
+							ps.setString(2, pwdEncrypt);
+						}
+						else {
+							ps.setString(2, clave);
+						}
+						ps.setInt(3, rol);
+						rs = ps.executeQuery();
+						if(rs.next()){
+							existe=true;
+						}
+					}
+					catch (Exception e){
+						System.out.println("DATOS: ERROR dtverificarLogin() "+ e.getMessage());
+						e.printStackTrace();
+					}
+					finally {
+						try {
+							if(rs != null){
+								rs.close();
+							}
+							if(ps != null){
+								ps.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				
+					return existe;
+				}
 	
 }

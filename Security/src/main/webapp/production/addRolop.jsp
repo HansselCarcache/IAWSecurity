@@ -73,12 +73,13 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="" method="post" novalidate>
+                                       <form action="../Sl_OpcionRol" method="post" novalidate>
+                                  
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 
-										
+										     <input type="hidden" value="1" name="opcion" id="opcion"/>
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Rol: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
@@ -93,7 +94,7 @@
 												  <% 
 												  	for(Tbl_rol trol :listRol){
 												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getRol()%></option>
+												  <option value="<%=trol.getId_rol()%>"><%=trol.getNombre_rol()%></option>
 												  <%
 												  	}
 												  %>
@@ -110,12 +111,12 @@
 							                      	Dt_Opciones dtopc = new Dt_Opciones();
 							                      	listaOpcion = dtopc.listaOpcionesActivos();
 								                 %>
-												<select class="form-control js-example-basic-single" name="cbxUser" id="cbxUser" required="required">
+												<select class="form-control js-example-basic-single" name="cbxOpc" id="cbxOpc" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
 												  	for(Tbl_opcion tu :listaOpcion){
 												  %>
-												  <option value="<%=tu.getId_opcion()%>"><%=tu.getOpcion()%></option>
+												  <option value="<%=tu.getId_opcion()%>"><%=tu.getNombre_opcion()%></option>
 												  <%
 												  	}
 												  %>

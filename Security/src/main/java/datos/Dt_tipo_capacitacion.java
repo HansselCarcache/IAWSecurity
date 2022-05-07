@@ -111,9 +111,9 @@ public class Dt_tipo_capacitacion {
 	
 	
 	public Tbl_tipo_capacitacion getTipoCapacitacionbyID(int id) {
-		Tbl_tipo_capacitacion tipcap = new Tbl_tipo_capacitacion();
+		Tbl_tipo_capacitacion tipcap = new Tbl_tipo_capacitacion(); //instanciamos a tipo capacitacion
 		try {
-			c = poolConexion.getConnection();
+			c = poolConexion.getConnection(); //obtenemos una PoolConexion del pool
 			ps = c.prepareStatement("SELECT * FROM gestion_docente.tipo_capacitacion where id_tipo_capacitacion = " +id, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			//ps.setInt(1, idTC);
 			rs = ps.executeQuery();
@@ -176,7 +176,7 @@ public class Dt_tipo_capacitacion {
 			}
 			catch (Exception e)
 			{
-				System.err.println("ERROR AL updateTipoCapacitacion() "+e.getMessage());
+				System.err.println("ERROR AL ACTUALIZAR TIPO CAPACITACION() "+e.getMessage());
 				e.printStackTrace();
 			}
 			finally
@@ -222,7 +222,7 @@ public class Dt_tipo_capacitacion {
 				}
 			}
 			catch (Exception e){
-				System.err.println("ERROR AL deleteTipoCapacitacion() "+e.getMessage());
+				System.err.println("ERROR AL Eliminar TIPO CAPACITACION() "+e.getMessage());
 				e.printStackTrace();
 			}
 			finally{

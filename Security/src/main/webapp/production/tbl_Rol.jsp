@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.Tbl_rol, datos.*, java.util.*;"%>
+    
+    <%
+String VarMsj = "";
+
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+
+
+%>
 
 <!DOCTYPE html>
 <html>
@@ -20,6 +28,8 @@
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+      <!-- JAlert -->
+    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
@@ -135,15 +145,15 @@
                           <td><%=trol.getDescripcion() %></td>
                           <td><%=estado %></td>
                           <td>
-                           <a href="updateRol.jsp">
+                           <a href="updateRol.jsp?idR=<%=trol.getId_rol()%>">
                             <i class="far fa-edit" title="Editar Opciones"></i>
                           </a>
                           &nbsp;&nbsp;
-                          <a href="readRol.jsp">
+                          <a href="readRol.jsp?idR=<%=trol.getId_rol()%>">
                             <i class="far fa-eye" title="Visualizar Opciones"></i>
                           </a> 
                           &nbsp;&nbsp;
-                          <a href="deleteRol.jsp" >
+                          <a href="deleteRol.jsp?idR=<%=trol.getId_rol()%>" >
                             <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
                           </a>
                           </td>
@@ -219,6 +229,10 @@
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    
+        <!-- JAlert js -->
+	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -239,6 +253,34 @@
    	
     
     $(document).ready(function() {
+    	
+     	 var mensaje = 0;
+ 	    mensaje = "<%=VarMsj %>";
+
+ 	    if(mensaje == "1")
+ 	      {
+ 	    	successAlert('Exito', 'Los datos han sido registrados exitosamente!');
+ 	      }
+ 	    if(mensaje == "2")
+ 	      {
+ 	        errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
+ 	      }
+ 	      if(mensaje == "3")
+ 	      {
+ 	        successAlert('Exito', 'Los datos han sido modificados exitosamente!');
+ 	      }
+ 	      if(mensaje == "4")
+ 	      {
+ 	    	  errorAlert('Exito', 'No se han podido modificar los datos, intente de nuevo');
+ 	      }
+ 	      if(mensaje == "5")
+ 	      {
+ 	        successAlert('Exito', 'Los datos han sido eliminados exitosamente!');
+ 	      }
+ 	      if(mensaje == "6")
+ 	      {
+ 	        errorAlert('Exito', 'No se han podido eliminar los datos, intente de nuevo');
+ 	      }
     	
     	
         $('#tbl_rol').DataTable( {

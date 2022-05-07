@@ -48,7 +48,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="../Login.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Oferta</span></a>
+              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Oferta</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -244,6 +244,10 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
  	      {
  	        errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
  	      }
+ 	   if(mensaje == "3")
+	      {
+	        errorAlert('Error', 'Usted ya está inscrito en este curso.');
+	      }
     	
         $('#tbl_detalle').DataTable( {
         	buttons: [  
