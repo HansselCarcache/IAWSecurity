@@ -101,6 +101,7 @@ public class Sl_Docente extends HttpServlet{
 		
 		tus.setUsuario_creacion(2);//2 valor temporal mientras se programa la sesion
 		tus.setFecha_creacion(new java.sql.Timestamp(fechaSistema.getTime()));
+		tus.setEstado(1);
 				
 		//PARA ENCRIPTAR LA PWD//	
 		key=dtenc.generarLLave();
@@ -124,6 +125,8 @@ public class Sl_Docente extends HttpServlet{
 				tur.setId_rol(2);
 				if(dtus2.guardarUser(tus2) && dtur.guardarRoluser(tur)) {
 					if(dtem.enviarEmailVerificacion(tus.getNombre_usuario(), tus.getCorreo_personal(), tus.getCodVerificacion())) {
+						tus.setId_usuario(tus2.getId_user());
+						dtus.modificarDocente(tus);
 						response.sendRedirect("docenteRegistrado.jsp");
 					}
 					

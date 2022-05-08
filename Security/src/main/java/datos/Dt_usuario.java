@@ -733,5 +733,42 @@ public class Dt_usuario {
 				
 					return existe;
 				}
+				
+	//metodo para modificar usuario de creacion a ser el mismo en el auto registro de docente - Jessica
+	public void modificarDocente(Tbl_user tus) {
+		try {
+			c = poolConexion.getConnection();
+			this.llenaRsUsuario(c);
+			rsUsuario.beforeFirst();
+			while(rsUsuario.next())
+			{
+				if(rsUsuario.getInt(1)==tus.getId_usuario())
+				{
+					rsUsuario.updateInt("usuario_creacion", tus.getId_usuario());
+					rsUsuario.updateRow();
+					break;
+				}
+			}
+		}catch (Exception e)
+		{
+			System.err.println("ERROR AL modificarDocente() "+e.getMessage());
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				if(rsUsuario != null){
+					rsUsuario.close();
+				}
+				if(c != null){
+					poolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 	
 }
