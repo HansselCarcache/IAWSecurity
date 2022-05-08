@@ -91,7 +91,7 @@ public class Sl_OfertaEnc extends HttpServlet {
 				switch(opc) {
 				case 1:
 					tf.setFecha_creacion(new java.sql.Timestamp(fechaSistema.getTime()));
-					tf.setUsuario_creacion(1);
+					tf.setUsuario_creacion(Integer.parseInt(request.getParameter("iduser")));
 					try {
 						id = dtf.addOferta(tf);
 
@@ -111,7 +111,7 @@ public class Sl_OfertaEnc extends HttpServlet {
 				case 2:
 					
 					tf.setFecha_modificacion(new java.sql.Timestamp(fechaSistema.getTime()));
-					tf.setUsuario_modificacion(1);
+					tf.setUsuario_modificacion(Integer.parseInt(request.getParameter("iduser")));
 					try {
 						if (dtf.editOferta(tf)) {
 							// Si
@@ -128,7 +128,7 @@ public class Sl_OfertaEnc extends HttpServlet {
 					break;
 				case 3:
 					tf.setFecha_eliminacion(new java.sql.Timestamp(fechaSistema.getTime()));
-					tf.setUsuario_eliminacion(1);
+					tf.setUsuario_eliminacion(Integer.parseInt(request.getParameter("iduser")));
 					try {
 						if (dtf.deleteOferta(tf)) {
 							// Si
