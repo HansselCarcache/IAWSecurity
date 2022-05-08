@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Escala de evaluaci髇 | Evaluaci髇</title>
+    <title>Escala de evaluaci贸n | Evaluaci贸n</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -40,19 +40,19 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gesti髇 Docente</span></a>
+              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gesti贸n Docente</span></a>
             </div>
 
             <div class="clearfix"></div>
 
-           <%@include file="dise駉.jsp"%>
+           <%@include file="dise帽o.jsp"%>
 
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Escala de evaluaci髇</h3>
+                <h3>Escala de evaluaci贸n</h3>
               </div>
 
 
@@ -64,7 +64,7 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Escalas de evaluaci髇 registradas</h2>
+                    <h2>Escalas de evaluaci贸n registradas</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -87,7 +87,7 @@
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
                             <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
                             <a href="addEscalaCalificacion.jsp">
-                            	<i class="fa fa-plus-square"></i> Nueva Escala de evaluaci髇</a>
+                            	<i class="fa fa-plus-square"></i> Nueva Escala de evaluaci贸n</a>
                             	<br><br>
                             </div>
                             
@@ -104,7 +104,7 @@
                         <tr>
                           <th>ID Escala <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Tipo de Calificacion <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
-                          <th>Descripci髇 <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+                          <th>Descripci贸n <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Estado <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           <th>Acciones <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
                           
@@ -133,15 +133,15 @@
                           <td><%=estado %></td>
                           <td>
                            <a href="updateEscalaCalificacion.jsp?m=<%=tecl.getId_escala() %>">
-                            <i class="far fa-edit" title="Editar Opciones"></i>
+                            <i class="far fa-edit fa-2x" title="Editar Opciones"></i>
                           </a>
                           &nbsp;&nbsp;
                           <a href="readEscalaCalificacion.jsp?m=<%=tecl.getId_escala() %>">
-                            <i class="far fa-eye" title="Visualizar Opciones"></i>
+                            <i class="far fa-eye fa-2x" title="Visualizar Opciones"></i>
                           </a> 
                           &nbsp;&nbsp;
                           <a href="deleteEscalaCalificacion.jsp?m=<%=tecl.getId_escala() %>">
-                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
+                            <i class="far fa-trash-alt fa-2x" title="Eliminar Opciones"></i>
                           </a>
                           </td>
                           
@@ -241,7 +241,7 @@
 		        		{
 			        		extend: 'csv',
 							text: 'CSV',
-							title: 'Escalas de calificaci髇 registradas',
+							title: 'Escalas de calificaci贸n registradas',
 							action: function ( e, dt, node, config ) {
 			                    //alert( 'Activated!' );
 			                    eliminarcolumna(4);
@@ -254,7 +254,7 @@
         				{
         					extend: 'excel',
         					text: 'Excel',
-        					title: 'Escalas de calificaci髇 registradas',
+        					title: 'Escalas de calificaci贸n registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
         	                    eliminarcolumna(4);
@@ -268,7 +268,7 @@
         				{
         					extend: 'pdf',
         					text: 'PDF',
-        					title: 'Escalas de calificaci髇 registradas',
+        					title: 'Escalas de calificaci贸n registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
         	                    eliminarcolumna(4);
@@ -282,7 +282,7 @@
         				{ 
         					extend: 'print',
         					text: 'Imprimir',
-        					title: 'Escalas de calificaci髇 registradas',
+        					title: 'Escalas de calificaci贸n registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
         	                    eliminarcolumna(4);
@@ -311,7 +311,7 @@
                 },
                 "emptyTable": "No existen datos en la tabla",
                 "zeroRecords": "No existe un registro en la BD",
-                "info": "Mostrando p醙ina _PAGE_ de _PAGES_",
+                "info": "Mostrando p谩gina _PAGE_ de _PAGES_",
                 
                 "infoEmpty": "No existe registro",
                 "infoFiltered": "(filtered from _MAX_ total records)"
