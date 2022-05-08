@@ -39,7 +39,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Escala Evaluación | Modificar </title>
+    <title>Escala EvaluaciÃ³n | Modificar </title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -73,12 +73,12 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa-solid fa-book"></i> <span>Gestión Docente</span></a>
+                        <a href="index.html" class="site_title"><i class="fa-solid fa-book"></i> <span>GestiÃ³n Docente</span></a>
                     </div>
 
                     <div class="clearfix"></div>
 
-                    <%@include file="diseño.jsp"%>
+                    <%@include file="diseÃ±o.jsp"%>
 
             <!-- page content -->
             <div class="right_col" role="main">
@@ -137,7 +137,18 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 												<input type="text" id="desc" name="desc"  value="<%=escala.getDescripcion() %>"class="form-control " readonly>
 											</div>
 										</div>
-										
+										<div class="ln_solid">
+													<div class="form-group">
+
+														<a href="tbl_escalaCalificacion.jsp"
+															title="Regresar a registros"> <i
+															class="fa fa-arrow-circle-o-left fa-2x"> </i> Regresar a
+															registros
+														</a>
+													</div>
+												</div>
+												
+                                 
 										
                                         
                                         
@@ -340,7 +351,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 					},
 					"emptyTable" : "No existen datos en la tabla",
 					"zeroRecords" : "No existe un registro en la BD",
-					"info" : "Mostrando página _PAGE_ de _PAGES_",
+					"info" : "Mostrando pÃ¡gina _PAGE_ de _PAGES_",
 
 					"infoEmpty" : "No existe registro",
 					"infoFiltered" : "(filtered from _MAX_ total records)"
@@ -365,7 +376,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 					},
 					"emptyTable" : "No existen datos en la tabla",
 					"zeroRecords" : "No existe un registro en la BD",
-					"info" : "Mostrando página _PAGE_ de _PAGES_",
+					"info" : "Mostrando pÃ¡gina _PAGE_ de _PAGES_",
 
 					"infoEmpty" : "No existe registro",
 					"infoFiltered" : "(filtered from _MAX_ total records)"
