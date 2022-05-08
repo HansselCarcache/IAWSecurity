@@ -105,6 +105,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 											<form id="frm_oferta" name="frm_oferta" class="" action="../Sl_OfertaEnc" method="post" novalidate>
 												<input type="hidden" value="3" id="opcion" name="opcion"/>
 												<input type="hidden" value="<%=of %>" id="id" name="id"/>
+												<input type="hidden" value="<%=vwur.getId_usuario() %>" name="iduser" id="iduser"/>
 												<div class="field item form-group">
 													<label
 														class="col-form-label col-md-3 col-sm-3  label-align">Nombre

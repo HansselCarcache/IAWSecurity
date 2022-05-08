@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,7 +87,9 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
+                                
                                     <form class="" action="../Sl_OfertaEnc" method="post" novalidate>
+                                    <input type="hidden" value="<%=vwur.getId_usuario() %>" name="iduser" id="iduser"/>
                                     <input type="hidden" value="1" name="opcion" id="opcion"/>
                                     <input type="hidden" value="0" name="id" id="id"/>
                                     <input type="hidden" value="addOferta.jsp" name="frm" id="frm"/>

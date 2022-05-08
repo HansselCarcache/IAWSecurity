@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*" %>
 <!DOCTYPE html>
 <html>
 <%
@@ -192,6 +192,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 												<div class="row">
 													<div class="col-md-12 col-sm-12">
 												<form class="" action="../Sl_OfertaDet" method="post" novalidate>
+													<input type="hidden" value="<%=vwur.getId_usuario() %>" name="iduser" id="iduser"/>
 													<input type="hidden" value="<%=oferta.getFecha_inicial() %>" name="finicio" id="finicio"/>
 												   	<input type="hidden" value="<%=oferta.getFecha_final() %>"  name="ffinal" id="ffinal" />
 												   	<input type="hidden" value="1" name="opcion" id="opcion"/>
