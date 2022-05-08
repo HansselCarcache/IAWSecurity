@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.Tbl_user, entidades.Vw_userrol, 
-    entidades.Vw_rolopcion, datos.Dt_usuario, datos.Dt_usuario2, datos.Dt_rolopciones, java.util.*;" %>
+    entidades.Vw_rolopcion, datos.Dt_usuario, datos.Dt_usuario2, datos.Dt_rolopciones, java.util.*" %>
     
  
 <%
@@ -8,7 +8,7 @@ String VarMsj = "";
 
 VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 Dt_usuario dtu = new Dt_usuario();
-dtu.crearJSON();
+// dtu.crearJSON();
 
 %>
 <!DOCTYPE html>
@@ -95,7 +95,7 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombres: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtnombres" name="txtnombres" data-validate-length-range="5,50" data-validate-words="2" placeholder="ex. Nombre1 Nombre2" title="Primer y Segundo Nombre" required="required" class="form-control ">
+												<input type="text" id="txtnombres" name="txtnombres"   placeholder="ex. Nombre1 Nombre2" title="Primer y Segundo Nombre" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -103,7 +103,7 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Apellidos: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtapellidos" name="txtapellidos" data-validate-length-range="5,50" data-validate-words="2" placeholder="ex. Apellido1 Apellido2" title="Primer y Segundo Apellido" required="required" class="form-control ">
+												<input type="text" id="txtapellidos" name="txtapellidos" placeholder="ex. Apellido1 Apellido2" title="Primer y Segundo Apellido" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -111,7 +111,8 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtusername" name="txtusername" onchange="comprobarJSON()"  data-validate-length-range="5,50" required="required" title="Escriba su nombre de usuario" class="form-control ">
+<!-- 												<input type="text" id="txtusername" name="txtusername" onchange="comprobarJSON()"   required="required" title="Escriba su nombre de usuario" class="form-control "> -->
+												<input type="text" id="txtusername" name="txtusername"  required="required" title="Escriba su nombre de usuario" class="form-control ">
 											</div>
 										</div>
 										
@@ -133,14 +134,15 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cédula: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcedula" name="txtcedula" onchange="comprobarJSON()" data-validate-length-range="5,50" title="Escriba su cédula" required="required" class="form-control ">
+<!-- 												<input type="text" id="txtcedula" name="txtcedula" onchange="comprobarJSON()"  title="Escriba su cédula" required="required" class="form-control "> -->
+												<input type="text" id="txtcedula" name="txtcedula" title="Escriba su cédula" required="required" class="form-control ">
 											</div>
 										</div>
                                         <div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txttelefono" name="txttelefono" data-validate-length-range="5,50" title="Escriba su teléfono de contacto" required="required" class="form-control ">
+												<input type="text" id="txttelefono" name="txttelefono" title="Escriba su teléfono de contacto" required="required" class="form-control ">
 											</div>
 										</div>
                                         
@@ -148,7 +150,7 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcargo" name="txtcargo" data-validate-length-range="5,50" title="Escriba el cargo que ocupa actualmente" required="required" class="form-control ">
+												<input type="text" id="txtcargo" name="txtcargo"  title="Escriba el cargo que ocupa actualmente" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -156,7 +158,7 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo personal: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcorreop" name="txtcorreop" title="Escriba su correo personal" required="required" class="form-control ">
+												<input type="email" id="txtcorreop" name="txtcorreop" title="Escriba su correo personal" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -182,7 +184,8 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtiduca" name="txtiduca" onchange="comprobarJSON()" title="Escriba su ID UCA"  class="form-control ">
+<!-- 												<input type="text" id="txtiduca" name="txtiduca" onchange="comprobarJSON()" title="Escriba su ID UCA"  class="form-control "> -->
+												<input type="text" id="txtiduca" name="txtiduca"  title="Escriba su ID UCA"  class="form-control ">
 											</div>
 										</div>
 										
@@ -190,7 +193,8 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcorreoi" onchange="comprobarJSON()" name="txtcorreoi" title="Escriba su correo institucional"  class="form-control ">
+<!-- 												<input type="text" id="txtcorreoi" onchange="comprobarJSON()" name="txtcorreoi" title="Escriba su correo institucional"  class="form-control "> -->
+												<input type="email" id="txtcorreoi"  name="txtcorreoi" title="Escriba su correo institucional"  class="form-control ">
 											</div>
 										</div>
 										
@@ -323,50 +327,50 @@ dtu.crearJSON();
             
         }
         
-        function comprobarJSON(){
-        	var txtuser = document.getElementById("txtusername");
-        	var txtiduca = document.getElementById("txtiduca");
-        	var txtcorreoi = document.getElementById("txtcorreoi")
-        	var txtcedula = document.getElementById("txtcedula");
-        	var request = new XMLHttpRequest();
-        	request.open('GET', 'datos_usuario.json', true)
-        	request.onload = function(){
-        		if(request.status === 200){
-        			var ourData = JSON.parse(request.responseText);
-        			//console.log(ourData);
+//         function comprobarJSON(){
+//         	var txtuser = document.getElementById("txtusername");
+//         	var txtiduca = document.getElementById("txtiduca");
+//         	var txtcorreoi = document.getElementById("txtcorreoi")
+//         	var txtcedula = document.getElementById("txtcedula");
+//         	var request = new XMLHttpRequest();
+//         	request.open('GET', 'datos_usuario.json', true)
+//         	request.onload = function(){
+//         		if(request.status === 200){
+//         			var ourData = JSON.parse(request.responseText);
+//         			//console.log(ourData);
         			
         		
-        		for(i=0; i<ourData.length;i++){
-        			//console.log(ourData[i].rol);
+//         		for(i=0; i<ourData.length;i++){
+//         			//console.log(ourData[i].rol);
         			
-        			/*var htmlString ="";
-        			htmlString += "<p>" + ourData[i].rol+".</p>";
-        			container.insertAdjacentHTML('beforebegin', htmlString);*/
-        			//alert(txt.value);
+//         			/*var htmlString ="";
+//         			htmlString += "<p>" + ourData[i].rol+".</p>";
+//         			container.insertAdjacentHTML('beforebegin', htmlString);*/
+//         			//alert(txt.value);
         			
-        			if(txtuser.value == ourData[i].nombre_usuario){
-        				errorAlert("Ya existe un registro con ese nombre de usuario, escriba otro diferente.");
-        			}
+//         			if(txtuser.value == ourData[i].nombre_usuario){
+//         				errorAlert("Ya existe un registro con ese nombre de usuario, escriba otro diferente.");
+//         			}
         			
-        			if(txtiduca.value == ourData[i].id_uca){
-        				errorAlert("Ya existe un registro con ese IDUCA, escriba otro diferente.");
-        			}
+//         			if(txtiduca.value == ourData[i].id_uca){
+//         				errorAlert("Ya existe un registro con ese IDUCA, escriba otro diferente.");
+//         			}
         			
-        			if(txtcorreoi.value == ourData[i].correo_institucional){
-        				errorAlert("Ya existe un registro con ese correo institucional, escriba otro diferente.");
-        			}
-        			if(txtcedula.value == ourData[i].cedula){
-        				errorAlert("Ya existe un registro con esa cedula, escriba otra diferente.");
-        			}
-        		}
-        		}
+//         			if(txtcorreoi.value == ourData[i].correo_institucional){
+//         				errorAlert("Ya existe un registro con ese correo institucional, escriba otro diferente.");
+//         			}
+//         			if(txtcedula.value == ourData[i].cedula){
+//         				errorAlert("Ya existe un registro con esa cedula, escriba otra diferente.");
+//         			}
+//         		}
+//         		}
         		
-        		var ourData = JSON.parse(request.responseText);
-        		//renderHTML(ourData);
-        	}
-        	request.send();
+//         		var ourData = JSON.parse(request.responseText);
+//         		//renderHTML(ourData);
+//         	}
+//         	request.send();
         	
-        }
+//         }
         
         function habilitar()
 

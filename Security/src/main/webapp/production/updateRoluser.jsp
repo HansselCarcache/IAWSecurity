@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.Tbl_userRol,entidades.Vw_rolopcion, entidades.Tbl_user,entidades.Vw_userrol,
-    entidades.Tbl_rol , datos.Dt_roluser, datos.Dt_usuario, datos.Dt_rol,datos.Dt_rolopciones, java.util.*;" %>
+    entidades.Tbl_rol , datos.Dt_roluser, datos.Dt_usuario, datos.Dt_rol,datos.Dt_rolopciones, java.util.*" %>
     
  
 <!DOCTYPE html>
@@ -90,12 +90,12 @@ tusr = dtusr.getRoluserbyID(Integer.parseInt(roluser));
 <!--                                         <span class="section">Personal Info</span> -->
 										<input type="hidden" value="2" name="opcion" id="opcion"/>	
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Rol Usuario<span class="required">*</span></label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="idrolu" name="idrolu" type="text"  class="form-control" readonly="readonly" placeholder="ID Rol Usuario">
-											</div>
-										</div>
+<!-- 										<div class="item form-group"> -->
+<!-- 											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Rol Usuario<span class="required">*</span></label> -->
+<!-- 											<div class="col-md-6 col-sm-6 "> -->
+												<input id="idrolu" name="idrolu" type="hidden"  class="form-control" readonly="readonly" placeholder="ID Rol Usuario">
+<!-- 											</div> -->
+<!-- 										</div> -->
 										
 										 <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Usuario: <span class="required">*</span></label>

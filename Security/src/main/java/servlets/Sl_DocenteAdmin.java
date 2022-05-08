@@ -100,7 +100,7 @@ public class Sl_DocenteAdmin extends HttpServlet{
 			tus.setCorreo_institucional(correoi);
 		}
 		
-		tus.setUsuario_creacion(2);//2 valor temporal mientras se programa la sesion
+		tus.setUsuario_creacion(Integer.parseInt(request.getParameter("usuario_creacion")));//Ya programada la sesion
 		tus.setFecha_creacion(new java.sql.Timestamp(fechaSistema.getTime()));
 				
 		//PARA ENCRIPTAR LA PWD//	
