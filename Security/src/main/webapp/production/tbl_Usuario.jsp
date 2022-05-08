@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.Tbl_user, entidades.Vw_userrol,
-     entidades.Vw_rolopcion, datos.Dt_usuario, datos.Dt_usuario2,datos.Dt_rolopciones, java.util.*;" %>
+     entidades.Vw_rolopcion, datos.Dt_usuario, datos.Dt_usuario2,datos.Dt_rolopciones, java.util.*" %>
     
 
 <%
 String VarMsj = "";
-
 VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
-
-
 %>
 <!DOCTYPE html>
 <html>
@@ -422,7 +419,6 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
     $(document).ready(function() {
     	 var mensaje = 0;
  	    mensaje = "<%=VarMsj %>";
-
  	    if(mensaje == "1")
  	      {
  	    	successAlert('Exito', 'Los datos han sido registrados exitosamente!');
