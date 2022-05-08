@@ -141,12 +141,7 @@ display:none;
 												  <%
 												  	}
 												  %>
-									</select>
-	                      	
-	                      			
-	                     
-								
-		                      				
+									</select>                 
 											</div>
 										</div>
 
@@ -154,9 +149,9 @@ display:none;
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="evaluada">Evaluacion <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 " >
-												<select class="form-control js-example-basic-single" name="evaluada" id="evaluada" onchange="display()" required="required">
+												<select class="form-control js-example-basic-single" name="evaluada" id="evaluada" required="required">
 								
-	                      					 <option  value = "">Seleccione...</option>
+	                
 	                      			             <option  value = "0">No será evaluada</option>
 												 <option  value = "1">Será evaluada</option>
 												  
@@ -261,7 +256,24 @@ display:none;
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
+        $(document).ready(function() {
+        	$('#evaluada').val("<%=tu2.getEvaluada()%>");
+        	
+        	
+        	
+        	
+            $('.js-example-basic-single').select2();
+        });
+        $(document).ready(function() {
+        	$('#cbxTipoCap').val("<%=tu2.getId_tipo_capacitacion()%>");
+        	
+        	
+        	
+        	
+            $('.js-example-basic-single').select2();
+        });
     </script>
+    
 
 <script type="text/javascript">
 function display(){

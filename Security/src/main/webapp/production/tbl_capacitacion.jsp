@@ -3,6 +3,10 @@
 
 <!DOCTYPE html>
 <html>
+<% 
+	String msj="";
+	msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
+%>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -32,6 +36,17 @@
 
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
+    
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
+	
   </head>
 
   <body class="nav-md">
@@ -237,6 +252,13 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    
+    
+        <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    
     <script>
     function eliminarcolumna(id){
    		var table = $('#tbl_capacitacion').DataTable();
@@ -339,6 +361,83 @@
             }
         } );
     } );
+    
+    $(document).ready(function() {
+    	try {
+    		<% if(msj.equals("1")) {%>
+    		new PNotify({
+                type: 'success',
+                title: 'Ingreso exitoso',
+                text: 'Se han ingresado los datos existosamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("2")) {%>
+    		new PNotify({
+                type: 'error',
+                title: 'Ocurrio un error al agregar',
+                text: 'Vuelva a ingresar los datos e intente nuevamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("3")) {%>
+    		new PNotify({
+                type: 'success',
+                title: 'Edicion exitosa',
+                text: 'Se han editado los datos existosamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("4")) {%>
+    		new PNotify({
+                type: 'error',
+                title: 'Ocurrio un error al editar',
+                text: 'Vuelva a ingresar los datos e intente nuevamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("5")) {%>
+    		new PNotify({
+                type: 'success',
+                title: 'Eliminacion existosa',
+                text: 'Se ha eliminado la oferta de la capacitacion exitosamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("6")) {%>
+    		new PNotify({
+                type: 'error',
+                title: 'Ocurrio un error al eliminar',
+                text: 'Revise su conexion he intentelo de nuevo',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+    		  
+        	
+    		  
+    		}
+    		catch(err) {
+    		  alert(err.message)
+    		}
+        
+    });
     
     </script>
 

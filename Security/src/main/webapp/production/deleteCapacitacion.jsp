@@ -137,7 +137,7 @@ tu2 = dtu.getCapacitacionbyID(Integer.parseInt(cap));
 											
 											  
 											
-								<select class="form-control js-example-basic-single" name="cbxTipoCap" id="cbxTipoCap" required="required" >
+								<select class="form-control js-example-basic-single" name="cbxTipoCap" id="cbxTipoCap" disabled="disabled" >
 																			
 												 
 												  <option value="<%=tu2.getId_tipo_capacitacion()%>"><%=tu2.getTipo_capacitacion()%></option>
@@ -155,7 +155,7 @@ tu2 = dtu.getCapacitacionbyID(Integer.parseInt(cap));
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="evaluada">Evaluada <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<select class="form-control js-example-basic-single" name="evaluada" id="evaluada" onchange="display()" required="required">
+												<select class="form-control js-example-basic-single" name="evaluada" id="evaluada" onchange="display()" disabled="disabled">
 								
 	                      	
 	                      			 <option value="<%=tu2.getEvaluada()%>"><%=evaluada%></option>

@@ -43,8 +43,7 @@ public class Sl_Capacitacion extends HttpServlet {
 		Dt_capacitacion dc = new Dt_capacitacion();
 		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 		cp.setNombre(request.getParameter("nombre"));
-		cp.setId_tipo_capacitacion(Integer.parseInt(request.getParameter("cbxTipoCap")));
-		cp.setEvaluada(Integer.parseInt(request.getParameter("evaluada")));
+
 		//cp.setTipo_evaluacion(Integer.parseInt(request.getParameter("tipoevaluacion")));
 		cp.setEstado(1);
 		
@@ -54,6 +53,10 @@ public class Sl_Capacitacion extends HttpServlet {
 		
 		switch(opc) {
 		case 1:
+			int evaluada = Integer.parseInt(request.getParameter("evaluada"));
+			cp.setEvaluada(evaluada);
+			int tipo = Integer.parseInt(request.getParameter("cbxTipoCap"));
+			cp.setId_tipo_capacitacion(tipo);
 			try {
 				if(dc.addCapacitacion(cp)) {
 					response.sendRedirect("production/tbl_capacitacion.jsp?msj=1");
@@ -69,8 +72,10 @@ public class Sl_Capacitacion extends HttpServlet {
 		case 2:
 			// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 			cp.setNombre(request.getParameter("nombre"));
-			cp.setId_tipo_capacitacion(Integer.parseInt(request.getParameter("cbxTipoCap")));
-			cp.setEvaluada(Integer.parseInt(request.getParameter("evaluada")));
+			int evaluada2 = Integer.parseInt(request.getParameter("evaluada"));
+			cp.setEvaluada(evaluada2);
+			int tipo2 = Integer.parseInt(request.getParameter("cbxTipoCap"));
+			cp.setId_tipo_capacitacion(tipo2);
 			cp.setId_capacitacion(Integer.parseInt(request.getParameter("id_capacitacion")));
 			try {
 				if(dc.modificarCapacitacion(cp)) {
