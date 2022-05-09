@@ -75,11 +75,8 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                     <h2>Usuarios registrados</h2>
                     <ul class="nav navbar-right panel_toolbox">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a onclick="usuariosEliminados()" class="dropdown-item" href="#">Usuarios Inactivos</a>
-                            
-                          </div>
+                        <a href="#" class="dropdown-toggle" onclick="usuariosEliminados()" data-toggle="dropdown" role="button" aria-expanded="false">Ver usuarios Inactivos <i class="fa-solid fa-user-large-slash"></i></a>
+                        
                       </li>
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -131,10 +128,11 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                      	<%
 	                      	for(Tbl_user tusr :listaUsuario){
 	                      		String estado= "";
-	                      		if(tusr.getEstado()!=3){
-	                      			estado= "Activo";
-	                      		}
-	                      		else{
+	                      		if(tusr.getEstado()==0){
+	                      			estado= "No verificado";
+	                      		}else if(tusr.getEstado()!=3){
+	                      			estado = "Activo";
+	                      		}else{
 	                      			estado = "Inactivo";
 	                      		}
 	                      		String sexo="";
@@ -218,11 +216,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                     <h2>Usuarios Inactivos</h2>
                     <ul class="nav navbar-right panel_toolbox">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a onclick="usuariosActivos()" class="dropdown-item" href="#">Usuarios Activos</a>
-                            
-                          </div>
+                        <a href="#" class="dropdown-toggle" onclick="usuariosActivos()" data-toggle="dropdown" role="button" aria-expanded="false">Ver usuarios Activos <i class="fa-solid fa-user-check"></i></a>
                       </li>
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>

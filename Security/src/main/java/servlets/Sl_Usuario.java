@@ -163,22 +163,53 @@ public class Sl_Usuario extends HttpServlet{
 			tus.setSexo(Integer.parseInt(request.getParameter("cbxsexo")));
 			tus.setTelefono_contacto(request.getParameter("txttelefono"));
 			tus.setCargo(request.getParameter("txtcargo"));
+			//nuevas funciones
+			tus.setNombre_usuario(request.getParameter("txtusername"));
+			tus.setCedula(request.getParameter("txtcedula"));
+			tus.setCorreo_personal(request.getParameter("txtcorreop"));
+			int estado = Integer.parseInt(request.getParameter("estado"));
+			tus.setEstado(estado);
+			
 			try {
 				tus.setFecha_edicion(new java.sql.Timestamp(fechaSistema.getTime()));
 				tus.setUsuario_edicion(Integer.parseInt(request.getParameter("usuario_modificacion")));//2 valor temporal mientras se programa la sesion
 				//Comprobamos que no exista el idUCA en la BD
-				if(ngu.existeIdUCA(tus.getId_uca())) {
+				if(!ngu.existeIdUCA(tus.getId_uca())) {
 					
-					if(dtus.modificarUserNoID(tus)) {
-						response.sendRedirect("production/tbl_Usuario.jsp?msj=7");
+					dtus.modificarIDUCA(tus);	
+				
+				}
+				//Comprobamos que no exista el nombre de usuario en la BD
+				if(!ngu.existeUsuario(tus.getNombre_usuario())) {
+					
+					dtus.modificarUsername(tus);	
+				
+				}
+				//Comprobamos que no exista la cedula en la BD
+				if(!ngu.existeCedula(tus.getCedula())) {
+					
+					dtus.modificarCedula(tus);	
+				
+				}
+				//Si el estado es 0 el usuario no esta verificado, el estado no cambia de 0
+				if(estado==0) {
+					if(dtus.modificarUserNV(tus)) {
+						response.sendRedirect("production/tbl_Usuario.jsp?msj=3");
 					}
-					
-				}else if(dtus.modificarUser(tus)) {
-					response.sendRedirect("production/tbl_Usuario.jsp?msj=3");
+					else {
+						response.sendRedirect("production/tbl_Usuario.jsp?msj=4");
+					}
+				}else {
+				//Si el estado es diferente de 0 el usuario esta verificado, el estado cambia a 2
+					if(dtus.modificarUser(tus)) {
+						response.sendRedirect("production/tbl_Usuario.jsp?msj=3");
+					}
+					else {
+						response.sendRedirect("production/tbl_Usuario.jsp?msj=4");
+					}
 				}
-				else {
-					response.sendRedirect("production/tbl_Usuario.jsp?msj=4");
-				}
+				
+				
 			}catch(Exception e) {
 				System.out.println("Error Sl_gestionUser opc2: "+e.getMessage());
 				e.printStackTrace();
@@ -187,15 +218,28 @@ public class Sl_Usuario extends HttpServlet{
 		case 3:
 			// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 			tus.setId_usuario(Integer.parseInt(request.getParameter("txtiduser")));
+			
+			tus.setEstado(Integer.parseInt(request.getParameter("estado")));
 			try {
 				tus.setFecha_eliminacion(new java.sql.Timestamp(fechaSistema.getTime()));
 				tus.setUsuario_eliminacion(Integer.parseInt(request.getParameter("usuario_eliminacion")));//2 valor temporal mientras se programa la sesion
-				if(dtus.eliminarUser(tus)) {
-					response.sendRedirect("production/tbl_Usuario.jsp?msj=5");
+				//Si el estado es 0 el usuario no esta verificado, no se ingresa una fecha de eliminacion para diferenciarlo a la hora de restaurarlo.
+				if(tus.getEstado()==0) {
+					if(dtus.eliminarUserNV(tus)) {
+						response.sendRedirect("production/tbl_Usuario.jsp?msj=5");
+					}
+					else {
+						response.sendRedirect("production/tbl_Usuario.jsp?msj=6");
+					}
+				}else {
+					if(dtus.eliminarUser(tus)) {
+						response.sendRedirect("production/tbl_Usuario.jsp?msj=5");
+					}
+					else {
+						response.sendRedirect("production/tbl_Usuario.jsp?msj=6");
+					}
 				}
-				else {
-					response.sendRedirect("production/tbl_Usuario.jsp?msj=6");
-				}
+				
 			}catch(Exception e) {
 				System.out.println("Error Sl_gestionUser opc3: "+e.getMessage());
 				e.printStackTrace();
@@ -204,18 +248,28 @@ public class Sl_Usuario extends HttpServlet{
 		case 4:
 			//CONTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 			tus.setId_usuario(Integer.parseInt(request.getParameter("txtiduser")));
-			
+			tus.setUsuario_eliminacion(Integer.parseInt(request.getParameter("usereliminacion")));
 			
 			
 			try {
 				tus.setFecha_edicion(new java.sql.Timestamp(fechaSistema.getTime()));
 				tus.setUsuario_edicion(Integer.parseInt(request.getParameter("usuario_modificacion")));//2 valor temporal mientras se programa la sesion
-				if(dtus.restaurarUsuario(tus)) {
-					response.sendRedirect("production/tbl_Usuario.jsp?msj=8");
+				if(tus.getUsuario_eliminacion()==0) {
+					if(dtus.restaurarUsuarioNV(tus)) {
+						response.sendRedirect("production/tbl_Usuario.jsp?msj=8");
+					}
+					else {
+						response.sendRedirect("production/tbl_Usuario.jsp?msj=9");
+					}
+				}else {
+					if(dtus.restaurarUsuario(tus)) {
+						response.sendRedirect("production/tbl_Usuario.jsp?msj=8");
+					}
+					else {
+						response.sendRedirect("production/tbl_Usuario.jsp?msj=9");
+					}
 				}
-				else {
-					response.sendRedirect("production/tbl_Usuario.jsp?msj=9");
-				}
+				
 			}catch(Exception e) {
 				System.out.println("Error Sl_gestionUser opc2: "+e.getMessage());
 				e.printStackTrace();

@@ -94,6 +94,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
 
 										<input type="hidden" value="2" name="opcion" id="opcion"/>
 										<input type="hidden" value="<%=vwur.getId_usuario() %>" name="usuario_modificacion" id="usuario_modificacion" />
+										<input type="hidden" value="<%=tu.getEstado() %>" name="estado" id="estado" />
 <!-- 										<div class="field item form-group"> -->
 <!-- 											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID usuario: <span class="required">*</span> -->
 <!-- 											</label> -->
@@ -102,8 +103,81 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
 <!-- 											</div> -->
 <!-- 										</div> -->
 										
+										
+										
 										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: 
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre completo: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtnombreC" name="txtnombreC" data-validate-length-range="5,100" data-validate-words="4" title="Nombre completo" required="required" class="form-control ">
+											</div>
+										</div>
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: <a href="#" onclick="desbloquear('#txtusername')">
+                           					 <i class="fa solid fa-lock-open" title="Desbloquear"></i>
+                          					</a>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+<!-- 												<input type="text" id="txtusername" name="txtusername" onchange="comprobarJSON()"   required="required" title="Escriba su nombre de usuario" class="form-control "> -->
+												<input type="text" id="txtusername" name="txtusername" readonly required="required" title="Escriba su nombre de usuario" class="form-control ">
+											</div>
+										</div>
+										
+										<div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Sexo: </label>
+                                            <div class="col-md-6 col-sm-6">
+<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
+											
+												<select class="form-control js-example-basic-single" name="cbxsexo" id="cbxsexo" required="required">
+												  
+												  
+												  <option value="1">Masculino</option>
+												  <option value="2">Femenino</option>
+												  
+												</select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cédula: <a href="#" onclick="desbloquear('#txtcedula')">
+                           					 <i class="fa solid fa-lock-open" title="Desbloquear"></i>
+                          					</a>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+<!-- 												<input type="text" id="txtcedula" name="txtcedula" onchange="comprobarJSON()"  title="Escriba su cédula" required="required" class="form-control "> -->
+												<input type="text" id="txtcedula" name="txtcedula" title="Escriba su cédula" readonly required="required" class="form-control ">
+											</div>
+										</div>
+                                        
+                                        <div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txttelefono" name="txttelefono" data-validate-length-range="5,50" title="Escriba su teléfono de contacto" required="required" class="form-control ">
+											</div>
+										</div>
+                                        
+                                        <div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtcargo" name="txtcargo" data-validate-length-range="3,50" title="Escriba el cargo que ocupa actualmente" required="required" class="form-control ">
+											</div>
+										</div>
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo personal: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="email" id="txtcorreop" name="txtcorreop" title="Escriba su correo personal" required="required" class="form-control ">
+											</div>
+										</div>
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: <a href="#" onclick="desbloquearID()">
+                           					 <i class="fa solid fa-lock-open" title="Desbloquear"></i>
+                          					</a>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
 <!-- 												<input type="text" id="txtiduca" onchange="comprobarIDJSON()" onkeyup="validarIdU()" name="txtiduca" title="Escriba su ID UCA" readonly class="form-control "> -->
@@ -120,7 +194,9 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
 										</div>
 										
 										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: 
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional:<a href="#" onclick="desbloquearC()">
+                           					 <i class="fa solid fa-lock-open" title="Desbloquear"></i>
+                          					</a> 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
 <!-- 												<input type="text" id="txtcorreoi" onchange="comprobarCJSON()" onkeyup="validarCorreoi()" name="txtcorreoi" title="Escriba su correo institucional"  readonly class="form-control "> -->
@@ -134,45 +210,6 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
 											</label>
 											<div class="col-md-6 col-sm-6 ">
 												<input type="text" id="txtcorreoi2" onkeyup="validarCorreoi()" name="txtcorreoi2" title="Escriba su correo institucional"   class="form-control ">
-											</div>
-										</div>
-										
-										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre completo: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtnombreC" name="txtnombreC" data-validate-length-range="5,100" data-validate-words="4" title="Nombre completo" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Sexo: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-											
-												<select class="form-control js-example-basic-single" name="cbxsexo" id="cbxsexo" required="required">
-												  
-												  
-												  <option value="1">Masculino</option>
-												  <option value="2">Femenino</option>
-												  
-												</select>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txttelefono" name="txttelefono" data-validate-length-range="5,50" title="Escriba su teléfono de contacto" required="required" class="form-control ">
-											</div>
-										</div>
-                                        
-                                        <div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcargo" name="txtcargo" data-validate-length-range="3,50" title="Escriba el cargo que ocupa actualmente" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -271,11 +308,14 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
         	document.getElementById("txtiduser").value = "<%=tu.getId_usuario()%>"
         	
         	document.getElementById("txtnombreC").value = "<%=tu.getNombre_real()%>"
+        		document.getElementById("txtusername").value = "<%=tu.getNombre_usuario()%>"
         	document.getElementById("cbxsexo").value = '<%=tu.getSexo()%>'
             document.getElementById("cbxsexo").text = '<%=tu.getSexo()%>'
             $("#cbxsexo").select2()	
+            document.getElementById("txtcedula").value = "<%=tu.getCedula()%>"
         	document.getElementById("txttelefono").value = "<%=tu.getTelefono_contacto()%>"
         	document.getElementById("txtcargo").value = "<%=tu.getCargo()%>"
+        		document.getElementById("txtcorreop").value = "<%=tu.getCorreo_personal()%>"
         	
         	txtid= "<%=tu.getId_uca()%>"
         	if(txtid=="null"){
@@ -315,6 +355,34 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
  
             
         	
+        }
+        
+        function desbloquear(id){
+        	
+        	if($(id).prop('readonly')){
+        		
+        		alert("Este campo no será modificado si existe otro igual en la base de datos.");
+            	$(id).removeAttr('readonly');
+        	}
+        	
+        }
+        
+        function desbloquearID(){
+        	
+			if($('#txtiduca').prop('readonly')){
+				alert("Este campo no será modificado si existe otro igual en la base de datos.");
+				$('#txtiduca').removeAttr('readonly');
+	            document.getElementById("dividuca").style.display = "flex";
+        	}
+        }
+        
+		function desbloquearC(){
+        	
+			if($('#txtcorreoi').prop('readonly')){
+				//alert("Este campo no será modificado si existe otro igual en la base de datos.");
+				$('#txtcorreoi').removeAttr('readonly');
+	            document.getElementById("divcorreoi").style.display = "flex";
+        	}
         }
         
 //         function comprobarIDJSON(){

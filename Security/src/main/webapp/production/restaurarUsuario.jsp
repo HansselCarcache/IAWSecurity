@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-   pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*;" %>
+   pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*" %>
 <!DOCTYPE html>
 <html>
 <% String user = "";
@@ -86,6 +86,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
 <!--                                         <span class="section">Personal Info</span> -->
 										<input type="hidden" value="4" name="opcion" id="opcion"/>
 										<input type="hidden" value="<%=vwur.getId_usuario() %>" name="usuario_modificacion" id="usuario_modificacion" />
+										<input type="hidden" value="<%=tu.getUsuario_eliminacion() %>" name="usereliminacion" id="usereliminacion" />	
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Usuario:</label>
 											<div class="col-md-6 col-sm-6 ">
@@ -293,7 +294,13 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                          
            		document.getElementById("txtestado").value = "Inactivo"
                          
-            }    	
+            }
+            usuarioE = "<%=tu.getUsuario_eliminacion()%>"
+            if(usuarioE==null){
+            	document.getElementById("usereliminacion").value = 0
+            }else{
+            	document.getElementById("usereliminacion").value = "<%=tu.getUsuario_eliminacion()%>"
+            }
            
  
         	

@@ -310,6 +310,7 @@ public class Dt_usuario {
 				tu.setCedula(rs.getString("cedula"));
 				tu.setFecha_creacion(rs.getTimestamp("fecha_creacion"));
 				tu.setEstado(rs.getInt("estado"));
+				tu.setUsuario_eliminacion(rs.getInt("usuario_eliminacion"));
 				
 			}
 		}catch (Exception e)
@@ -348,7 +349,7 @@ public class Dt_usuario {
 			{
 				if(rsUsuario.getInt(1)==tus.getId_usuario())
 				{
-					rsUsuario.updateString("id_uca", tus.getId_uca());
+					rsUsuario.updateString("correo_personal", tus.getCorreo_personal());
 					rsUsuario.updateString("correo_institucional", tus.getCorreo_institucional());
 					rsUsuario.updateString("nombre_real", tus.getNombre_real());
 					rsUsuario.updateInt("sexo", tus.getSexo());
@@ -386,7 +387,7 @@ public class Dt_usuario {
 	}
 	
 	//metodo para modificar usuario sin IDUCA
-		public boolean modificarUserNoID(Tbl_user tus) {
+		public boolean modificarUserNV(Tbl_user tus) {
 			boolean modificado = false;
 			try {
 				c = poolConexion.getConnection();
@@ -404,7 +405,7 @@ public class Dt_usuario {
 						rsUsuario.updateString("cargo", tus.getCargo());
 						rsUsuario.updateInt("usuario_edicion", tus.getUsuario_edicion());
 						rsUsuario.updateTimestamp("fecha_edicion", tus.getFecha_edicion());
-						rsUsuario.updateInt("estado", 2);
+						
 						rsUsuario.updateRow();
 						modificado = true;
 						break;
@@ -433,6 +434,126 @@ public class Dt_usuario {
 			return modificado;
 		}
 		
+		//metodo para modificar usuario IDUCA
+				public boolean modificarIDUCA(Tbl_user tus) {
+					boolean modificado = false;
+					try {
+						c = poolConexion.getConnection();
+						this.llenaRsUsuario(c);
+						rsUsuario.beforeFirst();
+						while(rsUsuario.next())
+						{
+							if(rsUsuario.getInt(1)==tus.getId_usuario())
+							{
+								rsUsuario.updateString("id_uca", tus.getId_uca());
+								rsUsuario.updateRow();
+								modificado = true;
+								break;
+							}
+						}
+					}catch (Exception e)
+					{
+						System.err.println("ERROR AL modificarUser() "+e.getMessage());
+						e.printStackTrace();
+					}
+					finally
+					{
+						try {
+							if(rsUsuario != null){
+								rsUsuario.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					return modificado;
+				}
+	
+				//metodo para modificar Nombre de usuario
+				public boolean modificarUsername(Tbl_user tus) {
+					boolean modificado = false;
+					try {
+						c = poolConexion.getConnection();
+						this.llenaRsUsuario(c);
+						rsUsuario.beforeFirst();
+						while(rsUsuario.next())
+						{
+							if(rsUsuario.getInt(1)==tus.getId_usuario())
+							{
+								rsUsuario.updateString("nombre_usuario", tus.getNombre_usuario());
+								rsUsuario.updateRow();
+								modificado = true;
+								break;
+							}
+						}
+					}catch (Exception e)
+					{
+						System.err.println("ERROR AL modificarUser() "+e.getMessage());
+						e.printStackTrace();
+					}
+					finally
+					{
+						try {
+							if(rsUsuario != null){
+								rsUsuario.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					return modificado;
+				}
+				
+				//metodo para modificar Cedula
+				public boolean modificarCedula(Tbl_user tus) {
+					boolean modificado = false;
+					try {
+						c = poolConexion.getConnection();
+						this.llenaRsUsuario(c);
+						rsUsuario.beforeFirst();
+						while(rsUsuario.next())
+						{
+							if(rsUsuario.getInt(1)==tus.getId_usuario())
+							{
+								rsUsuario.updateString("cedula", tus.getCedula());
+								rsUsuario.updateRow();
+								modificado = true;
+								break;
+							}
+						}
+					}catch (Exception e)
+					{
+						System.err.println("ERROR AL modificarUser() "+e.getMessage());
+						e.printStackTrace();
+					}
+					finally
+					{
+						try {
+							if(rsUsuario != null){
+								rsUsuario.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					return modificado;
+				}
+				
 		//metodo para restaurar usuario
 				public boolean restaurarUsuario(Tbl_user tus) {
 					boolean modificado = false;
@@ -449,6 +570,50 @@ public class Dt_usuario {
 								rsUsuario.updateInt("usuario_edicion", tus.getUsuario_edicion());
 								rsUsuario.updateTimestamp("fecha_edicion", tus.getFecha_edicion());
 								rsUsuario.updateInt("estado", 4);
+								rsUsuario.updateRow();
+								modificado = true;
+								break;
+							}
+						}
+					}catch (Exception e)
+					{
+						System.err.println("ERROR AL modificarUser() "+e.getMessage());
+						e.printStackTrace();
+					}
+					finally
+					{
+						try {
+							if(rsUsuario != null){
+								rsUsuario.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					return modificado;
+				}
+				
+				//metodo para restaurar usuario no verificado
+				public boolean restaurarUsuarioNV(Tbl_user tus) {
+					boolean modificado = false;
+					try {
+						c = poolConexion.getConnection();
+						this.llenaRsUsuario(c);
+						rsUsuario.beforeFirst();
+						while(rsUsuario.next())
+						{
+							if(rsUsuario.getInt(1)==tus.getId_usuario())
+							{
+								
+								
+								rsUsuario.updateInt("usuario_edicion", tus.getUsuario_edicion());
+								rsUsuario.updateTimestamp("fecha_edicion", tus.getFecha_edicion());
+								rsUsuario.updateInt("estado", 0);
 								rsUsuario.updateRow();
 								modificado = true;
 								break;
@@ -518,6 +683,47 @@ public class Dt_usuario {
 		}
 		return eliminado;
 	}
+	
+	// Metodo para eliminar usuario no verificado, no se pone usuario_eliminacion para diferenciar de un usuario verificado
+		public boolean eliminarUserNV(Tbl_user tus)
+		{
+			boolean eliminado=false;	
+			try
+			{
+				c = poolConexion.getConnection();
+				this.llenaRsUsuario(c);
+				rsUsuario.beforeFirst();
+				while (rsUsuario.next()){
+					if(rsUsuario.getInt(1)==tus.getId_usuario()){
+						rsUsuario.updateTimestamp("fecha_eliminacion", tus.getFecha_eliminacion());
+						
+						rsUsuario.updateInt("estado", 3);
+						rsUsuario.updateRow();
+						eliminado=true;
+						break;
+					}
+				}
+			}
+			catch (Exception e){
+				System.err.println("ERROR AL eliminarUser() "+e.getMessage());
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rsUsuario != null){
+						rsUsuario.close();
+					}
+					if(c != null){
+						poolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return eliminado;
+		}
 	
 	
 	//METODO PARA GENERAR UN CODIGO DE VERIFICACION //

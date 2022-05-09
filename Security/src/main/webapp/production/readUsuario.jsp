@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-   pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*;" %>
+   pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*" %>
 <!DOCTYPE html>
 <html>
 <% String user = "";
@@ -287,10 +287,12 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
             
             estado = "<%=tu.getEstado()%>" 
                  
-           	if(estado!="3"){
+           	if(estado=="0"){
                          
-           		document.getElementById("txtestado").value = "Activo"
+           		document.getElementById("txtestado").value = "No verificado"
                          
+            }else if(estado!="3"){
+            	document.getElementById("txtestado").value = "Activo"
             }    	
            
  

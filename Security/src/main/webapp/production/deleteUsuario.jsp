@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*" %>
 <!DOCTYPE html>
 <html>
 <%
@@ -88,7 +88,8 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 										<input type="hidden" value="3" name="opcion" id="opcion"/>
-										<input type="hidden" value="<%=vwur.getId_usuario() %>" name="usuario_eliminacion" id="usuario_eliminacion" />	
+										<input type="hidden" value="<%=vwur.getId_usuario() %>" name="usuario_eliminacion" id="usuario_eliminacion" />
+										<input type="hidden" value="<%=tu.getEstado() %>" name="estado" id="estado" />	
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Usuario:</label>
 											<div class="col-md-6 col-sm-6 ">
@@ -331,11 +332,13 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
             
             estado = "<%=tu.getEstado()%>" 
                  
-           	if(estado!="3"){
-                         
-           		document.getElementById("txtestado").value = "Activo"
-                         
-            }    	
+            	if(estado=="0"){
+                    
+               		document.getElementById("txtestado").value = "No verificado"
+                             
+                }else if(estado!="3"){
+                	document.getElementById("txtestado").value = "Activo"
+                }  	
            
  
         	
