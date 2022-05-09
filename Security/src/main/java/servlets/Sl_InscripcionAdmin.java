@@ -98,7 +98,9 @@ public class Sl_InscripcionAdmin extends HttpServlet {
 			try {
 				if(dia.updateInscripcionAdmin(ia)) {
 					if(dia.deleteCarreraInscripcionById(ia.getId_inscripcion())) {
-						String[] a = request.getParameterValues("carreras");
+						String[] b = {};
+						String[] a = request.getParameterValues("carreras") == null ? b : request.getParameterValues("carreras");
+						
 						Dt_carreras dac = new Dt_carreras();
 						
 						for(String s:a) {
@@ -124,6 +126,7 @@ public class Sl_InscripcionAdmin extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+			
 			
 			
 		case 3:

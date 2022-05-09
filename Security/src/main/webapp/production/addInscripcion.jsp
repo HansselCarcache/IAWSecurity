@@ -1,6 +1,6 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -215,7 +215,7 @@ display:none;
 													for(Vw_carrera_departamento c: listaCarreras){
 												%>
 												 
-													<input type="checkbox" name="carreras" id="carrera <%=c.getId_carrera()%>" value="<%=c.getId_carrera() %>" class="flat" /> <%=c.getNombre_carrera() %>
+													<input type="checkbox" name="carreras" id="carrera<%=c.getId_carrera()%>" value="<%=c.getId_carrera()%>" class="flat" /> <%=c.getNombre_carrera()%>
 												
 												<br />
 												

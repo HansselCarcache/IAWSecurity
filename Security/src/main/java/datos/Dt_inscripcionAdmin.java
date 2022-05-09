@@ -387,13 +387,13 @@ public class Dt_inscripcionAdmin {
 				this.llenar_rsInscripcion_carrera(c);
 				rsInscripcion_carrera.beforeFirst();
 				while (rsInscripcion_carrera.next()){
+					System.out.print(id);	
 					if(rsInscripcion_carrera.getInt("id_inscripcion") == id){
-						rsInscripcion_carrera.updateInt("estado", 3);
 						rsInscripcion_carrera.deleteRow();
-						eliminado=true;
 						
 					}
 				}
+				eliminado=true;
 			}
 			catch (Exception e){
 				System.err.println("ERROR AL deleteCarreraInscripcionById() "+e.getMessage());
