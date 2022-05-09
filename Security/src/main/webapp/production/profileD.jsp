@@ -8,10 +8,7 @@ user = request.getParameter("idU")==null?"0":request.getParameter("idU");
 Tbl_user tu = new Tbl_user();
 Dt_usuario dtu = new Dt_usuario();
 tu = dtu.getUserbyID(Integer.parseInt(user));
-ArrayList<Tbl_user> listaUser = new ArrayList<Tbl_user>();
-listaUser = dtu.listaUserActivos();
 // tu = dtu.getUserbyID(12);
-
 
 
 %>
@@ -60,7 +57,7 @@ listaUser = dtu.listaUserActivos();
 
             <div class="clearfix"></div>
 
-           <%@include file="diseño.jsp"%>
+           <%@include file="diseñoDocente.jsp"%>
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -213,9 +210,6 @@ listaUser = dtu.listaUserActivos();
                               </li>
 
                             </ul>
-                            
-                            
-                            
                             <!-- end recent activity -->
                             
                             </div>
@@ -232,33 +226,98 @@ listaUser = dtu.listaUserActivos();
                                 </tr>
                               </thead>
                               <tbody>
-                              
-                              <%
-                              for(Tbl_user userList: listaUser){
-                              %>
-                              
                                 <tr>
-                                  <td><%=userList.getId_usuario() %></td>
-                                  <td><%=userList.getNombre_real() %></td>
-                                  <td><%=userList.getCorreo_personal() %></td>
-                                  <td><%=userList.getTelefono_contacto() %></td>
+                                  <td>1</td>
+                                  <td>New Company Takeover Review</td>
+                                  <td>Deveint Inc</td>
+                                  <td class="hidden-phone">18</td>
                                 </tr>
-                                
-                                
-                                
-                                
-                                <%
-                              }
-                                %>
-                                
+                                <tr>
+                                  <td>2</td>
+                                  <td>New Partner Contracts Consultanci</td>
+                                  <td>Deveint Inc</td>
+                                  <td class="hidden-phone">13</td>
+                                </tr>
+                                <tr>
+                                  <td>3</td>
+                                  <td>Partners and Inverstors report</td>
+                                  <td>Deveint Inc</td>
+                                  <td class="hidden-phone">30</td>
+                                </tr>
+                                <tr>
+                                  <td>4</td>
+                                  <td>New Company Takeover Review</td>
+                                  <td>Deveint Inc</td>
+                                  <td class="hidden-phone">28</td>
+                                </tr>
                               </tbody>
                             </table>
-                            
-                            
-                            
                             <!-- end user projects -->
                             
-                            
+                            <div class="row">
+        
+        <div class="col-xl-12">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Account Details</div>
+                <div class="card-body">
+                    <form>
+                        <!-- Form Group (username)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>
+                            <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="username">
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputFirstName">First name</label>
+                                <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" value="Valerie">
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" value="Luna">
+                            </div>
+                        </div>
+                        <!-- Form Row        -->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (organization name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputOrgName">Organization name</label>
+                                <input class="form-control" id="inputOrgName" type="text" placeholder="Enter your organization name" value="Start Bootstrap">
+                            </div>
+                            <!-- Form Group (location)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLocation">Location</label>
+                                <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" value="San Francisco, CA">
+                            </div>
+                        </div>
+                        <!-- Form Group (email address)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                            <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com">
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputPhone">Phone number</label>
+                                <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="555-123-4567">
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputBirthday">Birthday</label>
+                                <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="06/10/1988">
+                            </div>
+                        </div>
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary" type="button">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
                             
                   </div>
                   </div>
