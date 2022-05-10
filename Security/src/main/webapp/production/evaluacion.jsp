@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
 
 <!DOCTYPE html>
 <html>
@@ -73,7 +73,7 @@
 
             <div class="clearfix"></div>
 
-           <%@include file="diseño.jsp"%>
+           <%@include file="diseñoFacilitador.jsp"%>
 
         <!-- page content -->
         <div class="right_col" role="main">
