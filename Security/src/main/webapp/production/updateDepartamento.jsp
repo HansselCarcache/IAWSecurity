@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
 <!DOCTYPE html>
 <html>
 
@@ -99,14 +99,17 @@ td = dtdepa.getDepartamentobyID(Integer.parseInt(departamento));
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 												<%
-							                      	ArrayList<Tbl_facultad> listaFacultad = new ArrayList<Tbl_facultad>();
-							                      	Dt_facultad dtf = new Dt_facultad();
-							                      	listaFacultad = dtf.listaFacultadesActivas();
-								                 %>
+                      		
+                      	                         	ArrayList<Tbl_facultad> listFacu = new ArrayList<Tbl_facultad>();
+                      	                        	Dt_facultad dtfacu = new Dt_facultad();
+                      	                          	listFacu =  dtfacu.listaFacultadActivos();
+                      		
+                                                %>
+                                                
 												<select class="form-control js-example-basic-single" name="cbxfacultad" id="cbxfacultad" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_facultad tf :listaFacultad){
+												  	for(Tbl_facultad tf :listFacu){
 												  %>
 												  <option value="<%=tf.getId_facultad()%>"><%=tf.getNombre_facultad()%></option>
 												  <%
