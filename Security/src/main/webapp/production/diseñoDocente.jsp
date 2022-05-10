@@ -88,11 +88,11 @@
                       
                     </ul>
                   </li>
-                    <li><a><i class="fa-solid fa-school"></i> Calificaciones <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="evaluacionD.jsp">Evaluacion</a></li>
-                    </ul>
-                  </li>
+<!--                     <li><a><i class="fa-solid fa-school"></i> Calificaciones <span class="fa fa-chevron-down"></span></a> -->
+<!--                     <ul class="nav child_menu"> -->
+<!--                       <li><a href="evaluacionD.jsp">Evaluacion</a></li> -->
+<!--                     </ul> -->
+<!--                   </li> -->
                   
                 </ul>
               </div>

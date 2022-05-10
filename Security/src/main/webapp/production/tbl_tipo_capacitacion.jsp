@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
 
 
 <!DOCTYPE html>
@@ -98,7 +98,8 @@
 											<div class="text-muted font-13 col-md-12"
 												style="text-align: right;">
 												<a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
-												<a href="addTipoCapacitacion.jsp"> <i class="fa fa-plus-square fa-2x" title="Nuevo Tipo de Capacitación"></i></a>
+												<a href="addTipoCapacitacion.jsp"> 
+													<i class="fa fa-plus-square " title="Nuevo Tipo de Capacitacion"></i> Nuevo Tipo de Capacitacion</a>
 												<br></br>
 											</div>
 										

@@ -1,6 +1,6 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*" %>
 <!DOCTYPE html>
 <html>
 
@@ -109,7 +109,7 @@ display:none;
                                 <div class="x_content">
                                     <form class="" action="../Sl_InscripcionAdmin" method="post" novalidate>
                                     <input type="hidden" value="2" name="opcion" id="opcion"/>
-                                    <input type="hidden" value="<%=InsAdm.getId_inscripcion() %>" name="id_inscripcion" id="id_inscripcion"/>
+                                    <input type="hidden" value="<%=InsAdm.getId_inscripcion()%>" name="id_inscripcion" id="id_inscripcion"/>
                                     
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
@@ -255,14 +255,14 @@ display:none;
 																
 																if(c.getId_carrera()==ci.getId_carrera()){
 																	%>
-																	<input checked  type="checkbox" name="carreras" id="carrera <%=c.getId_carrera()%>" value="<%=c.getId_carrera() %>" class="flat"/> <%=c.getNombre_carrera() %>
+																	<input checked  type="checkbox" name="carreras" id="carreras<%=c.getId_carrera()%>" value="<%=c.getId_carrera()%>" class="flat"/> <%=c.getNombre_carrera()%>
 																	<br>
 																	<%
 																	break;
 																}else{
 																	if(i == size){
 																		%>
-																		<input  type="checkbox" name="carreras" id="carrera <%=c.getId_carrera()%>" value="<%=c.getId_carrera() %>" class="flat"/> <%=c.getNombre_carrera() %>
+																		<input  type="checkbox" name="carreras" id="carreras<%=c.getId_carrera()%>" value="<%=c.getId_carrera()%>" class="flat"/> <%=c.getNombre_carrera()%>
 																		<br>
 																		<%
 																	}
@@ -273,7 +273,7 @@ display:none;
 														}
 													if(CarIns.isEmpty()){
 														for(Vw_carrera_departamento u : listaCarreras){%>
-															<input  type="checkbox" name="carreras" id="carrera <%=u.getId_carrera()%>" value="<%=u.getId_carrera() %>" class="flat"/> <%=u.getNombre_carrera() %>
+															<input  type="checkbox" name="carreras" id="carreras<%=u.getId_carrera()%>" value="<%=u.getId_carrera()%>" class="flat"/> <%=u.getNombre_carrera()%>
 															<br>
 														<%}
 													}
