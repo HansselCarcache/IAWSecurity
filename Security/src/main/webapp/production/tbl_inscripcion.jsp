@@ -105,13 +105,13 @@
                       <thead>
 	                        <tr>
 	                          <th>ID Inscripción<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-	                          <th>Nombre Completo<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-	                          <th>Teléfono<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-	                          <th>Correo<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-	                          <th>Otras dependencias<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-	                          <th>Carrera<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>	                          
-	                          <th>Estado<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>                        
-	                          <th>Acciones <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
+	                          <th>Nombre Completo<a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+	                          <th>Teléfono<a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+	                          <th>Correo<a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
+	                          <th>Otras dependencias<a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
+	                          <th>Carrera<a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>	                          
+	                          <th>Estado<a onclick="eliminarcolumna(6)"><i class="fa-solid fa-circle-minus"></i></a></th>                        
+	                          <th>Acciones <a onclick="eliminarcolumna(7)"><i class="fa-solid fa-circle-minus"></i></a></th>
 	                          
 	                        </tr>
                       </thead>
@@ -262,14 +262,14 @@
     
     <script>
 	function eliminarcolumna(id){
-   		var table = $('#tbl_modalidad').DataTable();
+   		var table = $('#tbl_insAdm').DataTable();
    	 
    		table.column( id).visible( false );
    	}
    	function mostrarcolumna(){
-   		var table = $('#tbl_modalidad').DataTable();
+   		var table = $('#tbl_insAdm').DataTable();
    	    
-   	   	table.columns( [ 0, 1, 2, 3, 4] ).visible( true, true );
+   	   	table.columns( [ 0, 1, 2, 3, 4,5,6,7] ).visible( true, true );
    	}
    	
    	
@@ -279,13 +279,13 @@
     $(document).ready(function() {
     	
     	
-        $('#tbl_tipocap').DataTable( {
+        $('#tbl_insAdm').DataTable( {
         	buttons: [  
         				
 		        		{
 			        		extend: 'csv',
 							text: 'CSV',
-							title: 'Tipo de Capacitacion registradas',
+							title: 'Inscripciones registradas',
 							action: function ( e, dt, node, config ) {
 			                    //alert( 'Activated!' );
 			                    eliminarcolumna(4);
@@ -298,7 +298,7 @@
         				{
         					extend: 'excel',
         					text: 'Excel',
-        					title: 'Tipo de Capacitacion registradas',
+        					title: 'Inscripciones registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
         	                    eliminarcolumna(4);
@@ -312,7 +312,7 @@
         				{
         					extend: 'pdf',
         					text: 'PDF',
-        					title: 'Tipo de Capacitacion registradas',
+        					title: 'Inscripciones registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
         	                    eliminarcolumna(4);
@@ -326,7 +326,7 @@
         				{ 
         					extend: 'print',
         					text: 'Imprimir',
-        					title: 'Tipo de Capacitacion registradas',
+        					title: 'Inscripciones registradas',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
         	                    eliminarcolumna(4);
