@@ -1,3 +1,5 @@
+<%@page import="entidades.Vw_perfilDocente"%>
+<%@page import="datos.Dt_inscripcionDocente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*" %>
 
@@ -8,10 +10,7 @@ user = request.getParameter("idU")==null?"0":request.getParameter("idU");
 Tbl_user tu = new Tbl_user();
 Dt_usuario dtu = new Dt_usuario();
 tu = dtu.getUserbyID(Integer.parseInt(user));
-ArrayList<Tbl_user> listaUser = new ArrayList<Tbl_user>();
-listaUser = dtu.listaUserActivos();
 // tu = dtu.getUserbyID(12);
-
 
 
 %>
@@ -99,7 +98,7 @@ listaUser = dtu.listaUserActivos();
                   </div>
                   <div class="x_content">
                       <div class="row">
-                          <div class="col-md-3 col-sm-3  profile_left">
+                          <div class="col-md-16 col-sm-3  profile_center" style="margin-left: 550px">
                       <div class="profile_img">
                         <div id="crop-avatar">
                             
@@ -119,7 +118,7 @@ listaUser = dtu.listaUserActivos();
                           <i class="fa fa-briefcase user-profile-icon"></i> <%=tu.getCargo()%>
                         </li>
                         
-                        <li><i class="fa-solid fa-envelope"></i> <%=vwur.getNombre_usuario()%>
+                        <li><i class="fa-solid fa-envelope"></i> <%=tu.getCorreo_personal()%>
                         </li>
                       </ul>
 
@@ -138,121 +137,10 @@ listaUser = dtu.listaUserActivos();
                     <div class="col-md-9 col-sm-9 ">
 
 
-                      <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Cursos</a>
-                          </li>
-                          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Detalles</a>
-                          </li>
-                        </ul>
-                        <div id="myTabContent" class="tab-content">
-                          <div role="tabpanel" class="tab-pane active " id="tab_content1" aria-labelledby="home-tab">
-                          <!-- End current avatar -->
-                    
-                    <!-- start recent activity -->
-                            <ul class="messages">
-                              <li>
-                              <div id="" class="card mt-1">
-                                  <div class="card-body row">
-                                     <div class="col-md-3 col-sm-6 courseimage">
-                                        <a><img src="images/capacitacion.png" class="img-fluid" alt="Responsive image"></a>
-                                     </div>
-									<div class="media-body col-md-9 col-sm-6">
-                                       <h3><%=vwur.getNombre_usuario() %></h3>
-                                       <h6>Comenzó el: <%=vwur.getNombre_usuario()%></h6>
-									<div class="mt-1">
-                                    </div>
-                                    </div>
-                                  </div>
-                               </div>
-                              </li>
-                              <li>
-                              <div id="" class="card mt-1">
-                                  <div class="card-body row">
-                                     <div class="col-md-3 col-sm-6 courseimage">
-                                        <a><img src="images/capacitacion.png" class="img-fluid" alt="Responsive image"></a>
-                                     </div>
-									<div class="media-body col-md-9 col-sm-6">
-                                       <h3><%=vwur.getNombre_usuario()%></h3>
-                                       <h6>Comenzó el: <%=vwur.getNombre_usuario()%></h6>
-									<div class="mt-1">
-                                    </div>
-                                    </div>
-                                  </div>
-                               </div>
-                              </li>
-                              <li>
-                              <div id="" class="card mt-1">
-                                  <div class="card-body row">
-                                     <div class="col-md-3 col-sm-6 courseimage">
-                                        <a><img src="images/capacitacion.png" class="img-fluid" alt="Responsive image"></a>
-                                     </div>
-									<div class="media-body col-md-9 col-sm-6">
-                                       <h3><%=vwur.getNombre_usuario()%></h3>
-                                       <h6>Comenzó el: <%=vwur.getNombre_usuario()%></h6>
-									<div class="mt-1">
-                                    </div>
-                                    </div>
-                                  </div>
-                               </div>
-                              </li>
-                              <li>
-                              <div id="" class="card mt-1">
-                                  <div class="card-body row">
-                                     <div class="col-md-3 col-sm-6 courseimage">
-                                        <a><img src="images/capacitacion.png" class="img-fluid" alt="Responsive image"></a>
-                                     </div>
-									<div class="media-body col-md-9 col-sm-6">
-                                       <h3><%=vwur.getNombre_usuario()%></h3>
-                                       <h6>Comenzó el: <%=vwur.getNombre_usuario()%></h6>
-									<div class="mt-1">
-                                    </div>
-                                    </div>
-                                  </div>
-                               </div>
-                              </li>
-
-                            </ul>
-                            
-                            
-                            
-                            <!-- end recent activity -->
-                            
-                            </div>
-                          <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                      
                     
                     <!-- start user projects -->
-                            <table class="table table-striped table-bordered" style="width:100%">
-                              <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Project Name</th>
-                                  <th>Client Company</th>
-                                  <th>Hours Spent</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              
-                              <%
-                              for(Tbl_user userList: listaUser){
-                              %>
-                              
-                                <tr>
-                                  <td><%=userList.getId_usuario() %></td>
-                                  <td><%=userList.getNombre_real() %></td>
-                                  <td><%=userList.getCorreo_personal() %></td>
-                                  <td><%=userList.getTelefono_contacto() %></td>
-                                </tr>
-                                
-                                
-                                
-                                
-                                <%
-                              }
-                                %>
-                                
-                              </tbody>
-                            </table>
+                            
                             
                             
                             
@@ -260,9 +148,7 @@ listaUser = dtu.listaUserActivos();
                             
                             
                             
-                  </div>
-                  </div>
-              </div>
+                  
             </div>
                 </div>
               </div>
