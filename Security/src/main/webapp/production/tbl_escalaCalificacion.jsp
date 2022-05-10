@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
 
 <!DOCTYPE html>
 <html>
@@ -45,14 +45,14 @@
 
             <div class="clearfix"></div>
 
-           <%@include file="diseÃ±o.jsp"%>
+           <%@include file="diseño.jsp"%>
 
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Escala de evaluaciÃ³n</h3>
+                <h3>Escala de evaluación</h3>
               </div>
 
 
@@ -64,7 +64,7 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Escalas de evaluaciÃ³n registradas</h2>
+                    <h2>Escalas de evaluación registradas</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -87,7 +87,7 @@
                             <div class="text-muted font-13 col-md-12" style="text-align: right;">
                             <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
                             <a href="addEscalaCalificacion.jsp">
-                            	<i class="fa fa-plus-square"></i> Nueva Escala de evaluaciÃ³n</a>
+                            	<i class="fa fa-plus-square"></i> Nueva Escala de evaluación</a>
                             	<br><br>
                             </div>
                             

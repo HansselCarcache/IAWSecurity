@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*" %>
     
  
     
@@ -78,7 +78,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 
                     <div class="clearfix"></div>
 
-                    <%@include file="diseÃ±o.jsp"%>
+                    <%@include file="diseño.jsp"%>
 
             <!-- page content -->
             <div class="right_col" role="main">
