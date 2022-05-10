@@ -46,7 +46,8 @@ dtu.crearJSON();
             			<div class="x_panel">
             				<div class="x_title">
             					<h2>Hubo un problema al realizar el proceso de registro por tanto su cuenta no ha sido creada!</h2></br></br>
-            					<h2><a href="registrarNuevoDocente.jsp">Favor intentar nuevamente aquí </a></h2></br>
+            					<h2>Favor intentar nuevamente</h2></br></br>
+            					<a href="registrarNuevoDocente.jsp" class="btn btn-primary">Regresar</a>
             					<div class="clearfix"></div>
             				</div>
             			</div>
