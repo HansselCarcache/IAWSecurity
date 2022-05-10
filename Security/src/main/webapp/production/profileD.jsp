@@ -1,3 +1,5 @@
+<%@page import="entidades.Vw_perfilDocente"%>
+<%@page import="datos.Dt_inscripcionDocente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*" %>
 
@@ -52,7 +54,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
+              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -116,7 +118,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                           <i class="fa fa-briefcase user-profile-icon"></i> <%=tu.getCargo()%>
                         </li>
                         
-                        <li><i class="fa-solid fa-envelope"></i> <%=vwur.getNombre_usuario()%>
+                        <li><i class="fa-solid fa-envelope"></i> <%=tu.getCorreo_personal()%>
                         </li>
                       </ul>
 
@@ -136,123 +138,75 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
 
 
                       <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Cursos</a>
-                          </li>
-                          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Detalles</a>
-                          </li>
-                        </ul>
+                      <h1 style="margin-left: 15px">Cursos</h1>
+                        <!-- <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">  -->
+                        
+                          <!-- <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Cursos</a>
+                          </li>  -->
+                          <!-- <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Detalles</a>
+                          </li>  -->
+                        <!--  </ul>  -->
                         <div id="myTabContent" class="tab-content">
                           <div role="tabpanel" class="tab-pane active " id="tab_content1" aria-labelledby="home-tab">
                           <!-- End current avatar -->
-                    
                     <!-- start recent activity -->
-                            <ul class="messages">
-                              <li>
-                              <div id="" class="card mt-1">
+                            <table>
+                            
+                            <%
+                    ArrayList<Vw_perfilDocente> listaInsc = new ArrayList<Vw_perfilDocente>();
+              		Dt_inscripcionDocente dtinsc = new Dt_inscripcionDocente();
+              		listaInsc = dtinsc.listaPerfil(vwur.getId_usuario());
+                      %>
+                            
+                            <thead>
+                                <tr>
+                                <th>
+                                
+                                </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                            <%
+                              for(Vw_perfilDocente ins: listaInsc){
+                              %>
+                            
+                            <tr>
+                            <td>
+                            
+                              
                                   <div class="card-body row">
-                                     <div class="col-md-3 col-sm-6 courseimage">
+                                     <div class="col-md-3 col-sm-8 courseimage">
                                         <a><img src="images/capacitacion.png" class="img-fluid" alt="Responsive image"></a>
                                      </div>
 									<div class="media-body col-md-9 col-sm-6">
-                                       <h3><%=vwur.getNombre_usuario() %></h3>
-                                       <h6>Comenzó el: <%=vwur.getNombre_usuario()%></h6>
+                                       <h3><%=ins.getNombre_capacitacion()%></h3>
+                                       <h6>Comenzó el: <%=ins.getFecha_inicial() %></h6>
 									<div class="mt-1">
                                     </div>
                                     </div>
                                   </div>
-                               </div>
-                              </li>
-                              <li>
-                              <div id="" class="card mt-1">
-                                  <div class="card-body row">
-                                     <div class="col-md-3 col-sm-6 courseimage">
-                                        <a><img src="images/capacitacion.png" class="img-fluid" alt="Responsive image"></a>
-                                     </div>
-									<div class="media-body col-md-9 col-sm-6">
-                                       <h3><%=vwur.getNombre_usuario()%></h3>
-                                       <h6>Comenzó el: <%=vwur.getNombre_usuario()%></h6>
-									<div class="mt-1">
-                                    </div>
-                                    </div>
-                                  </div>
-                               </div>
-                              </li>
-                              <li>
-                              <div id="" class="card mt-1">
-                                  <div class="card-body row">
-                                     <div class="col-md-3 col-sm-6 courseimage">
-                                        <a><img src="images/capacitacion.png" class="img-fluid" alt="Responsive image"></a>
-                                     </div>
-									<div class="media-body col-md-9 col-sm-6">
-                                       <h3><%=vwur.getNombre_usuario()%></h3>
-                                       <h6>Comenzó el: <%=vwur.getNombre_usuario()%></h6>
-									<div class="mt-1">
-                                    </div>
-                                    </div>
-                                  </div>
-                               </div>
-                              </li>
-                              <li>
-                              <div id="" class="card mt-1">
-                                  <div class="card-body row">
-                                     <div class="col-md-3 col-sm-6 courseimage">
-                                        <a><img src="images/capacitacion.png" class="img-fluid" alt="Responsive image"></a>
-                                     </div>
-									<div class="media-body col-md-9 col-sm-6">
-                                       <h3><%=vwur.getNombre_usuario()%></h3>
-                                       <h6>Comenzó el: <%=vwur.getNombre_usuario()%></h6>
-									<div class="mt-1">
-                                    </div>
-                                    </div>
-                                  </div>
-                               </div>
-                              </li>
-
-                            </ul>
+                               
+                             
+                            </td>  
+                            </tr>
+                            
+                            <%
+                              }
+                                %>
+                            
+                            </tbody>
+                            </table>
+                            
+                            
+                            
+                            
                             <!-- end recent activity -->
                             
                             </div>
                           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
                     
-                    <!-- start user projects -->
-                            <table class="table table-striped table-bordered" style="width:100%">
-                              <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Project Name</th>
-                                  <th>Client Company</th>
-                                  <th>Hours Spent</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td>New Company Takeover Review</td>
-                                  <td>Deveint Inc</td>
-                                  <td class="hidden-phone">18</td>
-                                </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td>New Partner Contracts Consultanci</td>
-                                  <td>Deveint Inc</td>
-                                  <td class="hidden-phone">13</td>
-                                </tr>
-                                <tr>
-                                  <td>3</td>
-                                  <td>Partners and Inverstors report</td>
-                                  <td>Deveint Inc</td>
-                                  <td class="hidden-phone">30</td>
-                                </tr>
-                                <tr>
-                                  <td>4</td>
-                                  <td>New Company Takeover Review</td>
-                                  <td>Deveint Inc</td>
-                                  <td class="hidden-phone">28</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                            <!-- end user projects -->
+                   
                             
                             <div class="row">
         

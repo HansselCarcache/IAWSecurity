@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import entidades.Tbl_inscripcion;
 import entidades.Tbl_user;
 import entidades.Vw_inscripcion_docente;
+import entidades.Vw_perfilDocente;
 import entidades.Vw_userrol;
 
 public class Dt_inscripcionDocente {
@@ -99,6 +100,58 @@ public class Dt_inscripcionDocente {
 				insc.setDesc_valor(rs.getString("desc_valor"));
 				insc.setEstado(rs.getInt("estado"));
 				insc.setOtras_dependencias(rs.getString("otras_dependencias"));
+				
+				listInsc.add(insc);
+				
+			}
+		}
+		catch (Exception e){
+			System.out.println("DATOS: ERROR EN LISTAR INSCRIPCION"+ e.getMessage());
+			e.printStackTrace();
+			
+		}
+		finally {
+			try {
+				if(rs!= null) {
+					rs.close();
+				}
+				if(ps!= null) {
+					ps.close();
+				}
+				if(c != null) {
+					poolConexion.closeConnection(c);
+				}
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return listInsc;
+	}
+	
+	public ArrayList<Vw_perfilDocente> listaPerfil(int idUser) {
+		ArrayList<Vw_perfilDocente> listInsc = new ArrayList<Vw_perfilDocente>();
+		try {
+			c = poolConexion.getConnection();
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_perfil where id_usuario=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1,  idUser);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Vw_perfilDocente insc = new Vw_perfilDocente();
+				insc.setId_inscripcion(rs.getInt("id_inscripcion"));
+				insc.setNombre_completo(rs.getString("nombre_completo"));
+				insc.setTelefono(rs.getString("telefono"));
+				insc.setCorreo(rs.getString("correo"));
+				insc.setId_usuario(rs.getInt("id_usuario"));
+				insc.setId_oferta_detalle(rs.getInt("id_oferta_detalle"));
+				insc.setValor(rs.getString("valor"));
+				insc.setDesc_valor(rs.getString("desc_valor"));
+				insc.setEstado(rs.getInt("estado"));
+				insc.setOtras_dependencias(rs.getString("otras_dependencias"));
+				insc.setId_capacitacion(rs.getInt("id_capacitacion"));
+				insc.setNombre_capacitacion(rs.getString("nombre_capacitacion"));
+				insc.setFecha_inicial(rs.getDate("fecha_inicial"));
+				insc.setFecha_final(rs.getDate("fecha_final"));
 				
 				listInsc.add(insc);
 				
