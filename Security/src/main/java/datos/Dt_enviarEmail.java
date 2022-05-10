@@ -12,7 +12,7 @@ public class Dt_enviarEmail {
 		private static final String SMTP_AUTH_PWD = "diagoexitjpydqgq";
 		
 		//Enlace de verificación de correo
-	    String linkHR = "http://localhost:8080/Security/Login.jsp";
+		String linkHR = "http://165.98.12.158:9090/Gestion_docente/Login.jsp";
 		
 	    //DECLARAMOS UNA CLASE PRIVADA COMO ATRIBUTO QUE HEREDA JAVAX.MAIL.AUTHENTICATOR
 	    private class SMTPAuthenticator extends javax.mail.Authenticator 
