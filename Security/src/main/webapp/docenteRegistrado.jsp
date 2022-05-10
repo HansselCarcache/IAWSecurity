@@ -46,7 +46,8 @@ dtu.crearJSON();
             			<div class="x_panel">
             				<div class="x_title">
             					<h2>El proceso ha sido exitoso, su cuenta ha sido registrada!</h2></br></br>
-            					<h2>Favor revisar las indicaciones en su correo para ingresar a la plataforma</h2>
+            					<h2>Favor revisar las indicaciones en su correo para ingresar a la plataforma</h2></br></br>
+            					<a href="Login.jsp" class="btn btn-primary">Regresar a la página de ingreso</a>
             					<div class="clearfix"></div>
             				</div>
             			</div>
