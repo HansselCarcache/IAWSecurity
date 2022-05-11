@@ -777,7 +777,46 @@ public class Dt_usuario {
 			return actualizado;
 		}
 		
-		// METODO PARA OBTENER UN OBJETO DE TIPO Vw_userrol //
+		// Metodo para actualizar el estado del Usuario //Cuando es verificado
+				public boolean updEstadoCedula(String cedula)
+				{
+					boolean actualizado = false;
+					try{
+						c = poolConexion.getConnection();
+						this.llenaRsUsuario(c);	
+						rsUsuario.beforeFirst();
+						while(rsUsuario.next()){
+							if(rsUsuario.getString("cedula").equals(cedula)){
+								rsUsuario.updateInt("estado", 1);
+								rsUsuario.updateRow();
+								actualizado = true;
+								break;
+							}
+						}
+					}
+					catch (Exception e) {
+						System.err.println("ERROR updEstado() "+e.getMessage());
+						e.printStackTrace();
+					}
+					finally{
+						try {
+							if(rsUsuario != null){
+								rsUsuario.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+					return actualizado;
+				}
+		
+		// METODO PARA OBTENER UN OBJETO DE TIPO Vw_userrol con el usuario //
 				public Vw_userrol dtGetVwUR(String login, int rol){
 					Vw_userrol vwur = new Vw_userrol();
 					String SQL = ("SELECT * FROM gestion_docente.vw_rol_usuarios WHERE nombre_usuario=? and id_rol=? and estado<>3");
@@ -785,6 +824,53 @@ public class Dt_usuario {
 						c = poolConexion.getConnection();
 						ps = c.prepareStatement(SQL);
 						ps.setString(1, login);
+						ps.setInt(2, rol);
+						rs = ps.executeQuery();
+						if(rs.next()){
+							vwur.setId_usuario(rs.getInt("id_usuario"));
+							vwur.setNombre_usuario(rs.getString("nombre_usuario"));
+							vwur.setUsuario(rs.getString("nombre_real"));
+							vwur.setPwd(rs.getString("pwd"));
+							vwur.setKey(rs.getString("token"));
+							vwur.setCodVerificacion(rs.getString("codVerificacion"));
+							vwur.setId_rol(rs.getInt("id_rol"));
+							vwur.setRol(rs.getString("rol_descripcion"));
+							vwur.setEstado(rs.getInt("estado"));
+						}
+					}
+					catch (Exception e){
+						System.out.println("DATOS: ERROR EN dtGetVwUR "+ e.getMessage());
+						e.printStackTrace();
+					}
+					finally {
+						try {
+							if(rs != null){
+								rs.close();
+							}
+							if(ps != null){
+								ps.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				
+					return vwur;
+				}
+				
+				// METODO PARA OBTENER UN OBJETO DE TIPO Vw_userrol con el usuario //
+				public Vw_userrol dtGetVwURCedula(String cedula, int rol){
+					Vw_userrol vwur = new Vw_userrol();
+					String SQL = ("SELECT * FROM gestion_docente.vw_rol_usuarios WHERE cedula=? and id_rol=? and estado<>3");
+					try{
+						c = poolConexion.getConnection();
+						ps = c.prepareStatement(SQL);
+						ps.setString(1, cedula);
 						ps.setInt(2, rol);
 						rs = ps.executeQuery();
 						if(rs.next()){
@@ -882,6 +968,65 @@ public class Dt_usuario {
 				
 					return existe;
 				}
+				
+				// METODO PARA VERIFICAR Cedula, PWD, ROL Y CODIGO DE VERIFICACION // POR PRIMERA VEZ
+				public boolean dtverificarLogin2Cedula(String cedula, String clave, int rol, String codigo)
+				{
+					boolean existe=false;
+					String SQL = ("SELECT * FROM gestion_docente.vw_rol_usuarios WHERE cedula=? AND pwd=? AND id_rol=? AND codVerificacion=? AND estado=0");
+					try{
+						/////// DESENCRIPTACION DE LA PWD //////////
+						Vw_userrol vwur = new Vw_userrol();
+						Encrypt enc = new Encrypt();
+						vwur = this.dtGetVwURCedula(cedula, rol);
+						String pwdDecrypt = "";
+						String pwdEncrypt = "";
+						
+						pwdEncrypt = vwur.getPwd();
+						pwdDecrypt = enc.getAESDecrypt(pwdEncrypt,vwur.getKey());
+						/////////////////////////////////////////
+						c = poolConexion.getConnection();
+						ps = c.prepareStatement(SQL);
+						ps.setString(1, cedula);
+						if(clave.equals(pwdDecrypt)){
+							ps.setString(2, pwdEncrypt);
+						}
+						else {
+							ps.setString(2, clave);
+						}
+						
+						ps.setInt(3, rol);
+						ps.setString(4, codigo);
+						rs = ps.executeQuery();
+						if(rs.next()){
+							existe=true;
+							this.updEstadoCedula(cedula);
+						}
+					}
+					catch (Exception e){
+						System.out.println("DATOS: ERROR dtverificarLogin2() "+ e.getMessage());
+						e.printStackTrace();
+					}
+					finally {
+						try {
+							if(rs != null){
+								rs.close();
+							}
+							if(ps != null){
+								ps.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				
+					return existe;
+				}
 		
 				// METODO PARA VERIFICAR USUARIO, PWD Y ROL //
 				public boolean dtverificarLogin(String login, String clave, int rol)
@@ -902,6 +1047,63 @@ public class Dt_usuario {
 						c = poolConexion.getConnection();
 						ps = c.prepareStatement(SQL);
 						ps.setString(1, login);
+						
+						if(clave.equals(pwdDecrypt)){
+							ps.setString(2, pwdEncrypt);
+						}
+						else {
+							ps.setString(2, clave);
+						}
+						ps.setInt(3, rol);
+						rs = ps.executeQuery();
+						if(rs.next()){
+							existe=true;
+						}
+					}
+					catch (Exception e){
+						System.out.println("DATOS: ERROR dtverificarLogin() "+ e.getMessage());
+						e.printStackTrace();
+					}
+					finally {
+						try {
+							if(rs != null){
+								rs.close();
+							}
+							if(ps != null){
+								ps.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				
+					return existe;
+				}
+				
+				// METODO PARA VERIFICAR CEDULA, PWD Y ROL //
+				public boolean dtverificarLoginCedula(String cedula, String clave, int rol)
+				{
+					boolean existe=false;
+					String SQL = ("SELECT * FROM gestion_docente.vw_rol_usuarios WHERE cedula=? AND pwd=? AND id_rol=? AND estado>0 AND estado<3");
+					try{
+						/////// DESENCRIPTACION DE LA PWD //////////
+						Vw_userrol vwur = new Vw_userrol();
+						Encrypt enc = new Encrypt();
+						vwur = this.dtGetVwURCedula(cedula, rol);
+						String pwdDecrypt = "";
+						String pwdEncrypt = "";
+						
+						pwdEncrypt = vwur.getPwd();
+						pwdDecrypt = enc.getAESDecrypt(pwdEncrypt,vwur.getKey());
+						/////////////////////////////////////////
+						c = poolConexion.getConnection();
+						ps = c.prepareStatement(SQL);
+						ps.setString(1, cedula);
 						
 						if(clave.equals(pwdDecrypt)){
 							ps.setString(2, pwdEncrypt);
