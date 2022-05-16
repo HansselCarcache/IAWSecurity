@@ -15,7 +15,7 @@
 	
 	String msj="";
 	msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");	
-	int usuario = 2; 
+	
 %>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -106,6 +106,7 @@
                     <table id="tbl_Evaluacion" class="table table-striped table-bordered" style="width:100%">
                     
                      <%
+                     		int usuario = vwur.getId_usuario(); 
                       		ArrayList<Vw_evaluacion> listInc = new ArrayList<Vw_evaluacion>();
                       		String cedula="";
                       		Dt_evaluacion dtins = new Dt_evaluacion();
@@ -254,10 +255,10 @@
                       <tfoot>
                         <tr>
                           <th>Estudiante docente</th>
-                          <th>Carrera</th>
-                          <th>Oferta</th>
-                          <th>Id UCA</th>
-                          <th>Correo</th>
+                          <th>Convocatoria</th>
+                          <th>Capacitacion</th>
+                          <th>Tipo Calificacion</th>
+                          <th>Valor</th>
                           <th>Calificacion</th>
   
                         </tr>
