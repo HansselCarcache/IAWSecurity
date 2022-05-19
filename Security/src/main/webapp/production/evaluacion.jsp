@@ -335,7 +335,7 @@
    	function mostrarcolumna(){
    		var table = $('#tbl_Evaluacion').DataTable();
    	    
-   	   	table.columns( [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ] ).visible( true, true );
+   	   	table.columns( [ 0, 1, 2, 3, 4, 5 ] ).visible( true, true );
    	}
    	
    	function init(x){
