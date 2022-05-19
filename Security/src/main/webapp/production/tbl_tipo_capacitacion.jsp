@@ -115,12 +115,12 @@
 					                      <thead>
 						                        <tr>
 						                          
-						                          <th>Id<a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
-						                          <th>Tipo Capacitación <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
-						                          <th>Certificación <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
-						                          <th>Descripcion <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
-						                          <th>Estado <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
-						                          <th>Acciones <a onclick="eliminarcolumna(5)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                    
+						                          <th>Tipo Capacitación <a onclick="eliminarcolumna(0)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Certificación <a onclick="eliminarcolumna(1)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Descripcion <a onclick="eliminarcolumna(2)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Estado <a onclick="eliminarcolumna(3)"><i class="fa-solid fa-circle-minus"></i></a></th>
+						                          <th>Acciones <a onclick="eliminarcolumna(4)"><i class="fa-solid fa-circle-minus"></i></a></th>
 						                          
 						                        </tr>
 					                      </thead>
@@ -146,7 +146,7 @@
 					                      
 					                        <tr>
 					                          
-					                          <td><%=tTipCal.getId_tipo_capacitacion() %></td>
+					                         
 											  <td><%=tTipCal.getTipo_capacitacion() %></td>
 											  <td><%=certificado %></td>
 											  <td><%= tTipCal.getDescripcion() %></td>
@@ -176,7 +176,7 @@
 					                      </tbody>
 					                      <tfoot>
 					                         <tr>
-												<th>Id </th>
+												
 												<th>Tipo Capacitación </th>
 												<th>Certificada</th>
 												<th>Descripcion</th>
