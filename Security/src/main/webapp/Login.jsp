@@ -108,7 +108,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
               <input type="hidden" name="opcion" id="opcion" value="<%=opcion%>">
               <input type="hidden" name="codVerificacion" value="<%=codigo%>">
               <div>
-                <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario" required="required" />
+                <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario o Cédula" required="required" />
               </div>
               <div>
                 <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Contraseña" required="required" />

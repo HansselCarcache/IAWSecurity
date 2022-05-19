@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
 	
 	String msj="";
 	msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");	
-	int usuario = 2; 
+	
 %>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -73,7 +73,7 @@
 
             <div class="clearfix"></div>
 
-           <%@include file="diseño.jsp"%>
+           <%@include file="diseñoFacilitador.jsp"%>
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -106,6 +106,7 @@
                     <table id="tbl_Evaluacion" class="table table-striped table-bordered" style="width:100%">
                     
                      <%
+                     		int usuario = vwur.getId_usuario(); 
                       		ArrayList<Vw_evaluacion> listInc = new ArrayList<Vw_evaluacion>();
                       		String cedula="";
                       		Dt_evaluacion dtins = new Dt_evaluacion();
@@ -254,10 +255,10 @@
                       <tfoot>
                         <tr>
                           <th>Estudiante docente</th>
-                          <th>Carrera</th>
-                          <th>Oferta</th>
-                          <th>Id UCA</th>
-                          <th>Correo</th>
+                          <th>Convocatoria</th>
+                          <th>Capacitacion</th>
+                          <th>Tipo Calificacion</th>
+                          <th>Valor</th>
                           <th>Calificacion</th>
   
                         </tr>
@@ -334,7 +335,7 @@
    	function mostrarcolumna(){
    		var table = $('#tbl_Evaluacion').DataTable();
    	    
-   	   	table.columns( [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ] ).visible( true, true );
+   	   	table.columns( [ 0, 1, 2, 3, 4, 5 ] ).visible( true, true );
    	}
    	
    	function init(x){

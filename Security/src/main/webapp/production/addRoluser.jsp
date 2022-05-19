@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.Tbl_userRol,entidades.Vw_rolopcion, entidades.Tbl_user,entidades.Vw_userrol,
-    entidades.Tbl_rol , datos.Dt_roluser, datos.Dt_usuario, datos.Dt_rol,datos.Dt_rolopciones, java.util.*;" %>
+    entidades.Tbl_rol , datos.Dt_roluser, datos.Dt_usuario, datos.Dt_rol,datos.Dt_rolopciones, java.util.*" %>
 
 
 <!DOCTYPE html>
@@ -95,7 +95,7 @@
 												  <% 
 												  	for(Tbl_user tu :listaUsuario){
 												  %>
-												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_real()%></option>
+												  <option value="<%=tu.getId_usuario()%>"><%=tu.getNombre_usuario()%></option>
 												  <%
 												  	}
 												  %>

@@ -5,16 +5,12 @@
 <%
 ArrayList<Vw_ofertadet> listaOferta = new ArrayList<Vw_ofertadet>();
 Tbl_oferta oferta = new Tbl_oferta();
-
 Dt_oferta dto = new Dt_oferta();
 Dt_ofertadet dtod = new Dt_ofertadet();
-
 String id = "";
 id = request.getParameter("m") == null ? "0" : request.getParameter("m");
-
 oferta = dto.getoferta(Integer.parseInt(id));
 listaOferta = dtod.listaOD_id(Integer.parseInt(id));
-
 String msj="";
 msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 %>
@@ -317,7 +313,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 																final: <span class="required">*</span>
 															</label>
 															<div class="col-md-6 col-sm-6 ">
-																<input type="date" id="ffinald" name="finiciod"
+																<input type="date" id="ffinald" name="ffinald"
 																	required="required" class="form-control ">
 															</div>
 														</div>
@@ -362,7 +358,8 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 														<div class="ln_solid">
 				                                            <div class="form-group">
 				                                                <div class="col-md-6 offset-md-3">
-				                                                    <button type='button' onclick="agregarFila()" class="btn btn-primary">Registrar apacitacion</button>
+				                                                    <button type='submit' class="btn btn-primary">Guardar</button>
+				                                                    <a href="tbl_oferta.jsp" class="btn btn-success">Regresar</a>
 				                                                </div>
 				                                            </div>
                                        					</div>
@@ -499,7 +496,6 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 			var password = document.getElementById("password1");
 			var slash = document.getElementById("slash");
 			var eye = document.getElementById("eye");
-
 			if (password.type === 'password') {
 				password.type = "text";
 				slash.style.display = "block";
@@ -534,11 +530,9 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 			if (this.checked)
 				$('form .alert').remove();
 		}).prop('checked', false);
-
 		$(document).ready(function() {
 			$('.js-example-basic-single').select2();
 		});
-
 		$(document).ready(function() {
         	try {
         		<% if(msj.equals("1")) {%>
@@ -606,11 +600,9 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
             
         });
 		function agregarFila() {
-
 			var cap = $('#capacitacion').val();
 			var fac = $('#facilitador').val();
 			var dias = $('#dias').val();
-
 			document.getElementById("tbl_detalle").insertRow(1).innerHTML = '<td>'
 					+ cap
 					+ '</td>'
@@ -622,22 +614,18 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 					+ '</td>'
 					+ '<td><button type="button" onclick="eliminarFila()" class="btn btn-sm btn-danger borrar"><i class="fas fa-trash-alt"></i></button></td>';
 		}
-
 		function eliminarFila() {
 			$(document).on('click', '.borrar', function(event) {
 				event.preventDefault();
 				$(this).closest('tr').remove();
 			});
 		}
-
 		$(document).ready(function() {
 			$('#tbl_capacitaciones').DataTable({
 				buttons : [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
 				"dom" : '<"top"lf>rt<"bottom"ip><"clear">',
 				keys : true,
-
 				"lengthMenu" : [ 10, 25, 50, 75, 100 ],
-
 				"language" : {
 					"lengthMenu" : "Mostrar _MENU_ records por pagina",
 					"search" : "Buscar:",
@@ -650,19 +638,15 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 					"emptyTable" : "No existen datos en la tabla",
 					"zeroRecords" : "No existe un registro en la BD",
 					"info" : "Mostrando página _PAGE_ de _PAGES_",
-
 					"infoEmpty" : "No existe registro",
 					"infoFiltered" : "(filtered from _MAX_ total records)"
 				}
 			});
-
 			$('#tbl_detalle').DataTable({
 				buttons : [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
 				"dom" : '<"top"lf>rst<"bottom"ip><"clear">',
 				keys : true,
-
 				"lengthMenu" : [ 10, 25, 50, 75, 100 ],
-
 				"language" : {
 					"lengthMenu" : "Mostrar _MENU_ records por pagina",
 					"search" : "Buscar:",
@@ -675,7 +659,6 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 					"emptyTable" : "No existen datos en la tabla",
 					"zeroRecords" : "No existe un registro en la BD",
 					"info" : "Mostrando página _PAGE_ de _PAGES_",
-
 					"infoEmpty" : "No existe registro",
 					"infoFiltered" : "(filtered from _MAX_ total records)"
 				}

@@ -104,6 +104,7 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 										</div>
 										<div class="x_content">
 											<form class="" action="../Sl_OfertaEnc" method="post" novalidate>
+												<input type="hidden" value="<%=vwur.getId_usuario()%>" name="iduser" id="iduser"/>
 												<input type="hidden" value="2" id="opcion" name="opcion"/>
 												<input type="hidden" value="<%=of %>" id="id" name="id"/>
 												<input type="hidden" value="updateOferta.jsp" name="frm" id="frm"/>
@@ -192,13 +193,13 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 												<div class="row">
 													<div class="col-md-12 col-sm-12">
 												<form class="" action="../Sl_OfertaDet" method="post" novalidate>
-													<input type="hidden" value="<%=vwur.getId_usuario() %>" name="iduser" id="iduser"/>
-													<input type="hidden" value="<%=oferta.getFecha_inicial() %>" name="finicio" id="finicio"/>
-												   	<input type="hidden" value="<%=oferta.getFecha_final() %>"  name="ffinal" id="ffinal" />
+													<input type="hidden" value="<%=vwur.getId_usuario()%>" name="iduser" id="iduser"/>
+													<input type="hidden" value="<%=oferta.getFecha_inicial()%>" name="finicio" id="finicio"/>
+												   	<input type="hidden" value="<%=oferta.getFecha_final()%>"  name="ffinal" id="ffinal" />
 												   	<input type="hidden" value="1" name="opcion" id="opcion"/>
 												   	<input type="hidden" value="updateOferta.jsp" name="frm" id="frm"/>
 												   	<input type="hidden" value="1" name="estado" id="estado"/>
-												   	<input type="hidden" value="<%=oferta.getId_oferta() %>" name="id_oferta" id="id_oferta"/>
+												   	<input type="hidden" value="<%=oferta.getId_oferta()%>" name="id_oferta" id="id_oferta"/>
 	
 													<!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 													<!--                                         </p> -->

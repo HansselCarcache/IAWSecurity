@@ -58,7 +58,7 @@ public class Sl_OfertaDet extends HttpServlet {
 		
 		
 		tod.setId_oferta(Integer.parseInt(request.getParameter("id_oferta")));
-		tod.setId_oferta_detalle(Integer.parseInt(request.getParameter("id_oferta_det")));
+		
 		int x = 0;
 		//boolean x = false;
 		try {
@@ -144,6 +144,7 @@ public class Sl_OfertaDet extends HttpServlet {
 				//ingresar detalles de un encabezado a modificar
 				case 2:
 					try {
+						tod.setId_oferta_detalle(Integer.parseInt(request.getParameter("id_oferta_det")));
 						tod.setPublico(Integer.parseInt(request.getParameter("publico")));
 						tod.setId_capacitacion(Integer.parseInt(request.getParameter("capacitacion")));
 						tod.setId_facilitador(Integer.parseInt(request.getParameter("facilitador")));

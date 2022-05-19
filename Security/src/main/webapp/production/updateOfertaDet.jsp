@@ -571,7 +571,7 @@ if(Integer.parseInt(d) !=0){
 				
 				$('#publico').val("<%=ofertaD.getPublico()%>");
 				$('#ffinald').val("<%=ofertaD.getFecha_final()%>");
-				$('#finiciod').val("<%=ofertaD.getFecha_final()%>");
+				$('#finiciod').val("<%=ofertaD.getFecha_inicio()%>");
 				$('#dias').val("<%=ofertaD.getDias()%>");
 			
 			<%}%>
