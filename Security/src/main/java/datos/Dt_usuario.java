@@ -290,6 +290,49 @@ public class Dt_usuario {
 		
 	}
 	
+	// Metodo para guardar la foto del Usuario
+		public boolean guardarFotoUser(int idUser, String urlFoto)
+		{
+			boolean actualizado = false;
+			
+			try{
+				c = poolConexion.getConnection();
+				this.llenaRsUsuario(c);	
+				rsUsuario.beforeFirst();
+				while(rsUsuario.next()){
+					if(rsUsuario.getInt(1)==idUser)
+					{
+						rsUsuario.updateString("urlFoto", urlFoto);
+						rsUsuario.updateRow();
+						actualizado = true;
+						break;
+					}
+				}
+			}
+			catch (Exception e) 
+			{
+				System.err.println("ERROR AL GUARDAR FOTO "+e.getMessage());
+				e.printStackTrace();
+			}
+			finally
+			{
+				try {
+					if(rsUsuario != null){
+						rsUsuario.close();
+					}
+					if(c != null){
+						poolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			return actualizado;
+		}
+	
 	public Tbl_user getUserbyID(int idUser) {
 		Tbl_user tu = new Tbl_user();
 		try {
@@ -311,6 +354,7 @@ public class Dt_usuario {
 				tu.setFecha_creacion(rs.getTimestamp("fecha_creacion"));
 				tu.setEstado(rs.getInt("estado"));
 				tu.setUsuario_eliminacion(rs.getInt("usuario_eliminacion"));
+				tu.setUrlFoto(rs.getString("urlFoto"));
 				
 			}
 		}catch (Exception e)
@@ -836,6 +880,7 @@ public class Dt_usuario {
 							vwur.setId_rol(rs.getInt("id_rol"));
 							vwur.setRol(rs.getString("rol_descripcion"));
 							vwur.setEstado(rs.getInt("estado"));
+							vwur.setUrlFoto(rs.getString("urlFoto"));
 						}
 					}
 					catch (Exception e){
@@ -883,6 +928,7 @@ public class Dt_usuario {
 							vwur.setId_rol(rs.getInt("id_rol"));
 							vwur.setRol(rs.getString("rol_descripcion"));
 							vwur.setEstado(rs.getInt("estado"));
+							vwur.setUrlFoto(rs.getString("urlFoto"));
 						}
 					}
 					catch (Exception e){
