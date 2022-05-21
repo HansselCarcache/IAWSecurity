@@ -111,13 +111,12 @@ public class Dt_usuario {
 		ArrayList<Tbl_user> listUser = new ArrayList<Tbl_user>();
 		try {
 			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT nombre_usuario, id_uca, correo_institucional, cedula FROM gestion_docente.usuario;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps = c.prepareStatement("SELECT nombre_usuario, id_uca, cedula FROM gestion_docente.usuario;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				Tbl_user user = new Tbl_user();
 				user.setNombre_usuario(rs.getString("nombre_usuario"));
 				user.setId_uca(rs.getString("id_uca"));
-				user.setCorreo_institucional(rs.getString("correo_institucional"));
 				user.setCedula(rs.getString("cedula"));
 				listUser.add(user);
 				
@@ -146,7 +145,7 @@ public class Dt_usuario {
 		}
 		//PARA GUARDAR
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			try (FileWriter writer = new FileWriter("../eclipseApps/Security/production/datos_usuario.json")) {
+			try (FileWriter writer = new FileWriter("C:\\payara5\\glassfish\\fotos_usuariosGD\\datos_usuario.json")) {
 	            gson.toJson(listUser, writer);
 	            
 	            
@@ -156,7 +155,7 @@ public class Dt_usuario {
 	            e.printStackTrace();
 	        }
 			//PARA LEER
-			String fileName = "../eclipseApps/Security/production/datos_usuario.json";
+			String fileName = "C:\\payara5\\glassfish\\fotos_usuariosGD\\datos_usuario.json";
 			Path path = new File(fileName).toPath();
 			
 			try (Reader br = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
