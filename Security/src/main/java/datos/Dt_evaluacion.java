@@ -35,7 +35,7 @@ public class Dt_evaluacion {
 			ArrayList<Vw_evaluacion> listEv = new ArrayList<Vw_evaluacion>();
 			try {
 				c = poolConexion.getConnection();
-				ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_evaluacion WHERE estado <> 3 AND cedula = '"+cedula+"'", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_evaluacion WHERE estado <> 3 AND cedula = '"+cedula+"' AND evaluada<> 0", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 				rs = ps.executeQuery();
 				while(rs.next()) {
 					Vw_evaluacion ev = new Vw_evaluacion();
