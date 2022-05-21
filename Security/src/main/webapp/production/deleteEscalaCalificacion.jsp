@@ -341,6 +341,20 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
              
         }
         $(document).ready(function() {
+        	
+        	<% if(msj.equals("1")) {%>
+    		new PNotify({
+                type: 'error',
+                title: 'Ocurrio un error al borrar',
+                text: 'Vuelva a ingresar los datos e intente nuevamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	
+        	
 			$('#tbl_capacitaciones').DataTable({
 				buttons : [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
 				"dom" : '<"top"lf>rt<"bottom"ip><"clear">',
@@ -393,7 +407,10 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 		});
         
     </script>
-
+<!--Pnotify-->
+<script src="../vendors/pnotify/dist/pnotify.js"></script>
+<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->

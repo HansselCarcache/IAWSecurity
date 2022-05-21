@@ -3,6 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<% 
+	String msj="";
+	msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
+%>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="ISO-8859-1">
@@ -218,6 +222,18 @@
         }).prop('checked', false);
         
         $(document).ready(function() {
+        	
+        	<% if(msj.equals("2")) {%>
+    		new PNotify({
+                type: 'error',
+                title: 'Ocurrio un error al agregar',
+                text: 'Vuelva a ingresar los datos e intente nuevamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
             $('.js-example-basic-single').select2();
         });
         
@@ -252,6 +268,11 @@
     <script src="../vendors/nprogress/nprogress.js"></script>
      <!-- iCheck -->
     <script src="../vendors/iCheck/icheck.min.js"></script>
+    
+    <!--Pnotify-->
+	<script src="../vendors/pnotify/dist/pnotify.js"></script>
+	<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+	<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
      <!-- Datatables -->
     <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

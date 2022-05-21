@@ -3,6 +3,10 @@
 
 <!DOCTYPE html>
 <html>
+<% 
+	String msj="";
+	msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
+%>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -22,6 +26,15 @@
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!--Pnotify-->
+	<link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+	<link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+	<link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+	<style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
     <!-- Datatables -->
     
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -197,6 +210,10 @@
     <script src="../vendors/nprogress/nprogress.js"></script>
     <!-- iCheck -->
     <script src="../vendors/iCheck/icheck.min.js"></script>
+        <!--Pnotify-->
+	<script src="../vendors/pnotify/dist/pnotify.js"></script>
+	<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+	<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
     <!-- Datatables -->
     <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -233,6 +250,17 @@
    	
     
     $(document).ready(function() {
+    	
+    	<% if(msj.equals("1")) {%>
+		new PNotify({
+            type: 'success',
+            title: 'Ingreso exitoso',
+            text: 'Se han borrado los datos existosamente',
+            styling: 'bootstrap3',
+            delay: 2000,
+            addclass: 'center'
+        }); 
+    	<%}%>
     	
     	
         $('#tbl_calificacion').DataTable( {

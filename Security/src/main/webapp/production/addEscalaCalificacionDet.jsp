@@ -29,6 +29,7 @@ String msj="";
 msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 %>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!-- Meta, title, CSS, favicons, etc. -->
 <meta charset="ISO-8859-1">
@@ -431,41 +432,6 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
                 }); 
             	<%}%>
             	
-            	//FECHAS EN DETALLE
-            	<% if(msj.equals("3")) {%>
-        		new PNotify({
-                    type: 'warning',
-                    title: 'Advertencia',
-                    text: 'La fecha inicial ingresada ocurre luego de la fecha final ingresada',
-                    styling: 'bootstrap3',
-                    delay: 2000,
-                    addclass: 'center'
-                }); 
-            	<%}%>
-            	
-            	<% if(msj.equals("4")) {%>
-        		new PNotify({
-                    type: 'warning',
-                    title: 'Advertencia',
-                    text: 'Asegurese que la fecha final esta dentro del rango del encabezado',
-                    styling: 'bootstrap3',
-                    delay: 2000,
-                    addclass: 'center'
-                }); 
-            	<%}%>
-            	
-            	<% if(msj.equals("5")) {%>
-        		new PNotify({
-                    type: 'warning',
-                    title: 'Advertencia',
-                    text: 'Asegurese que la fecha inicial esta dentro del rango del encabezado',
-                    styling: 'bootstrap3',
-                    delay: 2000,
-                    addclass: 'center'
-                }); 
-            	<%}%>
-        		  
-            	
         		  
         		}
         		catch(err) {
@@ -554,6 +520,8 @@ msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
 
 	<!-- Pnotify -->
 	<script src="../vendors/pnotify/dist/pnotify.js"></script>
+	<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+	<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 	<!-- jQuery -->
 	<script src="../vendors/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->

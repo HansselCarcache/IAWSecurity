@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import datos.Dt_carreras;
+import datos.Dt_carrerasInsc;
 import datos.Dt_inscripcionAdmin;
 import entidades.Vw_carrera_departamento;
 import entidades.Vw_inscripcionAdmin;
@@ -66,7 +67,7 @@ public class Sl_InscripcionAdmin extends HttpServlet {
 				if(id !=0) {
 					//OBTENER ARRAY DE CARRERAS A INSCRIBIR
 					String[] a = request.getParameterValues("carreras");
-					Dt_carreras dac = new Dt_carreras();
+					Dt_carrerasInsc dac = new Dt_carrerasInsc();
 					
 					for(String s:a) {
 						System.out.print("CARERRAS: " + s);
@@ -93,15 +94,13 @@ public class Sl_InscripcionAdmin extends HttpServlet {
 			ia.setId_inscripcion(Integer.parseInt(request.getParameter("id_inscripcion")));
 			ia.setId_oferta_detalle(Integer.parseInt(request.getParameter("oferta")));
 			
-			
-			
 			try {
 				if(dia.updateInscripcionAdmin(ia)) {
 					if(dia.deleteCarreraInscripcionById(ia.getId_inscripcion())) {
 						String[] b = {};
 						String[] a = request.getParameterValues("carreras") == null ? b : request.getParameterValues("carreras");
 						
-						Dt_carreras dac = new Dt_carreras();
+						Dt_carrerasInsc dac = new Dt_carrerasInsc();
 						
 						for(String s:a) {
 							
@@ -115,7 +114,7 @@ public class Sl_InscripcionAdmin extends HttpServlet {
 						response.sendRedirect("production/tbl_inscripcion.jsp?msj=3");
 
 					}else {
-						response.sendRedirect("production/tbl_inscripcion.jsp?msj=5");
+						response.sendRedirect("production/tbl_inscripcion.jsp?msj=4");
 					}
 				}
 				else {

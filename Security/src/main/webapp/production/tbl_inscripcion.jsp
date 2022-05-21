@@ -4,6 +4,10 @@
 
 <!DOCTYPE html>
 <html>
+<% 
+	String msj="";
+	msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
+%>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -16,6 +20,15 @@
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--Pnotify-->
+	<link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+	<link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+	<link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+	<style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
@@ -256,6 +269,12 @@
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    
+     <!--Pnotify-->
+	<script src="../vendors/pnotify/dist/pnotify.js"></script>
+	<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+	<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+	 
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -277,7 +296,72 @@
    	
     
     $(document).ready(function() {
-    	
+    	 
+    		<% if(msj.equals("1")) {%>
+    		new PNotify({
+                type: 'success',
+                title: 'Ingreso exitoso',
+                text: 'Se han ingresado los datos existosamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("2")) {%>
+    		new PNotify({
+                type: 'error',
+                title: 'Ocurrio un error al agregar',
+                text: 'Vuelva a ingresar los datos e intente nuevamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("3")) {%>
+    		new PNotify({
+                type: 'success',
+                title: 'Edicion exitosa',
+                text: 'Se han editado los datos existosamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("4")) {%>
+    		new PNotify({
+                type: 'error',
+                title: 'Ocurrio un error al editar',
+                text: 'Vuelva a ingresar los datos e intente nuevamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("5")) {%>
+    		new PNotify({
+                type: 'success',
+                title: 'Eliminacion existosa',
+                text: 'Se ha eliminado la oferta de la capacitacion exitosamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
+        	<% if(msj.equals("6")) {%>
+    		new PNotify({
+                type: 'error',
+                title: 'Ocurrio un error al eliminar',
+                text: 'Revise su conexion he intentelo de nuevo',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
     	
         $('#tbl_insAdm').DataTable( {
         	buttons: [  

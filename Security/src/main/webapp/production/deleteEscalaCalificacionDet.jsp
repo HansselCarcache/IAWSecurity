@@ -395,6 +395,18 @@ if(Integer.parseInt(d) !=0){
         }).prop('checked', false);
         
         $(document).ready(function() {
+        	
+        	<% if(msj.equals("1")) {%>
+    		new PNotify({
+                type: 'error',
+                title: 'Ocurrio un error al eliminar',
+                text: 'Vuelva a ingresar los datos e intente nuevamente',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            }); 
+        	<%}%>
+        	
             $('.js-example-basic-single').select2();
         });
         
@@ -472,7 +484,10 @@ if(Integer.parseInt(d) !=0){
 		});
         
     </script>
-
+<!--Pnotify-->
+<script src="../vendors/pnotify/dist/pnotify.js"></script>
+<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
