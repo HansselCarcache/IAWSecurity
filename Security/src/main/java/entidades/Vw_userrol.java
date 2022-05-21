@@ -13,7 +13,14 @@ public class Vw_userrol {
 	private int id_rol;
 	private String rol;
 	private int estado;
+	private String UrlFoto;
 	
+	public String getUrlFoto() {
+		return UrlFoto;
+	}
+	public void setUrlFoto(String urlFoto) {
+		this.UrlFoto = urlFoto;
+	}
 	//metodos
 	public int getId_rol_usuario() {
 		return id_rol_usuario;

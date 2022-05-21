@@ -165,11 +165,15 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                            <a href="updateUsuario.jsp?idU=<%=tusr.getId_usuario()%>">
                             <i class="far fa-edit" title="Editar Usuario"></i>
                           </a>
-                          &nbsp;&nbsp;
+                          &nbsp;
+                           <a href="addFotoUsuario.jsp?idU=<%=tusr.getId_usuario()%>">
+                            <i class="fa fa-camera" title="Agregar Foto de Usuario"></i>
+                          </a>
+                          &nbsp;
                           <a href="readUsuario.jsp?idU=<%=tusr.getId_usuario()%>">
                             <i class="far fa-eye" title="Visualizar Usuario"></i>
                           </a> 
-                          &nbsp;&nbsp;
+                          &nbsp;
                           <a href="deleteUsuario.jsp?idU=<%=tusr.getId_usuario() %>" >
                             <i class="far fa-trash-alt" title="Eliminar Usuario"></i>
                           </a>
@@ -448,6 +452,14 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
  	      if(mensaje == "9")
 	      {
 	        errorAlert('Error', 'No se ha podido restaurar el usuario. Intente de nuevo.');
+	      }
+ 	     if(mensaje == "10")
+	      {
+	    	successAlert('Exito', 'La foto fue subida con éxito');
+	      }
+	      if(mensaje == "11")
+	      {
+	        errorAlert('Error', 'No se ha podido subir la foto. Intente de nuevo.');
 	      }
     	
         $('#tbl_user').DataTable( {

@@ -144,7 +144,7 @@
                 <ul class=" navbar-right">
                   <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                      <img src="images/logoUCA.png" alt=""><%=vwur.getUsuario() %>
+                      <img src="../<%=vwur.getUrlFoto()==null?"production/images/no-user.jpg":vwur.getUrlFoto()%>" alt=""><%=vwur.getUsuario() %>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item"  href="profile.jsp?idU=<%=vwur.getId_usuario()%>">Perfil</a>
