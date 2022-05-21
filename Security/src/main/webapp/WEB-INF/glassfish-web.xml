@@ -4,4 +4,6 @@
 <glassfish-web-app>
     <context-root>/Security</context-root>
     <property name="alternatedocroot_1" value="from=/fotos_usuariosGD/* dir=\\C:\payara5\glassfish"/>
+    <property name="alternatedocroot_2" value="from=*.json dir=\\C:\payara5\glassfish\fotos_usuariosGD"/>
+<!--     <property name="alternatedocroot_2" value="from=/datos_usuario.json dir=\\C:\payara5\glassfish\fotos_usuariosGD"/> -->
 </glassfish-web-app>

@@ -8,7 +8,7 @@ String VarMsj = "";
 
 VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 Dt_usuario dtu = new Dt_usuario();
-// dtu.crearJSON();
+dtu.crearJSON();
 
 %>
 <!DOCTYPE html>
@@ -111,8 +111,8 @@ Dt_usuario dtu = new Dt_usuario();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-<!-- 												<input type="text" id="txtusername" name="txtusername" onchange="comprobarJSON()"   required="required" title="Escriba su nombre de usuario" class="form-control "> -->
-												<input type="text" id="txtusername" name="txtusername"  required="required" title="Escriba su nombre de usuario" class="form-control ">
+												<input type="text" id="txtusername" name="txtusername" onchange="comprobarJSON()"   required="required" title="Escriba su nombre de usuario" class="form-control ">
+												
 											</div>
 										</div>
 										
@@ -134,8 +134,8 @@ Dt_usuario dtu = new Dt_usuario();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cédula: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-<!-- 												<input type="text" id="txtcedula" name="txtcedula" onchange="comprobarJSON()"  title="Escriba su cédula" required="required" class="form-control "> -->
-												<input type="text" id="txtcedula" name="txtcedula" title="Escriba su cédula" required="required" class="form-control ">
+												<input type="text" id="txtcedula" name="txtcedula" onchange="comprobarJSON()"  title="Escriba su cédula" required="required" class="form-control ">
+												
 											</div>
 										</div>
                                         <div class="field item form-group">
@@ -184,8 +184,8 @@ Dt_usuario dtu = new Dt_usuario();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-<!-- 												<input type="text" id="txtiduca" name="txtiduca" onchange="comprobarJSON()" title="Escriba su ID UCA"  class="form-control "> -->
-												<input type="text" id="txtiduca" name="txtiduca"  title="Escriba su ID UCA"  class="form-control ">
+												<input type="text" id="txtiduca" name="txtiduca" onchange="comprobarJSON()" title="Escriba su ID UCA"  class="form-control ">
+												
 											</div>
 										</div>
 										
@@ -193,7 +193,7 @@ Dt_usuario dtu = new Dt_usuario();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-<!-- 												<input type="text" id="txtcorreoi" onchange="comprobarJSON()" name="txtcorreoi" title="Escriba su correo institucional"  class="form-control "> -->
+												
 												<input type="email" id="txtcorreoi"  name="txtcorreoi" title="Escriba su correo institucional"  class="form-control ">
 											</div>
 										</div>
@@ -327,50 +327,50 @@ Dt_usuario dtu = new Dt_usuario();
             
         }
         
-//         function comprobarJSON(){
-//         	var txtuser = document.getElementById("txtusername");
-//         	var txtiduca = document.getElementById("txtiduca");
-//         	var txtcorreoi = document.getElementById("txtcorreoi")
-//         	var txtcedula = document.getElementById("txtcedula");
-//         	var request = new XMLHttpRequest();
-//         	request.open('GET', 'datos_usuario.json', true)
-//         	request.onload = function(){
-//         		if(request.status === 200){
-//         			var ourData = JSON.parse(request.responseText);
-//         			//console.log(ourData);
+        function comprobarJSON(){
+        	var txtuser = document.getElementById("txtusername");
+        	var txtiduca = document.getElementById("txtiduca");
+        	var txtcorreoi = document.getElementById("txtcorreoi")
+        	var txtcedula = document.getElementById("txtcedula");
+        	var request = new XMLHttpRequest();
+        	request.open('GET', '../datos_usuario.json', true)
+        	request.onload = function(){
+        		if(request.status === 200){
+        			var ourData = JSON.parse(request.responseText);
+        			//console.log(ourData);
         			
         		
-//         		for(i=0; i<ourData.length;i++){
-//         			//console.log(ourData[i].rol);
+        		for(i=0; i<ourData.length;i++){
+        			//console.log(ourData[i].rol);
         			
-//         			/*var htmlString ="";
-//         			htmlString += "<p>" + ourData[i].rol+".</p>";
-//         			container.insertAdjacentHTML('beforebegin', htmlString);*/
-//         			//alert(txt.value);
+        			/*var htmlString ="";
+        			htmlString += "<p>" + ourData[i].rol+".</p>";
+        			container.insertAdjacentHTML('beforebegin', htmlString);*/
+        			//alert(txt.value);
         			
-//         			if(txtuser.value == ourData[i].nombre_usuario){
-//         				errorAlert("Ya existe un registro con ese nombre de usuario, escriba otro diferente.");
-//         			}
+        			if(txtuser.value == ourData[i].nombre_usuario){
+        				errorAlert("El usuario "+txtuser.value+ " ya esta siendo utilizado por otro usuario, escriba otro diferente.");
+        			}
         			
-//         			if(txtiduca.value == ourData[i].id_uca){
-//         				errorAlert("Ya existe un registro con ese IDUCA, escriba otro diferente.");
-//         			}
+        			if(txtiduca.value == ourData[i].id_uca){
+        				errorAlert("El IDUCA: "+txtiduca.value+" esta siendo utilizado por otro usuario, escriba otro diferente.");
+        			}
         			
 //         			if(txtcorreoi.value == ourData[i].correo_institucional){
 //         				errorAlert("Ya existe un registro con ese correo institucional, escriba otro diferente.");
 //         			}
-//         			if(txtcedula.value == ourData[i].cedula){
-//         				errorAlert("Ya existe un registro con esa cedula, escriba otra diferente.");
-//         			}
-//         		}
-//         		}
+        			if(txtcedula.value == ourData[i].cedula){
+        				errorAlert("El número de cedula: "+txtcedula.value+" pertenece a otro usuario, escriba otro diferente.");
+        			}
+        		}
+        		}
         		
-//         		var ourData = JSON.parse(request.responseText);
-//         		//renderHTML(ourData);
-//         	}
-//         	request.send();
+        		var ourData = JSON.parse(request.responseText);
+        		//renderHTML(ourData);
+        	}
+        	request.send();
         	
-//         }
+        }
         
         function habilitar()
 

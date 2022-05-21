@@ -55,7 +55,7 @@
    <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/logoUCA.png" alt="..." class="img-circle profile_img">
+                <img src="images/UCAlogo.png" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Bienvenido,</span>
@@ -129,15 +129,15 @@
                 <ul class=" navbar-right">
                   <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                      <img src="images/logoUCA.png" alt=""><%=vwur.getUsuario() %>
+                     <img src="../<%=vwur.getUrlFoto()==null?"production/images/no-user.jpg":vwur.getUrlFoto()%>" alt=""><%=vwur.getUsuario() %>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item"  href="profileD.jsp?idU=<%=vwur.getId_usuario()%>">Perfil</a>
-                        <a class="dropdown-item"  href="javascript:;">
-                          <span class="badge bg-red pull-right">50%</span>
-                          <span>Configuración</span>
-                        </a>
-                    <a class="dropdown-item"  href="javascript:;">Ayuda</a>
+<!--                         <a class="dropdown-item"  href="javascript:;"> -->
+<!--                           <span class="badge bg-red pull-right">50%</span> -->
+<!--                           <span>Configuración</span> -->
+<!--                         </a> -->
+<!--                     <a class="dropdown-item"  href="javascript:;">Ayuda</a> -->
                       <a class="dropdown-item"  href="../Login.jsp"><i class="fa fa-sign-out pull-right"></i>Cerrar sesión</a>
                     </div>
                   </li>
