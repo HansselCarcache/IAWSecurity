@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import entidades.Tbl_user;
 import entidades.Tbl_user2;
 
 public class Dt_usuario2 {
@@ -58,6 +59,46 @@ public class Dt_usuario2 {
 			}
 		}
 		return guardado;
+	}
+	
+	//metodo para modificar usuario TOKEN
+	public boolean modificarT(Tbl_user2 tus2) {
+		boolean modificado = false;
+		try {
+			c = poolConexion.getConnection();
+			this.llenarRsUser2(c);
+			rsUser2.beforeFirst();
+			while(rsUser2.next())
+			{
+				if(rsUser2.getInt(1)==tus2.getId_user())
+				{
+					rsUser2.updateString("token", tus2.getToken());
+					rsUser2.updateRow();
+					modificado = true;
+					break;
+				}
+			}
+		}catch (Exception e)
+		{
+			System.err.println("ERROR AL modificarUser() "+e.getMessage());
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				if(rsUser2 != null){
+					rsUser2.close();
+				}
+				if(c != null){
+					poolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return modificado;
 	}
 	
 

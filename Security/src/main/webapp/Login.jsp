@@ -163,13 +163,14 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
+            <form method="post" action="./Sl_login">
               <h1>Recuperar Contraseña</h1>
+              <input type="hidden" name="opcion" id="opcion" value="3">
               <div>
-                <input type="text" class="form-control" placeholder="Usuario" required />
+                <input type="text" name="usuario2" id="usuario2" class="form-control" placeholder="Usuario" required="required" />
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Email" required />
+                <input type="email" id="correo" name="correo"class="form-control" placeholder="Correo Personal" required />
               </div>
               
               <div style="margin-right: 38px; margin-left: -38px;">
@@ -221,7 +222,27 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 	 $(document).ready(function() {
     	 var mensaje = 0;
  	    mensaje = "<%=VarMsj %>";
-
+		
+	 	   if(mensaje == "1")
+		      {
+		    	successAlert('Exito', 'Se ha enviado un mensaje a su correo para que pueda reestablecer su contraseña');
+		      }
+	 	  if(mensaje == "2")
+		      {
+		    	errorAlert('Error', 'No existe un usuario asociado a ese correo, intentelo de nuevo.');
+		      }
+	 	 if(mensaje == "3")
+		     {
+		   	errorAlert('Error', 'Ha surgido un error a la hora de enviar el correo de reestablecimiento de contraseña, intente de nuevo');
+		     }
+	 	if(mensaje == "4")
+	      {
+	    	successAlert('Exito', 'La contraseña ha sido reestablecida con éxito.');
+	      }
+	 	if(mensaje == "5")
+	     {
+	   	errorAlert('Error', 'Ha surgido un error a la hora de cambiar la contraseña, intente de nuevo');
+	     }
  	    if(mensaje == "401")
  	      {
  	    	errorAlert('Error', 'Su sesión ha caducado, ingrese de nuevo al sistema.');
