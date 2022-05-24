@@ -41,23 +41,110 @@ public class Sl_rptCapacitados extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-try {
+		}
+
+
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+		try {
 			
-			String idUsuario = "";
-			idUsuario = request.getParameter("idU")==null?"0":request.getParameter("idU");
-			System.out.println("idUsuario: "+idUsuario);
+			String Convocatoria = "";
+			Convocatoria = request.getParameter("pconv")==null?"0":request.getParameter("pconv");
+			if(Convocatoria.equals("0"))
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pconv", null);
+			}
+			else
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pconv", Integer.parseInt(Convocatoria));
+			}
+			
+			
+			String Sexo = "";
+			Sexo = request.getParameter("psexo")==null?"0":request.getParameter("psexo");
+			if(Sexo.equals("0"))
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("psexo", null);
+			}
+			else
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("psexo", Integer.parseInt(Sexo));
+			}
+			
+			
+			String Anio = "";
+			Sexo = request.getParameter("yearr")==null?"0":request.getParameter("yearr");
+			if(Sexo.equals("0"))
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("yearr", null);
+			}
+			else
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("yearr", Integer.parseInt(Anio));
+			}
+			
+			String Facultad = "";
+			Facultad = request.getParameter("pfacultad")==null?"0":request.getParameter("pfacultad");
+			if(Facultad.equals("0"))
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pfacultad", null);
+			}
+			else
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pfacultad", Integer.parseInt(Facultad));
+			}
+			
+			String Departamento = "";
+			Departamento = request.getParameter("pdepartamento")==null?"0":request.getParameter("pdepartamento");
+			if(Departamento.equals("0"))
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pdepartamento", null);
+			}
+			else
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pedepartamento", Integer.parseInt(Departamento));
+			}
+			
+			String Carrera = "";
+			Carrera = request.getParameter("pcarrera")==null?"0":request.getParameter("pcarrera");
+			if(Carrera.equals("0"))
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pcarrera", null);
+			}`
+			else
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pcarrera", Integer.parseInt(Carrera));
+			}
+			
+			
+			
+		
 			
 			poolConexion pc = poolConexion.getInstance(); 
 			Connection c = poolConexion.getConnection();
-			
-			HashMap<String, Object>hm = new HashMap<>();
-			hm.put("userID", Integer.parseInt(idUsuario));
 			
 			OutputStream otps = response.getOutputStream();
 			ServletContext context = getServletContext();
 			String path = context.getRealPath("/");
 			System.out.println("Path: "+path);
-			String template = "reportes\\rptFichaUsuario.jasper";
+			String template = "reportes\\rpt.jasper";
 			Exporter exporter = new JRPdfExporter();
 			JasperPrint jasperPrint = JasperFillManager.fillReport(path+template, hm, c);
 			response.setContentType("application/pdf");
@@ -71,17 +158,11 @@ try {
 			e.printStackTrace();
 			System.out.println("REPORTE: ERROR AL GENERAR REPORTE " + e.getMessage());
 		}
+			
 		
 		
 		
-	}
-
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

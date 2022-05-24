@@ -3,6 +3,9 @@ package reportes;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Connection;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
@@ -49,18 +52,19 @@ public class Sl_rptCertificados extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		//HashMap<String, Object>hm = new HashMap<>();
+		HashMap<String, Object>hm = new HashMap<>();
+		
 		try {
 			
 			String Convocatoria = "";
 			Convocatoria = request.getParameter("pconv")==null?"0":request.getParameter("pconv");
 			if(Convocatoria.equals("0"))
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("pconv", null);
 			}
 			else
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("pconv", Integer.parseInt(Convocatoria));
 			}
 			
@@ -69,26 +73,23 @@ public class Sl_rptCertificados extends HttpServlet {
 			Sexo = request.getParameter("psexo")==null?"0":request.getParameter("psexo");
 			if(Sexo.equals("0"))
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("psexo", null);
 			}
 			else
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("psexo", Integer.parseInt(Sexo));
 			}
 			
 			
 			String Anio = "";
-			Anio = request.getParameter("yearr")==null?"0":request.getParameter("yearr");
-			if(Anio.equals("0"))
+			Anio = request.getParameter("yearr");
+			System.out.print("AAAAAAAAAAAAAA: "+ Anio);
+			if(Anio.isBlank())
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("yearr", null);
 			}
 			else
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("yearr", Integer.parseInt(Anio));
 			}
 
@@ -97,13 +98,11 @@ public class Sl_rptCertificados extends HttpServlet {
 			Facultad = request.getParameter("pfacultad")==null?"0":request.getParameter("pfacultad");
 			if(Facultad.equals("0"))
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("pfacultad", null);
 			}
 			else
 			{
-				HashMap<String, Object>hm = new HashMap<>();
-				hm.put("pfacultad", Integer.parseInt(Facultad));
+				hm.put("pfacultad",Facultad);
 			}
 
 			
@@ -111,13 +110,11 @@ public class Sl_rptCertificados extends HttpServlet {
 			Departamento = request.getParameter("pdepartamento")==null?"0":request.getParameter("pdepartamento");
 			if(Departamento.equals("0"))
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("pdepartamento", null);
 			}
 			else
 			{
-				HashMap<String, Object>hm = new HashMap<>();
-				hm.put("pdepartamento", Integer.parseInt(Departamento));
+				hm.put("pdepartamento", Departamento);
 			}
 
 			
@@ -125,17 +122,18 @@ public class Sl_rptCertificados extends HttpServlet {
 			Carrera = request.getParameter("pcarrera")==null?"0":request.getParameter("pcarrera");
 			if(Carrera.equals("0"))
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("pcarrera", null);
 			}
 			else
 			{
-				HashMap<String, Object>hm = new HashMap<>();
-				hm.put("pcarrera", Integer.parseInt(Carrera));
+				hm.put("pcarrera", Carrera);
 			}
 			
-			
-			
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			String id = dtf.format(LocalDateTime.now());
+
+			System.out.println("AAAAAAA : "+id);
+	        
 			
 			poolConexion pc = poolConexion.getInstance(); 
 			Connection c = poolConexion.getConnection();
@@ -144,11 +142,11 @@ public class Sl_rptCertificados extends HttpServlet {
 			ServletContext context = getServletContext();
 			String path = context.getRealPath("/");
 			System.out.println("Path: "+path);
-			String template = "reportes\\rptFichaUsuario.jasper";
+			String template = "reportes\\rpt_certificados.jasper";
 			Exporter exporter = new JRPdfExporter();
 			JasperPrint jasperPrint = JasperFillManager.fillReport(path+template, hm, c);
 			response.setContentType("application/pdf");
-			response.setHeader("Content-Disposition", "inline; filename=\"rptFichaUsuario_"+idUsuario+".pdf");
+			response.setHeader("Content-Disposition", "inline; filename=\"rpt_certificados"+id+".pdf");
 			exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(otps));
 			exporter.exportReport();
@@ -158,12 +156,7 @@ public class Sl_rptCertificados extends HttpServlet {
 			e.printStackTrace();
 			System.out.println("REPORTE: ERROR AL GENERAR REPORTE " + e.getMessage());
 		}
-			
 		
-		
-		
-		
-		doGet(request, response);
 	}
 
 }
