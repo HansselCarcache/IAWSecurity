@@ -138,7 +138,7 @@
 												  <% 
 												  	for(Tbl_facultad tf :listFacu){
 												  %>
-												  <option value="<%=tf.getId_facultad()%>"><%=tf.getNombre_facultad()%></option>
+												  <option value="<%=tf.getNombre_facultad()%>"><%=tf.getNombre_facultad()%></option>
 												  <%
 												  	}
 												  %>
@@ -160,7 +160,7 @@
 												  <% 
 												  	for(Vw_facultad_departamento tdepa :listDepa){
 												  %>
-												  <option value="<%=tdepa.getId_departamento()%>"><%=tdepa.getNombre_departamento()%></option>
+												  <option value="<%=tdepa.getNombre_departamento()%>"><%=tdepa.getNombre_departamento()%></option>
 												  <%
 												  	}
 												  %>
@@ -183,7 +183,7 @@
 												  <% 
 												  	for(Vw_carrera_departamento tcar :listCar){
 												  %>
-												  <option value="<%=tcar.getId_carrera()%>"><%=tcar.getNombre_carrera()%></option>
+												  <option value="<%=tcar.getNombre_carrera()%>"><%=tcar.getNombre_carrera()%></option>
 												  <%
 												  	}
 												  %>
