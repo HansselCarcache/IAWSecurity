@@ -516,6 +516,46 @@ public class Dt_usuario {
 					}
 					return modificado;
 				}
+		
+				//metodo para modificar usuario PWD
+				public boolean modificarPwd(Tbl_user tus) {
+					boolean modificado = false;
+					try {
+						c = poolConexion.getConnection();
+						this.llenaRsUsuario(c);
+						rsUsuario.beforeFirst();
+						while(rsUsuario.next())
+						{
+							if(rsUsuario.getString(4).equals(tus.getNombre_usuario()))
+							{
+								rsUsuario.updateString("pwd", tus.getPwd());
+								rsUsuario.updateRow();
+								modificado = true;
+								break;
+							}
+						}
+					}catch (Exception e)
+					{
+						System.err.println("ERROR AL modificarUser() "+e.getMessage());
+						e.printStackTrace();
+					}
+					finally
+					{
+						try {
+							if(rsUsuario != null){
+								rsUsuario.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					return modificado;
+				}
 	
 				//metodo para modificar Nombre de usuario
 				public boolean modificarUsername(Tbl_user tus) {
@@ -1223,5 +1263,92 @@ public class Dt_usuario {
 			}
 		}
 	}
+	
+	// METODO PARA VERIFICAR usuario y correo //
+	public boolean dtUsuarioCorreo(String usuario, String correo)
+	{
+		boolean existe=false;
+		String SQL = ("SELECT * FROM gestion_docente.usuario WHERE nombre_usuario=? AND correo_personal=? AND estado<>3");
+		try{
+			
+			
+			c = poolConexion.getConnection();
+			ps = c.prepareStatement(SQL);
+			ps.setString(1, usuario);
+			ps.setString(2, correo);
+			
+			rs = ps.executeQuery();
+			if(rs.next()){
+				existe=true;
+			}
+		}
+		catch (Exception e){
+			System.out.println("DATOS: ERROR dtverificarLogin() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(rs != null){
+					rs.close();
+				}
+				if(ps != null){
+					ps.close();
+				}
+				if(c != null){
+					poolConexion.closeConnection(c);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	
+		return existe;
+	}
+	
+	// METODO PARA VERIFICAR usuario y correo que retorna el id del usuario para completar correctamente el cambio de contraseña //
+		public int dtUsuarioCorreo2(String usuario, String correo)
+		{
+			int id= 0;
+			String SQL = ("SELECT * FROM gestion_docente.usuario WHERE nombre_usuario=? AND correo_personal=? AND estado<>3");
+			try{
+				
+				
+				c = poolConexion.getConnection();
+				ps = c.prepareStatement(SQL);
+				ps.setString(1, usuario);
+				ps.setString(2, correo);
+				
+				rs = ps.executeQuery();
+				if(rs.next()){
+					
+					id= rs.getInt(1);
+				}
+			}
+			catch (Exception e){
+				System.out.println("DATOS: ERROR dtverificarLogin() "+ e.getMessage());
+				e.printStackTrace();
+			}
+			finally {
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						poolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		
+			return id;
+		}
 	
 }
