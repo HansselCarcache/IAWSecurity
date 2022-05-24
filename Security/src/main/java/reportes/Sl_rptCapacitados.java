@@ -3,6 +3,8 @@ package reportes;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Connection;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
@@ -50,19 +52,20 @@ public class Sl_rptCapacitados extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-		try {
+		
+		
+		//HashMap<String, Object>hm = new HashMap<>();
+				HashMap<String, Object>hm = new HashMap<>();
+try {
 			
 			String Convocatoria = "";
 			Convocatoria = request.getParameter("pconv")==null?"0":request.getParameter("pconv");
 			if(Convocatoria.equals("0"))
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("pconv", null);
 			}
 			else
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("pconv", Integer.parseInt(Convocatoria));
 			}
 			
@@ -71,71 +74,67 @@ public class Sl_rptCapacitados extends HttpServlet {
 			Sexo = request.getParameter("psexo")==null?"0":request.getParameter("psexo");
 			if(Sexo.equals("0"))
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("psexo", null);
 			}
 			else
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("psexo", Integer.parseInt(Sexo));
 			}
 			
 			
 			String Anio = "";
-			Sexo = request.getParameter("yearr")==null?"0":request.getParameter("yearr");
-			if(Sexo.equals("0"))
+			Anio = request.getParameter("yearr");
+			System.out.print("AAAAAAAAAAAAAA: "+ Anio);
+			if(Anio.isBlank())
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("yearr", null);
 			}
 			else
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("yearr", Integer.parseInt(Anio));
 			}
+
 			
 			String Facultad = "";
 			Facultad = request.getParameter("pfacultad")==null?"0":request.getParameter("pfacultad");
 			if(Facultad.equals("0"))
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("pfacultad", null);
 			}
 			else
 			{
-				HashMap<String, Object>hm = new HashMap<>();
-				hm.put("pfacultad", Integer.parseInt(Facultad));
+				hm.put("pfacultad",Facultad);
 			}
+
 			
 			String Departamento = "";
 			Departamento = request.getParameter("pdepartamento")==null?"0":request.getParameter("pdepartamento");
 			if(Departamento.equals("0"))
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("pdepartamento", null);
 			}
 			else
 			{
-				HashMap<String, Object>hm = new HashMap<>();
-				hm.put("pedepartamento", Integer.parseInt(Departamento));
+				hm.put("pdepartamento", Departamento);
 			}
+
 			
 			String Carrera = "";
 			Carrera = request.getParameter("pcarrera")==null?"0":request.getParameter("pcarrera");
 			if(Carrera.equals("0"))
 			{
-				HashMap<String, Object>hm = new HashMap<>();
 				hm.put("pcarrera", null);
-			}`
+			}
 			else
 			{
-				HashMap<String, Object>hm = new HashMap<>();
-				hm.put("pcarrera", Integer.parseInt(Carrera));
+				hm.put("pcarrera", Carrera);
 			}
 			
-			
-			
-		
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			String id = dtf.format(LocalDateTime.now());
+
+			System.out.println("AAAAAAA : "+id);
+	        
 			
 			poolConexion pc = poolConexion.getInstance(); 
 			Connection c = poolConexion.getConnection();
@@ -144,11 +143,11 @@ public class Sl_rptCapacitados extends HttpServlet {
 			ServletContext context = getServletContext();
 			String path = context.getRealPath("/");
 			System.out.println("Path: "+path);
-			String template = "reportes\\rpt.jasper";
+			String template = "reportes\\rpt_capacitados.jasper";
 			Exporter exporter = new JRPdfExporter();
 			JasperPrint jasperPrint = JasperFillManager.fillReport(path+template, hm, c);
 			response.setContentType("application/pdf");
-			response.setHeader("Content-Disposition", "inline; filename=\"rptFichaUsuario_"+idUsuario+".pdf");
+			response.setHeader("Content-Disposition", "inline; filename=\"rpt_capacitados"+id+"ReportCapacitados.pdf");
 			exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(otps));
 			exporter.exportReport();
@@ -158,12 +157,7 @@ public class Sl_rptCapacitados extends HttpServlet {
 			e.printStackTrace();
 			System.out.println("REPORTE: ERROR AL GENERAR REPORTE " + e.getMessage());
 		}
-			
 		
-		
-		
-		
-		doGet(request, response);
 	}
 
 }

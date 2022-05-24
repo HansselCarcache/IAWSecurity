@@ -74,7 +74,7 @@
                                 </div>
                                 
                                 <div class="x_content">
-                                       <form action="../Sl_OpcionRol" method="post" novalidate>
+                                       <form action="../Sl_rptCapacitados" method="post" novalidate>
                                   
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
@@ -91,7 +91,7 @@
 						                      		listaOferta = dtof.listaOfActivos();
 								                 %>
 								                 <select class="form-control js-example-basic-single" name="pconv" id="pconv" > <!-- Cambiar el id y name -->
-												  <option value="">Seleccione...</option>
+												  <option value="0">Seleccione...</option>
 												  <% 
 												  	for(Vw_oferta tof :listaOferta){
 												  %>
@@ -109,7 +109,7 @@
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 											
 												<select class="form-control js-example-basic-single" name="psexo" id="psexo" >
-												  <option value="">Seleccione...</option>
+												  <option value="0">Seleccione...</option>
 												  
 												  <option value="1">Masculino</option>
 												  <option value="2">Femenino</option>
@@ -135,7 +135,7 @@
 						                      		listFacu =  dtfacu.listaFacultadActivos();
 								                 %>
 												<select class="form-control js-example-basic-single" name="pfacultad" id="pfacultad" >
-												  <option value="">Seleccione...</option>
+												  <option value="0">Seleccione...</option>
 												  <% 
 												  	for(Tbl_facultad tf :listFacu){
 												  %>
@@ -156,8 +156,8 @@
 				                      			Dt_departamento dtdepa = new Dt_departamento();
 				                      			listDepa = dtdepa.listaDepartamentosActivos();
 								                 %>
-								                 <select class="form-control js-example-basic-single" name="pdepartamento" id="pdepartamento" required="required">
-												  <option value="">Seleccione...</option>
+								                 <select class="form-control js-example-basic-single" name="pdepartamento" id="pdepartamento" >
+												  <option value="0">Seleccione...</option>
 												  <% 
 												  	for(Vw_facultad_departamento tdepa :listDepa){
 												  %>
@@ -179,8 +179,8 @@
 				                      			Dt_carreras dtcar = new Dt_carreras();
 				                      			listCar = dtcar.listCarrera();
 								                 %>
-								                 <select class="form-control js-example-basic-single" name="pcarrera" id="pcarrera" required="required">
-												  <option value="">Seleccione...</option>
+								                 <select class="form-control js-example-basic-single" name="pcarrera" id="pcarrera" >
+												  <option value="0">Seleccione...</option>
 												  <% 
 												  	for(Vw_carrera_departamento tcar :listCar){
 												  %>
