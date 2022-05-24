@@ -62,18 +62,21 @@ import negocio.Ng_Facilitador;
 			switch(opc) {
 			case 1:
 				try {
-					if(Ngf.existeCedula(Faci.getCedula())) {
+					System.out.print(Faci.getCedula());
+					if(Ngf.existeCedula(Faci.getCedula()) == false) {
 						if(dtm.addFacilitador(Faci)) {
 							response.sendRedirect("production/tbl_facilitadores.jsp?msj=1");
 						}else {
 							response.sendRedirect("production/tbl_facilitadores.jsp?msj=2");
 						}
 						
+					}else {
+						response.sendRedirect("production/tbl_facilitadores.jsp?msj=7");
 					}
 					
 					
 				}catch(Exception e) {
-					System.out.println("Error Sl_gestionUserRol opc1: "+e.getMessage());
+					System.out.println("Error Sl_Facilitador opc1: "+e.getMessage());
 					e.printStackTrace();
 				}
 				break;
