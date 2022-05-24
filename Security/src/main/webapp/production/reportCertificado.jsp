@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,17 +84,17 @@
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Convocatoria: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
 <!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
-												<%
-							                      	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-							                      	Dt_rol dtr = new Dt_rol();
-							                      	listRol = dtr.listaRolActivos();
+												<%						                      	
+							                      	ArrayList<Vw_oferta> listaOferta = new ArrayList<Vw_oferta>();
+						                      		Dt_oferta dtof = new Dt_oferta();
+						                      		listaOferta = dtof.listaOfActivos();
 								                 %>
-								                 <select class="form-control js-example-basic-single" name="cbxRol" id="cbxRol" required="required">
+								                 <select class="form-control js-example-basic-single" name="pconv" id="pconv" > <!-- Cambiar el id y name -->
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_rol trol :listRol){
+												  	for(Vw_oferta tof :listaOferta){
 												  %>
-												  <option value="<%=trol.getId_rol()%>"><%=trol.getNombre_rol()%></option>
+												  <option value="<%=tof.getId_oferta()%>"><%=tof.getNombre()%></option>
 												  <%
 												  	}
 												  %>
@@ -107,7 +107,7 @@
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 											
-												<select class="form-control js-example-basic-single" name="cbxsexo" id="cbxsexo" required="required">
+												<select class="form-control js-example-basic-single" name="psexo" id="psexo" >
 												  <option value="">Seleccione...</option>
 												  
 												  <option value="1">Masculino</option>
@@ -120,25 +120,25 @@
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Año: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-												<input class="form-control" type="text" name="yearr" id="yearr" />
+												<input class="form-control" type="number" name="yearr" id="yearr" />
                                             </div>
                                         </div>
                                         
-                                        <%-- <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Facultad: <span class="required">*</span></label>
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Facultad: <span >*</span></label>
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
-												<%
-							                      	ArrayList<Tbl_opcion> listaOpcion = new ArrayList<Tbl_opcion>();
-							                      	Dt_Opciones dtopc = new Dt_Opciones();
-							                      	listaOpcion = dtopc.listaOpcionesActivos();
+												<%					                      	
+							                      	ArrayList<Tbl_facultad> listFacu = new ArrayList<Tbl_facultad>();
+						                      		Dt_facultad dtfacu = new Dt_facultad();
+						                      		listFacu =  dtfacu.listaFacultadActivos();
 								                 %>
-												<select class="form-control js-example-basic-single" name="cbxOpc" id="cbxOpc" required="required">
+												<select class="form-control js-example-basic-single" name="pfacultad" id="pfacultad" >
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_opcion tu :listaOpcion){
+												  	for(Tbl_facultad tf :listFacu){
 												  %>
-												  <option value="<%=tu.getId_opcion()%>"><%=tu.getNombre_opcion()%></option>
+												  <option value="<%=tf.getId_facultad()%>"><%=tf.getNombre_facultad()%></option>
 												  <%
 												  	}
 												  %>
@@ -147,20 +147,20 @@
                                         </div>
                                         
                                         <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Departamento: <span class="required">*</span></label>
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Departamento: <span >*</span></label>
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 												<%
-							                      	ArrayList<Tbl_opcion> listaOpcion = new ArrayList<Tbl_opcion>();
-							                      	Dt_Opciones dtopc = new Dt_Opciones();
-							                      	listaOpcion = dtopc.listaOpcionesActivos();
+												ArrayList<Vw_facultad_departamento> listDepa = new ArrayList<Vw_facultad_departamento>();
+				                      			Dt_departamento dtdepa = new Dt_departamento();
+				                      			listDepa = dtdepa.listaDepartamentosActivos();
 								                 %>
-												<select class="form-control js-example-basic-single" name="cbxOpc" id="cbxOpc" required="required">
+								                 <select class="form-control js-example-basic-single" name="pdepartamento" id="pdepartamento" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_opcion tu :listaOpcion){
+												  	for(Vw_facultad_departamento tdepa :listDepa){
 												  %>
-												  <option value="<%=tu.getId_opcion()%>"><%=tu.getNombre_opcion()%></option>
+												  <option value="<%=tdepa.getId_departamento()%>"><%=tdepa.getNombre_departamento()%></option>
 												  <%
 												  	}
 												  %>
@@ -170,33 +170,33 @@
                                         
                                         
                                         <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Carrera: <span class="required">*</span></label>
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Carrera: <span >*</span></label>
                                             <div class="col-md-6 col-sm-6">
 <!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
 												<%
-							                      	ArrayList<Tbl_opcion> listaOpcion = new ArrayList<Tbl_opcion>();
-							                      	Dt_Opciones dtopc = new Dt_Opciones();
-							                      	listaOpcion = dtopc.listaOpcionesActivos();
+												ArrayList<Vw_carrera_departamento> listCar = new ArrayList<Vw_carrera_departamento>();
+				                      			Dt_carreras dtcar = new Dt_carreras();
+				                      			listCar = dtcar.listCarrera();
 								                 %>
-												<select class="form-control js-example-basic-single" name="cbxOpc" id="cbxOpc" required="required">
+								                 <select class="form-control js-example-basic-single" name="pcarrera" id="pcarrera" required="required">
 												  <option value="">Seleccione...</option>
 												  <% 
-												  	for(Tbl_opcion tu :listaOpcion){
+												  	for(Vw_carrera_departamento tcar :listCar){
 												  %>
-												  <option value="<%=tu.getId_opcion()%>"><%=tu.getNombre_opcion()%></option>
+												  <option value="<%=tcar.getId_carrera()%>"><%=tcar.getNombre_carrera()%></option>
 												  <%
 												  	}
 												  %>
 												</select>
                                             </div>
-                                        </div> --%>
+                                        </div>
 
                                         
                                         
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-primary">Guardar</button>
+                                                    <button type='submit' class="btn btn-primary">Generar reporte</button>
                                                     
                                                 </div>
                                             </div>
@@ -221,25 +221,18 @@
         </div>
     </div>
 
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
-    
+    <script src="../vendors/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
     <script src="../vendors/validator/multifield.js"></script>
     <script src="../vendors/validator/validator.js"></script>
     
     <!-- Javascript functions	-->
 	<script>
 		$(document).ready(function(){
-		  $("#yearr").datepicker({
+		  $("#yearr").datetimepicker({
 		     format: "yyyy",
-		     viewMode: "years", 
-		     minViewMode: "years",
-		     autoclose:true
+		     viewMode: "years"
 		  });   
-		})
+		});
 	
 	
 	</script>
