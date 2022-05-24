@@ -20,6 +20,108 @@ import net.sf.jasperreports.export.Exporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 
-public class Sl_rptCertificados {
+/**
+ * Servlet implementation class Sl_rptCertificados
+ */
+@WebServlet("/Sl_rptCertificados")
+public class Sl_rptCertificados extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Sl_rptCertificados() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		try {
+			
+			String Convocatoria = "";
+			Convocatoria = request.getParameter("pconv")==null?"0":request.getParameter("pconv");
+			if(Convocatoria.equals("0"))
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pconv", null);
+			}
+			else
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pconv", Integer.parseInt(Convocatoria));
+			}
+			
+			
+			String Sexo = "";
+			Sexo = request.getParameter("psexo")==null?"0":request.getParameter("psexo");
+			if(Sexo.equals("0"))
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pconv", null);
+			}
+			else
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pconv", Integer.parseInt(Sexo));
+			}
+			
+			
+			String Anio = "";
+			Sexo = request.getParameter("psexo")==null?"0":request.getParameter("psexo");
+			if(Sexo.equals("0"))
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pconv", null);
+			}
+			else
+			{
+				HashMap<String, Object>hm = new HashMap<>();
+				hm.put("pconv", Integer.parseInt(Sexo));
+			}
+			
+			poolConexion pc = poolConexion.getInstance(); 
+			Connection c = poolConexion.getConnection();
+			
+			HashMap<String, Object>hm = new HashMap<>();
+			hm.put("userID", Integer.parseInt(idUsuario));
+			
+			OutputStream otps = response.getOutputStream();
+			ServletContext context = getServletContext();
+			String path = context.getRealPath("/");
+			System.out.println("Path: "+path);
+			String template = "reportes\\rptFichaUsuario.jasper";
+			Exporter exporter = new JRPdfExporter();
+			JasperPrint jasperPrint = JasperFillManager.fillReport(path+template, hm, c);
+			response.setContentType("application/pdf");
+			response.setHeader("Content-Disposition", "inline; filename=\"rptFichaUsuario_"+idUsuario+".pdf");
+			exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(otps));
+			exporter.exportReport();
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("REPORTE: ERROR AL GENERAR REPORTE " + e.getMessage());
+		}
+			
+		
+		
+		
+		
+		doGet(request, response);
+	}
 
 }
