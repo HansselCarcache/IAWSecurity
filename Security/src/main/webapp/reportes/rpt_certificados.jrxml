@@ -88,7 +88,7 @@
 				<textElement textAlignment="Center">
 					<font size="20"/>
 				</textElement>
-				<text><![CDATA[Gestión Docente - UCA ]]></text>
+				<text><![CDATA[Gestion Docente - UCA ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="173" y="40" width="210" height="20" uuid="fb6ede15-c5a4-4e4f-a37d-f3fee4fb6612"/>
@@ -305,7 +305,7 @@
 			</textField>
 			<staticText>
 				<reportElement x="60" y="10" width="130" height="30" uuid="a78c85ee-953a-415a-bc6d-1c20c953eb8d"/>
-				<text><![CDATA[Fecha y hora de impresión:]]></text>
+				<text><![CDATA[Fecha y hora de impresi�n:]]></text>
 			</staticText>
 		</band>
 	</pageFooter>
