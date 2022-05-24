@@ -91,6 +91,7 @@ public class Dt_facilitadores {
 				rsFacilitador.updateString("nombre_completo", Faci.getNombres());
 				rsFacilitador.updateString("telefono_contacto", Faci.getTelefono());
 				rsFacilitador.updateString("cedula", Faci.getCedula());
+				rsFacilitador.updateInt("estado", 1);
 				rsFacilitador.insertRow();
 				rsFacilitador.moveToCurrentRow();
 				guardado = true;

@@ -19,11 +19,15 @@ public class Ng_Facilitador {
 		boolean existe = false;
 		try {
 			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT * FROM gestion_docente.facilitador where cedula=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
-			ps.setString(1, cedula);
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.facilitador where cedula='"+cedula+"'", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rs = ps.executeQuery();
+			//rs.first();
 			if(rs.next()) {
-				existe = true;
+				if (rs.getInt("id_facilitador") > 0) {
+					System.out.print("AAAAAAAAAAA  :  "+rs.getInt(0));
+					return true;
+				}
+				
 			}
 		}catch (Exception e){
 			System.out.println("DATOS ERROR existeCedula(): "+ e.getMessage());
