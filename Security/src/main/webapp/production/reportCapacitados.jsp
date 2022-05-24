@@ -72,6 +72,7 @@
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
+                                
                                 <div class="x_content">
                                        <form action="../Sl_OpcionRol" method="post" novalidate>
                                   
@@ -138,7 +139,7 @@
 												  <% 
 												  	for(Tbl_facultad tf :listFacu){
 												  %>
-												  <option value="<%=tf.getId_facultad()%>"><%=tf.getNombre_facultad()%></option>
+												  <option value="<%=tf.getNombre_facultad()%>"><%=tf.getNombre_facultad()%></option>
 												  <%
 												  	}
 												  %>
@@ -160,7 +161,7 @@
 												  <% 
 												  	for(Vw_facultad_departamento tdepa :listDepa){
 												  %>
-												  <option value="<%=tdepa.getId_departamento()%>"><%=tdepa.getNombre_departamento()%></option>
+												  <option value="<%=tdepa.getNombre_departamento()%>"><%=tdepa.getNombre_departamento()%></option>
 												  <%
 												  	}
 												  %>
@@ -183,7 +184,7 @@
 												  <% 
 												  	for(Vw_carrera_departamento tcar :listCar){
 												  %>
-												  <option value="<%=tcar.getId_carrera()%>"><%=tcar.getNombre_carrera()%></option>
+												  <option value="<%=tcar.getNombre_carrera()%>"><%=tcar.getNombre_carrera()%></option>
 												  <%
 												  	}
 												  %>
@@ -258,6 +259,8 @@
 	</script>
 
     <script>
+    
+    
         // initialize a validator instance from the "FormValidator" constructor.
         // A "<form>" element is optionally passed as an argument, but is not a must
         var validator = new FormValidator({
@@ -285,6 +288,16 @@
             $('.js-example-basic-single').select2();
         });
     </script>
+    
+    <script>
+ 	// IMPRIMIR REPORTE SIN PARAMETROS //
+    function printListUsers(){
+    	window.open("../Sl_rptCapacitados", '_blank');
+    }
+    
+    
+    </script>
+    
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
@@ -307,6 +320,8 @@
     <script type="text/javascript">
    
     </script>
+    
+    
 
 </body>
 </html>
