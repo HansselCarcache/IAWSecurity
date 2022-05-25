@@ -50,6 +50,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	switch(opc) {
 	case 1:
 		// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
+		int idconvocatoria= Integer.parseInt(request.getParameter("convocatoria"));
 		tins.setNombre_completo(request.getParameter("nombre_completo"));
 		tins.setTelefono(request.getParameter("telefono_contacto"));
 		tins.setCorreo(request.getParameter("correo"));
@@ -67,7 +68,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				
 			
 		if(ngi.existeInscripcion(tins.getId_oferta_detalle(), tins.getId_usuario())) {
-			response.sendRedirect("production/tbl_capacitacionD.jsp?msj=3");
+			response.sendRedirect("production/tbl_capacitacionD.jsp?msj=3&idC="+idconvocatoria);
 		}else {
 			
 			int id = dti.guardarInscripcion(tins);
@@ -86,9 +87,9 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 					dtc.addInscripcionCarrera(car, id);
 				
 				}
-				response.sendRedirect("production/tbl_capacitacionD.jsp?msj=1");
+				response.sendRedirect("production/tbl_capacitacionD.jsp?msj=1&idC="+idconvocatoria);
 			}else {
-				response.sendRedirect("production/tbl_capacitacionD.jsp?msj=2");
+				response.sendRedirect("production/tbl_capacitacionD.jsp?msj=2&idC="+idconvocatoria);
 			}
 			
 			
@@ -114,10 +115,14 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		tins.setId_inscripcion(Integer.parseInt(request.getParameter("id_inscripcion")));
 		dtc.eliminarCarreraInsc(tins.getId_inscripcion());
 		if(dti.eliminarInsc(tins.getId_inscripcion())) {
-			response.sendRedirect("production/tbl_inscripcionD.jsp?msj=1");
+			response.sendRedirect("production/tbl_inscripcionD.jsp?msj=3");
 		}else {
-			response.sendRedirect("production/tbl_inscripcionD.jsp?msj=2");
+			response.sendRedirect("production/tbl_inscripcionD.jsp?msj=4");
 		}
+		break;
+	case 3:
+		int id = Integer.parseInt(request.getParameter("cbxConvo"));
+		response.sendRedirect("production/tbl_capacitacionD.jsp?idC="+id);
 		break;
 	default:
 		//codigo

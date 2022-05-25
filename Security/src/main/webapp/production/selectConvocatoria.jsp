@@ -1,22 +1,12 @@
+<%@page import="entidades.Vw_oferta"%>
+<%@page import="datos.Dt_inscripcionDocente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*" %>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_userRol,entidades.Vw_rolopcion, entidades.Tbl_user,entidades.Vw_userrol,
+    entidades.Tbl_rol , datos.Dt_roluser, datos.Dt_usuario, datos.Dt_rol,datos.Dt_rolopciones, java.util.*" %>
+
+
 <!DOCTYPE html>
 <html>
-
-<%
-
- String cap = ""; 
- cap = request.getParameter("idC")==null?"0":request.getParameter("idC"); 
- 
- String ofer = ""; 
- ofer = request.getParameter("idO")==null?"0":request.getParameter("idO"); 
-						
-Vw_ofertadet ofd = new Vw_ofertadet(); 
-Dt_ofertadet dtofd = new Dt_ofertadet(); 
-ofd = dtofd.getDetalleId(Integer.parseInt(cap));
-
-%>
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -24,7 +14,7 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Capacitación | Visualizar </title>
+    <title>Capacitaciones | Convocatoria </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -60,7 +50,7 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Capacitación</h3>
+                            <h3>Buscar capacitaciones por convocatoria</h3>
                         </div>
 
                         
@@ -71,7 +61,7 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Visualización de capacitación </h2>
+                                    <h2>Elija una convocatoria </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -88,85 +78,47 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form  action="#" method="post" novalidate>
-                                   
+                                    <form action="../Sl_Inscripcion" method="post" novalidate>
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
-										
+										<input type="hidden" value="3" name="opcion" id="opcion"/>
 										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Capacitación: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtusername" value="<%=ofd.getCapacitacion() %>" name="txtusername" readonly="readonly"  required="required"  class="form-control ">
-											</div>
-										</div>
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Convocatoria: <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
+												<%
+							                      	ArrayList<Vw_oferta> listaOferta = new ArrayList<Vw_oferta>();
+							                      	Dt_inscripcionDocente dtu = new Dt_inscripcionDocente();
+							                      	listaOferta = dtu.listaOferta();
+								                 %>
+												<select class="form-control js-example-basic-single" name="cbxConvo" id="cbxConvo" required="required">
+												  <option value="">Seleccione...</option>
+												  <% 
+												  	for(Vw_oferta tu :listaOferta){
+												  %>
+												  <option value="<%=tu.getId_oferta()%>"><%=tu.getNombre()%></option>
+												  <%
+												  	}
+												  %>
+												</select>
+                                            </div>
+                                        </div>
+										
+										
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align ">Fecha Inicio:</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="txtiduser" name="txtiduser" value="<%=ofd.getFecha_inicio() %>" type="text" class="form-control" readonly="readonly" placeholder="ID Usuario">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Fecha Final: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtfreg" value="<%=ofd.getFecha_final() %>" name="txtfreg" readonly="readonly" required="required" class="form-control ">
-											</div>
-										</div>
-										
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Dias: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtestado" value="<%=ofd.getDias() %>" name="txtestado" readonly="readonly" required="required" class="form-control ">
-											</div>
-										</div>
-
-										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Descripción Horaria: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtnombreC" value="<%=ofd.getDescripcion_horaria() %>" name="txtnombreC" readonly="readonly"  required="required" class="form-control ">
-											</div>
-										</div>
-										
-										
-										<div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Modalidad: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcargo" value="<%=ofd.getModalidad() %>" name="txtcargo" readonly="readonly" required="required" class="form-control ">
-											</div>
-										</div>
-										
-                                        <div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Tipo de capacitación: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcedula" value="<%=ofd.getTipo_capacitacion() %>"  name="txtcedula" readonly="readonly"  required="required" class="form-control ">
-											</div>
-										</div>
-                                        <div class="field item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" >Facilitador: 
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txttelefono" value="<%=ofd.getFacilitador() %>" name="txttelefono" readonly="readonly" required="required" class="form-control ">
-											</div>
-										</div>
                                         
                                         
-										
-										
-						
-                        
-																																						                                                                                
+
+                                        
+                                        
                                         <div class="ln_solid">
-                                            <div class="col-md-6 offset-md-3">
-                								<a href="tbl_capacitacionD.jsp?idC=<%=ofer %>" class="btn btn-primary">Regresar</a>
-                  							</div>
+                                            <div class="form-group">
+                                                <div class="col-md-6 offset-md-3">
+                                                    <button type='submit' class="btn btn-primary">Buscar</button>
+                                                    <a href="InicioDocente.jsp" class="btn btn-danger">Cancelar</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

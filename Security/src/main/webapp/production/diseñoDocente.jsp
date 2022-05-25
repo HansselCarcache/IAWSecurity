@@ -76,7 +76,7 @@
                   <li><a><i class="fa-solid fa-graduation-cap"></i> Oferta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                      <li><a href="tbl_capacitacionD.jsp">Capacitaciones</a></li>
+                      <li><a href="selectConvocatoria.jsp">Capacitaciones</a></li>
                       
                       
                     </ul>

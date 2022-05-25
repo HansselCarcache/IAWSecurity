@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import entidades.Tbl_inscripcion;
 import entidades.Tbl_user;
 import entidades.Vw_inscripcion_docente;
+import entidades.Vw_oferta;
+import entidades.Vw_ofertadet;
 import entidades.Vw_perfilDocente;
 import entidades.Vw_userrol;
 
@@ -80,6 +82,103 @@ public class Dt_inscripcionDocente {
 		}
 		return listInsc;
 	}
+	
+	//Metodo para visualizar usuarios registrados y activos
+		public ArrayList<Vw_ofertadet> listaOfertasdet(int id){
+			ArrayList<Vw_ofertadet> listofc = new ArrayList<Vw_ofertadet>();
+			try{
+				c = poolConexion.getConnection(); //obtenemos una conexion del pool
+				ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_ofertadet2 where estado<>3 and id_oferta="+id, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				rs = ps.executeQuery();
+				while(rs.next()){
+					Vw_ofertadet topc = new Vw_ofertadet(); //instanciamos a rol
+					topc.setId_oferta_detalle(rs.getInt("id_oferta_detalle"));
+					topc.setFecha_inicio(rs.getDate("fecha_inicial"));
+					topc.setFecha_final(rs.getDate("fecha_final"));
+					topc.setDescripcion_horaria(rs.getString("descripcion_horaria"));
+					topc.setDias(rs.getString("dias"));
+					topc.setPublico(rs.getInt("publico"));
+					topc.setId_oferta(rs.getInt("id_oferta"));
+					topc.setConvocatoria(rs.getString("Convocatoria"));
+					topc.setId_capacitacion(rs.getInt("id_capacitacion"));
+					topc.setCapacitacion(rs.getString("capacitacion"));
+					topc.setTipo_capacitacion(rs.getString("tipo_capacitacion"));
+					topc.setId_facilitador(rs.getInt("id_facilitador"));
+					topc.setFacilitador(rs.getString("facilitador"));
+					topc.setId_modalidad(rs.getInt("id_modalidad"));
+					topc.setModalidad(rs.getString("modalidad"));
+					listofc.add(topc);
+				}
+			}
+			catch (Exception e){
+				System.out.println("DATOS: ERROR EN LISTAR Oferta_Detalle "+ e.getMessage());
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						poolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			return listofc;
+		}
+		
+		//Metodo para visualizar usuarios registrados y activos
+		public ArrayList<Vw_oferta> listaOferta(){
+			ArrayList<Vw_oferta> listFac = new ArrayList<Vw_oferta>();
+			try{
+				c = poolConexion.getConnection(); //obtenemos una PoolConexion del pool
+				ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_oferta WHERE estado<>3;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				rs = ps.executeQuery();
+				while(rs.next()){
+					Vw_oferta of = new Vw_oferta(); //instanciamos a rol
+					of.setId_oferta(rs.getInt("id_oferta"));
+					of.setNombre(rs.getString("nombre"));
+					of.setDescripcion(rs.getString("descripcion"));
+					of.setYear(rs.getString("year"));
+					of.setFecha_inicio(rs.getDate("fecha_inicial"));
+					of.setFecha_final(rs.getDate("fecha_final"));
+					of.setCantidad(rs.getInt("cantidad"));
+					of.setEstado(rs.getInt("estado"));
+					listFac.add(of);
+				}
+			}
+			catch (Exception e){
+				System.out.println("DATOS: ERROR EN LISTAR Facultades: "+ e.getMessage());
+				e.printStackTrace();
+			}
+			finally{
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						poolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			return listFac;
+		}
 	
 	public ArrayList<Vw_inscripcion_docente> listainscripcionPersonal(int idUser) {
 		ArrayList<Vw_inscripcion_docente> listInsc = new ArrayList<Vw_inscripcion_docente>();
@@ -286,6 +385,7 @@ public class Dt_inscripcionDocente {
 		boolean eliminado=false;	
 		try
 		{
+			
 			c = poolConexion.getConnection();
 			this.llenaRsInscripcion(c);
 			rsInscripcion.beforeFirst();

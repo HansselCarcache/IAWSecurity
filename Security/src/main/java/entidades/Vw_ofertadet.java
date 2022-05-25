@@ -19,7 +19,14 @@ public class Vw_ofertadet {
 	private String modalidad;
 	private int id_facilitador;
 	private String facilitador;
+	private String convocatoria;
 	
+	public String getConvocatoria() {
+		return convocatoria;
+	}
+	public void setConvocatoria(String convocatoria) {
+		this.convocatoria = convocatoria;
+	}
 	//metodos
 	public int getId_oferta_detalle() {
 		return id_oferta_detalle;

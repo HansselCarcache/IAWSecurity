@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
 <%
 String VarMsj = "";
 
 VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+
+String convocatoria = "";
+
+convocatoria = request.getParameter("idC")==null?"0":request.getParameter("idC");
 
 
 %>
@@ -102,12 +106,12 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 						                    
 						                    <%
 						                      		ArrayList<Vw_ofertadet> listaOfertadet = new ArrayList<Vw_ofertadet>();
-						                      		Dt_ofertadet dtof = new Dt_ofertadet();
-						                      		listaOfertadet = dtof.listaOfertasdet();
+						                      		Dt_inscripcionDocente dtof = new Dt_inscripcionDocente();
+						                      		listaOfertadet = dtof.listaOfertasdet(Integer.parseInt(convocatoria));
 						                      %>
 						                      <thead>
 						                        <tr>
-						                          
+						                          <th>Convocatoria</th>
 						                          <th>Nombre Capacitación</th>
 						                          <th>Modalidad</th>
 						                          <th>Facilitador</th>
@@ -126,7 +130,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 								                      		
 								                      %>
 							          					<tr>
-							                          
+							                          <td><%=oferD.getConvocatoria() %></td>
 							                          <td><%=oferD.getCapacitacion() %></td>
 							                          <td><%=oferD.getModalidad() %></td>
 							                          <td><%=oferD.getFacilitador() %></td>
@@ -135,7 +139,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 							                          <td><%=oferD.getDias() %></td>
 							                          <td>
 							                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							                           <a href="addInscripcionD.jsp?idC=<%=oferD.getId_oferta_detalle()%>">
+							                           <a href="addInscripcionD.jsp?idC=<%=oferD.getId_oferta_detalle()%>&idO=<%=oferD.getId_oferta()%>">
 							                            <i class="far fa-edit" title="Inscribir Capacitacion"></i>
 							                            
 							                          </a>
@@ -143,7 +147,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 							                          </td>
 							                          <td>
 							                           &nbsp;&nbsp;
-							                          <a href="readCapacitacionD.jsp?idC=<%=oferD.getId_oferta_detalle()%>">
+							                          <a href="readCapacitacionD.jsp?idC=<%=oferD.getId_oferta_detalle()%>&idO=<%=oferD.getId_oferta()%>">
 							                            <i class="far fa-eye" title="Visualizar Capacitación"></i>
 							                          </a>
 							                          </td>
@@ -156,6 +160,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 						                      <tfoot>
 						                        <tr>
 						                          
+						                          <th>Convocatoria</th>
 						                          <th>Nombre Capacitación</th>
 						                          <th>Modalidad</th>
 						                          <th>Facilitador</th>
@@ -329,7 +334,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                     "next":       "Siguiente",
                     "previous":   "Anterior"
                 },
-                "emptyTable": "No existen datos en la tabla",
+                "emptyTable": "No existen capacitaciones ofertadas en esta convocatoria todavía",
                 "zeroRecords": "No existe un registro en la BD",
                 "info": "Mostrando página _PAGE_ de _PAGES_",
                 

@@ -216,7 +216,7 @@ public class Dt_carrerasInsc {
 						
 						rsCarrerasins.deleteRow();
 						eliminado=true;
-						break;
+						
 					}
 				}
 			}

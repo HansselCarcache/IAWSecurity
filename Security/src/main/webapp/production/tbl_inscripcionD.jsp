@@ -1,7 +1,7 @@
 <%@page import="entidades.Vw_inscripcion_docente"%>
 <%@page import="entidades.Vw_rolopcion"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
     
     <%
 String VarMsj = "";
@@ -116,7 +116,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                           <th>Fecha Final</th>
                           <th>Días </th>
                           <th>Valor </th>
-                          <th>Desc_valor </th>
+                          <th>Descripción valor </th>
                           <th>Eliminar </th>
                           
                         </tr>
@@ -126,6 +126,18 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                       <tbody>
                      	<%
 	                      	for(Vw_inscripcion_docente ins :listaInsc){
+	                      		String valor = "";
+	                      		if(ins.getValor()==null){
+	                      			valor = "";
+	                      		}else{
+	                      			valor=ins.getValor();
+	                      		}
+	                      		String desc_valor = "";
+	                      		if(ins.getDesc_valor()==null){
+	                      			desc_valor = "";
+	                      		}else{
+	                      			desc_valor=ins.getDesc_valor();
+	                      		}
 	                      		
 	                      %>
                       	
@@ -139,9 +151,9 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                           
                           <td><%=ins.getDias() %></td>
                           
-                          <td><%=ins.getValor() %></td>
+                          <td><%=valor %></td>
                           
-                          <td><%=ins.getDesc_valor() %></td>
+                          <td><%=desc_valor %></td>
                           <td>
                           
 <!--                           <a href="readInscripcion.jsp"> -->
@@ -169,7 +181,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                           <th>Fecha Final</th>
                           <th>Días </th>
                           <th>Valor </th>
-                          <th>Desc_valor </th>
+                          <th>Descripción valor </th>
                           <th>Eliminar </th>
                         </tr>
                       </tfoot>
@@ -258,6 +270,14 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 	    if(mensaje == "2")
 	      {
 	        errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
+	      }
+	    if(mensaje == "3")
+	      {
+	    	successAlert('Exito', 'Los datos de inscripcion han sido eliminados exitosamente!');
+	      }
+	    if(mensaje == "4")
+	      {
+	        errorAlert('Error', 'No se han podido eliminar los datos de inscripcion, intente de nuevo.');
 	      }
 	    
          $('#tbl_inscr').DataTable( {

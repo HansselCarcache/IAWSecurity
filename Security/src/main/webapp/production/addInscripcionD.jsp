@@ -7,6 +7,9 @@
 
  String cap = ""; 
  cap = request.getParameter("idC")==null?"0":request.getParameter("idC"); 
+ 
+ String ofer = ""; 
+ ofer = request.getParameter("idO")==null?"0":request.getParameter("idO"); 
 						
 Vw_ofertadet ofd = new Vw_ofertadet(); 
 Dt_ofertadet dtofd = new Dt_ofertadet(); 
@@ -103,8 +106,10 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
 										<input type="hidden" value="<%=tu.getId_usuario() %>" name="iduser" id="iduser"/>
 										<input type="hidden" value="<%=tu.getNombre_real() %>" name="nombre_completo" id="nombre_completo"/>
 										<input type="hidden" value="<%=tu.getTelefono_contacto() %>" name="telefono_contacto" id="telefono_contacto"/>
+										<input type="hidden" value="<%=tu.getTelefono_contacto() %>" name="telefono_contacto" id="telefono_contacto"/>
 										<!-- Para mientras solo se hace con el correo personal pero después se hara una validación para que elija el correo institucional si este existe. -->
 										<input type="hidden" value="<%=tu.getCorreo_personal() %>" name="correo" id="correo"/>
+										<input type="hidden" value="<%=ofer %>" name="convocatoria" id="convocatoria"/>
 										
 										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Capacitación: 
@@ -174,7 +179,7 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
 													for(Vw_carrera_departamento c: listaCarreras){
 												%>
 												 
-													<input type="checkbox" name="carreras" id="carrera<%=c.getId_carrera()%>" value="<%=c.getId_carrera()%>" class="flat" /> <%=c.getNombre_carrera()%>
+													<input type="checkbox" name="carreras" id="carrera<%=c.getId_carrera()%>" value="<%=c.getId_carrera()%>"  class="flat" /> <%=c.getNombre_carrera()%>
 												
 												<br />
 												
@@ -192,7 +197,7 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
                 								<button type="submit" class="btn btn-primary">Inscribir</button>
-                                                   <a href="tbl_capacitacionD.jsp" class="btn btn-danger">Cancelar</a>
+                                                   <a href="tbl_capacitacionD.jsp?idC=<%=ofer %>" class="btn btn-danger">Cancelar</a>
                   							</div>
                                         </div>
                                     </form>
