@@ -85,7 +85,7 @@ public class Dt_inscripcionDocente {
 		ArrayList<Vw_inscripcion_docente> listInsc = new ArrayList<Vw_inscripcion_docente>();
 		try {
 			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_inscripcion where id_usuario=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_inscripcion_docente where id_usuario=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			ps.setInt(1,  idUser);
 			rs = ps.executeQuery();
 			while(rs.next()) {
@@ -96,6 +96,11 @@ public class Dt_inscripcionDocente {
 				insc.setCorreo(rs.getString("correo"));
 				insc.setId_usuario(rs.getInt("id_usuario"));
 				insc.setId_oferta_detalle(rs.getInt("id_oferta_detalle"));
+				insc.setCapacitacion(rs.getString("capacitacion"));
+				insc.setFecha_final(rs.getDate("fecha_final"));
+				insc.setFecha_inicial(rs.getDate("fecha_inicial"));
+				insc.setDescripcion_horaria(rs.getString("descripcion_horaria"));
+				insc.setDias(rs.getString("dias"));
 				insc.setValor(rs.getString("valor"));
 				insc.setDesc_valor(rs.getString("desc_valor"));
 				insc.setEstado(rs.getInt("estado"));
@@ -186,7 +191,7 @@ public class Dt_inscripcionDocente {
 		Vw_inscripcion_docente insc = new Vw_inscripcion_docente();
 		try {
 			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_inscripcion where id_inscripcion=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_inscripcion_docente where id_inscripcion=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			ps.setInt(1,  id_inscripcion);
 			rs = ps.executeQuery();
 			if(rs.next()) {
@@ -196,6 +201,11 @@ public class Dt_inscripcionDocente {
 				insc.setCorreo(rs.getString("correo"));
 				insc.setId_usuario(rs.getInt("id_usuario"));
 				insc.setId_oferta_detalle(rs.getInt("id_oferta_detalle"));
+				insc.setCapacitacion(rs.getString("capacitacion"));
+				insc.setFecha_final(rs.getDate("fecha_final"));
+				insc.setFecha_inicial(rs.getDate("fecha_inicial"));
+				insc.setDescripcion_horaria(rs.getString("descripcion_horaria"));
+				insc.setDias(rs.getString("dias"));
 				insc.setValor(rs.getString("valor"));
 				insc.setDesc_valor(rs.getString("desc_valor"));
 				insc.setEstado(rs.getInt("estado"));

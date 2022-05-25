@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*" %>
 <!DOCTYPE html>
 <html>
 <%
@@ -62,7 +62,7 @@ insc = dtinsc.getInscripcionbyID(Integer.parseInt(user));
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Registrar inscripción</h3>
+                            <h3>Eliminar inscripción</h3>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -71,7 +71,7 @@ insc = dtinsc.getInscripcionbyID(Integer.parseInt(user));
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Registro de inscripciones </h2>
+                                    <h2>Eliminación de inscripción </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -124,6 +124,7 @@ insc = dtinsc.getInscripcionbyID(Integer.parseInt(user));
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
                                                     <button type='submit' class="btn btn-danger">Eliminar</button>
+                                                    <a href="tbl_capacitacionD.jsp" class="btn btn-info">Regresar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -219,7 +220,7 @@ insc = dtinsc.getInscripcionbyID(Integer.parseInt(user));
         {
        		document.getElementById("nombre").value = "<%=insc.getNombre_completo()%>"
        		document.getElementById("correo").value = "<%=insc.getCorreo()%>"
-    		document.getElementById("capacitacion").value = "<%=insc.getId_oferta_detalle()%>"
+    		document.getElementById("capacitacion").value = "<%=insc.getCapacitacion()%>"
         }
        	
         

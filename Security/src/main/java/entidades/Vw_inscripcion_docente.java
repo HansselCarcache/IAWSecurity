@@ -1,5 +1,7 @@
 package entidades;
 
+import java.util.Date;
+
 public class Vw_inscripcion_docente {
 
 	//Attributes
@@ -10,6 +12,41 @@ public class Vw_inscripcion_docente {
 		private String correo;
 		private int id_usuario;
 		private int id_oferta_detalle;
+		private String capacitacion;
+		private Date fecha_inicial;
+		private Date fecha_final;
+		private String descripcion_horaria;
+		public String getCapacitacion() {
+			return capacitacion;
+		}
+		public void setCapacitacion(String capacitacion) {
+			this.capacitacion = capacitacion;
+		}
+		public Date getFecha_inicial() {
+			return fecha_inicial;
+		}
+		public void setFecha_inicial(Date fecha_inicial) {
+			this.fecha_inicial = fecha_inicial;
+		}
+		public Date getFecha_final() {
+			return fecha_final;
+		}
+		public void setFecha_final(Date fecha_final) {
+			this.fecha_final = fecha_final;
+		}
+		public String getDescripcion_horaria() {
+			return descripcion_horaria;
+		}
+		public void setDescripcion_horaria(String descripcion_horaria) {
+			this.descripcion_horaria = descripcion_horaria;
+		}
+		public String getDias() {
+			return dias;
+		}
+		public void setDias(String dias) {
+			this.dias = dias;
+		}
+		private String dias;
 		private String valor;
 		private String desc_valor;
 		private int estado;

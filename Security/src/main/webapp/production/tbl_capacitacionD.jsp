@@ -107,14 +107,15 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 						                      %>
 						                      <thead>
 						                        <tr>
-						                          <th>Id Oferta detalle</th>
+						                          
 						                          <th>Nombre Capacitación</th>
 						                          <th>Modalidad</th>
 						                          <th>Facilitador</th>
 						                          <th>Fecha Inicio</th>
 						                          <th>Fecha Final</th>
 						                          <th>Dias</th>
-						                          <th>Acciones</th>
+						                          <th>Inscripción</th>
+						                          <th>Ver</th>
 						                        </tr>
 						                      </thead>
 						
@@ -125,7 +126,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 								                      		
 								                      %>
 							          					<tr>
-							                          <td><%=oferD.getId_oferta_detalle() %></td>
+							                          
 							                          <td><%=oferD.getCapacitacion() %></td>
 							                          <td><%=oferD.getModalidad() %></td>
 							                          <td><%=oferD.getFacilitador() %></td>
@@ -133,10 +134,14 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 							                          <td><%=oferD.getFecha_final() %></td>
 							                          <td><%=oferD.getDias() %></td>
 							                          <td>
+							                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							                           <a href="addInscripcionD.jsp?idC=<%=oferD.getId_oferta_detalle()%>">
 							                            <i class="far fa-edit" title="Inscribir Capacitacion"></i>
 							                            
 							                          </a>
+							                         
+							                          </td>
+							                          <td>
 							                           &nbsp;&nbsp;
 							                          <a href="readCapacitacionD.jsp?idC=<%=oferD.getId_oferta_detalle()%>">
 							                            <i class="far fa-eye" title="Visualizar Capacitación"></i>
@@ -150,14 +155,15 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 							                      </tbody>
 						                      <tfoot>
 						                        <tr>
-						                          <th>Id Oferta detalle</th>
+						                          
 						                          <th>Nombre Capacitación</th>
 						                          <th>Modalidad</th>
 						                          <th>Facilitador</th>
 						                          <th>Fecha Inicio</th>
 						                          <th>Fecha Final</th>
 						                          <th>Dias</th>
-						                          <th>Acciones</th>
+						                          <th>Inscripción</th>
+						                          <th>Ver</th>
 						                        </tr>
 						                      </tfoot>
 						                    </table>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*" %>
 <!DOCTYPE html>
 <html>
 
@@ -162,27 +162,26 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
 											</div>
 										</div>
 										
-										<div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Carrera: <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nombre">Carrera:<span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
 												<%
-							                      	ArrayList<Vw_carrera_departamento> listCarreras = new ArrayList<Vw_carrera_departamento>();
-							                      	Dt_carrerasInsc dtcar = new Dt_carrerasInsc();
-							                      	listCarreras = dtcar.listaCarreras();
-								                 %>
-								                 <select class="form-control js-example-basic-single" name="cbxCarrera" id="cbxCarrera" required="required">
-												  <option value="">Seleccione...</option>
-												  <% 
-												  	for(Vw_carrera_departamento cardf :listCarreras){
-												  %>
-												  <option value="<%=cardf.getId_carrera()%>"><%=cardf.getNombre_carrera()%></option>
-												  <%
-												  	}
-												  %>
-												</select>
+													ArrayList<Vw_carrera_departamento> listaCarreras = new ArrayList<Vw_carrera_departamento>();
+													Dt_carreras dtc = new Dt_carreras();
+													listaCarreras = dtc.listCarrera();
+	
+													for(Vw_carrera_departamento c: listaCarreras){
+												%>
+												 
+													<input type="checkbox" name="carreras" id="carrera<%=c.getId_carrera()%>" value="<%=c.getId_carrera()%>" class="flat" /> <%=c.getNombre_carrera()%>
+												
+												<br />
+												
+												
+												<%} %>
 											</div>
-                                       </div>
+										</div>
                                         
                                         
 										
@@ -193,7 +192,7 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
                 								<button type="submit" class="btn btn-primary">Inscribir</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
+                                                   <a href="tbl_capacitacionD.jsp" class="btn btn-danger">Cancelar</a>
                   							</div>
                                         </div>
                                     </form>

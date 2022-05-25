@@ -57,25 +57,51 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		tins.setId_oferta_detalle(Integer.parseInt(request.getParameter("idoferd")));
 		try {
 		// CONSTRUIMOS EL OBJETO CARRERA INSCRIPCION
-		cardf = dtc.getCarreraDFbyID(Integer.parseInt(request.getParameter("cbxCarrera")));
-		tcari.setId_departamento(cardf.getId_departamento());
-		tcari.setId_facultad(cardf.getId_facultad());
-		tcari.setEstado(1);
-		tcari.setId_carrera(cardf.getId_carrera());
+//		cardf = dtc.getCarreraDFbyID(Integer.parseInt(request.getParameter("cbxCarrera")));
+//		tcari.setId_departamento(cardf.getId_departamento());
+//		tcari.setId_facultad(cardf.getId_facultad());
+//		tcari.setEstado(1);
+//		tcari.setId_carrera(cardf.getId_carrera());
+		
+			
+				
+			
 		if(ngi.existeInscripcion(tins.getId_oferta_detalle(), tins.getId_usuario())) {
 			response.sendRedirect("production/tbl_capacitacionD.jsp?msj=3");
 		}else {
-			tcari.setId_inscripcion(dti.guardarInscripcion(tins));
-			if(tcari.getId_inscripcion()>0) {
-				if(dtc.guardarCarrerainsc(tcari)) {
-					response.sendRedirect("production/tbl_capacitacionD.jsp?msj=1");
+			
+			int id = dti.guardarInscripcion(tins);
+			
+			if(id !=0) {
+				//OBTENER ARRAY DE CARRERAS A INSCRIBIR
+				String[] a = request.getParameterValues("carreras");
+				Dt_carrerasInsc dac = new Dt_carrerasInsc();
+				
+				for(String s:a) {
+					System.out.print("CARERRAS: " + s);
+					//CONVERTIR CADA INDICE A UN OBJETO
+					Vw_carrera_departamento car = dac.getCarreraDFbyID(Integer.parseInt(s));
+					System.out.print("CARERRAS OBJ: " + car.getNombre_carrera());
+				
+					dtc.addInscripcionCarrera(car, id);
+				
 				}
-				else {
-					response.sendRedirect("production/tbl_capacitacionD.jsp?msj=2");
-				}
+				response.sendRedirect("production/tbl_capacitacionD.jsp?msj=1");
 			}else {
 				response.sendRedirect("production/tbl_capacitacionD.jsp?msj=2");
 			}
+			
+			
+//			if(tcari.getId_inscripcion()>0) {
+//				if(dtc.guardarCarrerainsc(tcari)) {
+//					response.sendRedirect("production/tbl_capacitacionD.jsp?msj=1");
+//				}
+//				else {
+//					response.sendRedirect("production/tbl_capacitacionD.jsp?msj=2");
+//				}
+//			}else {
+//				response.sendRedirect("production/tbl_capacitacionD.jsp?msj=2");
+//			}
 		}
 		
 		

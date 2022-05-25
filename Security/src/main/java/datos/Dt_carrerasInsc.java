@@ -123,6 +123,45 @@ public class Dt_carrerasInsc {
 		return guardado;
 	}
 	
+	//Agregar CarreraInscripcion
+			public boolean addInscripcionCarrera(Vw_carrera_departamento CaIns, int id_inscripcion){
+				boolean guardado = false;
+				
+				try{
+					c = poolConexion.getConnection();
+					this.llenaRsCarrerasInsc(c);
+					this.rsCarrerasins.moveToInsertRow();
+					rsCarrerasins.updateInt("id_carrera", CaIns.getId_carrera());
+					rsCarrerasins.updateInt("id_departamento", CaIns.getId_departamento());
+					rsCarrerasins.updateInt("id_facultad", CaIns.getId_facultad());
+					rsCarrerasins.updateInt("id_inscripcion", id_inscripcion);
+					rsCarrerasins.updateInt("estado", 1);				
+					rsCarrerasins.insertRow();
+					rsCarrerasins.moveToCurrentRow();
+					guardado = true;
+				}
+				catch (Exception e) {
+					System.err.println("ERROR AL GUARDAR INSCRIPCION CARRERA: "+e.getMessage());
+					e.printStackTrace();
+				}
+				finally{
+					try {
+						if(rsCarrerasins != null){
+							rsCarrerasins.close();
+						}
+						if(c != null){
+							poolConexion.closeConnection(c);
+						}
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				return guardado;
+			}
+	
 	//Metodo para recuperar departamentos y facultad de una carrera
 	public Vw_carrera_departamento getCarreraDFbyID(int idcarrera) {
 		Vw_carrera_departamento cardf = new Vw_carrera_departamento();

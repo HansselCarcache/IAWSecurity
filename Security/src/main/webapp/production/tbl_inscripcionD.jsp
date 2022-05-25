@@ -111,13 +111,13 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                       <thead>
                         <tr>
                           
-                          <th>ID_inscripcion </th>
-                          <th>Nombre completo </th>
-                          <th>Correo </th>
-                          <th>id_oferta_detalle </th>
+                          <th>Capacitacion </th>
+                          <th>Fecha Inicio </th>
+                          <th>Fecha Final</th>
+                          <th>Días </th>
                           <th>Valor </th>
                           <th>Desc_valor </th>
-                          <th>Acciones </th>
+                          <th>Eliminar </th>
                           
                         </tr>
                       </thead>
@@ -131,13 +131,13 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                       	
                       
                         <tr>
-                          <td><%=ins.getId_inscripcion()%></td>
+                          <td><%=ins.getCapacitacion()%></td>
                           
-                          <td><%=ins.getNombre_completo()%></td>
+                          <td><%=ins.getFecha_inicial()%></td>
                           
-                          <td><%=ins.getCorreo() %></td>
+                          <td><%=ins.getFecha_final() %></td>
                           
-                          <td><%=ins.getId_oferta_detalle() %></td>
+                          <td><%=ins.getDias() %></td>
                           
                           <td><%=ins.getValor() %></td>
                           
@@ -164,13 +164,13 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                       <tfoot>
                         <tr>
                           
-                          <th>ID_inscripcion </th>
-                          <th>Nombre completo </th>
-                          <th>Correo </th>
-                          <th>id_oferta_detalle </th>
+                         <th>Capacitacion </th>
+                          <th>Fecha Inicio </th>
+                          <th>Fecha Final</th>
+                          <th>Días </th>
                           <th>Valor </th>
                           <th>Desc_valor </th>
-                          <th>Acciones </th>
+                          <th>Eliminar </th>
                         </tr>
                       </tfoot>
                     </table>
