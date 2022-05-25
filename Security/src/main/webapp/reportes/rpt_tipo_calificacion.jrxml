@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_consolidado" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="821f3426-b2af-4170-b1df-e5ce8b6ef15a">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="232"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="762"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="daGestionDocente"/>
+	<parameter name="pconv" class="java.lang.String"/>
+	<parameter name="ptipo_calificacion" class="java.lang.Integer"/>
+	<queryString language="plsql">
+		<![CDATA[CALL rpt_tipo_calificacion (  $P{pconv},  $P{ptipo_calificacion} )]]>
+	</queryString>
+	<field name="convocatoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="convocatoria"/>
+		<property name="com.jaspersoft.studio.field.label" value="convocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="oferta"/>
+	</field>
+	<field name="capacitacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="capacitacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="capacitacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="capacitacion"/>
+	</field>
+	<field name="nombre_completo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre_completo"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre_completo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscripcion"/>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="telefono"/>
+		<property name="com.jaspersoft.studio.field.label" value="telefono"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscripcion"/>
+	</field>
+	<field name="correo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="correo"/>
+		<property name="com.jaspersoft.studio.field.label" value="correo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscripcion"/>
+	</field>
+	<field name="carreras" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="carreras"/>
+		<property name="com.jaspersoft.studio.field.label" value="carreras"/>
+	</field>
+	<field name="departamento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="departamento"/>
+		<property name="com.jaspersoft.studio.field.label" value="departamento"/>
+	</field>
+	<field name="facultad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="facultad"/>
+		<property name="com.jaspersoft.studio.field.label" value="facultad"/>
+	</field>
+	<field name="otras_dependencias" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="otras_dependencias"/>
+		<property name="com.jaspersoft.studio.field.label" value="otras_dependencias"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscripcion"/>
+	</field>
+	<field name="tipo_calificacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tipo_calificacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="tipo_calificacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="escala_calificacion"/>
+	</field>
+	<field name="valor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="valor"/>
+		<property name="com.jaspersoft.studio.field.label" value="valor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscripcion"/>
+	</field>
+	<field name="desc_valor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="desc_valor"/>
+		<property name="com.jaspersoft.studio.field.label" value="desc_valor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscripcion"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="83" splitType="Stretch">
+			<image>
+				<reportElement stretchType="ContainerBottom" x="60" y="10" width="70" height="60" uuid="b29f5ede-e47d-44da-b7df-65e5089d9407"/>
+				<imageExpression><![CDATA["C:/payara5/glassfish/logoUCA/logouca.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="164" y="10" width="244" height="30" uuid="7bcc8be8-a439-49b9-ab01-f8feb429ab62"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Gestión Docente - UCA ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="40" width="198" height="30" uuid="fb6ede15-c5a4-4e4f-a37d-f3fee4fb6612"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Reporte de Docentes Capacitados]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<line>
+				<reportElement x="65" y="0" width="443" height="1" uuid="e7c83699-351a-4acb-b5e6-d9c97a4735fa"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="66" y="0" width="81" height="61" forecolor="#FFFFFF" backcolor="#142D87" uuid="006b8310-46b7-4a4b-96d8-c32ed37d7c0d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="38f4b0ba-ca8a-4827-a8dc-aced1754400f"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Medium"/>
+				</textElement>
+				<text><![CDATA[Convocatoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="240" y="0" width="100" height="61" forecolor="#FFFFFF" backcolor="#132D8A" uuid="969622e7-9510-4c9f-a398-4b3dcd0444d0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="00637501-733e-4462-b3e2-5545c25731a7"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Medium"/>
+				</textElement>
+				<text><![CDATA[Tipo de calificación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="147" y="0" width="93" height="61" forecolor="#FFFFFF" backcolor="#142D87" uuid="5a0c5e03-ad16-4801-9e35-003503b6b1a2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="37d3dd09-aa49-4ece-bb02-f897e8ef198e"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Medium"/>
+				</textElement>
+				<text><![CDATA[Nombre Docente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="340" y="0" width="80" height="61" forecolor="#FFFFFF" backcolor="#17308A" uuid="c9d5db9a-28e4-4b02-bba6-611a14989cdf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0ceaf5e3-39a3-4443-bc51-6a8b067ddd72"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Medium"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="420" y="0" width="90" height="61" forecolor="#FFFFFF" backcolor="#142D87" uuid="37fda8a7-e7bc-409d-850a-306c403607a0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e44aa71-527f-4039-9027-a6e4ebfb3d64"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Medium"/>
+				</textElement>
+				<text><![CDATA[Descripción de valor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="53" splitType="Stretch">
+			<textField>
+				<reportElement x="66" y="0" width="81" height="52" uuid="e03199eb-0b34-4ac8-902f-e4c889c37e7e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5186e8f4-3435-409a-8085-e61f3c28cdf6"/>
+				</reportElement>
+				<box padding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{convocatoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="0" width="94" height="52" uuid="c4610ce3-f0ef-400f-8b70-6082ae461474">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="af37d211-b0b5-4937-9517-61bdce1d5090"/>
+				</reportElement>
+				<box padding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombre_completo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="241" y="0" width="99" height="52" uuid="bd663a46-5298-4979-8f4b-7efcc58f3831">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c594032b-5e19-4fe2-83bd-38ed1f713da6"/>
+				</reportElement>
+				<box padding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tipo_calificacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="80" height="52" uuid="312fcd68-39a5-4fa6-8a5d-d898fdf1e50f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="158c02e9-2a47-4004-a738-5309244d92ff"/>
+				</reportElement>
+				<box padding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="90" height="52" uuid="09dc6ea2-18ed-4ad2-88d7-5ff64f171809">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fc80ccf1-c386-4b5a-ad35-47ca9946c2df"/>
+				</reportElement>
+				<box padding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{desc_valor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement x="490" y="10" width="100" height="30" uuid="ceac2b69-b435-4d90-8ee4-4fe9085030d0"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="65" y="10" width="443" height="1" uuid="19552e9a-6335-4c8f-a212-05a78b9fa051"/>
+			</line>
+			<textField pattern="d/M/yy h:mm a">
+				<reportElement x="190" y="10" width="100" height="30" uuid="9b614a7e-d618-49bb-90d2-d48cb0581cc5"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="60" y="10" width="130" height="30" uuid="a78c85ee-953a-415a-bc6d-1c20c953eb8d"/>
+				<text><![CDATA[Fecha y hora de impresión:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

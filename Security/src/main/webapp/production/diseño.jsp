@@ -109,7 +109,7 @@
                       <li><a href="reportCertificado.jsp">Reporte Certificados</a></li>
                       <li><a href="reportConsolidado.jsp">Reprote Consolidados</a></li>
                       <li><a href="reportCapacitados.jsp">Reprote Capacitados</a></li>
-                      <li><a href="reportEvaluacion.jsp">Reprote por Evaluación</a></li>
+                      <li><a href="reportTipoCalificacion.jsp">Reprote por Evaluación</a></li>
                       
                     </ul>
                   </li>
