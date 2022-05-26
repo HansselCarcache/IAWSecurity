@@ -52,6 +52,7 @@ public class Sl_login extends HttpServlet {
 		Vw_userrol vwur = new Vw_userrol();
 		Ng_Usuario ngu = new Ng_Usuario();
 		String usuario = "";
+		String usuarioCedula = "";
 		String clave = "";
 		String codigoV = "";
 		String correo = "";
@@ -224,7 +225,19 @@ public class Sl_login extends HttpServlet {
 						response.sendRedirect("Login.jsp?msj=3");
 					}
 					
+					
+				}
+				//SI NO SE ENCONTRO EL USER SE PRUEBA RECUPERAR EL USUARIO A PARTIR DE LA CEDULA
+				usuarioCedula=dtu.cedulaUsuario(usuario);
+				
+				if(dtu.dtUsuarioCorreo(usuarioCedula, correo)) {
+					if(dte.enviarEmailContraseña(usuarioCedula, correo)) {
+						response.sendRedirect("Login.jsp?msj=1");
+					}else {
+						response.sendRedirect("Login.jsp?msj=3");
+					}
 				}else {
+					
 					response.sendRedirect("Login.jsp?msj=2");
 				}
 			}
@@ -234,7 +247,7 @@ public class Sl_login extends HttpServlet {
 			}
 			break;
 		case 4:
-			 
+			//CAMBIO DE CONTRASEÑA 
 			correo = request.getParameter("correo");
 			Encrypt dtenc = new Encrypt();
 			Tbl_user tus  = new Tbl_user();

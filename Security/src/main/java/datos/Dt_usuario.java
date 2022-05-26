@@ -1350,5 +1350,48 @@ public class Dt_usuario {
 		
 			return id;
 		}
+		
+		// METODO PARA ENCONTRAR USUARIO CON CEDULA //
+		public String cedulaUsuario(String cedula)
+		{
+			String existe="";
+			String SQL = ("SELECT nombre_usuario FROM gestion_docente.usuario WHERE cedula=? AND estado<>3");
+			try{
+				
+				
+				c = poolConexion.getConnection();
+				ps = c.prepareStatement(SQL);
+				ps.setString(1, cedula);
+				
+				
+				rs = ps.executeQuery();
+				if(rs.next()){
+					existe=rs.getString("nombre_usuario");
+				}
+			}
+			catch (Exception e){
+				System.out.println("DATOS: ERROR dtverificarLogin() "+ e.getMessage());
+				e.printStackTrace();
+			}
+			finally {
+				try {
+					if(rs != null){
+						rs.close();
+					}
+					if(ps != null){
+						ps.close();
+					}
+					if(c != null){
+						poolConexion.closeConnection(c);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		
+			return existe;
+		}
 	
 }

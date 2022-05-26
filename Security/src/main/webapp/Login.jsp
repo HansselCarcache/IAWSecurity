@@ -167,7 +167,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
               <h1>Recuperar Contraseña</h1>
               <input type="hidden" name="opcion" id="opcion" value="3">
               <div>
-                <input type="text" name="usuario2" id="usuario2" class="form-control" placeholder="Usuario" required="required" />
+                <input type="text" name="usuario2" id="usuario2" class="form-control" placeholder="Usuario o Cédula" required="required" />
               </div>
               <div>
                 <input type="email" id="correo" name="correo"class="form-control" placeholder="Correo Personal" required />
