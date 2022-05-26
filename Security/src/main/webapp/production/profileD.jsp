@@ -123,7 +123,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                       </ul>
 
                       <div class="file-select" id="src-file1" >
-                      <a href="addFotoPerfil.jsp?idU=<%=tu.getId_usuario()%>" class="btn btn-primary" style="color: white;"><i class="fa-solid fa-image" title="Agregar Foto de Usuario"></i> Editar foto de perfil</a>
+                      <a href="addFotoPerfilD.jsp?idU=<%=tu.getId_usuario()%>" class="btn btn-primary" style="color: white;"><i class="fa-solid fa-image" title="Agregar Foto de Usuario"></i> Editar foto de perfil</a>
                           
                       </div>
 

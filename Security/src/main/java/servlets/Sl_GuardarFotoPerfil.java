@@ -107,10 +107,10 @@ public class Sl_GuardarFotoPerfil extends HttpServlet {
 						String url = "fotos_usuariosGD/"+rutaFichero;
 						
 						if(dtu.guardarFotoUser(Integer.parseInt(idusuario), url)) {
-							response.sendRedirect("production/profileD.jsp?msj=1");
+							response.sendRedirect("production/Inicio.jsp?msj=1");
 						}
 						else {
-							response.sendRedirect("production/profileD.jsp?msj=2");
+							response.sendRedirect("production/Inicio.jsp?msj=2");
 						}
 					}
 				}
