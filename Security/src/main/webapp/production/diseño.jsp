@@ -107,9 +107,9 @@
                   <li><a><i class="fa-solid fa-file-text-o"></i> Reportes <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="reportCertificado.jsp">Reporte Certificados</a></li>
-                      <li><a href="reportConsolidado.jsp">Reprote Consolidados</a></li>
-                      <li><a href="reportCapacitados.jsp">Reprote Capacitados</a></li>
-                      <li><a href="reportTipoCalificacion.jsp">Reprote por Evaluación</a></li>
+                      <li><a href="reportConsolidado.jsp">Reporte Consolidados</a></li>
+                      <li><a href="reportCapacitados.jsp">Reporte Capacitados</a></li>
+                      <li><a href="reportTipoCalificacion.jsp">Reporte por Evaluación</a></li>
                       
                     </ul>
                   </li>
