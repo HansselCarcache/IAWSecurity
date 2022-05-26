@@ -91,15 +91,23 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                      <div class="row">
-                          <div class="col-sm-12">
-                            <div class="card-box table-responsive">
-                            <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                            
+                  
+                    <div class="text-muted font-13 col-md-12" style="text-align: right;">
+                             <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
+                                  <input type="hidden" value="<%=vwur.getId_usuario() %>" name="Id de usuario" id="idU" />
+                            <a href="../Sl_rpt_calificacion?idI=<%=vwur.getId_usuario() %>"  target="_blank">
+                            <i class="fa-solid fa-book-open" title=" reporte de calificaciones"></i>
+                          </a>
+                          <a href="../Sl_rpt_inscripcion?idI=<%=vwur.getId_usuario() %>" target="_blank">
+                            <i class="fa-solid fa-print" title=" reporte de inscripcion"></i>
+                          </a>
                             	<br><br>
                             </div>
+                  
+                
+                  
+
                             
-                    
                     <table id="tbl_inscr" class="table table-striped table-bordered" style="width:100%">
                     
                     <%
@@ -161,7 +169,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 <!--                           </a>  -->
 <!--                           &nbsp;&nbsp; -->
                           <a href="deleteInscripcionD.jsp?idI=<%=ins.getId_inscripcion() %>" >
-                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
+                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>  
                           </a>
                           </td>
                           
@@ -243,6 +251,12 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    
+    <script>
+    function printCal(){
+    	window.open("../Sl_rpt_calificacion", '_blank');
+    }
+    </script>
     
      <script>
      function eliminarcolumna(id){
