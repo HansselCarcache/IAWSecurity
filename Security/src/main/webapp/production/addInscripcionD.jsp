@@ -91,7 +91,8 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form  action="../Sl_Inscripcion" method="post" >
+                                    
+                                    <form  id="frmIns" action="../Sl_Inscripcion" method="post" onsubmit="toSubmit(event)" >
                                     <%
                                     Tbl_user tu = new Tbl_user();
                                     Dt_usuario dtu = new Dt_usuario();
@@ -179,7 +180,7 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
 													for(Vw_carrera_departamento c: listaCarreras){
 												%>
 												 
-													<input type="checkbox" name="carreras" id="carrera<%=c.getId_carrera()%>" value="<%=c.getId_carrera()%>"  class="flat" /> <%=c.getNombre_carrera()%>
+													<input type="checkbox" name="carreras" required id="carrera<%=c.getId_carrera()%>" value="<%=c.getId_carrera()%>"  class="flat" /> <%=c.getNombre_carrera()%>
 												
 												<br />
 												
@@ -196,7 +197,7 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
 																																						                                                                                
                                         <div class="ln_solid">
                                             <div class="col-md-6 offset-md-3">
-                								<button type="submit" class="btn btn-primary">Inscribir</button>
+                								<button onclick="validarcheckbox()" class="btn btn-primary">Inscribir</button>
                                                    <a href="tbl_capacitacionD.jsp?idC=<%=ofer %>" class="btn btn-danger">Cancelar</a>
                   							</div>
                                         </div>
@@ -252,12 +253,12 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
             "events": ['blur', 'input', 'change']
         }, document.forms[0]);
         // on form "submit" event
-        document.forms[0].onsubmit = function(e) {
-            var submit = true,
-                validatorResult = validator.checkAll(this);
-            console.log(validatorResult);
-            return !!validatorResult.valid;
-        };
+//         document.forms[0].onsubmit = function(e) {
+//             var submit = true,
+//                 validatorResult = validator.checkAll(this);
+//             console.log(validatorResult);
+//             return !!validatorResult.valid;
+//         };
         // on form "reset" event
         document.forms[0].onreset = function(e) {
             validator.reset();
@@ -269,9 +270,50 @@ ofd = dtofd.getDetalleId(Integer.parseInt(cap));
                 $('form .alert').remove();
         }).prop('checked', false);
         
+        
+        function toSubmit(e){
+    		e.preventDefault(); 
+ 			 try {
+   					someBug();
+  					} catch (e) {
+   					throw new Error(e.message);
+  					}
+  					return false;
+   		}
+   
+   		function submitForm(){
+    		var form = document.getElementById("frmIns");
+			form.onsubmit = function() {
+  			return true;
+			}
+   		}
+        
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
+        
+        
+        function validarcheckbox() {
+            el=document.getElementsByClassName("flat");
+
+            var atLeastOneChecked=false;//at least one cb is checked
+            for (i=0; i<el.length; i++) {
+                if (el[i].checked === true) {
+                    atLeastOneChecked=true;
+                }
+            }
+
+            if (atLeastOneChecked === true) {
+                for (i=0; i<el.length; i++) {
+                    el[i].required = false;
+                }
+            } else {
+                for (i=0; i<el.length; i++) {
+                    el[i].required = true;
+                }
+            }
+            submitForm();
+        }
     </script>
 
     <!-- jQuery -->

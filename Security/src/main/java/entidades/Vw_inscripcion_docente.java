@@ -16,6 +16,14 @@ public class Vw_inscripcion_docente {
 		private Date fecha_inicial;
 		private Date fecha_final;
 		private String descripcion_horaria;
+		private String convocatoria;
+	
+		public String getConvocatoria() {
+			return convocatoria;
+		}
+		public void setConvocatoria(String convocatoria) {
+			this.convocatoria = convocatoria;
+		}
 		public String getCapacitacion() {
 			return capacitacion;
 		}

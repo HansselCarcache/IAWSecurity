@@ -136,6 +136,58 @@ public class Dt_inscripcionDocente {
 		}
 		
 		//Metodo para visualizar usuarios registrados y activos
+				public Vw_ofertadet getOfertaByID(int id){
+					Vw_ofertadet topc = new Vw_ofertadet(); //instanciamos a rol
+					try{
+						c = poolConexion.getConnection(); //obtenemos una conexion del pool
+						ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_ofertadet2 where estado<>3 and id_oferta="+id, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+						rs = ps.executeQuery();
+						while(rs.next()){
+							
+							topc.setId_oferta_detalle(rs.getInt("id_oferta_detalle"));
+							topc.setFecha_inicio(rs.getDate("fecha_inicial"));
+							topc.setFecha_final(rs.getDate("fecha_final"));
+							topc.setDescripcion_horaria(rs.getString("descripcion_horaria"));
+							topc.setDias(rs.getString("dias"));
+							topc.setPublico(rs.getInt("publico"));
+							topc.setId_oferta(rs.getInt("id_oferta"));
+							topc.setConvocatoria(rs.getString("Convocatoria"));
+							topc.setId_capacitacion(rs.getInt("id_capacitacion"));
+							topc.setCapacitacion(rs.getString("capacitacion"));
+							topc.setTipo_capacitacion(rs.getString("tipo_capacitacion"));
+							topc.setId_facilitador(rs.getInt("id_facilitador"));
+							topc.setFacilitador(rs.getString("facilitador"));
+							topc.setId_modalidad(rs.getInt("id_modalidad"));
+							topc.setModalidad(rs.getString("modalidad"));
+							
+						}
+					}
+					catch (Exception e){
+						System.out.println("DATOS: ERROR EN LISTAR Oferta_Detalle "+ e.getMessage());
+						e.printStackTrace();
+					}
+					finally{
+						try {
+							if(rs != null){
+								rs.close();
+							}
+							if(ps != null){
+								ps.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					}
+					return topc;
+				}
+		
+		//Metodo para visualizar usuarios registrados y activos
 		public ArrayList<Vw_oferta> listaOferta(){
 			ArrayList<Vw_oferta> listFac = new ArrayList<Vw_oferta>();
 			try{
@@ -195,6 +247,7 @@ public class Dt_inscripcionDocente {
 				insc.setCorreo(rs.getString("correo"));
 				insc.setId_usuario(rs.getInt("id_usuario"));
 				insc.setId_oferta_detalle(rs.getInt("id_oferta_detalle"));
+				insc.setConvocatoria(rs.getString("convocatoria"));
 				insc.setCapacitacion(rs.getString("capacitacion"));
 				insc.setFecha_final(rs.getDate("fecha_final"));
 				insc.setFecha_inicial(rs.getDate("fecha_inicial"));

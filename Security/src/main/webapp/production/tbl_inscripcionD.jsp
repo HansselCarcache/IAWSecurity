@@ -93,7 +93,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                   <div class="x_content">
                   
                     <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                             <a class="col-md-1" href="#" onclick="mostrarcolumna()"><i class="fa-solid fa-arrow-rotate-left"></i>Cargar</a>
+                             
                                   <input type="hidden" value="<%=vwur.getId_usuario() %>" name="Id de usuario" id="idU" />
                             <a href="../Sl_rpt_calificacion?idI=<%=vwur.getId_usuario() %>"  target="_blank">
                             <i class="fa-solid fa-book-open" title=" reporte de calificaciones"></i>
@@ -118,7 +118,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                     
                       <thead>
                         <tr>
-                          
+                          <th>Convocatoria </th>
                           <th>Capacitacion </th>
                           <th>Fecha Inicio </th>
                           <th>Fecha Final</th>
@@ -151,27 +151,28 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                       	
                       
                         <tr>
-                          <td><%=ins.getCapacitacion()%></td>
+                        	<td><%=ins.getConvocatoria()%></td>
+                          	<td><%=ins.getCapacitacion()%></td>
                           
-                          <td><%=ins.getFecha_inicial()%></td>
+                          	<td><%=ins.getFecha_inicial()%></td>
                           
-                          <td><%=ins.getFecha_final() %></td>
+                          	<td><%=ins.getFecha_final() %></td>
                           
-                          <td><%=ins.getDias() %></td>
+                          	<td><%=ins.getDias() %></td>
                           
-                          <td><%=valor %></td>
+                          	<td><%=valor %></td>
                           
-                          <td><%=desc_valor %></td>
-                          <td>
+                          	<td><%=desc_valor %></td>
+                          	<td>
                           
-<!--                           <a href="readInscripcion.jsp"> -->
-<!--                             <i class="far fa-eye" title="Visualizar Opciones"></i> -->
-<!--                           </a>  -->
-<!--                           &nbsp;&nbsp; -->
-                          <a href="deleteInscripcionD.jsp?idI=<%=ins.getId_inscripcion() %>" >
-                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>  
-                          </a>
-                          </td>
+		<!--                           <a href="readInscripcion.jsp"> -->
+		<!--                             <i class="far fa-eye" title="Visualizar Opciones"></i> -->
+		<!--                           </a>  -->
+		<!--                           &nbsp;&nbsp; -->
+		                          <a href="deleteInscripcionD.jsp?idI=<%=ins.getId_inscripcion() %>" >
+		                            <i class="far fa-trash-alt" title="Botar curso"></i>  
+		                          </a>
+                          	</td>
                           
                           
                         </tr>
@@ -184,7 +185,8 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                       <tfoot>
                         <tr>
                           
-                         <th>Capacitacion </th>
+                         <th>Convocatoria </th>
+                          <th>Capacitacion </th>
                           <th>Fecha Inicio </th>
                           <th>Fecha Final</th>
                           <th>Días </th>
@@ -292,6 +294,10 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 	    if(mensaje == "4")
 	      {
 	        errorAlert('Error', 'No se han podido eliminar los datos de inscripcion, intente de nuevo.');
+	      }
+	    if(mensaje == "5")
+	      {
+	        errorAlert('Error', 'No es posible eliminar su inscripción porque esta ya fue evaluada.');
 	      }
 	    
          $('#tbl_inscr').DataTable( {

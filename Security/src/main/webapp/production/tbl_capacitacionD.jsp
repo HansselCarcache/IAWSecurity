@@ -1,5 +1,6 @@
+<%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*,negocio.Ng_InscripcionD ,  java.util.*"%>
 <%
 String VarMsj = "";
 
@@ -8,7 +9,13 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 String convocatoria = "";
 
 convocatoria = request.getParameter("idC")==null?"0":request.getParameter("idC");
-
+Vw_ofertadet oferN = new Vw_ofertadet();
+ArrayList<Vw_ofertadet> listaOfertadet = new ArrayList<Vw_ofertadet>();
+Dt_inscripcionDocente dtof = new Dt_inscripcionDocente();
+listaOfertadet = dtof.listaOfertasdet(Integer.parseInt(convocatoria));
+oferN = dtof.getOfertaByID(Integer.parseInt(convocatoria));
+Ng_InscripcionD ngi = new Ng_InscripcionD();
+String existe ="";
 
 %>
 <!DOCTYPE html>
@@ -64,7 +71,7 @@ convocatoria = request.getParameter("idC")==null?"0":request.getParameter("idC")
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Capacitaciones </h3>
+                <h3>Capacitaciones de <%=oferN.getConvocatoria() %> </h3>
               </div>
 
 
@@ -101,16 +108,13 @@ convocatoria = request.getParameter("idC")==null?"0":request.getParameter("idC")
                             	<br><br>
                             </div>
                             
-                    
+                    <input type="hidden" id="iduser" value="<%=vwur.getId_usuario()%>">
                      <table  id="tbl_detalle"  class="table table-striped table-bordered" style="width:100%">
 						                    
-						                    <%
-						                      		ArrayList<Vw_ofertadet> listaOfertadet = new ArrayList<Vw_ofertadet>();
-						                      		Dt_inscripcionDocente dtof = new Dt_inscripcionDocente();
-						                      		listaOfertadet = dtof.listaOfertasdet(Integer.parseInt(convocatoria));
-						                      %>
+						                   
 						                      <thead>
 						                        <tr>
+						                        
 						                          <th>Convocatoria</th>
 						                          <th>Nombre Capacitación</th>
 						                          <th>Modalidad</th>
@@ -127,9 +131,15 @@ convocatoria = request.getParameter("idC")==null?"0":request.getParameter("idC")
 							                      <tbody>
 							                      <%
 								                      	for(Vw_ofertadet oferD :listaOfertadet){
+								                      		if(ngi.existeInscripcion(oferD.getId_oferta_detalle(), vwur.getId_usuario())){
+								                      			 existe = "existe";
+								                      		}else{
+								                      			existe ="no";
+								                      		}
 								                      		
 								                      %>
-							          					<tr>
+							          					<tr id="<%=existe%>">
+							          					
 							                          <td><%=oferD.getConvocatoria() %></td>
 							                          <td><%=oferD.getCapacitacion() %></td>
 							                          <td><%=oferD.getModalidad() %></td>
@@ -159,6 +169,7 @@ convocatoria = request.getParameter("idC")==null?"0":request.getParameter("idC")
 							                      </tbody>
 						                      <tfoot>
 						                        <tr>
+						                          
 						                          
 						                          <th>Convocatoria</th>
 						                          <th>Nombre Capacitación</th>
@@ -227,10 +238,10 @@ convocatoria = request.getParameter("idC")==null?"0":request.getParameter("idC")
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
     <script>
-    function eliminarcolumna(id){
+    function eliminarcolumna(){
    		var table = $('#tbl_detalle').DataTable();
    	 
-   		table.column( id).visible( false );
+   		table.column(0).visible( false );
    	}
    	function mostrarcolumna(){
    		var table = $('#tbl_detalle').DataTable();
@@ -243,6 +254,7 @@ convocatoria = request.getParameter("idC")==null?"0":request.getParameter("idC")
    	
     
     $(document).ready(function() {
+    	
     	
     	var mensaje = 0;
  	    mensaje = "<%=VarMsj %>";
@@ -261,6 +273,24 @@ convocatoria = request.getParameter("idC")==null?"0":request.getParameter("idC")
 	      }
     	
         $('#tbl_detalle').DataTable( {
+        	createdRow: function(row, data, index) {
+        		 
+                // Updated Schedule Week 1 - 07 Mar 22
+         
+                 if ( row.id == "existe" ) {
+                	 $('td:eq(0)', row).css('background-color', 'lightgreen');
+                	 $('td:eq(1)', row).css('background-color', 'lightgreen');
+                	 $('td:eq(2)', row).css('background-color', 'lightgreen');
+                	 $('td:eq(3)', row).css('background-color', 'lightgreen');
+                	 $('td:eq(4)', row).css('background-color', 'lightgreen');
+                  	 $('td:eq(5)', row).css('background-color', 'lightgreen');
+                  	$('td:eq(6)', row).css('background-color', 'lightgreen');
+               		 $('td:eq(7)', row).css('background-color', 'lightgreen');
+               		 $('td:eq(8)', row).css('background-color', 'lightgreen');
+               	 	
+                 	 
+                 }
+        },
         	buttons: [  
         				
 		        		{
