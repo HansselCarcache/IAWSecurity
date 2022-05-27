@@ -1,18 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
+    pageEncoding="ISO-8859-1" import="entidades.* , datos.*, java.util.*" %>
+
+
 <!DOCTYPE html>
 <html>
-
-<%
-String departamento = "";
-departamento = request.getParameter("idD")==null?"0":request.getParameter("idD");
-						
-Vw_facultad_departamento td = new Vw_facultad_departamento();
-Dt_departamento dtdepa = new Dt_departamento();
-td = dtdepa.getDepartamentobyID(Integer.parseInt(departamento));
-%>
-
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -20,7 +11,7 @@ td = dtdepa.getDepartamentobyID(Integer.parseInt(departamento));
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Departamento | Eliminar </title>
+    <title>Usuarios | Agregar Foto </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -56,10 +47,10 @@ td = dtdepa.getDepartamentobyID(Integer.parseInt(departamento));
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Eliminar departamento</h3>
+                            <h3>Foto Usuario</h3>
                         </div>
 
-                        
+                       
                     </div>
                     <div class="clearfix"></div>
 
@@ -67,7 +58,7 @@ td = dtdepa.getDepartamentobyID(Integer.parseInt(departamento));
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Eliminación de departamentos </h2>
+                                    <h2>Foto del Usuario </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -84,35 +75,31 @@ td = dtdepa.getDepartamentobyID(Integer.parseInt(departamento));
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                     <form action="../Sl_Departamento" method="post" novalidate>
-                                    	<input type="hidden" value="3" name="opcion" id="opcion"/>
-                                    	<input type="hidden" value="<%=td.getId_departamento() %>" name="idDepartamento" id="idDepartamento"/>                                    
-
-										 <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Departamento:<span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-                                            	<input type="text" value="<%=td.getNombre_departamento() %>" name="txtnombredepartamento" id="txtnombredepartamento" class="form-control" placeholder="" title="Nombre del departamento" readonly="readonly" />
-                                            </div>
+                                    <form action="../Sl_GuardarFotoPerfilD" method="post" enctype="multipart/form-data" novalidate>
+                                        <div class="form-group">
+	                                        <%
+	                                        	Tbl_user tus = new Tbl_user();
+                                    			Dt_usuario dtus = new Dt_usuario();
+                                    			String idUser = "";
+                                    			idUser = request.getParameter("idU")==null?"0":request.getParameter("idU");
+                                    			tus = dtus.getUserbyID(Integer.parseInt(idUser));
+                                    			System.out.println("urlFoto: "+tus.getUrlFoto());
+	                                        %>
+                                        	<input type="hidden" name="id_usuario" value="<%=tus.getId_usuario()%>">
+<%--                                         	<input type="hidden" id="usuario" name="usuario" value="<%=vwur.getNombre_usuario()%>"> --%>
+<%--                                         	<input type="hidden" id="rol" name="rol" value="<%=vwur.getId_rol()%>"> --%>
+                                        	
+                                            <div class="cuadro-fotoNima" align="center">
+												<img id="preview" name="preview" src="../<%=tus.getUrlFoto()==null?"production/images/no-user.jpg":tus.getUrlFoto()%>"  alt="Foto Usuario" style="width: 100px; height: 100px; border-bottom-color: white; margin: 2px;" />
+											</div>
                                         </div>
-                                        
-                                        
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Facultad:<span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-                                            	<input type="text" value="<%=td.getNombre_facultad() %>" name="txtnombrefacultad" id="txtnombrefacultad" class="form-control" placeholder="" title="Nombre de la facultad" readonly="readonly" />
-                                            </div>
+                                        <div class="form-group" align="center">
+                                        	<input type="file"  id="foto" name="foto" onchange="Test.UpdatePreview(this)" required="required">&nbsp;
                                         </div>
-
-                                        
-                                        
-                                           <div class="ln_solid">
-                                            <div class="form-group">
-                                                <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-danger">Eliminar</button>
-                                                    
-                                                    <a class="btn btn-success" href="tbl_departamento.jsp">Cancelar</a>
-                                                </div>
-                                            </div>
+                                        <hr>
+                                        <div class="form-group" align="center">
+                                            <button type='submit' class="btn btn-primary">Guardar</button>
+                                            <button type='reset' class="btn btn-danger">Cancelar</button>
                                         </div>
                                     </form>
                                 </div>
@@ -184,7 +171,32 @@ td = dtdepa.getDepartamentobyID(Integer.parseInt(departamento));
         }).prop('checked', false);
         
         $(document).ready(function() {
-            $('.js-example-basic-single').select2();
+            
+        	/////// FUNCION PARA PREVISUALIZAR LA FOTO QUE SUBE EL USUARIO //////
+	    	Test = {
+	    	        UpdatePreview: function(obj)
+	    	        {
+	    	          // if IE < 10 doesn't support FileReader
+	    	          if(!window.FileReader)
+	    	          {
+	    	             
+	    	          } 
+	    	          else 
+	    	          {
+	    	             var reader = new FileReader();
+	    	             var target = null;
+	    	             
+	    	             reader.onload = function(e) 
+	    	             {
+	    	              target =  e.target || e.srcElement;
+	    	               $("#preview").prop("src", target.result);
+	    	             };
+	    	              reader.readAsDataURL(obj.files[0]);
+	    	          }
+	    	        }
+	    	    }; 
+            
+        
         });
     </script>
 

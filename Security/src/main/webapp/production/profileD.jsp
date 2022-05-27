@@ -54,7 +54,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
+              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span> &nbsp Formación Docente UCA</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -123,7 +123,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                       </ul>
 
                       <div class="file-select" id="src-file1" >
-                      <a href="addFotoPerfil.jsp?idU=<%=tu.getId_usuario()%>" class="btn btn-primary" style="color: white;"><i class="fa-solid fa-image" title="Agregar Foto de Usuario"></i> Editar foto de perfil</a>
+                      <a href="addFotoPerfilD.jsp?idU=<%=tu.getId_usuario()%>" class="btn btn-primary" style="color: white;"><i class="fa-solid fa-image" title="Agregar Foto de Usuario"></i> Editar foto de perfil</a>
                           
                       </div>
 

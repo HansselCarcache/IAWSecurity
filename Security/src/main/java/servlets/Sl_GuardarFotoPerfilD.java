@@ -21,14 +21,14 @@ import datos.Dt_usuario;
 /**
  * Servlet implementation class Sl_guardarFoto
  */
-@WebServlet("/Sl_GuardarFotoPerfil")
-public class Sl_GuardarFotoPerfil extends HttpServlet {
+@WebServlet("/Sl_GuardarFotoPerfilD")
+public class Sl_GuardarFotoPerfilD extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Sl_GuardarFotoPerfil() {
+    public Sl_GuardarFotoPerfilD() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -107,10 +107,10 @@ public class Sl_GuardarFotoPerfil extends HttpServlet {
 						String url = "fotos_usuariosGD/"+rutaFichero;
 						
 						if(dtu.guardarFotoUser(Integer.parseInt(idusuario), url)) {
-							response.sendRedirect("production/Inicio.jsp?msj=1");
+							response.sendRedirect("production/InicioDocente.jsp?msj=1");
 						}
 						else {
-							response.sendRedirect("production/Inicio.jsp?msj=2");
+							response.sendRedirect("production/InicioDocente.jsp?msj=2");
 						}
 					}
 				}
