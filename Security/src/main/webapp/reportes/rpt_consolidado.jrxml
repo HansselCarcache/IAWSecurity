@@ -9,9 +9,11 @@
 	<parameter name="pcarrera" class="java.lang.String"/>
 	<parameter name="pdepartamento" class="java.lang.String"/>
 	<parameter name="pfacultad" class="java.lang.String"/>
+	<parameter name="ptcurso" class="java.lang.Integer"/>
+	<parameter name="pcurso" class="java.lang.Integer"/>
 	<parameter name="yearr" class="java.lang.Integer"/>
 	<queryString language="plsql">
-		<![CDATA[call rpt_consolidado( $P{psexo},  $P{yearr} , $P{pcarrera},  $P{pdepartamento},  $P{pfacultad} )]]>
+		<![CDATA[call rpt_consolidado( $P{psexo},  $P{yearr} , $P{pcarrera},  $P{pdepartamento},  $P{pfacultad}, $P{pcurso}, $P{ptcurso} )]]>
 	</queryString>
 	<field name="convocatoria" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="nombre"/>

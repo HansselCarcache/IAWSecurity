@@ -60,6 +60,8 @@ public class Sl_rptConsolidado extends HttpServlet {
 			String carrera = "";
 			String departamento = "";
 			String facultad = "";
+			String curso = "";
+			String ptcurso = "";
 			HashMap<String, Object>hm = new HashMap<>();
 			
 			carrera = request.getParameter("pcarrera")==null?"0":request.getParameter("pcarrera");
@@ -107,6 +109,25 @@ public class Sl_rptConsolidado extends HttpServlet {
 				hm.put("yearr", Integer.parseInt(year));
 			}
 			
+			curso = request.getParameter("pcurso");
+			System.out.println("curso: "+curso);
+			if(curso.isBlank())
+			{
+				hm.put("pcurso", null);
+			} else {
+				hm.put("pcurso", Integer.parseInt(curso));
+			}
+			
+			ptcurso = request.getParameter("ptcurso");
+			System.out.println("ptcurso: "+ptcurso);
+			if(ptcurso.isBlank())
+			{
+				hm.put("ptcurso", null);
+			} else {
+				hm.put("ptcurso", Integer.parseInt(ptcurso));
+			}
+			
+			
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			String id = dtf.format(LocalDateTime.now());
 			System.out.println("AAAAAAA : "+id);
@@ -121,8 +142,8 @@ public class Sl_rptConsolidado extends HttpServlet {
 			String template = "reportes\\rpt_consolidado.jasper";
 			Exporter exporter = new JRPdfExporter();
 			JasperPrint jasperPrint = JasperFillManager.fillReport(path+template, hm, c);
-			response.setContentType("application/pdf");
-			response.setHeader("Content-Disposition", "inline; filename=\"rptConsolidado_"+id+".pdf");
+			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+			response.setHeader("Content-Disposition", "inline; filename=\"rpt_tipo_calificacion"+id+".xlsx");
 			exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(otps));
 			exporter.exportReport();
