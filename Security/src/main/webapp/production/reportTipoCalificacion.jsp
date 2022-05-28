@@ -101,7 +101,7 @@
 											</div>
                                         </div>		
 
-										     <input type="hidden" value="1" name="opcion" id="opcion"/>
+										<input type="hidden" value="1" name="opcion" id="opcion"/>
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Convocatoria: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
@@ -123,6 +123,60 @@
 												</select>
 											</div>
                                         </div>
+                                        
+                                          <div class="field item form-group">
+											<label
+												class="col-form-label col-md-3 col-sm-3  label-align">Capacitación:<span
+												class="required">*</span></label>
+											<div class="col-md-6 col-sm-6">
+												<!--<input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
+												<%
+												ArrayList<Tbl_capacitacion> listaCapacitacion = new ArrayList<Tbl_capacitacion>();
+												Dt_capacitacion dtu = new Dt_capacitacion();
+												listaCapacitacion = dtu.listacapacitacionesActivas();
+												%>
+												<select class="form-control js-example-basic-single"
+														name="pcurso" id="pcurso"
+														required="required">
+														<option value="0">Seleccione...</option>
+														<%
+														for (Tbl_capacitacion tc : listaCapacitacion) {
+														%>
+													<option value="<%=tc.getId_capacitacion()%>"><%=tc.getNombre()%></option>
+														<%
+														}
+														%>
+											</select>
+											</div>
+										</div>
+                                        
+                                         <div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align">Tipo Capacitacion <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+											
+																	<%
+								                      			    ArrayList<Tbl_tipo_capacitacion> listaModalidad = new ArrayList<Tbl_tipo_capacitacion>();
+								                      			    Dt_tipo_capacitacion dtmodalidad = new Dt_tipo_capacitacion();
+								                      			    listaModalidad = dtmodalidad.listaTipCapActivos();
+								                      				%> 
+											
+								                  <select class="form-control js-example-basic-single" name="ptcurso" id="ptcurso" >
+								
+								
+												 <option value="0">Seleccione...</option>
+																  <% 
+																  	for(Tbl_tipo_capacitacion mod :listaModalidad){
+																  %>
+																  <option value="<%=mod.getId_tipo_capacitacion()%>"><%=mod.getTipo_capacitacion()%></option>
+																  <%
+																  	}
+																  %>
+									</select>                 
+											</div>
+										</div>
+
+                                        
                                        
                                         <div class="ln_solid">
                                             <div class="form-group">
