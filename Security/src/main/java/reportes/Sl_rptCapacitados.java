@@ -146,8 +146,8 @@ try {
 			String template = "reportes\\rpt_capacitados.jasper";
 			Exporter exporter = new JRPdfExporter();
 			JasperPrint jasperPrint = JasperFillManager.fillReport(path+template, hm, c);
-			response.setContentType("application/pdf");
-			response.setHeader("Content-Disposition", "inline; filename=\"rpt_capacitados"+id+"ReportCapacitados.pdf");
+			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+			response.setHeader("Content-Disposition", "inline; filename=\"rpt_capacitados"+id+".xlsx");
 			exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(otps));
 			exporter.exportReport();

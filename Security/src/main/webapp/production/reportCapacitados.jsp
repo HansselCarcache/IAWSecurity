@@ -103,6 +103,7 @@
 											</div>
                                         </div>
                                         
+                                        
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Sexo: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
@@ -117,6 +118,30 @@
 												</select>
                                             </div>
                                         </div>
+                                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="cbxTipoCap">Tipo Capacitacion <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+											
+																	<%
+								                      			    ArrayList<Tbl_tipo_capacitacion> listaModalidad = new ArrayList<Tbl_tipo_capacitacion>();
+								                      			    Dt_tipo_capacitacion dtmodalidad = new Dt_tipo_capacitacion();
+								                      			    listaModalidad = dtmodalidad.listaTipCapActivos();
+								                      				%> 
+											
+								                  <select class="form-control js-example-basic-single" name="cbxTipoCap" id="cbxTipoCap" required="required" >
+								
+								
+												 <option value="0">Seleccione...</option>
+																  <% 
+																  	for(Tbl_tipo_capacitacion mod :listaModalidad){
+																  %>
+																  <option value="<%=mod.getId_tipo_capacitacion()%>"><%=mod.getTipo_capacitacion()%></option>
+																  <%
+																  	}
+																  %>
+													</select>                 
+											</div>
+										</div>
                                         
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Año: <span class="required">*</span></label>
