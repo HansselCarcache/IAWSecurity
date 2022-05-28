@@ -1,4 +1,4 @@
-package servlets;
+package reportes;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -54,8 +54,10 @@ public class Sl_rptTipoCalificacion extends HttpServlet {
 		HashMap<String, Object>hm = new HashMap<>();
 
 		try {
-		
+			String curso = "";
+			String ptcurso = "";
 			String Convocatoria = "";
+			
 			Convocatoria = request.getParameter("pconvTC")==null?"0":request.getParameter("pconvTC");
 			if(Convocatoria.equals("0"))
 			{
@@ -74,6 +76,25 @@ public class Sl_rptTipoCalificacion extends HttpServlet {
 			}else {
 				hm.put("ptipo_calificacion", Integer.parseInt(TipoCalificacion));
 			}
+			
+			curso = request.getParameter("pcurso");
+			System.out.println("curso: "+curso);
+			if(curso.equals("0"))
+			{
+				hm.put("pcurso", null);
+			} else {
+				hm.put("pcurso", Integer.parseInt(curso));
+			}
+			
+			ptcurso = request.getParameter("ptcurso");
+			System.out.println("ptcurso: "+ptcurso);
+			if(ptcurso.equals("0"))
+			{
+				hm.put("ptcurso", null);
+			} else {
+				hm.put("ptcurso", Integer.parseInt(ptcurso));
+			}
+			
 		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String id = dtf.format(LocalDateTime.now());
