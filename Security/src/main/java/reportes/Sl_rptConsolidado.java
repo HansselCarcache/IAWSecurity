@@ -111,7 +111,7 @@ public class Sl_rptConsolidado extends HttpServlet {
 			
 			curso = request.getParameter("pcurso");
 			System.out.println("curso: "+curso);
-			if(curso.isBlank())
+			if(curso.equals("0"))
 			{
 				hm.put("pcurso", null);
 			} else {
@@ -120,7 +120,7 @@ public class Sl_rptConsolidado extends HttpServlet {
 			
 			ptcurso = request.getParameter("ptcurso");
 			System.out.println("ptcurso: "+ptcurso);
-			if(ptcurso.isBlank())
+			if(ptcurso.equals("0"))
 			{
 				hm.put("ptcurso", null);
 			} else {
@@ -140,7 +140,7 @@ public class Sl_rptConsolidado extends HttpServlet {
 			String path = context.getRealPath("/");
 			System.out.println("Path: "+path);
 			String template = "reportes\\rpt_consolidado.jasper";
-			Exporter exporter = new JRPdfExporter();
+			net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter exporter = new net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter();
 			JasperPrint jasperPrint = JasperFillManager.fillReport(path+template, hm, c);
 			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 			response.setHeader("Content-Disposition", "inline; filename=\"rpt_tipo_calificacion"+id+".xlsx");
