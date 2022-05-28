@@ -40,6 +40,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	Dt_inscripcionDocente dti = new Dt_inscripcionDocente();
 	Dt_carrerasInsc dtc = new Dt_carrerasInsc();
 	Ng_InscripcionD ngi = new Ng_InscripcionD();
+	String valor="";
+	
 	
 	// CONSTRUIMOS EL OBJETO CON LOS VALORES DE LOS CONTROLES
 	
@@ -113,12 +115,20 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		break;
 	case 2:
 		tins.setId_inscripcion(Integer.parseInt(request.getParameter("id_inscripcion")));
-		dtc.eliminarCarreraInsc(tins.getId_inscripcion());
-		if(dti.eliminarInsc(tins.getId_inscripcion())) {
-			response.sendRedirect("production/tbl_inscripcionD.jsp?msj=3");
+		tins.setId_usuario(Integer.parseInt(request.getParameter("id_usuario")));
+		
+		if(ngi.cursoEvaluado(tins.getId_inscripcion(), tins.getId_usuario())) {
+			response.sendRedirect("production/tbl_inscripcionD.jsp?msj=5");
 		}else {
-			response.sendRedirect("production/tbl_inscripcionD.jsp?msj=4");
+			
+			dtc.eliminarCarreraInsc(tins.getId_inscripcion());
+			if(dti.eliminarInsc(tins.getId_inscripcion())) {
+				response.sendRedirect("production/tbl_inscripcionD.jsp?msj=3");
+			}else {
+				response.sendRedirect("production/tbl_inscripcionD.jsp?msj=4");
+			}
 		}
+		
 		break;
 	case 3:
 		int id = Integer.parseInt(request.getParameter("cbxConvo"));

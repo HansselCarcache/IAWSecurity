@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
 
-
+<% 
+String VarMsj = "";
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -12,14 +15,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Inicio | Sistema de gestión docente</title>
+    <title>Inicio | Sistema de  &nbsp Formación Docente UCA</title>
 
-    <!-- Bootstrap -->
+     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+    <!-- JAlert -->
+    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
@@ -42,7 +47,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
+              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span> &nbsp Formación Docente UCA</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -143,8 +148,34 @@
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
+<!-- JAlert js -->
+	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+
+<script>
+    	
+    }
+
+    $(document).ready(function() {
+    	var mensaje = 0;
+ 	    mensaje = "<%=VarMsj %>";
+ 	    if(mensaje == "1")
+ 	      {
+ 	    	successAlert('Exito', 'La foto fue subida con éxito');
+ 	      }
+ 	    if(mensaje == "2")
+ 	      {
+ 	        errorAlert('Error', 'No se ha podido subir la foto. Intente de nuevo.');
+ 	      }
+        
+        	
+    });
+    
+    
+    </script>
 
   </body>
 </html>

@@ -4,6 +4,10 @@
     pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*" %>
 
 <% 
+
+String VarMsj = "";
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+
 String user = "";
 user = request.getParameter("idU")==null?"0":request.getParameter("idU");
 
@@ -38,6 +42,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
+    
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
@@ -54,7 +59,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
+              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span> &nbsp Formación Docente UCA</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -85,7 +90,6 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#">Settings 1</a>
                             <a class="dropdown-item" href="#">Settings 2</a>
-                            
                           </div>
                       </li>
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -98,12 +102,14 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                   </div>
                   <div class="x_content">
                       <div class="row">
-                          <div class="col-md-16 col-sm-3  profile_center" style="margin-left: 550px">
+                          <div class="col-md-16 col-sm-4  profile_left" style="margin-left: 50px">
                       <div class="profile_img">
                         <div id="crop-avatar">
                             
                             <!-- Current avatar -->
-                          <img style="margin-bottom: -25px" class="img-responsive avatar-view" src="images/userProfile.png" alt="Avatar" title="Change the avatar" width="250xp" height="230xp">
+                          
+                          <img class="img-responsive avatar-view" src="../<%=tu.getUrlFoto()==null?"production/images/no-user.jpg":tu.getUrlFoto()%>"  alt="Foto Usuario" style="margin-bottom: -5px" title="Change the avatar" width="230xp" height="200xp">
+                          
                         </div>
                       </div>
                       
@@ -123,14 +129,8 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                       </ul>
 
                       <div class="file-select" id="src-file1" >
-                      <a class="btn btn-primary" style="color: white;"><i class="fa-solid fa-image"></i> Editar foto de perfil</a>
-                      <form method="post" action="../Sl_Imagen" enctype="multipart/form-data">
-         				Elija un archivo / imagen:
-    					<input type="file" name="uploadFile">
-   						 <br/><br/>
-    					<input type="submit" value="Subir" />
-                      	 <br />
-                      </form>
+                      <a href="addFotoPerfil.jsp?idU=<%=tu.getId_usuario()%>" class="btn btn-primary" style="color: white;"><i class="fa-solid fa-image" title="Agregar Foto de Usuario"></i> Editar foto de perfil</a>
+                          
                       </div>
 
                     </div>
@@ -197,8 +197,8 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-
-	<!-- JAlert js -->
+    
+    <!-- JAlert js -->
 	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
 	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
 
@@ -207,10 +207,19 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
     
     <script>
     	
-    }
+    
 
     $(document).ready(function() {
-        $('.js-example-basic-single').select2();
+    	var mensaje = 0;
+ 	    mensaje = "<%=VarMsj %>";
+ 	    if(mensaje == "1")
+ 	      {
+ 	    	successAlert('Exito', 'La foto fue subida con éxito');
+ 	      }
+ 	    if(mensaje == "2")
+ 	      {
+ 	        errorAlert('Error', 'No se ha podido subir la foto. Intente de nuevo.');
+ 	      }
         
         	
     });

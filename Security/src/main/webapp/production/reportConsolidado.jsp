@@ -33,7 +33,11 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
+<<<<<<< HEAD
               <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestiï¿½n Docente</span></a>
+=======
+              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span> &nbsp Formación Docente UCA</span></a>
+>>>>>>> 58657d8773d55472f4c0e484a8fe19fea3bf1e98
             </div>
 
             <div class="clearfix"></div>

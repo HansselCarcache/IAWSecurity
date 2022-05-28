@@ -54,7 +54,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
+              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span> &nbsp Formación Docente UCA</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -103,7 +103,7 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                         <div id="crop-avatar">
                             
                             <!-- Current avatar -->
-                          <img style="margin-bottom: -25px" class="img-responsive avatar-view" src="images/userProfile.png" alt="Avatar" title="Change the avatar" width="250xp" height="230xp">
+                          <img class="img-responsive avatar-view" src="../<%=tu.getUrlFoto()==null?"production/images/no-user.jpg":tu.getUrlFoto()%>"  alt="Foto Usuario" style="margin-bottom: -5px" title="Change the avatar" width="230xp" height="200xp">
                         </div>
                       </div>
                       
@@ -123,14 +123,8 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
                       </ul>
 
                       <div class="file-select" id="src-file1" >
-                      <a class="btn btn-primary" style="color: white;"><i class="fa-solid fa-image"></i> Editar foto de perfil</a>
-                      <form method="post" action="../Sl_Imagen" enctype="multipart/form-data">
-         				Elija un archivo / imagen:
-    					<input type="file" name="uploadFile">
-   						 <br/><br/>
-    					<input type="submit" value="Subir" />
-                      	 <br />
-                      </form>
+                      <a href="addFotoPerfilD.jsp?idU=<%=tu.getId_usuario()%>" class="btn btn-primary" style="color: white;"><i class="fa-solid fa-image" title="Agregar Foto de Usuario"></i> Editar foto de perfil</a>
+                          
                       </div>
 
                     </div>

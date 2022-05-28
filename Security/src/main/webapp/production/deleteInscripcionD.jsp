@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, negocio.*,java.util.*" %>
 <!DOCTYPE html>
 <html>
+
 <%
 String user = "";
 user = request.getParameter("idI")==null?"0":request.getParameter("idI");
@@ -9,6 +10,7 @@ user = request.getParameter("idI")==null?"0":request.getParameter("idI");
 Vw_inscripcion_docente insc = new Vw_inscripcion_docente();
 Dt_inscripcionDocente dtinsc = new Dt_inscripcionDocente();
 insc = dtinsc.getInscripcionbyID(Integer.parseInt(user));
+
 %>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -25,6 +27,8 @@ insc = dtinsc.getInscripcionbyID(Integer.parseInt(user));
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+    <!-- JAlert -->
+    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 <!-- iCheck -->
@@ -50,7 +54,7 @@ insc = dtinsc.getInscripcionbyID(Integer.parseInt(user));
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Docente</span></a>
+              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span> &nbsp Formación Docente UCA</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -88,11 +92,13 @@ insc = dtinsc.getInscripcionbyID(Integer.parseInt(user));
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form class="" action="../Sl_Inscripcion" method="post" novalidate>
+                                    <form class="" action="../Sl_Inscripcion" method="post" id="frmIns" onsubmit="toSubmit(event)">
 <!--                                         <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a> -->
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 										<input type="hidden" value="2" name="opcion" id="opcion"/>
+										<input type="hidden" value="<%=vwur.getId_usuario() %>" name="id_usuario" id="id_usuario"/>
+										
 										<input type="hidden" value="<%=insc.getId_inscripcion() %>" name="id_inscripcion" id="id_inscripcion"/>
 										<div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre: <span class="required">*</span></label>
@@ -123,8 +129,8 @@ insc = dtinsc.getInscripcionbyID(Integer.parseInt(user));
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-danger">Eliminar</button>
-                                                    <a href="tbl_capacitacionD.jsp" class="btn btn-info">Regresar</a>
+                                                    <button onclick="deleteIns()" class="btn btn-danger">Eliminar</button>
+                                                    <a href="tbl_inscripcionD.jsp" class="btn btn-info">Regresar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -183,12 +189,12 @@ insc = dtinsc.getInscripcionbyID(Integer.parseInt(user));
             "events": ['blur', 'input', 'change']
         }, document.forms[0]);
         // on form "submit" event
-        document.forms[0].onsubmit = function(e) {
-            var submit = true,
-                validatorResult = validator.checkAll(this);
-            console.log(validatorResult);
-            return !!validatorResult.valid;
-        };
+//         document.forms[0].onsubmit = function(e) {
+//             var submit = true,
+//                 validatorResult = validator.checkAll(this);
+//             console.log(validatorResult);
+//             return !!validatorResult.valid;
+//         };
         // on form "reset" event
         document.forms[0].onreset = function(e) {
             validator.reset();
@@ -204,16 +210,45 @@ insc = dtinsc.getInscripcionbyID(Integer.parseInt(user));
             $('.js-example-basic-single').select2();
         });
         
-        function eliminarcolumna(id){
-       		var table = $('#tbl_capacitaciones').DataTable();
-       	 
-       		table.column( id).visible( false );
-       	}
-       	function mostrarcolumna(){
-       		var table = $('#tbl_capacitaciones').DataTable();
-       	    
-       	   	table.columns( [ 0, 1, 2 ] ).visible( true, true );
-       	}
+      //Funciones del formulario
+        function toSubmit(e){
+    		e.preventDefault(); 
+ 			 try {
+   					someBug();
+  					} catch (e) {
+   					throw new Error(e.message);
+  					}
+  					return false;
+   		}
+   
+   		function submitForm(){
+    		var form = document.getElementById("frmIns");
+			form.onsubmit = function() {
+  			return true;
+			}
+   		}
+       
+       	
+       	function deleteIns(){
+            $.jAlert({
+                'type': 'confirm',
+                'confirmQuestion': '¿Esta seguro que darse de baja de esta capacitación?',
+                'onConfirm': function(e, btn){
+                  e.preventDefault();
+                  //do something here
+                  submitForm();
+                  document.getElementById('frmIns').submit();
+                  btn.parents('.jAlert').closeAlert();
+                  return false;
+                },
+                'onDeny': function(e, btn){
+                  e.preventDefault();
+                  //do something here
+                  btn.parents('.jAlert').closeAlert();
+                  return false;
+                }
+            });
+        }
        	
        	
        	function setValores()
@@ -248,6 +283,9 @@ insc = dtinsc.getInscripcionbyID(Integer.parseInt(user));
     
     <!-- Select2 -->
     <script src="../vendors/select2/dist/js/select2.min.js"></script>
+    <!-- JAlert js -->
+	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
     
     <script type="text/javascript">

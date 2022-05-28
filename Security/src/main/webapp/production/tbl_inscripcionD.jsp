@@ -52,7 +52,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span>Gestión Oferta</span></a>
+              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span> &nbsp Formación Docente UCA</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -91,15 +91,23 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                      <div class="row">
-                          <div class="col-sm-12">
-                            <div class="card-box table-responsive">
-                            <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                            
+                  
+                    <div class="text-muted font-13 col-md-12" style="text-align: right;">
+                             
+                                  <input type="hidden" value="<%=vwur.getId_usuario() %>" name="Id de usuario" id="idU" />
+                            <a href="../Sl_rpt_calificacion?idI=<%=vwur.getId_usuario() %>"  target="_blank">
+                            <i class="fa-solid fa-book-open" title=" reporte de calificaciones"></i>
+                          </a>
+                          <a href="../Sl_rpt_inscripcion?idI=<%=vwur.getId_usuario() %>" target="_blank">
+                            <i class="fa-solid fa-print" title=" reporte de inscripcion"></i>
+                          </a>
                             	<br><br>
                             </div>
+                  
+                
+                  
+
                             
-                    
                     <table id="tbl_inscr" class="table table-striped table-bordered" style="width:100%">
                     
                     <%
@@ -110,7 +118,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                     
                       <thead>
                         <tr>
-                          
+                          <th>Convocatoria </th>
                           <th>Capacitacion </th>
                           <th>Fecha Inicio </th>
                           <th>Fecha Final</th>
@@ -143,27 +151,28 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                       	
                       
                         <tr>
-                          <td><%=ins.getCapacitacion()%></td>
+                        	<td><%=ins.getConvocatoria()%></td>
+                          	<td><%=ins.getCapacitacion()%></td>
                           
-                          <td><%=ins.getFecha_inicial()%></td>
+                          	<td><%=ins.getFecha_inicial()%></td>
                           
-                          <td><%=ins.getFecha_final() %></td>
+                          	<td><%=ins.getFecha_final() %></td>
                           
-                          <td><%=ins.getDias() %></td>
+                          	<td><%=ins.getDias() %></td>
                           
-                          <td><%=valor %></td>
+                          	<td><%=valor %></td>
                           
-                          <td><%=desc_valor %></td>
-                          <td>
+                          	<td><%=desc_valor %></td>
+                          	<td>
                           
-<!--                           <a href="readInscripcion.jsp"> -->
-<!--                             <i class="far fa-eye" title="Visualizar Opciones"></i> -->
-<!--                           </a>  -->
-<!--                           &nbsp;&nbsp; -->
-                          <a href="deleteInscripcionD.jsp?idI=<%=ins.getId_inscripcion() %>" >
-                            <i class="far fa-trash-alt" title="Eliminar Opciones"></i>
-                          </a>
-                          </td>
+		<!--                           <a href="readInscripcion.jsp"> -->
+		<!--                             <i class="far fa-eye" title="Visualizar Opciones"></i> -->
+		<!--                           </a>  -->
+		<!--                           &nbsp;&nbsp; -->
+		                          <a href="deleteInscripcionD.jsp?idI=<%=ins.getId_inscripcion() %>" >
+		                            <i class="far fa-trash-alt" title="Botar curso"></i>  
+		                          </a>
+                          	</td>
                           
                           
                         </tr>
@@ -176,7 +185,8 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                       <tfoot>
                         <tr>
                           
-                         <th>Capacitacion </th>
+                         <th>Convocatoria </th>
+                          <th>Capacitacion </th>
                           <th>Fecha Inicio </th>
                           <th>Fecha Final</th>
                           <th>Días </th>
@@ -244,6 +254,12 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
     
+    <script>
+    function printCal(){
+    	window.open("../Sl_rpt_calificacion", '_blank');
+    }
+    </script>
+    
      <script>
      function eliminarcolumna(id){
     		var table = $('#tbl_inscr').DataTable();
@@ -278,6 +294,10 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 	    if(mensaje == "4")
 	      {
 	        errorAlert('Error', 'No se han podido eliminar los datos de inscripcion, intente de nuevo.');
+	      }
+	    if(mensaje == "5")
+	      {
+	        errorAlert('Error', 'No es posible eliminar su inscripción porque esta ya fue evaluada.');
 	      }
 	    
          $('#tbl_inscr').DataTable( {
