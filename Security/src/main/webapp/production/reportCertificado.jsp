@@ -190,6 +190,50 @@
 												</select>
                                             </div>
                                         </div>
+                                        
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Capacitación: <span >*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+												<%						                      	
+							                      	ArrayList<Vw_capacitacion> listaCapacitacion = new ArrayList<Vw_capacitacion>();
+							                      	Dt_capacitacion dtcapacitacion = new Dt_capacitacion();
+						                      		listaCapacitacion = dtcapacitacion.listarcapacitacionesV();
+								                 %>
+								                 <select class="form-control js-example-basic-single" name="pcurso" id="pcurso" > <!-- Cambiar el id y name -->
+												  <option value="0">Seleccione...</option>
+												  <% 
+												  	for(Vw_capacitacion tcap :listaCapacitacion){
+												  %>
+												  <option value="<%=tcap.getId_capacitacion()%>"><%=tcap.getNombre()%></option>
+												  <%
+												  	}
+												  %>
+												</select>
+											</div>
+                                        </div>
+                                        
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Tipo de capacitación: <span >*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+<!--                                                 <input class="form-control" class='optional' name="occupation" data-validate-length-range="5,15" type="text" /></div> -->
+												<%						                      	
+													ArrayList<Tbl_tipo_capacitacion> listaTipCap = new ArrayList<Tbl_tipo_capacitacion>();
+								                    Dt_tipo_capacitacion dttipcap = new Dt_tipo_capacitacion();
+								                    listaTipCap = dttipcap.listaTipCapActivos();
+								                 %>
+								                 <select class="form-control js-example-basic-single" name="ptcurso" id="ptcurso" > <!-- Cambiar el id y name -->
+												  <option value="0">Seleccione...</option>
+												  <% 
+												  	for(Tbl_tipo_capacitacion ttipcap :listaTipCap){
+												  %>
+												  <option value="<%=ttipcap.getId_tipo_capacitacion()%>"><%=ttipcap.getTipo_capacitacion()%></option>
+												  <%
+												  	}
+												  %>
+												</select>
+											</div>
+                                        </div>
 
                                         
                                         

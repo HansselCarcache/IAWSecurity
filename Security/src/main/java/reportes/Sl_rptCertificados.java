@@ -23,6 +23,7 @@ import net.sf.jasperreports.export.Exporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 
+
 /**
  * Servlet implementation class Sl_rptCertificados
  */
@@ -129,6 +130,30 @@ public class Sl_rptCertificados extends HttpServlet {
 				hm.put("pcarrera", Carrera);
 			}
 			
+			
+			String Capacitacion = "";
+			Capacitacion = request.getParameter("pcurso")==null?"0":request.getParameter("pcurso");
+			if(Capacitacion.equals("0"))
+			{
+				hm.put("pcurso", null);
+			}
+			else
+			{
+				hm.put("pcurso", Capacitacion);
+			}
+			
+			
+			String TipoCapacitacion = "";
+			TipoCapacitacion = request.getParameter("ptcurso")==null?"0":request.getParameter("ptcurso");
+			if(TipoCapacitacion.equals("0"))
+			{
+				hm.put("ptcurso", null);
+			}
+			else
+			{
+				hm.put("ptcurso", TipoCapacitacion);
+			}
+			
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			String id = dtf.format(LocalDateTime.now());
 
@@ -143,10 +168,11 @@ public class Sl_rptCertificados extends HttpServlet {
 			String path = context.getRealPath("/");
 			System.out.println("Path: "+path);
 			String template = "reportes\\rpt_certificados.jasper";
-			Exporter exporter = new JRPdfExporter();
+			net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter exporter = new net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter();
 			JasperPrint jasperPrint = JasperFillManager.fillReport(path+template, hm, c);
-			response.setContentType("application/pdf");
-			response.setHeader("Content-Disposition", "inline; filename=\"rpt_certificados"+id+".pdf");
+			response.setContentType("application/xlsx");
+			response.setHeader("Content-Disposition", "inline; filename=\"rpt_certificados"+id+".xlsx");
+			
 			exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(otps));
 			exporter.exportReport();
