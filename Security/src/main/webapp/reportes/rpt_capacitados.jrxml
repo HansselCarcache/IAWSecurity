@@ -5,16 +5,18 @@
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="232"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="762"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="daGestionDocente"/>
-	<parameter name="pconv" class="java.lang.Integer" isForPrompting="false"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="390"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="599"/>
+	<parameter name="pconv" class="java.lang.Integer"/>
 	<parameter name="psexo" class="java.lang.Integer"/>
 	<parameter name="yearr" class="java.lang.Integer"/>
 	<parameter name="pcarrera" class="java.lang.String"/>
 	<parameter name="pdepartamento" class="java.lang.String"/>
 	<parameter name="pfacultad" class="java.lang.String"/>
-	<parameter name="ptcurso" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="ptcurso" class="java.lang.Integer"/>
 	<parameter name="pcurso" class="java.lang.Integer"/>
 	<queryString language="plsql">
-		<![CDATA[CALL rpt_capacitados ($P{pconv}, $P{psexo}, $P{yearr}, $P{pcarrera} ,$P{pdepartamento} ,$P{pfacultad}, $P{ptcurso},$P{pcurso} )]]>
+		<![CDATA[CALL rpt_capacitados ($P{pconv}, $P{psexo}, $P{yearr}, $P{pcarrera} ,$P{pdepartamento} ,$P{pfacultad}, $P{pcurso},$P{ptcurso} )]]>
 	</queryString>
 	<field name="convocatoria" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="convocatoria"/>
@@ -107,12 +109,12 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="43" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="74" splitType="Stretch">
+		<band height="78" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="20" y="1" width="70" height="63" forecolor="#FFFFFF" backcolor="#142D87" uuid="006b8310-46b7-4a4b-96d8-c32ed37d7c0d">
+				<reportElement mode="Opaque" x="20" y="18" width="70" height="60" forecolor="#FFFFFF" backcolor="#142D87" uuid="006b8310-46b7-4a4b-96d8-c32ed37d7c0d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="38f4b0ba-ca8a-4827-a8dc-aced1754400f"/>
 				</reportElement>
 				<box>
@@ -124,7 +126,7 @@
 				<text><![CDATA[Convocatoria]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="170" y="1" width="70" height="63" forecolor="#FFFFFF" backcolor="#132D8A" uuid="969622e7-9510-4c9f-a398-4b3dcd0444d0">
+				<reportElement mode="Opaque" x="170" y="18" width="70" height="60" forecolor="#FFFFFF" backcolor="#132D8A" uuid="969622e7-9510-4c9f-a398-4b3dcd0444d0">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="00637501-733e-4462-b3e2-5545c25731a7"/>
 				</reportElement>
 				<box>
@@ -136,7 +138,7 @@
 				<text><![CDATA[Capacitación]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="90" y="1" width="80" height="63" forecolor="#FFFFFF" backcolor="#142D87" uuid="5a0c5e03-ad16-4801-9e35-003503b6b1a2">
+				<reportElement mode="Opaque" x="90" y="18" width="80" height="60" forecolor="#FFFFFF" backcolor="#142D87" uuid="5a0c5e03-ad16-4801-9e35-003503b6b1a2">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="37d3dd09-aa49-4ece-bb02-f897e8ef198e"/>
 				</reportElement>
 				<box>
@@ -148,7 +150,7 @@
 				<text><![CDATA[Nombre Docente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="320" y="1" width="80" height="63" forecolor="#FFFFFF" backcolor="#17308A" uuid="c9d5db9a-28e4-4b02-bba6-611a14989cdf">
+				<reportElement mode="Opaque" x="320" y="18" width="80" height="60" forecolor="#FFFFFF" backcolor="#17308A" uuid="c9d5db9a-28e4-4b02-bba6-611a14989cdf">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0ceaf5e3-39a3-4443-bc51-6a8b067ddd72"/>
 				</reportElement>
 				<box>
@@ -160,7 +162,7 @@
 				<text><![CDATA[Carreras]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="400" y="1" width="90" height="63" forecolor="#FFFFFF" backcolor="#142D87" uuid="37fda8a7-e7bc-409d-850a-306c403607a0">
+				<reportElement mode="Opaque" x="400" y="18" width="80" height="60" forecolor="#FFFFFF" backcolor="#142D87" uuid="37fda8a7-e7bc-409d-850a-306c403607a0">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e44aa71-527f-4039-9027-a6e4ebfb3d64"/>
 				</reportElement>
 				<box>
@@ -172,7 +174,7 @@
 				<text><![CDATA[Departamento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="490" y="1" width="80" height="63" forecolor="#FFFFFF" backcolor="#142D87" uuid="110cb245-bc78-4580-a23c-04177466d4fd">
+				<reportElement mode="Opaque" x="480" y="18" width="80" height="60" forecolor="#FFFFFF" backcolor="#142D87" uuid="110cb245-bc78-4580-a23c-04177466d4fd">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a412b4ec-9bb5-43ee-a218-2545e2493bea"/>
 				</reportElement>
 				<box>
@@ -184,7 +186,7 @@
 				<text><![CDATA[Facultad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="240" y="0" width="80" height="64" forecolor="#FFFFFF" backcolor="#142D87" uuid="9f7284c8-779e-4c12-9b62-a417b868b9d9">
+				<reportElement mode="Opaque" x="240" y="18" width="80" height="60" forecolor="#FFFFFF" backcolor="#142D87" uuid="9f7284c8-779e-4c12-9b62-a417b868b9d9">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="38f4b0ba-ca8a-4827-a8dc-aced1754400f"/>
 				</reportElement>
 				<box>
@@ -198,9 +200,9 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="62" splitType="Stretch">
+		<band height="66" splitType="Stretch">
 			<textField>
-				<reportElement x="20" y="-10" width="70" height="47" uuid="1141d4d6-3769-4a0b-8c61-6b91c59cc367">
+				<reportElement x="20" y="0" width="70" height="66" uuid="1141d4d6-3769-4a0b-8c61-6b91c59cc367">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="38f4b0ba-ca8a-4827-a8dc-aced1754400f"/>
 				</reportElement>
 				<box>
@@ -210,7 +212,7 @@
 				<textFieldExpression><![CDATA[$F{convocatoria}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="90" y="-10" width="80" height="47" uuid="2c70a4ef-c8a4-424f-a25a-ddbbd083c8a3">
+				<reportElement x="90" y="0" width="80" height="66" uuid="2c70a4ef-c8a4-424f-a25a-ddbbd083c8a3">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="37d3dd09-aa49-4ece-bb02-f897e8ef198e"/>
 				</reportElement>
 				<box>
@@ -220,7 +222,7 @@
 				<textFieldExpression><![CDATA[$F{nombre_completo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="320" y="-10" width="80" height="47" uuid="ffcf91af-bea2-4ec2-9bfb-e14304eec92d">
+				<reportElement x="320" y="0" width="80" height="66" uuid="ffcf91af-bea2-4ec2-9bfb-e14304eec92d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0ceaf5e3-39a3-4443-bc51-6a8b067ddd72"/>
 				</reportElement>
 				<box>
@@ -230,7 +232,7 @@
 				<textFieldExpression><![CDATA[$F{carreras}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="-10" width="90" height="48" uuid="4e4d8e29-fb65-4769-9756-bfcc0a81fe6e">
+				<reportElement x="400" y="0" width="80" height="66" uuid="4e4d8e29-fb65-4769-9756-bfcc0a81fe6e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e44aa71-527f-4039-9027-a6e4ebfb3d64"/>
 				</reportElement>
 				<box>
@@ -240,7 +242,7 @@
 				<textFieldExpression><![CDATA[$F{departamento}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="490" y="-10" width="80" height="47" uuid="ff9d2a15-80b0-44b3-8936-14ee556d0fab">
+				<reportElement x="480" y="0" width="80" height="66" uuid="ff9d2a15-80b0-44b3-8936-14ee556d0fab">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a412b4ec-9bb5-43ee-a218-2545e2493bea"/>
 				</reportElement>
 				<box>
@@ -250,7 +252,7 @@
 				<textFieldExpression><![CDATA[$F{facultad}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="170" y="-10" width="70" height="47" uuid="79f8eb0a-a157-4daf-9567-a14ce2681071">
+				<reportElement x="170" y="0" width="70" height="66" uuid="79f8eb0a-a157-4daf-9567-a14ce2681071">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="00637501-733e-4462-b3e2-5545c25731a7"/>
 				</reportElement>
 				<box>
@@ -260,7 +262,7 @@
 				<textFieldExpression><![CDATA[$F{capacitacion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="240" y="-10" width="80" height="47" uuid="498446e0-cdd0-4d32-98cd-7fe1a8a11756">
+				<reportElement x="240" y="0" width="80" height="66" uuid="498446e0-cdd0-4d32-98cd-7fe1a8a11756">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="996d2e57-755a-467e-87fe-02ef76d8974f"/>
 				</reportElement>
 				<box>

@@ -58,6 +58,9 @@ public class Sl_rptCapacitados extends HttpServlet {
 				HashMap<String, Object>hm = new HashMap<>();
 try {
 			
+	
+			String curso = "";
+			String ptcurso = "";
 			String Convocatoria = "";
 			Convocatoria = request.getParameter("pconv")==null?"0":request.getParameter("pconv");
 			if(Convocatoria.equals("0"))
@@ -130,6 +133,25 @@ try {
 				hm.put("pcarrera", Carrera);
 			}
 			
+			curso = request.getParameter("pcurso");
+			System.out.println("curso: "+curso);
+			if(curso.equals("0"))
+			{
+				hm.put("pcurso", null);
+			} else {
+				hm.put("pcurso", Integer.parseInt(curso));
+			}
+			
+			ptcurso = request.getParameter("ptcurso");
+			System.out.println("ptcurso: "+ptcurso);
+			if(ptcurso.equals("0"))
+			{
+				hm.put("ptcurso", null);
+			} else {
+				hm.put("ptcurso", Integer.parseInt(ptcurso));
+			}
+			
+			
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			String id = dtf.format(LocalDateTime.now());
 
@@ -144,7 +166,7 @@ try {
 			String path = context.getRealPath("/");
 			System.out.println("Path: "+path);
 			String template = "reportes\\rpt_capacitados.jasper";
-			Exporter exporter = new JRPdfExporter();
+			net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter exporter = new net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter();
 			JasperPrint jasperPrint = JasperFillManager.fillReport(path+template, hm, c);
 			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 			response.setHeader("Content-Disposition", "inline; filename=\"rpt_capacitados"+id+".xlsx");
