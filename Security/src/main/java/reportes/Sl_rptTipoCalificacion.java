@@ -1,4 +1,4 @@
-package servlets;
+package reportes;
 
 import java.io.IOException;
 import java.io.OutputStream;
