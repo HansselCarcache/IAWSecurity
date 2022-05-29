@@ -96,7 +96,7 @@ public class Sl_rptTipoCalificacion extends HttpServlet {
 			}
 			
 		
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		String id = dtf.format(LocalDateTime.now());
 		
 		System.out.println("AAAAAAA : "+id);
@@ -112,7 +112,7 @@ public class Sl_rptTipoCalificacion extends HttpServlet {
 		net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter exporter = new net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter();
 		JasperPrint jasperPrint = JasperFillManager.fillReport(path+template, hm, c);
 		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-		response.setHeader("Content-Disposition", "inline; filename=\"rpt_tipo_calificacion"+id+".xlsx");
+		response.setHeader("Content-Disposition", "inline; filename=\"rpt_tipo_calificacion_"+id+".xlsx");
 		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(otps));
 		exporter.exportReport();

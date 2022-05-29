@@ -154,7 +154,7 @@ public class Sl_rptCertificados extends HttpServlet {
 				hm.put("ptcurso", TipoCapacitacion);
 			}
 			
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			String id = dtf.format(LocalDateTime.now());
 
 			System.out.println("AAAAAAA : "+id);
@@ -171,7 +171,7 @@ public class Sl_rptCertificados extends HttpServlet {
 			net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter exporter = new net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter();
 			JasperPrint jasperPrint = JasperFillManager.fillReport(path+template, hm, c);
 			response.setContentType("application/xlsx");
-			response.setHeader("Content-Disposition", "inline; filename=\"rpt_certificados"+id+".xlsx");
+			response.setHeader("Content-Disposition", "inline; filename=\"rpt_certificados_"+id+".xlsx");
 			
 			exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(otps));
