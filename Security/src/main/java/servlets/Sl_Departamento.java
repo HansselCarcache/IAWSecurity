@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import datos.Dt_departamento ;
 import entidades.Tbl_departamento;
-import negocio.Ng_departamento;
 
 	@WebServlet("/Sl_Departamento")
 
