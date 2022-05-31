@@ -66,7 +66,150 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
             </div>
 
             <div class="clearfix"></div>
+			
+			<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>Seguridad</h2>
 
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<div class="field item form-group col-sm-3">
+										<a href="tbl_Usuario.jsp"><i class="fa fa-5x fa-shield "></i></a>
+										
+										<h2 style="padding-top:0.3; line-height:25px; padding-left:10px;">Usuarios</h2>
+									</div>
+									
+									<div class="field item form-group col-sm-3">
+										<a href="tbl_rolusuario.jsp"><i class="fa fa-5x fa-arrows-h "></i></a>
+										
+										<h2 style="padding-top:0.3; line-height:25px;padding-left:10px;">Asignar rol a usuario</h2>
+									</div>
+				
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>Gestion de Ofertas de capacitaciones</h2>
+
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<div class="field item form-group col-sm-3">
+										<a href="tbl_modalidad.jsp"><i class="fa fa-5x fa-file-text "></i></a>
+										
+										<h2 style="padding-top:0.3; line-height:25px; padding-left:10px;">Modalidades</h2>
+									</div>
+									
+									<div class="field item form-group col-sm-3">
+										<a href="tbl_tipo_capacitacion.jsp"><i class="fa fa-5x fa-bars "></i></a>
+										
+										<h2 style="padding-top:0.3; line-height:25px; padding-left:10px;">Tipos de <br> Capacitaciones</h2>
+									</div>
+									
+									<div class="field item form-group col-sm-3">
+										<a href="tbl_capacitacion.jsp"><i class="fa fa-5x fa-tasks "></i></a>
+										
+										<h2 style="padding-top:0.3; line-height:25px;padding-left:10px;">Capacitaciones</h2>
+									</div>
+									
+									<div class="field item form-group col-sm-3">
+										<a href="tbl_facilitadores.jsp"><i class="fa fa-5x fa-user "></i></a>
+										
+										<h2 style="padding-top:0.3; line-height:25px;padding-left:10px;">Facilitadores</h2>
+									</div>
+									
+									<div class="clearfix"></div>
+									
+									<div class="field item form-group col-sm-3">
+										<a href="tbl_oferta.jsp"><i class="fa fa-5x fa-folder "></i></a>
+										
+										<h2 style="padding-top:10; line-height:25px;padding-left:10px;">Ofertas</h2>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>Catalogos relacionados a la Universidad</h2>
+
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<div class="field item form-group col-sm-3">
+										<a href="tbl_facultad.jsp"><i class="fa fa-5x fa-institution "></i></a>
+										
+										<h2 style="padding-top:0.3; line-height:25px; padding-left:10px;">Facultad</h2>
+									</div>
+									
+									<div class="field item form-group col-sm-3">
+										<a href="tbl_departamento.jsp"><i class="fa fa-5x fa-building "></i></a>
+										
+										<h2 style="padding-top:0.3; line-height:25px;padding-left:10px;">Departamento</h2>
+									</div>
+									
+									<div class="field item form-group col-sm-3">
+										<a href="tbl_carreras.jsp"><i class="fa fa-5x fa-mortar-board "></i></a>
+										
+										<h2 style="padding-top:0.3; line-height:25px;padding-left:10px;">Carrera</h2>
+									</div>
+									
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>Reporteria</h2>
+
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<div class="field item form-group col-sm-3">
+										<a href="reportConsolidado.jsp"><i class="fa fa-5x fa-file-excel-o "></i></a>
+										
+										<h2 style="padding-top:0.3; line-height:25px; padding-left:10px;">Consolidado General</h2>
+									</div>
+									
+									<div class="field item form-group col-sm-3">
+										<a href="reportTipoCalificacion.jsp"><i class="fa fa-5x fa-file-excel-o "></i></a>
+										
+										<h2 style="padding-top:0.3; line-height:25px; padding-left:10px;">Reporte por tipo<br> de Evaluacion</h2>
+									</div>
+									
+									<div class="field item form-group col-sm-3">
+										<a href="reportCapacitados.jsp"><i class="fa fa-5x fa-file-excel-o "></i></a>
+										
+										<h2 style="padding-top:0.3; line-height:25px;padding-left:10px;">Reporte de docentes<br> capacitados</h2>
+									</div>
+									
+									<div class="field item form-group col-sm-3">
+										<a href="reportCertificado.jsp"><i class="fa fa-5x fa-file-excel-o"></i></a>
+										
+										<h2 style="padding-top:0.3; line-height:25px;padding-left:10px;">Reporte de docentes<br> certificados</h2>
+									</div>
+									
+								
+								</div>
+							</div>
+						</div>
+					</div>
             <!--  <div class="row">
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
