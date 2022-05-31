@@ -236,7 +236,7 @@ public class Dt_inscripcionDocente {
 		ArrayList<Vw_inscripcion_docente> listInsc = new ArrayList<Vw_inscripcion_docente>();
 		try {
 			c = poolConexion.getConnection();
-			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_inscripcion_docente where id_usuario=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps = c.prepareStatement("SELECT * FROM gestion_docente.vw_inscripcion_docente where id_usuario=? AND estado <>3", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			ps.setInt(1,  idUser);
 			rs = ps.executeQuery();
 			while(rs.next()) {
