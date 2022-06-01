@@ -25,8 +25,6 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
-    <!-- JAlert -->
-    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
@@ -41,6 +39,15 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
   </head>
 
   <body class="nav-md">
@@ -152,9 +159,10 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
     
-    <!-- JAlert js -->
-	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
-	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
+    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -166,14 +174,30 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
     $(document).ready(function() {
     	var mensaje = 0;
  	    mensaje = "<%=VarMsj %>";
- 	    if(mensaje == "1")
- 	      {
- 	    	successAlert('Exito', 'La foto fue subida con éxito');
- 	      }
- 	    if(mensaje == "2")
- 	      {
- 	        errorAlert('Error', 'No se ha podido subir la foto. Intente de nuevo.');
- 	      }
+ 	   if(mensaje == "1")
+	      {
+	    	new PNotify({
+             type: 'success',
+             title: 'Exito',
+             text: 'La foto de perfil ha sido registrada exitosamente!',
+             styling: 'bootstrap3',
+             delay: 2000,
+             addclass: 'center'
+         });
+	    	//successAlert('Exito', 'Los datos han sido registrados exitosamente!');
+	      }
+	    if(mensaje == "2")
+	      {
+	    	new PNotify({
+             type: 'error',
+             title: 'Error',
+             text: 'No se ha podido registrar la foto de perfil, intente de nuevo.',
+             styling: 'bootstrap3',
+             delay: 2000,
+             addclass: 'center'
+         });
+	        //errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
+	      }
         
         	
     });
