@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
 
+<% 
 
+String VarMsj = "";
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+
+%>
 
 <!DOCTYPE html>
 <html>
@@ -20,6 +25,8 @@
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
+    <!-- JAlert -->
+    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
@@ -115,6 +122,8 @@
         <!-- /footer content -->
       </div>
     </div>
+    </div>
+    </div>
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
@@ -142,9 +151,35 @@
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    
+    <!-- JAlert js -->
+	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
+	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    
+    <script>
+    	
+    
+
+    $(document).ready(function() {
+    	var mensaje = 0;
+ 	    mensaje = "<%=VarMsj %>";
+ 	    if(mensaje == "1")
+ 	      {
+ 	    	successAlert('Exito', 'La foto fue subida con éxito');
+ 	      }
+ 	    if(mensaje == "2")
+ 	      {
+ 	        errorAlert('Error', 'No se ha podido subir la foto. Intente de nuevo.');
+ 	      }
+        
+        	
+    });
+    
+    
+    </script>
 
   </body>
 </html>

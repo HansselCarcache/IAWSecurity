@@ -35,12 +35,12 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="InicioDocente.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span> Formación Docente</span></a>
+              <a href="InicioFacilitador.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span> Formación Docente</span></a>
             </div>
 
             <div class="clearfix"></div>
 
-            <%@include file="diseño.jsp"%>
+            <%@include file="diseñoFacilitador.jsp"%>
 
             <!-- page content -->
             <div class="right_col" role="main">
@@ -75,7 +75,7 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <form action="../Sl_GuardarFotoPerfilD" method="post" enctype="multipart/form-data" novalidate>
+                                    <form action="../Sl_GuardarFotoPerfilF" method="post" enctype="multipart/form-data" novalidate>
                                         <div class="form-group">
 	                                        <%
 	                                        	Tbl_user tus = new Tbl_user();
@@ -119,6 +119,8 @@
             </footer>
             <!-- /footer content -->
         </div>
+    </div>
+    </div>
     </div>
 
 

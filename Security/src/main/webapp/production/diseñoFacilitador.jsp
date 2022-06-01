@@ -127,7 +127,7 @@
                       <img src="../<%=vwur.getUrlFoto()==null?"production/images/no-user.jpg":vwur.getUrlFoto()%>" alt=""><%=vwur.getUsuario() %>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item"  href="profileD.jsp?idU=<%=vwur.getId_usuario()%>">Perfil</a>
+                      <a class="dropdown-item"  href="profileF.jsp?idU=<%=vwur.getId_usuario()%>">Perfil</a>
 <!--                         <a class="dropdown-item"  href="javascript:;"> -->
 <!--                           <span class="badge bg-red pull-right">50%</span> -->
 <!--                           <span>Configuración</span> -->

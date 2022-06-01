@@ -1,13 +1,23 @@
+<%@page import="entidades.Vw_perfilDocente"%>
+<%@page import="datos.Dt_inscripcionDocente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.Dt_usuario, datos.Dt_usuario2, java.util.*" %>
 
 <% 
 
 String VarMsj = "";
 VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 
-%>
+String user = "";
+user = request.getParameter("idU")==null?"0":request.getParameter("idU");
 
+Tbl_user tu = new Tbl_user();
+Dt_usuario dtu = new Dt_usuario();
+tu = dtu.getUserbyID(Integer.parseInt(user));
+// tu = dtu.getUserbyID(12);
+
+
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,7 +27,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Inicio | Sistema de  Formación Docente</title>
+    <title>Seguridad | Opciones</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -54,14 +64,14 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 
             <div class="clearfix"></div>
 
-            <%@include file="diseñoFacilitador.jsp"%>
+           <%@include file="diseñoFacilitador.jsp"%>
 
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Inicio </h3>
+                <h3>Perfil de Usuario</h3>
               </div>
 
 
@@ -69,15 +79,13 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 
             <div class="clearfix"></div>
 
-            <!--  <div class="row">
+            <div id="divtabla1" style="display:block;" class="row">
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Usuarios registrados</h2>
+                    <h2>Detalles</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#">Settings 1</a>
@@ -86,28 +94,65 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                       </li>
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
+                      
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
                     </ul>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                       <div class="row">
-                          <div class="col-sm-12">
-                            <div class="card-box table-responsive">
-                            <div class="text-muted font-13 col-md-12" style="text-align: right;">
-                            <a href="addUsuario.jsp">
-                            	<i class="fa fa-plus-square"></i>Nuevo usuario</a>
-                            	<br><br>
-                            </div>
+                          <div class="col-md-16 col-sm-4  profile_left" style="margin-left: 50px">
+                      <div class="profile_img">
+                        <div id="crop-avatar">
                             
+                            <!-- Current avatar -->
+                          
+                          <img class="img-responsive avatar-view" src="../<%=tu.getUrlFoto()==null?"production/images/no-user.jpg":tu.getUrlFoto()%>"  alt="Foto Usuario" style="margin-bottom: -5px" title="Change the avatar" width="230xp" height="200xp">
+                          
+                        </div>
+                      </div>
+                      
+                      <h3><%=tu.getNombre_real()%></h3>
+                      
+                      <ul class="list-unstyled user_data">
+                        
+                        <li><i class="fa-solid fa-user"></i> <%=tu.getNombre_usuario()%>
+                        </li>
+                        
+                        <li>
+                          <i class="fa fa-briefcase user-profile-icon"></i> <%=tu.getCargo()%>
+                        </li>
+                        
+                        <li><i class="fa-solid fa-envelope"></i> <%=tu.getCorreo_personal()%>
+                        </li>
+                      </ul>
+
+                      <div class="file-select" id="src-file1" >
+                      <a href="addFotoPerfilF.jsp?idU=<%=tu.getId_usuario()%>" class="btn btn-primary" style="color: white;"><i class="fa-solid fa-image" title="Agregar Foto de Usuario"></i> Editar foto de perfil</a>
+                          
+                      </div>
+
+                    </div>
+                    <div class="col-md-9 col-sm-9 ">
+
+
+                      
                     
-                    
-                  </div>
-                  </div>
-              </div>
+                    <!-- start user projects -->
+                            
+                            
+                            
+                            
+                            <!-- end user projects -->
+                            
+                            
+                            
+                  
             </div>
                 </div>
               </div>
-              </div>-->
+              </div>
                 </div>
               </div>
         <!-- /page content -->
@@ -122,9 +167,10 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
         <!-- /footer content -->
       </div>
     </div>
-    </div>
-    </div>
-
+</div>
+</div>
+</div>
+</div>
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->

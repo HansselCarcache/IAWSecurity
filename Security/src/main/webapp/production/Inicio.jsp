@@ -2,8 +2,10 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
 
 <% 
+
 String VarMsj = "";
 VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+
 %>
 
 <!DOCTYPE html>
@@ -263,6 +265,8 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
         <!-- /footer content -->
       </div>
     </div>
+    </div>
+    </div>
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
@@ -290,8 +294,8 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-
-<!-- JAlert js -->
+    
+    <!-- JAlert js -->
 	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
 	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
 
@@ -300,7 +304,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 
 <script>
     	
-    }
+    
 
     $(document).ready(function() {
     	var mensaje = 0;
