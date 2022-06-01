@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.* , datos.* , java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.* , datos.* , java.util.*" %>
 <!DOCTYPE html>
 <html>
 <%
@@ -86,12 +86,12 @@ tusr = dtusr.getRolID(Integer.parseInt(roluser));
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 
-											<div class="item form-group">
+											<!--<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align ">ID Rol_opciones<span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
 												<input id="idrol" value="<%=tusr.getId_rol_opciones()%>" name="idrol" type="text" class="form-control" readonly="readonly" placeholder="ID Rol">
 											</div>
-										    </div>
+										    </div>  -->
 										
 										<div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Rol: <span class="required">*</span></label>

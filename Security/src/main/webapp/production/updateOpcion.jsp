@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*" %>
 <!DOCTYPE html>
 <html>
 
@@ -92,7 +92,7 @@ top = dtop.getOpcionbyID(Integer.parseInt(opc));
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 
-										<div class="item form-group">
+										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Opción: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
@@ -100,7 +100,7 @@ top = dtop.getOpcionbyID(Integer.parseInt(opc));
 											</div>
 										</div>
 										
-										<div class="item form-group">
+										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Descripcion: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">

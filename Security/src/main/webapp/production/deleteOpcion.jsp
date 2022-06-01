@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*" %>
 <!DOCTYPE html>
 <html>
 
@@ -96,7 +96,7 @@ top = dtop.getOpcionbyID(Integer.parseInt(opc));
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Opción: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" value="<%=top.getNombre_opcion()%>" id="txtnombreopcion" name="txtnombreopcion" required="required" class="form-control ">
+												<input type="text" value="<%=top.getNombre_opcion()%>" id="txtnombreopcion" name="txtnombreopcion" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
 										
@@ -104,7 +104,7 @@ top = dtop.getOpcionbyID(Integer.parseInt(opc));
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Descripcion: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" value="<%=top.getDescripcion()%>" id="txtdescripcion" name="txtdescripcion" required="required" class="form-control ">
+												<input type="text" value="<%=top.getDescripcion()%>" id="txtdescripcion" name="txtdescripcion" required="required" readonly="readonly" class="form-control ">
 											</div>
 										</div>
 

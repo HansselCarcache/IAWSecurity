@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*" %>
     
 
 <!DOCTYPE html>
@@ -81,7 +81,7 @@
 <!--                                         <span class="section">Personal Info</span> -->
 	                                        <input type="hidden" value="1" name="opcion" id="opcion"/>
 
-										<div class="item form-group">
+										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="namewartan9">Nombre <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
@@ -89,7 +89,7 @@
 											</div>
 										</div>
 
-										<div class="item form-group">
+										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="desc">Descripcion <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">

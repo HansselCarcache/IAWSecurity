@@ -82,19 +82,18 @@
 <!--                                         </p> -->
 <!--                                         <span class="section">Personal Info</span> -->
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align">Opción: <span class="required">*</span>
-											</label>
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align">Opción: <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtnombreopcion" name="txtnombreopcion" data-validate-length-range="5,50" data-validate-words="2" placeholder="ex. tbl_ejemplo" title="Nombre de la opción" required="required" class="form-control ">
+												<input type="text" id="txtnombreopcion" name="txtnombreopcion" data-validate-length-range="5" data-validate-words="1" placeholder="ex. tbl_ejemplo.jsp" title="Nombre de la opción" required="required" class="form-control ">
 											</div>
 										</div>
 										
-										<div class="item form-group">
+										<div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Descripción: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtdescripcion" name="txtdescripcion" data-validate-length-range="5,50" data-validate-words="2" placeholder="Descripción de la opción" title="Descripción de la opción" required="required" class="form-control ">
+												<input type="text" id="txtdescripcion" name="txtdescripcion" data-validate-length-range="5,50" data-validate-words="1" placeholder="Descripción de la opción" title="Descripción de la opción" required="required" class="form-control ">
 											</div>
 										</div>
 
