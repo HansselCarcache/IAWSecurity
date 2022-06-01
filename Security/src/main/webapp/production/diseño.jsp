@@ -71,9 +71,6 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa-solid fa-lock"></i> Seguridad <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="Tbl_opciones.jsp">Opciones</a></li>
-                      <li><a href="tbl_rolopciones.jsp">Rol Opciones</a></li>
-                      <li><a href="tbl_Rol.jsp">Roles</a></li>
                       <li><a href="tbl_rolusuario.jsp">Roles de Usuario</a></li>
                       <li><a href="tbl_Usuario.jsp">Usuarios</a></li>
                     </ul>

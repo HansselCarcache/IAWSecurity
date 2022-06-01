@@ -64,6 +64,7 @@ public class Sl_login extends HttpServlet {
 		boolean accesoAdmin = false;
 		boolean accesoDocente = false;
 		boolean accesoFacilitador=false;
+		boolean accesoDesarrollador=false;
 		
 		switch(opc) {
 		case 1:
@@ -103,6 +104,21 @@ public class Sl_login extends HttpServlet {
 						hts.setAttribute("acceso", vwur);
 						accesoDocente = true;
 					}
+					//Validacion de DESARROLLADOR con usuario o cedula	
+				}else if(ngu.accesoDesarrollador(rolId)) {
+					if(dtu.dtverificarLogin(usuario, clave, rolId)) {
+						vwur = dtu.dtGetVwUR(usuario, rolId);
+						HttpSession hts = request.getSession(true);
+						hts.setAttribute("acceso", vwur);
+						accesoDesarrollador = true;
+						
+					}
+					else if(dtu.dtverificarLoginCedula(usuario, clave, rolId)){
+						vwur = dtu.dtGetVwURCedula(usuario, rolId);
+						HttpSession hts = request.getSession(true);
+						hts.setAttribute("acceso", vwur);
+						accesoDocente = true;
+					}
 				//Validacion de FACILITADOR con usuario o cedula	
 				}else {
 					if(dtu.dtverificarLogin(usuario, clave, rolId)) {
@@ -128,6 +144,8 @@ public class Sl_login extends HttpServlet {
 					
 				}else if(accesoFacilitador) {
 					response.sendRedirect("production/InicioFacilitador.jsp");
+				}else if(accesoDesarrollador) {
+					response.sendRedirect("production/InicioDesarrollador.jsp");
 				}else {
 					response.sendRedirect("Login.jsp?msj=403");
 				}

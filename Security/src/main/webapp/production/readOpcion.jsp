@@ -58,12 +58,12 @@ top = dtop.getOpcionbyID(Integer.parseInt(opc));
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span> Formación Docente</span></a>
+              <a href="InicioDesarrollador.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span> Formación Docente</span></a>
             </div>
 
             <div class="clearfix"></div>
 
-            <%@include file="diseño.jsp"%>
+            <%@include file="diseñoDesarrollador.jsp"%>
 
             <!-- page content -->
             <div class="right_col" role="main">
