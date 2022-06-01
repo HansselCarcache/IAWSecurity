@@ -76,14 +76,15 @@ public class Sl_login extends HttpServlet {
 			try {
 				//Validacion de ADMINISTRADOR con usuario o cedula
 				if(ngu.accesoAdmin(rolId)) {
-					if(dtu.dtverificarLogin(usuario, clave, rolId)) {
-						vwur = dtu.dtGetVwUR(usuario, rolId);
-						HttpSession hts = request.getSession(true);
-						hts.setAttribute("acceso", vwur);
-						accesoAdmin = true;
-						
-					}
-					else if(dtu.dtverificarLoginCedula(usuario, clave, rolId)){
+//					if(dtu.dtverificarLogin(usuario, clave, rolId)) {
+//						vwur = dtu.dtGetVwUR(usuario, rolId);
+//						HttpSession hts = request.getSession(true);
+//						hts.setAttribute("acceso", vwur);
+//						accesoAdmin = true;
+//						
+//					}
+//					else
+					if(dtu.dtverificarLoginCedula(usuario, clave, rolId)){
 						vwur = dtu.dtGetVwURCedula(usuario, rolId);
 						HttpSession hts = request.getSession(true);
 						hts.setAttribute("acceso", vwur);
@@ -91,14 +92,15 @@ public class Sl_login extends HttpServlet {
 					}
 				//Validacion de DOCENTE con usuario o cedula	
 				}else if(ngu.accesoDocente(rolId)) {
-					if(dtu.dtverificarLogin(usuario, clave, rolId)) {
-						vwur = dtu.dtGetVwUR(usuario, rolId);
-						HttpSession hts = request.getSession(true);
-						hts.setAttribute("acceso", vwur);
-						accesoDocente = true;
-						
-					}
-					else if(dtu.dtverificarLoginCedula(usuario, clave, rolId)){
+//					if(dtu.dtverificarLogin(usuario, clave, rolId)) {
+//						vwur = dtu.dtGetVwUR(usuario, rolId);
+//						HttpSession hts = request.getSession(true);
+//						hts.setAttribute("acceso", vwur);
+//						accesoDocente = true;
+//						
+//					}
+//					else
+					if(dtu.dtverificarLoginCedula(usuario, clave, rolId)){
 						vwur = dtu.dtGetVwURCedula(usuario, rolId);
 						HttpSession hts = request.getSession(true);
 						hts.setAttribute("acceso", vwur);
@@ -106,14 +108,15 @@ public class Sl_login extends HttpServlet {
 					}
 					//Validacion de DESARROLLADOR con usuario o cedula	
 				}else if(ngu.accesoDesarrollador(rolId)) {
-					if(dtu.dtverificarLogin(usuario, clave, rolId)) {
-						vwur = dtu.dtGetVwUR(usuario, rolId);
-						HttpSession hts = request.getSession(true);
-						hts.setAttribute("acceso", vwur);
-						accesoDesarrollador = true;
-						
-					}
-					else if(dtu.dtverificarLoginCedula(usuario, clave, rolId)){
+//					if(dtu.dtverificarLogin(usuario, clave, rolId)) {
+//						vwur = dtu.dtGetVwUR(usuario, rolId);
+//						HttpSession hts = request.getSession(true);
+//						hts.setAttribute("acceso", vwur);
+//						accesoDesarrollador = true;
+//						
+//					}
+//					else
+					if(dtu.dtverificarLoginCedula(usuario, clave, rolId)){
 						vwur = dtu.dtGetVwURCedula(usuario, rolId);
 						HttpSession hts = request.getSession(true);
 						hts.setAttribute("acceso", vwur);
@@ -121,14 +124,15 @@ public class Sl_login extends HttpServlet {
 					}
 				//Validacion de FACILITADOR con usuario o cedula	
 				}else {
-					if(dtu.dtverificarLogin(usuario, clave, rolId)) {
-						vwur = dtu.dtGetVwUR(usuario, rolId);
-						HttpSession hts = request.getSession(true);
-						hts.setAttribute("acceso", vwur);
-						accesoFacilitador = true;
-						
-					}
-					else if(dtu.dtverificarLoginCedula(usuario, clave, rolId)){
+//					if(dtu.dtverificarLogin(usuario, clave, rolId)) {
+//						vwur = dtu.dtGetVwUR(usuario, rolId);
+//						HttpSession hts = request.getSession(true);
+//						hts.setAttribute("acceso", vwur);
+//						accesoFacilitador = true;
+//						
+//					}
+//					else
+					if(dtu.dtverificarLoginCedula(usuario, clave, rolId)){
 						vwur = dtu.dtGetVwURCedula(usuario, rolId);
 						HttpSession hts = request.getSession(true);
 						hts.setAttribute("acceso", vwur);
@@ -166,14 +170,15 @@ public class Sl_login extends HttpServlet {
 			try {
 				//Validacion de ADMINISTRADOR con usuario o cedula
 				if(ngu.accesoAdmin(rolId)) {
-					if(dtu.dtverificarLogin2(usuario,clave, rolId, codigoV)) {
-						vwur = dtu.dtGetVwUR(usuario, rolId);
-						HttpSession hts = request.getSession(true);
-						hts.setAttribute("acceso", vwur);
-						accesoAdmin = true;
-						
-					}
-					else if(dtu.dtverificarLogin2Cedula(usuario, clave, rolId, codigoV)){
+//					if(dtu.dtverificarLogin2(usuario,clave, rolId, codigoV)) {
+//						vwur = dtu.dtGetVwUR(usuario, rolId);
+//						HttpSession hts = request.getSession(true);
+//						hts.setAttribute("acceso", vwur);
+//						accesoAdmin = true;
+//						
+//					}
+//					else
+					if(dtu.dtverificarLogin2Cedula(usuario, clave, rolId, codigoV)){
 						vwur = dtu.dtGetVwURCedula(usuario, rolId);
 						HttpSession hts = request.getSession(true);
 						hts.setAttribute("acceso", vwur);
@@ -181,14 +186,15 @@ public class Sl_login extends HttpServlet {
 					}
 				//Validacion de DOCENTE con usuario o cedula
 				}else if(ngu.accesoDocente(rolId)) {
-					if(dtu.dtverificarLogin2(usuario,clave, rolId, codigoV)) {
-						vwur = dtu.dtGetVwUR(usuario, rolId);
-						HttpSession hts = request.getSession(true);
-						hts.setAttribute("acceso", vwur);
-						accesoDocente = true;
-						
-					}
-					else if(dtu.dtverificarLogin2Cedula(usuario, clave, rolId, codigoV)) {
+//					if(dtu.dtverificarLogin2(usuario,clave, rolId, codigoV)) {
+//						vwur = dtu.dtGetVwUR(usuario, rolId);
+//						HttpSession hts = request.getSession(true);
+//						hts.setAttribute("acceso", vwur);
+//						accesoDocente = true;
+//						
+//					}
+//					else
+					if(dtu.dtverificarLogin2Cedula(usuario, clave, rolId, codigoV)) {
 						vwur = dtu.dtGetVwURCedula(usuario, rolId);
 						HttpSession hts = request.getSession(true);
 						hts.setAttribute("acceso", vwur);
@@ -196,14 +202,15 @@ public class Sl_login extends HttpServlet {
 					}
 				//Validacion de FACILITADOR con usuario o cedula
 				}else {
-					if(dtu.dtverificarLogin2(usuario,clave, rolId, codigoV)) {
-						vwur = dtu.dtGetVwUR(usuario, rolId);
-						HttpSession hts = request.getSession(true);
-						hts.setAttribute("acceso", vwur);
-						accesoFacilitador = true;
-						
-					}
-					else if(dtu.dtverificarLogin2Cedula(usuario, clave, rolId, codigoV)){
+//					if(dtu.dtverificarLogin2(usuario,clave, rolId, codigoV)) {
+//						vwur = dtu.dtGetVwUR(usuario, rolId);
+//						HttpSession hts = request.getSession(true);
+//						hts.setAttribute("acceso", vwur);
+//						accesoFacilitador = true;
+//						
+//					}
+//					else
+					if(dtu.dtverificarLogin2Cedula(usuario, clave, rolId, codigoV)){
 						vwur = dtu.dtGetVwURCedula(usuario, rolId);
 						HttpSession hts = request.getSession(true);
 						hts.setAttribute("acceso", vwur);
@@ -236,15 +243,15 @@ public class Sl_login extends HttpServlet {
 			usuario = request.getParameter("usuario2");
 			correo = request.getParameter("correo");
 			try {
-				if(dtu.dtUsuarioCorreo(usuario, correo)) {
-					if(dte.enviarEmailContraseña(usuario, correo)) {
-						response.sendRedirect("Login.jsp?msj=1");
-					}else {
-						response.sendRedirect("Login.jsp?msj=3");
-					}
-					
-					
-				}
+//				if(dtu.dtUsuarioCorreo(usuario, correo)) {
+//					if(dte.enviarEmailContraseña(usuario, correo)) {
+//						response.sendRedirect("Login.jsp?msj=1");
+//					}else {
+//						response.sendRedirect("Login.jsp?msj=3");
+//					}
+//					
+//					
+//				}
 				//SI NO SE ENCONTRO EL USER SE PRUEBA RECUPERAR EL USUARIO A PARTIR DE LA CEDULA
 				usuarioCedula=dtu.cedulaUsuario(usuario);
 				
