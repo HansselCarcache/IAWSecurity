@@ -83,7 +83,7 @@ if(Integer.parseInt(d) !=0){
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
 						<a href="Inicio.jsp" class="site_title"> <i
-							class="fa-solid fa-book"></i><span> &nbsp Formación Docente UCA</span></a>
+							class="fa-solid fa-book"></i><span> Formación Docente</span></a>
 					</div>
 
 					<div class="clearfix"></div>

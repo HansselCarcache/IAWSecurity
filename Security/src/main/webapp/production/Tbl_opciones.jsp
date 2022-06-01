@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Tbl_opcion, entidades.Vw_userrol, entidades.Vw_rolopcion, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_opcion, entidades.Vw_userrol, entidades.Vw_rolopcion, datos.*, java.util.*"%>
     
 
 <%
@@ -26,8 +26,6 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../vendors/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet">
-    <!-- JAlert -->
-    <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
@@ -41,6 +39,15 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
   </head>
 
   <body class="nav-md">
@@ -49,7 +56,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span> &nbsp Formación Docente UCA</span></a>
+              <a href="Inicio.jsp" class="site_title"> <i class="fa-solid fa-book"></i><span> Formación Docente</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -219,9 +226,10 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
-	<!-- JAlert js -->
-	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
-	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
+        <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -245,27 +253,75 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 
  	    if(mensaje == "1")
  	      {
- 	    	successAlert('Exito', 'Los datos han sido registrados exitosamente!');
+ 	    	new PNotify({
+                type: 'success',
+                title: 'Exito',
+                text: 'Los datos han sido registrados exitosamente!',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            });
+ 	    	//successAlert('Exito', 'Los datos han sido registrados exitosamente!');
  	      }
  	    if(mensaje == "2")
  	      {
- 	        errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
+ 	    	new PNotify({
+                type: 'error',
+                title: 'Error',
+                text: 'No se han podido registrar los datos, intente de nuevo.',
+                styling: 'bootstrap3',
+                delay: 2000,
+                addclass: 'center'
+            });
+ 	        //errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
  	      }
  	      if(mensaje == "3")
  	      {
- 	        successAlert('Exito', 'Los datos han sido modificados exitosamente!');
+ 	    	 new PNotify({
+                 type: 'success',
+                 title: 'Exito',
+                 text: 'Los datos han sido modificados exitosamente!',
+                 styling: 'bootstrap3',
+                 delay: 2000,
+                 addclass: 'center'
+             }); 
+ 	        //successAlert('Exito', 'Los datos han sido modificados exitosamente!');
  	      }
  	      if(mensaje == "4")
  	      {
- 	    	  errorAlert('Error', 'No se han podido modificar los datos, intente de nuevo');
+ 	    	 new PNotify({
+                 type: 'error',
+                 title: 'Error',
+                 text: 'No se han podido modificar los datos, intente de nuevo',
+                 styling: 'bootstrap3',
+                 delay: 2000,
+                 addclass: 'center'
+             }); 
+ 	    	 //errorAlert('Error', 'No se han podido modificar los datos, intente de nuevo');
  	      }
  	      if(mensaje == "5")
  	      {
- 	        successAlert('Exito', 'Los datos han sido eliminados exitosamente!');
+ 	    	 new PNotify({
+                 type: 'success',
+                 title: 'Exito',
+                 text: 'Los datos han sido eliminados exitosamente!',
+                 styling: 'bootstrap3',
+                 delay: 2000,
+                 addclass: 'center'
+             });
+ 	        //successAlert('Exito', 'Los datos han sido eliminados exitosamente!');
  	      }
  	      if(mensaje == "6")
  	      {
- 	        errorAlert('Error', 'No se han podido eliminar los datos, intente de nuevo');
+ 	    	 new PNotify({
+                 type: 'error',
+                 title: 'Error',
+                 text: 'No se han podido eliminar los datos, intente de nuevo',
+                 styling: 'bootstrap3',
+                 delay: 2000,
+                 addclass: 'center'
+             });
+ 	        //errorAlert('Error', 'No se han podido eliminar los datos, intente de nuevo');
  	      }
     	
     	

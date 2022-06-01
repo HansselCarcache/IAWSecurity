@@ -20,7 +20,7 @@ Dt_usuario dtu = new Dt_usuario();
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Registro | Sistema de  &nbsp Formación Docente UCA</title>
+	<title>Registro | Sistema de  Formación Docente</title>
 
 	<!-- Bootstrap -->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
