@@ -85,6 +85,16 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
     <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- Animate.css -->
     <link href="vendors/animate.css/animate.min.css" rel="stylesheet">
+    
+        <!-- PNotify -->
+    <link href="vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 
     <!-- Custom Theme Style -->
     <link href="build/css/custom.min.css" rel="stylesheet">
@@ -218,6 +228,12 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 	<script src="vendors/jAlert/dist/jAlert.min.js"></script>
 	<script src="vendors/jAlert/dist/jAlert-functions.min.js"></script>
 	
+	
+	<!-- PNotify -->
+    <script src="vendors/pnotify/dist/pnotify.js"></script>
+    <script src="vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="vendors/pnotify/dist/pnotify.nonblock.js"></script>
+	
 	<script>
 	 $(document).ready(function() {
     	 var mensaje = 0;
@@ -225,31 +241,87 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 		
 	 	   if(mensaje == "1")
 		      {
-		    	successAlert('Exito', 'Se ha enviado un mensaje a su correo para que pueda reestablecer su contraseña');
+		 		  new PNotify({
+		              type: 'success',
+		              title: 'Exito',
+		              text: 'Se ha enviado un mensaje a su correo para que pueda reestablecer su contraseña',
+		              styling: 'bootstrap3',
+		              delay: 2000,
+		              addclass: 'center'
+		         });
+		    	//successAlert('Exito', 'Se ha enviado un mensaje a su correo para que pueda reestablecer su contraseña');
 		      }
 	 	  if(mensaje == "2")
 		      {
-		    	errorAlert('Error', 'No existe un usuario asociado a ese correo, intentelo de nuevo.');
+		 		 new PNotify({
+		             type: 'error',
+		             title: 'Error',
+		             text: 'No existe un usuario asociado a ese correo, intentelo de nuevo.',
+		             styling: 'bootstrap3',
+		             delay: 2000,
+		             addclass: 'center'
+				});
+		    	//errorAlert('Error', 'No existe un usuario asociado a ese correo, intentelo de nuevo.');
 		      }
 	 	 if(mensaje == "3")
 		     {
-		   	errorAlert('Error', 'Ha surgido un error a la hora de enviar el correo de reestablecimiento de contraseña, intente de nuevo');
+		 		new PNotify({
+		             type: 'error',
+		             title: 'Error',
+		             text: 'Ha surgido un error a la hora de enviar el correo de reestablecimiento de contraseña, intente de nuevo',
+		             styling: 'bootstrap3',
+		             delay: 2000,
+		             addclass: 'center'
+				});
+		   	//errorAlert('Error', 'Ha surgido un error a la hora de enviar el correo de reestablecimiento de contraseña, intente de nuevo');
 		     }
 	 	if(mensaje == "4")
 	      {
-	    	successAlert('Exito', 'La contraseña ha sido reestablecida con éxito.');
+	 		new PNotify({
+	             type: 'success',
+	             title: 'Exito',
+	             text: 'La contraseña ha sido reestablecida con éxito.',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+	        });
+	    	//successAlert('Exito', 'La contraseña ha sido reestablecida con éxito.');
 	      }
 	 	if(mensaje == "5")
 	     {
-	   	errorAlert('Error', 'Ha surgido un error a la hora de cambiar la contraseña, intente de nuevo');
+	 		new PNotify({
+	             type: 'error',
+	             title: 'Error',
+	             text: 'Ha surgido un error a la hora de cambiar la contraseña, intente de nuevo',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+			});
+	   	//errorAlert('Error', 'Ha surgido un error a la hora de cambiar la contraseña, intente de nuevo');
 	     }
  	    if(mensaje == "401")
  	      {
- 	    	errorAlert('Error', 'Su sesión ha caducado, ingrese de nuevo al sistema.');
+ 	    	new PNotify({
+ 	             type: 'error',
+ 	             title: 'Error',
+ 	             text: 'Su sesión ha caducado, ingrese de nuevo al sistema.',
+ 	             styling: 'bootstrap3',
+ 	             delay: 2000,
+ 	             addclass: 'center'
+ 			});
+ 	    	//errorAlert('Error', 'Su sesión ha caducado, ingrese de nuevo al sistema.');
  	      }
  	    if(mensaje == "403")
  	      {
- 	        errorAlert('Error', 'Los datos de inicio de sesión son incorrectos, revise e intente  de nuevo.');
+ 	    	new PNotify({
+ 	             type: 'error',
+ 	             title: 'Error',
+ 	             text: 'Los datos de inicio de sesión son incorrectos, revise e intente  de nuevo.',
+ 	             styling: 'bootstrap3',
+ 	             delay: 2000,
+ 	             addclass: 'center'
+ 			});
+ 	        //errorAlert('Error', 'Los datos de inicio de sesión son incorrectos, revise e intente  de nuevo.');
  	      }
 	 } );
 	</script>
