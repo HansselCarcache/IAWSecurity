@@ -36,6 +36,11 @@ dtu.crearJSON();
     <link href="vendors/pnotify/dist/pnotify.css" rel="stylesheet">
     <link href="vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
     <link href="vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 </head>
 	
 <body>
@@ -189,6 +194,7 @@ dtu.crearJSON();
     <script src="vendors/pnotify/dist/pnotify.buttons.js"></script>
     <script src="vendors/pnotify/dist/pnotify.nonblock.js"></script>
     
+    
     <!-- Javascript functions	-->
 	<script>
 		function hideshow(){
@@ -259,14 +265,30 @@ dtu.crearJSON();
         	sexo= document.frmDocente.cbxsexo.value
         	
         	if(sexo==""){
-        		errorAlert('Error!', 'Es necesario que escoger un sexo para registrar el usuario');
+        		new PNotify({
+                    type: 'error',
+                    title: 'Error!',
+                    text: 'Es necesario que escoger un sexo para registrar el usuario',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+       			});
+        		//errorAlert('Error!', 'Es necesario que escoger un sexo para registrar el usuario');
         	}else if (clave1 == clave2)
         	    {
         	    submitForm();
         	    
         	    }    
         	    else{
-        	      errorAlert('Error!', 'Las contraseñas no son iguales, intente de nuevo!');
+        	    	new PNotify({
+       	             type: 'error',
+       	             title: 'Error!',
+       	             text: 'Las contraseñas no son iguales, intente de nuevo!',
+       	             styling: 'bootstrap3',
+       	             delay: 2000,
+       	             addclass: 'center'
+       			});
+       	      //errorAlert('Error!', 'Las contraseñas no son iguales, intente de nuevo!');
         	      document.frmDocente.txtpwd.value = ""
         	      document.frmDocente.txtpwd2.value = ""
         	      document.frmDocente.txtpwd.focus
@@ -381,11 +403,27 @@ dtu.crearJSON();
 
      	    if(mensaje == "1")
      	      {
-     	    	errorAlert('Error', 'Ya existe un usuario con ese IDUCA en el sistema, no se ha podido registrar el usuario.');
+     	    	new PNotify({
+    	             type: 'error',
+    	             title: 'Error',
+    	             text: 'Ya existe un usuario con ese IDUCA en el sistema, no se ha podido registrar el usuario.',
+    	             styling: 'bootstrap3',
+    	             delay: 2000,
+    	             addclass: 'center'
+    			});
+    	    	//errorAlert('Error', 'Ya existe un usuario con ese IDUCA en el sistema, no se ha podido registrar el usuario.');
      	      }
      	    if(mensaje == "2")
      	      {
-     	        errorAlert('Error', 'Ya existe un usuario con esa cédula en el sistema, no se ha podido registrar el usuario.');
+     	    	new PNotify({
+    	             type: 'error',
+    	             title: 'Error',
+    	             text: 'Ya existe un usuario con esa cédula en el sistema, no se ha podido registrar el usuario.',
+    	             styling: 'bootstrap3',
+    	             delay: 2000,
+    	             addclass: 'center'
+    			});
+    	        //errorAlert('Error', 'Ya existe un usuario con esa cédula en el sistema, no se ha podido registrar el usuario.');
      	      }
         });
     </script>
