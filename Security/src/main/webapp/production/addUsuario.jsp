@@ -38,6 +38,16 @@ dtu.crearJSON();
     <!-- Select2 -->
     <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
 <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
+
+	<!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 </head>
 
 <body class="nav-md">
@@ -241,6 +251,10 @@ dtu.crearJSON();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../vendors/validator/multifield.js"></script>
     <script src="../vendors/validator/validator.js"></script>
+    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
     
     <!-- Javascript functions	-->
 	<script>
@@ -312,14 +326,30 @@ dtu.crearJSON();
         	sexo= document.frmUser.cbxsexo.value
         	
         	if(sexo==""){
-        		errorAlert('Error!', 'Es necesario que escoger un sexo para registrar el usuario');
+        		new PNotify({
+                    type: 'error',
+                    title: 'Error!',
+                    text: 'Es necesario que escoger un sexo para registrar el usuario',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+       			});
+        		//errorAlert('Error!', 'Es necesario que escoger un sexo para registrar el usuario');
         	}else if (clave1 == clave2)
         	    {
         	    submitForm();
         	    
         	    }    
         	    else{
-        	      errorAlert('Error!', 'Las contraseñas no son iguales, intente de nuevo!');
+        	    	new PNotify({
+        	             type: 'error',
+        	             title: 'Error!',
+        	             text: 'Las contraseñas no son iguales, intente de nuevo!',
+        	             styling: 'bootstrap3',
+        	             delay: 2000,
+        	             addclass: 'center'
+        			});
+        	      //errorAlert('Error!', 'Las contraseñas no son iguales, intente de nuevo!');
         	      document.frmUser.txtpwd.value = ""
         	      document.frmUser.txtpwd2.value = ""
         	      document.frmUser.txtpwd.focus
@@ -349,18 +379,42 @@ dtu.crearJSON();
         			//alert(txt.value);
         			
         			if(txtuser.value == ourData[i].nombre_usuario){
-        				errorAlert("El usuario "+txtuser.value+ " ya esta siendo utilizado por otro usuario, escriba otro diferente.");
+        				new PNotify({
+        		             type: 'error',
+        		             title: 'Error!',
+        		             text: 'El usuario '+txtuser.value+ ' ya esta siendo utilizado por otro usuario, escriba otro diferente.',
+        		             styling: 'bootstrap3',
+        		             delay: 2000,
+        		             addclass: 'center'
+        				});
+        				//errorAlert("El usuario "+txtuser.value+ " ya esta siendo utilizado por otro usuario, escriba otro diferente.");
         			}
         			
         			if(txtiduca.value == ourData[i].id_uca){
-        				errorAlert("El IDUCA: "+txtiduca.value+" esta siendo utilizado por otro usuario, escriba otro diferente.");
+        				new PNotify({
+        		             type: 'error',
+        		             title: 'Error!',
+        		             text: 'El IDUCA: '+txtiduca.value+' esta siendo utilizado por otro usuario, escriba otro diferente.',
+        		             styling: 'bootstrap3',
+        		             delay: 2000,
+        		             addclass: 'center'
+        				});
+        				//errorAlert("El IDUCA: "+txtiduca.value+" esta siendo utilizado por otro usuario, escriba otro diferente.");
         			}
         			
 //         			if(txtcorreoi.value == ourData[i].correo_institucional){
 //         				errorAlert("Ya existe un registro con ese correo institucional, escriba otro diferente.");
 //         			}
         			if(txtcedula.value == ourData[i].cedula){
-        				errorAlert("El número de cedula: "+txtcedula.value+" pertenece a otro usuario, escriba otro diferente.");
+        				new PNotify({
+        		             type: 'error',
+        		             title: 'Error!',
+        		             text: 'El número de cedula: '+txtcedula.value+' pertenece a otro usuario, escriba otro diferente.',
+        		             styling: 'bootstrap3',
+        		             delay: 2000,
+        		             addclass: 'center'
+        				});
+        				//errorAlert("El número de cedula: "+txtcedula.value+" pertenece a otro usuario, escriba otro diferente.");
         			}
         		}
         		}
@@ -404,15 +458,39 @@ dtu.crearJSON();
 
      	    if(mensaje == "1")
      	      {
-     	    	errorAlert('Error', 'Ya existe un usuario con ese IDUCA en el sistema, no se ha podido registrar el usuario.');
+     	    	new PNotify({
+     	             type: 'error',
+     	             title: 'Error',
+     	             text: 'Ya existe un usuario con ese IDUCA en el sistema, no se ha podido registrar el usuario.',
+     	             styling: 'bootstrap3',
+     	             delay: 2000,
+     	             addclass: 'center'
+     			});
+     	    	//errorAlert('Error', 'Ya existe un usuario con ese IDUCA en el sistema, no se ha podido registrar el usuario.');
      	      }
      	    if(mensaje == "2")
      	      {
-     	        errorAlert('Error', 'Ya existe un usuario con esa cédula en el sistema, no se ha podido registrar el usuario.');
+     	    	new PNotify({
+     	             type: 'error',
+     	             title: 'Error',
+     	             text: 'Ya existe un usuario con esa cédula en el sistema, no se ha podido registrar el usuario.',
+     	             styling: 'bootstrap3',
+     	             delay: 2000,
+     	             addclass: 'center'
+     			});
+     	        //errorAlert('Error', 'Ya existe un usuario con esa cédula en el sistema, no se ha podido registrar el usuario.');
      	      }
      	   if(mensaje == "3")
   	      {
-  	        errorAlert('Error', 'Ya existe un usuario con esa nombre de usuario en el sistema, no se ha podido registrar el usuario.');
+     		  new PNotify({
+                  type: 'error',
+                  title: 'Error',
+                  text: 'Ya existe un usuario con esa nombre de usuario en el sistema, no se ha podido registrar el usuario.',
+                  styling: 'bootstrap3',
+                  delay: 2000,
+                  addclass: 'center'
+     		});
+  	        //errorAlert('Error', 'Ya existe un usuario con esa nombre de usuario en el sistema, no se ha podido registrar el usuario.');
   	      }
         });
     </script>

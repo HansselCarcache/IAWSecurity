@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
 <!DOCTYPE html>
+
 <html>
 
 <%
@@ -105,10 +106,10 @@ td = dtdepa.getDepartamentobyID(Integer.parseInt(departamento));
 
                                         
                                         
-                                           <div class="ln_solid">
+                                          <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-danger">Eliminar</button>
+                                                    <button onclick="deleteDepartamento()" class="btn btn-danger">Eliminar</button>
                                                     
                                                     <a class="btn btn-success" href="tbl_departamento.jsp">Cancelar</a>
                                                 </div>
@@ -135,7 +136,7 @@ td = dtdepa.getDepartamentobyID(Integer.parseInt(departamento));
     </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../vendors/validator/multifield.js"></script>
     <script src="../vendors/validator/validator.js"></script>
     
@@ -166,12 +167,12 @@ td = dtdepa.getDepartamentobyID(Integer.parseInt(departamento));
             "events": ['blur', 'input', 'change']
         }, document.forms[0]);
         // on form "submit" event
-        document.forms[0].onsubmit = function(e) {
+       /* document.forms[0].onsubmit = function(e) {
             var submit = true,
                 validatorResult = validator.checkAll(this);
             console.log(validatorResult);
             return !!validatorResult.valid;
-        };
+        };*/
         // on form "reset" event
         document.forms[0].onreset = function(e) {
             validator.reset();
@@ -183,32 +184,84 @@ td = dtdepa.getDepartamentobyID(Integer.parseInt(departamento));
                 $('form .alert').remove();
         }).prop('checked', false);
         
+               //Funciones del formulario
+        function toSubmit(e){
+    		e.preventDefault(); 
+ 			 try {
+   					someBug();
+  					} catch (e) {
+   					throw new Error(e.message);
+  					}
+  					return false;
+   		}
+   
+   		function submitForm(){
+    		var form = document.getElementById("frmdelete");
+			form.onsubmit = function() {
+  			return true;
+			}
+   		}
+        
+        function deleteDepartamento(){
+            $.jAlert({
+                'type': 'confirm',
+                'confirmQuestion': '¿Está seguro que desea eliminar el registro?',
+                'onConfirm': function(e, btn){
+                  e.preventDefault();
+                  //do something here
+                  submitForm();
+                  document.getElementById('frmdelete').submit();
+                  btn.parents('.jAlert').closeAlert();
+                  return false;
+                },
+                'onDeny': function(e, btn){
+                  e.preventDefault();
+                  //do something here
+                  btn.parents('.jAlert').closeAlert();
+                  return false;
+                }
+            });
+        }
+        
+        function setValores()
+        {
+        	
+        	document.getElementById("idDepartamento").value = "<%=td.getId_departamento()%>"
+        	document.getElementById("txtnombredepartamento").value = "<%=td.getNombre_departamento()%>"
+       		document.getElementById("txtnombrefacultad").value = "<%=td.getNombre_facultad()%>"	
+        	
+        }
+        
+        
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
-    </script>
+        </script>
 
-    <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- validator -->
-    <!-- <script src="../vendors/validator/validator.js"></script> -->
+        <!-- jQuery -->
+        <script src="../vendors/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- FastClick -->
+        <script src="../vendors/fastclick/lib/fastclick.js"></script>
+        <!-- NProgress -->
+        <script src="../vendors/nprogress/nprogress.js"></script>
+        <!-- validator -->
+        <!-- <script src="../vendors/validator/validator.js"></script> -->
 
-    <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
-    
-    <!-- Select2 -->
-    <script src="../vendors/select2/dist/js/select2.min.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
-    
-    <script type="text/javascript">
-   
-    </script>
+        <!-- Custom Theme Scripts -->
+        <script src="../build/js/custom.min.js"></script>
+        
+        <!-- Select2 -->
+        <script src="../vendors/select2/dist/js/select2.min.js"></script>
+        <!-- JAlert js -->
+    	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
+    	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
+        
+        <script type="text/javascript">
+       
+        </script>
 
-</body>
-</html>
+    </body>
+    </html>

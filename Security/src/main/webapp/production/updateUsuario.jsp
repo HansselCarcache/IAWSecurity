@@ -32,6 +32,16 @@ dtu.crearJSON();
     <link href="../vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    
+        <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
@@ -254,6 +264,11 @@ dtu.crearJSON();
     <script src="../vendors/validator/multifield.js"></script>
     <script src="../vendors/validator/validator.js"></script>
     
+        <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    
     <!-- Javascript functions	-->
 	<script>
 		function hideshow(){
@@ -406,7 +421,15 @@ dtu.crearJSON();
         			//alert(txt.value);
         			
         			if(txtiduca.value == ourData[i].id_uca){
-        				errorAlert("El IDUCA: "+txtiduca.value+" esta siendo utilizado por otro usuario, escriba otro diferente.");
+        				new PNotify({
+        		             type: 'error',
+        		             title: 'Error',
+        		             text: 'El IDUCA: '+txtiduca.value+' esta siendo utilizado por otro usuario, escriba otro diferente.',
+        		             styling: 'bootstrap3',
+        		             delay: 2000,
+        		             addclass: 'center'
+        				});
+        				//errorAlert("El IDUCA: "+txtiduca.value+" esta siendo utilizado por otro usuario, escriba otro diferente.");
         			}
         			
         			
@@ -442,7 +465,15 @@ dtu.crearJSON();
         			//alert(txt.value);
         			
         			if(txtuser.value == ourData[i].nombre_usuario){
-        				errorAlert("El usuario "+txtuser.value+ " ya esta siendo utilizado por otro usuario, escriba otro diferente.");
+        				new PNotify({
+        		             type: 'error',
+        		             title: 'Error',
+        		             text: 'El usuario '+txtuser.value+ ' ya esta siendo utilizado por otro usuario, escriba otro diferente.',
+        		             styling: 'bootstrap3',
+        		             delay: 2000,
+        		             addclass: 'center'
+        				});
+        				//errorAlert("El usuario "+txtuser.value+ " ya esta siendo utilizado por otro usuario, escriba otro diferente.");
         			}
         			
         			
@@ -480,7 +511,15 @@ dtu.crearJSON();
         			
         			
         			if(txtcedula.value == ourData[i].cedula){
-        				errorAlert("El número de cedula: "+txtcedula.value+" pertenece a otro usuario, escriba otro diferente.");
+        				new PNotify({
+        		             type: 'error',
+        		             title: 'Error',
+        		             text: 'El número de cedula: '+txtcedula.value+' pertenece a otro usuario, escriba otro diferente.',
+        		             styling: 'bootstrap3',
+        		             delay: 2000,
+        		             addclass: 'center'
+        				});
+        				//errorAlert("El número de cedula: "+txtcedula.value+" pertenece a otro usuario, escriba otro diferente.");
         			}
         			
         		}
@@ -575,7 +614,15 @@ dtu.crearJSON();
         	    
         	    }    
         	    else{
-        	      errorAlert('Error!', 'El IDUCA y/o el correo institucional no son iguales, intente de nuevo!');
+        	    	new PNotify({
+        	             type: 'error',
+        	             title: 'Error',
+        	             text: 'El IDUCA y/o el correo institucional no son iguales, intente de nuevo!',
+        	             styling: 'bootstrap3',
+        	             delay: 2000,
+        	             addclass: 'center'
+        			});
+        	      //errorAlert('Error!', 'El IDUCA y/o el correo institucional no son iguales, intente de nuevo!');
         	      document.frmUser.txtpwd.value = ""
         	      document.frmUser.txtpwd2.value = ""
         	      document.frmUser.txtpwd.focus

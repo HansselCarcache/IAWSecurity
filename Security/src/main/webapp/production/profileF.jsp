@@ -48,6 +48,16 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
@@ -201,6 +211,11 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
     <!-- JAlert js -->
 	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
 	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
+	
+	    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -214,11 +229,27 @@ tu = dtu.getUserbyID(Integer.parseInt(user));
  	    mensaje = "<%=VarMsj %>";
  	    if(mensaje == "1")
  	      {
- 	    	successAlert('Exito', 'La foto fue subida con éxito');
+ 	    	new PNotify({
+	             type: 'success',
+	             title: 'Exito',
+	             text: 'La foto fue subida con éxito',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+	        });
+ 	    	//successAlert('Exito', 'La foto fue subida con éxito');
  	      }
  	    if(mensaje == "2")
  	      {
- 	        errorAlert('Error', 'No se ha podido subir la foto. Intente de nuevo.');
+ 	    	new PNotify({
+	             type: 'error',
+	             title: 'Error',
+	             text: 'No se ha podido subir la foto. Intente de nuevo.',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+			});
+ 	        //errorAlert('Error', 'No se ha podido subir la foto. Intente de nuevo.');
  	      }
         
         	

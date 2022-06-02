@@ -48,6 +48,16 @@ String existe ="";
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    
+        <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
@@ -234,6 +244,11 @@ String existe ="";
     <!-- JAlert js -->
 	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
 	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
+	
+	    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -261,15 +276,39 @@ String existe ="";
 
  	    if(mensaje == "1")
  	      {
- 	    	successAlert('Exito', 'Los datos han sido registrados exitosamente!');
+ 		    new PNotify({
+ 	             type: 'success',
+ 	             title: 'Exito',
+ 	             text: 'Los datos han sido registrados exitosamente!',
+ 	             styling: 'bootstrap3',
+ 	             delay: 2000,
+ 	             addclass: 'center'
+ 	        });
+ 	    	//successAlert('Exito', 'Los datos han sido registrados exitosamente!');
  	      }
  	    if(mensaje == "2")
  	      {
- 	        errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
+ 	    	new PNotify({
+ 	             type: 'error',
+ 	             title: 'Error',
+ 	             text: 'No se han podido registrar los datos, intente de nuevo.',
+ 	             styling: 'bootstrap3',
+ 	             delay: 2000,
+ 	             addclass: 'center'
+ 			});
+ 	        //errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
  	      }
  	   if(mensaje == "3")
 	      {
-	        errorAlert('Error', 'Usted ya está inscrito en este curso.');
+ 		  new PNotify({
+              type: 'error',
+              title: 'Error',
+              text: 'Usted ya está inscrito en este curso.',
+              styling: 'bootstrap3',
+              delay: 2000,
+              addclass: 'center'
+ 			});
+	        //errorAlert('Error', 'Usted ya está inscrito en este curso.');
 	      }
     	
         $('#tbl_detalle').DataTable( {

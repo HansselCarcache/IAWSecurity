@@ -28,6 +28,17 @@ dtu.crearJSON();
     <link href="vendors/jAlert/dist/jAlert.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+    
+        <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
+	
 	<!-- Custom Theme Style -->
 	<link href="custom.min.css" rel="stylesheet">
 	<!-- Select2 -->
@@ -236,14 +247,30 @@ dtu.crearJSON();
         	sexo= document.frmDocente.cbxsexo.value
         	
         	if(sexo==""){
-        		errorAlert('Error!', 'Es necesario que escoger un sexo para registrar el usuario');
+        		new PNotify({
+                    type: 'error',
+                    title: 'Error!',
+                    text: 'Es necesario que escoger un sexo para registrar el usuario',
+                    styling: 'bootstrap3',
+                    delay: 2000,
+                    addclass: 'center'
+       			});
+        		//errorAlert('Error!', 'Es necesario que escoger un sexo para registrar el usuario');
         	}else if (clave1 == clave2)
         	    {
         	    submitForm();
         	    
         	    }    
         	    else{
-        	      errorAlert('Error!', 'Las contraseñas no son iguales, intente de nuevo!');
+        	    	new PNotify({
+        	             type: 'error',
+        	             title: 'Error!',
+        	             text: 'Las contraseñas no son iguales, intente de nuevo!',
+        	             styling: 'bootstrap3',
+        	             delay: 2000,
+        	             addclass: 'center'
+        			});
+        	      //errorAlert('Error!', 'Las contraseñas no son iguales, intente de nuevo!');
         	      document.frmDocente.txtpwd.value = ""
         	      document.frmDocente.txtpwd2.value = ""
         	      document.frmDocente.txtpwd.focus
@@ -272,14 +299,38 @@ dtu.crearJSON();
         			//alert(txt.value);
         			
         			if(txtiduca.value == ourData[i].id_uca){
-        				errorAlert("Ya existe un registro con ese IDUCA, escriba otro diferente.");
+        				new PNotify({
+        		             type: 'error',
+        		             title: 'Error',
+        		             text: 'Ya existe un registro con ese IDUCA, escriba otro diferente.',
+        		             styling: 'bootstrap3',
+        		             delay: 2000,
+        		             addclass: 'center'
+        				});
+        				//errorAlert("Ya existe un registro con ese IDUCA, escriba otro diferente.");
         			}
         			
         			if(txtcorreoi.value == ourData[i].correo_institucional){
-        				errorAlert("Ya existe un registro con ese correo institucional, escriba otro diferente.");
+        				new PNotify({
+        		             type: 'error',
+        		             title: 'Error',
+        		             text: 'Ya existe un registro con ese correo institucional, escriba otro diferente.',
+        		             styling: 'bootstrap3',
+        		             delay: 2000,
+        		             addclass: 'center'
+        				});
+        				//errorAlert("Ya existe un registro con ese correo institucional, escriba otro diferente.");
         			}
         			if(txtcedula.value == ourData[i].cedula){
-        				errorAlert("Ya existe un registro con esa cedula, escriba otra diferente.");
+        				new PNotify({
+        		             type: 'error',
+        		             title: 'Error',
+        		             text: 'Ya existe un registro con esa cedula, escriba otra diferente.',
+        		             styling: 'bootstrap3',
+        		             delay: 2000,
+        		             addclass: 'center'
+        				});
+        				//errorAlert("Ya existe un registro con esa cedula, escriba otra diferente.");
         			}
         		}
         		}
@@ -323,11 +374,27 @@ dtu.crearJSON();
 
      	    if(mensaje == "1")
      	      {
-     	    	errorAlert('Error', 'Ya existe un usuario con ese IDUCA en el sistema, no se ha podido registrar el usuario.');
+     	    	new PNotify({
+     	             type: 'error',
+     	             title: 'Error',
+     	             text: 'Ya existe un usuario con ese IDUCA en el sistema, no se ha podido registrar el usuario.',
+     	             styling: 'bootstrap3',
+     	             delay: 2000,
+     	             addclass: 'center'
+     			});
+     	    	//errorAlert('Error', 'Ya existe un usuario con ese IDUCA en el sistema, no se ha podido registrar el usuario.');
      	      }
      	    if(mensaje == "2")
      	      {
-     	        errorAlert('Error', 'Ya existe un usuario con esa cédula en el sistema, no se ha podido registrar el usuario.');
+     	    	new PNotify({
+     	             type: 'error',
+     	             title: 'Error',
+     	             text: 'Ya existe un usuario con esa cédula en el sistema, no se ha podido registrar el usuario.',
+     	             styling: 'bootstrap3',
+     	             delay: 2000,
+     	             addclass: 'center'
+     			});
+     	        //errorAlert('Error', 'Ya existe un usuario con esa cédula en el sistema, no se ha podido registrar el usuario.');
      	      }
         });
     </script>
@@ -352,6 +419,11 @@ dtu.crearJSON();
 	<script src="vendors/jAlert/dist/jAlert.min.js"></script>
 	<script src="vendors/jAlert/dist/jAlert-functions.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
+
+    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
     
     <script type="text/javascript">
    

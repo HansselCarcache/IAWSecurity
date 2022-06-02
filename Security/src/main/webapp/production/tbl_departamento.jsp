@@ -2,8 +2,13 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
 <!DOCTYPE html>
 <html>
+<% 
+	String msj="";
+	msj = request.getParameter("msj") == null ? "0" : request.getParameter("msj");
+%>
+<html>
 
-  <head>
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="ISO-8859-1">
@@ -22,6 +27,15 @@
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+ 	<!--Pnotify-->
+	<link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+	<link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+	<link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+	<style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>   
     <!-- Datatables -->
     
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -199,6 +213,10 @@
     <script src="../vendors/nprogress/nprogress.js"></script>
     <!-- iCheck -->
     <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!--Pnotify-->
+	<script src="../vendors/pnotify/dist/pnotify.js"></script>
+	<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+	<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
     <!-- Datatables -->
     <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -231,12 +249,74 @@
    	   	table.columns( [ 0, 1, 2, 3 ] ).visible( true, true );
    	}
    	
-   	
-   	
-   	
-    
+  
     $(document).ready(function() {
-    	
+    
+    	    	<% if(msj.equals("1")) {%>
+    			new PNotify({
+    	            type: 'success',
+    	            title: 'Ingreso exitoso',
+    	            text: 'Se ha agregado un nuevo departamento existosamente',
+    	            styling: 'bootstrap3',
+    	            delay: 2000,
+    	            addclass: 'center'
+    	        }); 
+    	    	<%}%>
+    	    	
+    	    	<% if(msj.equals("2")) {%>
+    			new PNotify({
+    	            type: 'error',
+    	            title: 'Ocurrió un error al agregar',
+    	            text: 'Vuelva a ingresar los datos e intente nuevamente',
+    	            styling: 'bootstrap3',
+    	            delay: 2000,
+    	            addclass: 'center'
+    	        }); 
+    	    	<%}%>
+    	    	
+    	    	<% if(msj.equals("3")) {%>
+    			new PNotify({
+    	            type: 'success',
+    	            title: 'Edición exitosa',
+    	            text: 'Se ha editado el departamento existosamente',
+    	            styling: 'bootstrap3',
+    	            delay: 2000,
+    	            addclass: 'center'
+    	        }); 
+    	    	<%}%>
+    	    	
+    	    	<% if(msj.equals("4")) {%>
+    			new PNotify({
+    	            type: 'error',
+    	            title: 'Ocurrió un error al editar',
+    	            text: 'Vuelva a ingresar los datos e intente nuevamente',
+    	            styling: 'bootstrap3',
+    	            delay: 2000,
+    	            addclass: 'center'
+    	        }); 
+    	    	<%}%>
+    	    	
+    	    	<% if(msj.equals("5")) {%>
+    			new PNotify({
+    	            type: 'success',
+    	            title: 'Eliminación existosa',
+    	            text: 'Se ha eliminado el departamento exitosamente',
+    	            styling: 'bootstrap3',
+    	            delay: 2000,
+    	            addclass: 'center'
+    	        }); 
+    	    	<%}%>
+    	    	
+    	    	<% if(msj.equals("6")) {%>
+    			new PNotify({
+    	            type: 'error',
+    	            title: 'Ocurrió un error al eliminar',
+    	            text: 'Revise su conexion he intentelo de nuevo',
+    	            styling: 'bootstrap3',
+    	            delay: 2000,
+    	            addclass: 'center'
+    	        }); 
+    	    	<%}%>
     	
         $('#tbl_departamento').DataTable( {
         	buttons: [  
@@ -257,7 +337,7 @@
         				{
         					extend: 'excel',
         					text: 'Excel',
-        					title: 'Departamentos registradas',
+        					title: 'Departamentos registrados',
         					action: function ( e, dt, node, config ) {
         	                    //alert( 'Activated!' );
         	                    eliminarcolumna(3);
