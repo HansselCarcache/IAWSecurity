@@ -41,6 +41,16 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
+	
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
   </head>
@@ -217,6 +227,11 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
             <!-- JAlert js -->
 	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
 	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
+	
+	    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -250,27 +265,75 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 
 	    if(mensaje == "1")
 	      {
-	    	successAlert('Exito', 'Los datos han sido registrados exitosamente!');
+	    	new PNotify({
+	             type: 'success',
+	             title: 'Exito',
+	             text: 'Los datos han sido registrados exitosamente!',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+	        });
+	    	//successAlert('Exito', 'Los datos han sido registrados exitosamente!');
 	      }
 	    if(mensaje == "2")
 	      {
-	        errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
+			new PNotify({
+	             type: 'error',
+	             title: 'Error',
+	             text: 'No se han podido registrar los datos, intente de nuevo.',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+			});
+	        //errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
 	      }
 	      if(mensaje == "3")
 	      {
-	        successAlert('Exito', 'Los datos han sido modificados exitosamente!');
+	    	  new PNotify({
+	              type: 'success',
+	              title: 'Exito',
+	              text: 'Los datos han sido modificados exitosamente!',
+	              styling: 'bootstrap3',
+	              delay: 2000,
+	              addclass: 'center'
+	         });
+	        //successAlert('Exito', 'Los datos han sido modificados exitosamente!');
 	      }
 	      if(mensaje == "4")
 	      {
-	    	  errorAlert('Exito', 'No se han podido modificar los datos, intente de nuevo');
+	  		new PNotify({
+	             type: 'error',
+	             title: 'Error',
+	             text: 'No se han podido modificar los datos, intente de nuevo',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+			});
+	    	  //errorAlert('Exito', 'No se han podido modificar los datos, intente de nuevo');
 	      }
 	      if(mensaje == "5")
 	      {
-	        successAlert('Exito', 'Los datos han sido eliminados exitosamente!');
+	    	  new PNotify({
+	              type: 'success',
+	              title: 'Exito',
+	              text: 'Los datos han sido eliminados exitosamente!',
+	              styling: 'bootstrap3',
+	              delay: 2000,
+	              addclass: 'center'
+	         });
+	        //successAlert('Exito', 'Los datos han sido eliminados exitosamente!');
 	      }
 	      if(mensaje == "6")
 	      {
-	        errorAlert('Exito', 'No se han podido eliminar los datos, intente de nuevo');
+	  		new PNotify({
+	             type: 'error',
+	             title: 'Error',
+	             text: 'No se han podido eliminar los datos, intente de nuevo',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+			});
+	        //errorAlert('Exito', 'No se han podido eliminar los datos, intente de nuevo');
 	      }
    	
     	

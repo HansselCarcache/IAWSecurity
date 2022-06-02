@@ -41,6 +41,16 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
@@ -250,6 +260,12 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
      <!-- JAlert js -->
 	<script src="../vendors/jAlert/dist/jAlert.min.js"></script>
 	<script src="../vendors/jAlert/dist/jAlert-functions.min.js"></script>
+	
+	
+    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -281,23 +297,63 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
   	    mensaje = "<%=VarMsj %>";
     	 if(mensaje == "1")
 	      {
-	    	successAlert('Exito', 'Los datos han sido registrados exitosamente!');
+   		    new PNotify({
+   	             type: 'success',
+   	             title: 'Exito',
+   	             text: 'Los datos han sido registrados exitosamente!',
+   	             styling: 'bootstrap3',
+   	             delay: 2000,
+   	             addclass: 'center'
+   	        });
+	    	//successAlert('Exito', 'Los datos han sido registrados exitosamente!');
 	      }
 	    if(mensaje == "2")
 	      {
-	        errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
+	    	new PNotify({
+	             type: 'error',
+	             title: 'Error',
+	             text: 'No se han podido registrar los datos, intente de nuevo.',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+			});
+	        //errorAlert('Error', 'No se han podido registrar los datos, intente de nuevo.');
 	      }
 	    if(mensaje == "3")
 	      {
-	    	successAlert('Exito', 'Los datos de inscripcion han sido eliminados exitosamente!');
+		    new PNotify({
+	             type: 'success',
+	             title: 'Exito',
+	             text: 'Los datos de inscripcion han sido eliminados exitosamente!',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+	        });
+	    	//successAlert('Exito', 'Los datos de inscripcion han sido eliminados exitosamente!');
 	      }
 	    if(mensaje == "4")
 	      {
-	        errorAlert('Error', 'No se han podido eliminar los datos de inscripcion, intente de nuevo.');
+	    	new PNotify({
+	             type: 'error',
+	             title: 'Error',
+	             text: 'No se han podido eliminar los datos de inscripcion, intente de nuevo.',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+			});
+	        //errorAlert('Error', 'No se han podido eliminar los datos de inscripcion, intente de nuevo.');
 	      }
 	    if(mensaje == "5")
 	      {
-	        errorAlert('Error', 'No es posible eliminar su inscripción porque esta ya fue evaluada.');
+	    	new PNotify({
+	             type: 'error',
+	             title: 'Error',
+	             text: 'No es posible eliminar su inscripción porque esta ya fue evaluada.',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+			});
+	        //errorAlert('Error', 'No es posible eliminar su inscripción porque esta ya fue evaluada.');
 	      }
 	    
          $('#tbl_inscr').DataTable( {
