@@ -1,7 +1,11 @@
 <%@page import="entidades.Tbl_facultad"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Tbl_facultad, datos.*, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_facultad, datos.*, java.util.*"%>
 
+<%
+String VarMsj = "";
+VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -30,6 +34,15 @@
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <style type="text/css">
+		.center{
+			right: calc(50% - 150px) !important;
+		}
+	</style>
 
     <!-- Custom Theme Style -->
     <link href="../custom.min.css" rel="stylesheet">
@@ -212,6 +225,10 @@
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+        <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -232,7 +249,81 @@
    	
     
     $(document).ready(function() {
-    	
+    	var mensaje = 0;
+ 	    mensaje = "<%=VarMsj %>";
+    	if(mensaje == "1")
+	      {
+	    	new PNotify({
+	             type: 'success',
+	             title: 'Exito',
+	             text: 'Los datos han sido registrados exitosamente!',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+	        });
+	    	
+	      }
+	    if(mensaje == "2")
+	      {
+	    	new PNotify({
+	             type: 'error',
+	             title: 'Error',
+	             text: 'No se han podido registrar los datos, intente de nuevo.',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+			});
+	        
+	      }
+	      if(mensaje == "3")
+	      {
+	    	 new PNotify({
+	             type: 'success',
+	             title: 'Exito',
+	             text: 'Los datos han sido modificados exitosamente!',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+	        });
+	        
+	      }
+	      if(mensaje == "4")
+	      {
+	    	new PNotify({
+	             type: 'error',
+	             title: 'Error',
+	             text: 'No se han podido modificar los datos, intente de nuevo.',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+			});
+	        
+	      }
+	      
+	      if(mensaje == "5")
+	      {
+	    	 new PNotify({
+	             type: 'success',
+	             title: 'Exito',
+	             text: 'Los datos han sido eliminados exitosamente!',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+	        });
+	        
+	      }
+	      if(mensaje == "6")
+	      {
+	    	new PNotify({
+	             type: 'error',
+	             title: 'Error',
+	             text: 'No se han podido eliminar los datos, intente de nuevo.',
+	             styling: 'bootstrap3',
+	             delay: 2000,
+	             addclass: 'center'
+			});
+	        
+	      }
     	
         $('#tbl_facultad').DataTable( {
         	buttons: [  
