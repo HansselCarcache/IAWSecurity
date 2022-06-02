@@ -145,7 +145,8 @@ public class Dt_usuario {
 		}
 		//PARA GUARDAR
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			try (FileWriter writer = new FileWriter("C:\\payara5\\glassfish\\fotos_usuariosGD\\datos_usuario.json")) {
+//			"C:\\payara5\\glassfish\\fotos_usuariosGD\\datos_usuario.json"
+			try (FileWriter writer = new FileWriter("C:\\payara-5.2022.2\\payara5\\glassfish\\fotos_usuariosGD\\datos_usuario.json")) {
 	            gson.toJson(listUser, writer);
 	            
 	            
@@ -155,7 +156,7 @@ public class Dt_usuario {
 	            e.printStackTrace();
 	        }
 			//PARA LEER
-			String fileName = "C:\\payara5\\glassfish\\fotos_usuariosGD\\datos_usuario.json";
+			String fileName = "C:\\payara-5.2022.2\\payara5\\glassfish\\fotos_usuariosGD\\datos_usuario.json";
 			Path path = new File(fileName).toPath();
 			
 			try (Reader br = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {

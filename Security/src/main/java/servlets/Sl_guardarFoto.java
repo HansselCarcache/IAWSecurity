@@ -91,7 +91,7 @@ public class Sl_guardarFoto extends HttpServlet {
 						System.out.println("Filetype: "+uploaded.getContentType());
 						
 						rutaFichero = "fotoUsuario_"+idusuario+".jpg";
-						path = "C:\\payara5\\glassfish\\fotos_usuariosGD\\";
+						path = "C:\\payara-5.2022.2\\payara5\\glassfish\\fotos_usuariosGD\\";
 						System.out.println(path+rutaFichero);
 						
 						fichero = new File(path+rutaFichero);

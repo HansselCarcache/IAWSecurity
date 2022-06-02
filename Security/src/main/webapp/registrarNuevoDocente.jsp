@@ -32,6 +32,10 @@ dtu.crearJSON();
 	<link href="custom.min.css" rel="stylesheet">
 	<!-- Select2 -->
     <link href="vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- PNotify -->
+    <link href="vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
 </head>
 	
 <body>
@@ -52,99 +56,111 @@ dtu.crearJSON();
             					<form id="frmDocente" name="frmDocente" action="Sl_Docente" method="post" onsubmit="toSubmit(event)">
             						<input type="hidden" value="1" name="opcion" id="opcion"/>
             						<div class="field item form-group">
-										<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombres: <span class="required">*</span>
-										</label>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="text" id="txtnombres" name="txtnombres" data-validate-length-range="5,50" data-validate-words="2" placeholder="ej. Nombre1 Nombre2" title="Primer y Segundo Nombre" required="required" class="form-control ">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombres: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtnombres" name="txtnombres"   placeholder="ex. Nombre1 Nombre2" title="Primer y Segundo Nombre" required="required" class="form-control ">
+											</div>
 										</div>
-									</div>
-									<div class="field item form-group">
-										<label class="col-form-label col-md-3 col-sm-3 label-align" >Apellidos: <span class="required">*</span>
-										</label>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="text" id="txtapellidos" name="txtapellidos" data-validate-length-range="5,50" data-validate-words="2" placeholder="ej. Apellido1 Apellido2" title="Primer y Segundo Apellido" required="required" class="form-control ">
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Apellidos: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtapellidos" name="txtapellidos" placeholder="ex. Apellido1 Apellido2" title="Primer y Segundo Apellido" required="required" class="form-control ">
+											</div>
 										</div>
-									</div>
-									<div class="field item form-group">
-										<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: <span class="required">*</span>
-										</label>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="text" id="txtusername" name="txtusername" data-validate-length-range="5,50" required="required" title="Escriba su nombre de usuario" class="form-control ">
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtusername" name="txtusername" onchange="comprobarJSON()" placeholder="ex. Nombre1Apellido1"  required="required" title="Escriba su nombre de usuario" class="form-control ">
+												
+											</div>
 										</div>
-									</div>
-									<div class="field item form-group">
-                                    	<label class="col-form-label col-md-3 col-sm-3  label-align">Sexo: <span class="required">*</span></label>
-                                        <div class="col-md-6 col-sm-6">
-											<select class="form-control js-example-basic-single" name="cbxsexo" id="cbxsexo" required="required">
-										  		<option value="">Seleccione...</option>
-										  		<option value="1">Masculino</option>
-										  		<option value="2">Femenino</option>
-											</select>
-                                       	</div>
-                                	</div>
-                                	<div class="field item form-group">
-										<label class="col-form-label col-md-3 col-sm-3 label-align" >Cédula: <span class="required">*</span>
-										</label>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="text" id="txtcedula" name="txtcedula" onchange="comprobarJSON()" data-validate-length-range="5,50" title="Escriba su cédula" required="required" class="form-control ">
+										
+										<div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Sexo: <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+<!--                                            <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required" /> -->
+											
+												<select class="form-control js-example-basic-single" name="cbxsexo" id="cbxsexo" required="required">
+												  <option value="">Seleccione...</option>
+												  
+												  <option value="1">Masculino</option>
+												  <option value="2">Femenino</option>
+												  
+												</select>
+                                            </div>
+                                        </div>
+                                        <div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cédula: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtcedula" data-mask="AAA-AAAAAA-AAAAA" name="txtcedula" placeholder="ex. 000-000000-0000A"  onchange="comprobarJSON()"  title="Escriba su cédula" required="required" class="form-control ">
+												
+											</div>
 										</div>
-									</div>
-                                       <div class="field item form-group">
-										<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: <span class="required">*</span>
-										</label>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="text" id="txttelefono" name="txttelefono" data-validate-length-range="5,50" title="Escriba su teléfono de contacto" required="required" class="form-control ">
+                                        <div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txttelefono" name="txttelefono" placeholder="ex. 888888888" title="Escriba su teléfono de contacto" required="required" class="form-control ">
+											</div>
 										</div>
-									</div>
-                                       
-                                       <div class="field item form-group">
-										<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: <span class="required">*</span>
-										</label>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="text" id="txtcargo" name="txtcargo" data-validate-length-range="5,50" title="Escriba el cargo que ocupa actualmente" required="required" class="form-control ">
+                                         
+                                        <div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtcargo" name="txtcargo" placeholder="ex. Administrador" title="Escriba el cargo que ocupa actualmente" required="required" class="form-control ">
+											</div>
 										</div>
-									</div>
-									<div class="field item form-group">
-										<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo personal: <span class="required">*</span>
-										</label>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="text" id="txtcorreop" name="txtcorreop" title="Escriba su correo personal" required="required" class="form-control ">
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo personal: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="email" id="txtcorreop" name="txtcorreop" placeholder="ex. nombre.apellido@gmail.com" title="Escriba su correo personal" required="required" class="form-control ">
+											</div>
 										</div>
-									</div>
-									
-									<div class="field item form-group">
-										<label class="col-form-label col-md-3 col-sm-3 label-align" >Contraseña: <span class="required">*</span>
-										</label>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="password" id="txtpwd" name="txtpwd" title="Escriba su contraseña" required="required" class="form-control ">
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Contraseña: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="password" id="txtpwd" name="txtpwd" title="Escriba su contraseña" required="required" class="form-control ">
+											</div>
 										</div>
-									</div>
-									
-									<div class="field item form-group">
-										<label class="col-form-label col-md-3 col-sm-3 label-align" >Confirmar contraseña: <span class="required">*</span>
-										</label>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="password" id="txtpwd2" name="txtpwd2" onkeyUp="habilitar()" title="Escriba de nuevo su contraseña" required="required" class="form-control ">
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Confirmar contraseña: <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="password" id="txtpwd2" name="txtpwd2" onkeyUp="habilitar()" title="Escriba de nuevo su contraseña" required="required" class="form-control ">
+												
+											</div>
 											
 										</div>
 										
-									</div>
-									
-									<div class="field item form-group">
-										<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: 
-										</label>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="text" id="txtiduca" name="txtiduca" onchange="comprobarJSON()" title="Escriba su ID UCA"  class="form-control ">
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="txtiduca" name="txtiduca" onchange="comprobarJSON()" placeholder="ex. 000000000" title="Escriba su ID UCA"  class="form-control ">
+												
+											</div>
 										</div>
-									</div>
-									
-									<div class="field item form-group">
-										<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: 
-										</label>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="text" id="txtcorreoi" onchange="comprobarJSON()" name="txtcorreoi" title="Escriba su correo institucional"  class="form-control ">
+										
+										<div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: 
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												
+												<input type="email" id="txtcorreoi"  name="txtcorreoi" placeholder="ex. nombre.apellido@est.uca.edu.ni" title="Escriba su correo institucional"  class="form-control ">
+											</div>
 										</div>
-									</div>
 									<div class="ln_solid">
                                         <div class="form-group">
                                             <div class="col-md-6 offset-md-3">
@@ -163,8 +179,15 @@ dtu.crearJSON();
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
     <script src="vendors/validator/multifield.js"></script>
     <script src="vendors/validator/validator.js"></script>
+    <!-- PNotify -->
+    <script src="vendors/pnotify/dist/pnotify.js"></script>
+    <script src="vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="vendors/pnotify/dist/pnotify.nonblock.js"></script>
     
     <!-- Javascript functions	-->
 	<script>
@@ -252,6 +275,7 @@ dtu.crearJSON();
         }
         
         function comprobarJSON(){
+        	var txtuser = document.getElementById("txtusername");
         	var txtiduca = document.getElementById("txtiduca");
         	var txtcorreoi = document.getElementById("txtcorreoi")
         	var txtcedula = document.getElementById("txtcedula");
@@ -271,15 +295,43 @@ dtu.crearJSON();
         			container.insertAdjacentHTML('beforebegin', htmlString);*/
         			//alert(txt.value);
         			
-        			if(txtiduca.value == ourData[i].id_uca){
-        				errorAlert("Ya existe un registro con ese IDUCA, escriba otro diferente.");
+        			if(txtuser.value == ourData[i].nombre_usuario){
+        				new PNotify({
+        		             type: 'error',
+        		             title: 'Error!',
+        		             text: 'El usuario '+txtuser.value+ ' ya esta siendo utilizado por otro usuario, escriba otro diferente.',
+        		             styling: 'bootstrap3',
+        		             delay: 2000,
+        		             addclass: 'center'
+        				});
+        				//errorAlert("El usuario "+txtuser.value+ " ya esta siendo utilizado por otro usuario, escriba otro diferente.");
         			}
         			
-        			if(txtcorreoi.value == ourData[i].correo_institucional){
-        				errorAlert("Ya existe un registro con ese correo institucional, escriba otro diferente.");
+        			if(txtiduca.value == ourData[i].id_uca){
+        				new PNotify({
+        		             type: 'error',
+        		             title: 'Error!',
+        		             text: 'El IDUCA: '+txtiduca.value+' esta siendo utilizado por otro usuario, escriba otro diferente.',
+        		             styling: 'bootstrap3',
+        		             delay: 2000,
+        		             addclass: 'center'
+        				});
+        				//errorAlert("El IDUCA: "+txtiduca.value+" esta siendo utilizado por otro usuario, escriba otro diferente.");
         			}
+        			
+//         			if(txtcorreoi.value == ourData[i].correo_institucional){
+//         				errorAlert("Ya existe un registro con ese correo institucional, escriba otro diferente.");
+//         			}
         			if(txtcedula.value == ourData[i].cedula){
-        				errorAlert("Ya existe un registro con esa cedula, escriba otra diferente.");
+        				new PNotify({
+        		             type: 'error',
+        		             title: 'Error!',
+        		             text: 'El número de cedula: '+txtcedula.value+' pertenece a otro usuario, escriba otro diferente.',
+        		             styling: 'bootstrap3',
+        		             delay: 2000,
+        		             addclass: 'center'
+        				});
+        				//errorAlert("El número de cedula: "+txtcedula.value+" pertenece a otro usuario, escriba otro diferente.");
         			}
         		}
         		}
@@ -318,6 +370,12 @@ dtu.crearJSON();
         
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+            Inputmask("*{3}-*{6}-*{5}", {
+          		 
+                
+                
+          		 casing: "upper",
+               }).mask('#txtcedula');
             var mensaje = 0;
      	    mensaje = "<%=VarMsj %>";
 

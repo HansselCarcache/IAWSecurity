@@ -121,7 +121,7 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtusername" name="txtusername" onchange="comprobarJSON()"   required="required" title="Escriba su nombre de usuario" class="form-control ">
+												<input type="text" id="txtusername" name="txtusername" onchange="comprobarJSON()" placeholder="ex. Nombre1Apellido1"  required="required" title="Escriba su nombre de usuario" class="form-control ">
 												
 											</div>
 										</div>
@@ -144,7 +144,7 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cédula: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcedula" name="txtcedula" onchange="comprobarJSON()"  title="Escriba su cédula" required="required" class="form-control ">
+												<input type="text" id="txtcedula" data-validate-length-range="16,50" name="txtcedula" placeholder="ex. 000-000000-0000A"  onchange="comprobarJSON()"  title="Escriba su cédula" required="required" class="form-control ">
 												
 											</div>
 										</div>
@@ -152,15 +152,15 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txttelefono" name="txttelefono" title="Escriba su teléfono de contacto" required="required" class="form-control ">
+												<input type="text" id="txttelefono" name="txttelefono" placeholder="ex. 888888888" title="Escriba su teléfono de contacto" required="required" class="form-control ">
 											</div>
 										</div>
-                                        
+                                         
                                         <div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcargo" name="txtcargo"  title="Escriba el cargo que ocupa actualmente" required="required" class="form-control ">
+												<input type="text" id="txtcargo" name="txtcargo" placeholder="ex. Administrador" title="Escriba el cargo que ocupa actualmente" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -168,7 +168,7 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo personal: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="email" id="txtcorreop" name="txtcorreop" title="Escriba su correo personal" required="required" class="form-control ">
+												<input type="email" id="txtcorreop" name="txtcorreop" placeholder="ex. nombre.apellido@gmail.com" title="Escriba su correo personal" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -194,7 +194,7 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtiduca" name="txtiduca" onchange="comprobarJSON()" title="Escriba su ID UCA"  class="form-control ">
+												<input type="text" id="txtiduca" name="txtiduca" onchange="comprobarJSON()" placeholder="ex. 000000000" title="Escriba su ID UCA"  class="form-control ">
 												
 											</div>
 										</div>
@@ -204,7 +204,7 @@ dtu.crearJSON();
 											</label>
 											<div class="col-md-6 col-sm-6 ">
 												
-												<input type="email" id="txtcorreoi"  name="txtcorreoi" title="Escriba su correo institucional"  class="form-control ">
+												<input type="email" id="txtcorreoi"  name="txtcorreoi" placeholder="ex. nombre.apellido@est.uca.edu.ni" title="Escriba su correo institucional"  class="form-control ">
 											</div>
 										</div>
 										
@@ -249,6 +249,10 @@ dtu.crearJSON();
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
     <script src="../vendors/validator/multifield.js"></script>
     <script src="../vendors/validator/validator.js"></script>
     <!-- PNotify -->
@@ -453,6 +457,12 @@ dtu.crearJSON();
         
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+            Inputmask("*{3}-*{6}-*{5}", {
+       		 
+                
+                
+       		 casing: "upper",
+            }).mask('#txtcedula');
             var mensaje = 0;
      	    mensaje = "<%=VarMsj %>";
 
@@ -504,7 +514,7 @@ dtu.crearJSON();
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
     <!-- validator -->
-    <!-- <script src="../vendors/validator/validator.js"></script> -->
+    <script src="../vendors/validator/validator.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>

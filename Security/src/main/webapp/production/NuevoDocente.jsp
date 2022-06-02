@@ -102,7 +102,7 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombres: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtnombres" name="txtnombres" data-validate-length-range="5,50" data-validate-words="2" placeholder="ex. Nombre1 Nombre2" title="Primer y Segundo Nombre" required="required" class="form-control ">
+												<input type="text" id="txtnombres" name="txtnombres"   placeholder="ex. Nombre1 Nombre2" title="Primer y Segundo Nombre" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -110,7 +110,7 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Apellidos: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtapellidos" name="txtapellidos" data-validate-length-range="5,50" data-validate-words="2" placeholder="ex. Apellido1 Apellido2" title="Primer y Segundo Apellido" required="required" class="form-control ">
+												<input type="text" id="txtapellidos" name="txtapellidos" placeholder="ex. Apellido1 Apellido2" title="Primer y Segundo Apellido" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -118,7 +118,8 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Nombre Usuario: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtusername" name="txtusername" data-validate-length-range="5,50" required="required" title="Escriba su nombre de usuario" class="form-control ">
+												<input type="text" id="txtusername" name="txtusername" onchange="comprobarJSON()" placeholder="ex. Nombre1Apellido1"  required="required" title="Escriba su nombre de usuario" class="form-control ">
+												
 											</div>
 										</div>
 										
@@ -140,22 +141,23 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cédula: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcedula" name="txtcedula" onchange="comprobarJSON()" data-validate-length-range="5,50" title="Escriba su cédula" required="required" class="form-control ">
+												<input type="text" id="txtcedula" data-mask="AAA-AAAAAA-AAAAA" name="txtcedula" placeholder="ex. 000-000000-0000A"  onchange="comprobarJSON()"  title="Escriba su cédula" required="required" class="form-control ">
+												
 											</div>
 										</div>
                                         <div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Teléfono: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txttelefono" name="txttelefono" data-validate-length-range="5,50" title="Escriba su teléfono de contacto" required="required" class="form-control ">
+												<input type="text" id="txttelefono" name="txttelefono" placeholder="ex. 888888888" title="Escriba su teléfono de contacto" required="required" class="form-control ">
 											</div>
 										</div>
-                                        
+                                         
                                         <div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Cargo: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcargo" name="txtcargo" data-validate-length-range="5,50" title="Escriba el cargo que ocupa actualmente" required="required" class="form-control ">
+												<input type="text" id="txtcargo" name="txtcargo" placeholder="ex. Administrador" title="Escriba el cargo que ocupa actualmente" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -163,7 +165,7 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo personal: <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcorreop" name="txtcorreop" title="Escriba su correo personal" required="required" class="form-control ">
+												<input type="email" id="txtcorreop" name="txtcorreop" placeholder="ex. nombre.apellido@gmail.com" title="Escriba su correo personal" required="required" class="form-control ">
 											</div>
 										</div>
 										
@@ -189,7 +191,8 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >ID UCA: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtiduca" name="txtiduca" onchange="comprobarJSON()" title="Escriba su ID UCA"  class="form-control ">
+												<input type="text" id="txtiduca" name="txtiduca" onchange="comprobarJSON()" placeholder="ex. 000000000" title="Escriba su ID UCA"  class="form-control ">
+												
 											</div>
 										</div>
 										
@@ -197,7 +200,8 @@ dtu.crearJSON();
 											<label class="col-form-label col-md-3 col-sm-3 label-align" >Correo institucional: 
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="txtcorreoi" onchange="comprobarJSON()" name="txtcorreoi" title="Escriba su correo institucional"  class="form-control ">
+												
+												<input type="email" id="txtcorreoi"  name="txtcorreoi" placeholder="ex. nombre.apellido@est.uca.edu.ni" title="Escriba su correo institucional"  class="form-control ">
 											</div>
 										</div>
 										
@@ -242,6 +246,9 @@ dtu.crearJSON();
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
     <script src="../vendors/validator/multifield.js"></script>
     <script src="../vendors/validator/validator.js"></script>
     
@@ -352,11 +359,12 @@ dtu.crearJSON();
         }
         
         function comprobarJSON(){
+        	var txtuser = document.getElementById("txtusername");
         	var txtiduca = document.getElementById("txtiduca");
         	var txtcorreoi = document.getElementById("txtcorreoi")
         	var txtcedula = document.getElementById("txtcedula");
         	var request = new XMLHttpRequest();
-        	request.open('GET', 'datos_usuario.json', true)
+        	request.open('GET', '../datos_usuario.json', true)
         	request.onload = function(){
         		if(request.status === 200){
         			var ourData = JSON.parse(request.responseText);
@@ -371,39 +379,43 @@ dtu.crearJSON();
         			container.insertAdjacentHTML('beforebegin', htmlString);*/
         			//alert(txt.value);
         			
+        			if(txtuser.value == ourData[i].nombre_usuario){
+        				new PNotify({
+        		             type: 'error',
+        		             title: 'Error!',
+        		             text: 'El usuario '+txtuser.value+ ' ya esta siendo utilizado por otro usuario, escriba otro diferente.',
+        		             styling: 'bootstrap3',
+        		             delay: 2000,
+        		             addclass: 'center'
+        				});
+        				//errorAlert("El usuario "+txtuser.value+ " ya esta siendo utilizado por otro usuario, escriba otro diferente.");
+        			}
+        			
         			if(txtiduca.value == ourData[i].id_uca){
         				new PNotify({
         		             type: 'error',
-        		             title: 'Error',
-        		             text: 'Ya existe un registro con ese IDUCA, escriba otro diferente.',
+        		             title: 'Error!',
+        		             text: 'El IDUCA: '+txtiduca.value+' esta siendo utilizado por otro usuario, escriba otro diferente.',
         		             styling: 'bootstrap3',
         		             delay: 2000,
         		             addclass: 'center'
         				});
-        				//errorAlert("Ya existe un registro con ese IDUCA, escriba otro diferente.");
+        				//errorAlert("El IDUCA: "+txtiduca.value+" esta siendo utilizado por otro usuario, escriba otro diferente.");
         			}
         			
-        			if(txtcorreoi.value == ourData[i].correo_institucional){
-        				new PNotify({
-        		             type: 'error',
-        		             title: 'Error',
-        		             text: 'Ya existe un registro con ese correo institucional, escriba otro diferente.',
-        		             styling: 'bootstrap3',
-        		             delay: 2000,
-        		             addclass: 'center'
-        				});
-        				//errorAlert("Ya existe un registro con ese correo institucional, escriba otro diferente.");
-        			}
+//         			if(txtcorreoi.value == ourData[i].correo_institucional){
+//         				errorAlert("Ya existe un registro con ese correo institucional, escriba otro diferente.");
+//         			}
         			if(txtcedula.value == ourData[i].cedula){
         				new PNotify({
         		             type: 'error',
-        		             title: 'Error',
-        		             text: 'Ya existe un registro con esa cedula, escriba otra diferente.',
+        		             title: 'Error!',
+        		             text: 'El número de cedula: '+txtcedula.value+' pertenece a otro usuario, escriba otro diferente.',
         		             styling: 'bootstrap3',
         		             delay: 2000,
         		             addclass: 'center'
         				});
-        				//errorAlert("Ya existe un registro con esa cedula, escriba otra diferente.");
+        				//errorAlert("El número de cedula: "+txtcedula.value+" pertenece a otro usuario, escriba otro diferente.");
         			}
         		}
         		}
@@ -442,6 +454,12 @@ dtu.crearJSON();
         
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+            Inputmask("*{3}-*{6}-*{5}", {
+          		 
+                
+                
+          		 casing: "upper",
+               }).mask('#txtcedula');
             var mensaje = 0;
      	    mensaje = "<%=VarMsj %>";
 

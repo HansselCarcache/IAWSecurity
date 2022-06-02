@@ -108,8 +108,9 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
               <input type="hidden" name="opcion" id="opcion" value="<%=opcion%>">
               <input type="hidden" name="codVerificacion" value="<%=codigo%>">
               <div>
-                <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Cédula" required="required" />
+                <input type="text" name="usuario" id="usuario"  class="form-control" placeholder="Cédula" required="required" />
               </div>
+              
               <div>
                 <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Contraseña" required="required" />
               </div>
@@ -203,7 +204,9 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
     <div>
       
     </div>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
      <!-- jQuery -->
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -221,6 +224,21 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
 	<script>
 	 $(document).ready(function() {
     	 var mensaje = 0;
+//     	 $('#usuario').mask('000-000000-0000A', {'translation': {A: {pattern: /[A-Z0-9]/}}}, { casing: "upper"});
+    	 
+    	 Inputmask("*{3}-*{6}-*{5}", {
+    		 
+             
+             
+    		 casing: "upper",
+         }).mask('#usuario');
+		Inputmask("*{3}-*{6}-*{5}", {
+    		 
+             
+             
+    		 casing: "upper",
+         }).mask('#usuario2');
+    	 
  	    mensaje = "<%=VarMsj %>";
 		
 	 	   if(mensaje == "1")
