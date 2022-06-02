@@ -120,7 +120,7 @@ public class Sl_login extends HttpServlet {
 						vwur = dtu.dtGetVwURCedula(usuario, rolId);
 						HttpSession hts = request.getSession(true);
 						hts.setAttribute("acceso", vwur);
-						accesoDocente = true;
+						accesoDesarrollador = true;
 					}
 				//Validacion de FACILITADOR con usuario o cedula	
 				}else {
