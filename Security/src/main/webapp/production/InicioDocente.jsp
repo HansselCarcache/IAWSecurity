@@ -62,7 +62,14 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
             <div class="clearfix"></div>
 
             <%@include file="diseñoDocente.jsp"%>
+            <%
+            Dt_usuario dtusr = new Dt_usuario();
+            Vw_userrol nuevaFoto = new Vw_userrol();
+      		nuevaFoto = dtusr.actualizarFoto(vwur.getId_usuario());
+            vwur.setUrlFoto(nuevaFoto.getUrlFoto());
 
+            %>
+            
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">

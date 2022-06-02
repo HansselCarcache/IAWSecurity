@@ -40,7 +40,7 @@
 
             <div class="clearfix"></div>
 
-            <%@include file="diseño.jsp"%>
+            <%@include file="diseñoDocente.jsp"%>
 
             <!-- page content -->
             <div class="right_col" role="main">

@@ -1228,6 +1228,50 @@ public class Dt_usuario {
 					return existe;
 				}
 				
+				// METODO PARA VERIFICAR CEDULA, PWD Y ROL //
+				public Vw_userrol actualizarFoto(int id_usuario)
+				{
+					Vw_userrol vwur = new Vw_userrol();
+					String SQL = ("SELECT urlFoto FROM gestion_docente.vw_rol_usuarios WHERE id_usuario=? AND estado<3");
+					try{
+						/////// DESENCRIPTACION DE LA PWD //////////
+						
+						
+						c = poolConexion.getConnection();
+						ps = c.prepareStatement(SQL);
+						ps.setInt(1, id_usuario);
+						
+						
+						rs = ps.executeQuery();
+						if(rs.next()){
+							vwur.setUrlFoto(rs.getString("urlFoto"));
+						}
+					}
+					catch (Exception e){
+						System.out.println("DATOS: ERROR dtverificarLogin() "+ e.getMessage());
+						e.printStackTrace();
+					}
+					finally {
+						try {
+							if(rs != null){
+								rs.close();
+							}
+							if(ps != null){
+								ps.close();
+							}
+							if(c != null){
+								poolConexion.closeConnection(c);
+							}
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				
+					return vwur;
+				}
+				
 	//metodo para modificar usuario de creacion a ser el mismo en el auto registro de docente - Jessica
 	public void modificarDocente(Tbl_user tus) {
 		try {

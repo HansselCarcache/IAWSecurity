@@ -64,6 +64,7 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
             <div class="clearfix"></div>
 
            <%@include file="diseño.jsp"%>
+          
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -113,6 +114,10 @@ VarMsj = request.getParameter("msj")==null?"0":request.getParameter("msj");
                       		ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>();
                       		Dt_usuario dtusr = new Dt_usuario();
                       		listaUsuario = dtusr.listaUserActivos();
+                      		
+                      		Vw_userrol nuevaFoto = new Vw_userrol();
+                      		nuevaFoto = dtusr.actualizarFoto(vwur.getId_usuario());
+                            vwur.setUrlFoto(nuevaFoto.getUrlFoto());
                       %>
                     
                       <thead>
