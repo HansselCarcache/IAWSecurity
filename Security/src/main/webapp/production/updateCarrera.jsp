@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*" %>
 <!DOCTYPE html>
 <html>
 
@@ -123,7 +123,7 @@ tc = dtc.getCarreraDFbyID(Integer.parseInt(carrera));
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
                                                     <button type='submit' class="btn btn-primary">Guardar</button>
-                                                    <button type='reset' class="btn btn-danger">Cancelar</button>
+                                                    <a href="tbl_Carreras.jsp" class="btn btn-danger">Cancelar</a>
                                                 </div>
                                             </div>
                                         </div>
